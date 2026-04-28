@@ -1469,6 +1469,21 @@
   cursor: pointer;
 }
 
+.config-pill-input {
+  width: 90px;
+  padding: 6px 14px;
+  border: 1px solid #d7dee8;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 13px;
+  font-weight: 600;
+  outline: none;
+}
+.config-pill-input:focus {
+  border-color: #232f3e;
+}
+
 .config-pill:hover {
   border-color: #ff9900;
 }

@@ -831,6 +831,18 @@ function App() {
                       {val === 'all' ? 'All' : val}
                     </button>
                   ))}
+                  <input
+                    type="number"
+                    className="config-pill-input"
+                    placeholder="Custom"
+                    min={1}
+                    max={availableQuestions.length}
+                    value={typeof examConfigLimit === 'number' && ![10, 20, 50].includes(examConfigLimit as number) ? examConfigLimit : ''}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value)
+                      if (!isNaN(val) && val > 0) setExamConfigLimit(val)
+                    }}
+                  />
                 </div>
               </div>
 
@@ -846,6 +858,17 @@ function App() {
                       {val === -1 ? 'Unlimited' : `${val} Min`}
                     </button>
                   ))}
+                  <input
+                    type="number"
+                    className="config-pill-input"
+                    placeholder="Custom"
+                    min={1}
+                    value={examConfigDuration !== -1 && ![15, 30, 45, 60].includes(examConfigDuration) ? examConfigDuration : ''}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value)
+                      if (!isNaN(val) && val > 0) setExamConfigDuration(val)
+                    }}
+                  />
                 </div>
               </div>
             </div>
