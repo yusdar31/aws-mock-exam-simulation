@@ -39,7 +39,9 @@ type ErrorInsight = {
 }
 
 const EXAM_DURATION_SECONDS = 45 * 60
-const API_BASE_URL = 'http://localhost:4000'
+const API_BASE_URL = window.location.hostname === 'localhost' 
+  ? 'http://localhost:4000' 
+  : `http://${window.location.hostname}:4000`
 
 function formatTime(totalSeconds: number) {
   const safeSeconds = Math.max(totalSeconds, 0)
