@@ -1,9 +1,21 @@
 import { useEffect, useMemo, useState } from 'react'
+import html2pdf from 'html2pdf.js'
 import './App.css'
 import { questionBank, type ExamQuestion } from './data/questionBank'
 
-type ExamPhase = 'landing' | 'exam' | 'review' | 'result' | 'admin'
+type ExamPhase = 'landing' | 'exam' | 'review' | 'result' | 'admin' | 'history'
 type QuestionStatus = 'answered-marked' | 'marked' | 'answered' | 'unanswered'
+
+type ExamHistoryRecord = {
+  id: string
+  userId: string
+  submittedAt: number
+  score: number
+  totalQuestions: number
+  scoreRate: number
+  durationSeconds: number
+  domainPerformance: { domain: string; total: number; correct: number; answered: number; accuracy: number }[]
+}
 
 type ReviewQuestion = {
   id: string
@@ -370,6 +382,28 @@ function App() {
   const [importAiCount, setImportAiCount] = useState<number>(5)
   const [adminStatusFilter, setAdminStatusFilter] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState('')
+  const [historyRecords, setHistoryRecords] = useState<ExamHistoryRecord[]>([])
+  const [userId, setUserId] = useState<string>('')
+
+  useEffect(() => {
+    // Initialize userId
+    let storedUserId = localStorage.getItem('mockExamUserId')
+    if (!storedUserId) {
+      storedUserId = 'user_' + Math.random().toString(36).substring(2, 9)
+      localStorage.setItem('mockExamUserId', storedUserId)
+    }
+    setUserId(storedUserId)
+
+    // Load history
+    try {
+      const stored = localStorage.getItem('mockExamHistory')
+      if (stored) {
+        setHistoryRecords(JSON.parse(stored))
+      }
+    } catch (e) {
+      console.error('Failed to load history', e)
+    }
+  }, [])
 
   const currentQuestion = examQuestions[currentIndex]
   const selectedReviewQuestion =
@@ -616,8 +650,41 @@ function App() {
 
   function finishExam() {
     setShowDetailedReview(false)
-    setSubmittedAt(Date.now())
+    const now = Date.now()
+    setSubmittedAt(now)
     setPhase('result')
+
+    const newRecord: ExamHistoryRecord = {
+      id: 'result_' + Math.random().toString(36).substring(2, 9),
+      userId,
+      submittedAt: now,
+      score,
+      totalQuestions: examQuestions.length,
+      scoreRate: examQuestions.length > 0 ? Math.round((score / examQuestions.length) * 100) : 0,
+      durationSeconds: examConfigDuration === -1 ? -1 : (examConfigDuration * 60) - remainingSeconds,
+      domainPerformance,
+    }
+
+    setHistoryRecords((current) => {
+      const updated = [newRecord, ...current]
+      localStorage.setItem('mockExamHistory', JSON.stringify(updated))
+      return updated
+    })
+  }
+
+  function downloadPDF() {
+    const element = document.getElementById('result-report-content')
+    if (!element) return
+
+    const opt = {
+      margin:       0.5,
+      filename:     `aws-mock-exam-result-${Date.now()}.pdf`,
+      image:        { type: 'jpeg' as const, quality: 0.98 },
+      html2canvas:  { scale: 2, useCORS: true },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    }
+
+    html2pdf().set(opt as any).from(element).save()
   }
 
   function goToReviewScreen() {
@@ -898,6 +965,9 @@ function App() {
           </div>
 
           <div className="lobby-actions split-actions">
+            <button className="exam-secondary-button" onClick={() => setPhase('history')}>
+              View History
+            </button>
             <button className="exam-secondary-button" onClick={openAdminPanel}>
               Open Review Admin
             </button>
@@ -906,6 +976,60 @@ function App() {
             </button>
           </div>
           {examError && <p className="lobby-error">{examError}</p>}
+        </section>
+      </main>
+    )
+  }
+
+  if (phase === 'history') {
+    return (
+      <main className="admin-shell">
+        <header className="admin-header">
+          <div>
+            <div className="aws-badge">History</div>
+            <h1>Your Exam History</h1>
+            <p>Review your previous mock exam scores and performance.</p>
+          </div>
+          <div className="admin-header-actions">
+            <button className="exam-secondary-button" onClick={() => setPhase('landing')}>
+              Back To Lobby
+            </button>
+          </div>
+        </header>
+
+        <section className="history-layout">
+          {historyRecords.length === 0 ? (
+            <div className="admin-empty-state">
+              <h2>No history found</h2>
+              <p>You haven't completed any mock exams yet. Start an exam from the lobby!</p>
+            </div>
+          ) : (
+            <div className="history-list">
+              {historyRecords.map((record) => (
+                <div key={record.id} className="history-card">
+                  <div className="history-card-header">
+                    <h3>{new Date(record.submittedAt).toLocaleDateString()} {new Date(record.submittedAt).toLocaleTimeString()}</h3>
+                    <div className="history-score-badge">
+                      Score: {record.scoreRate}% ({record.score}/{record.totalQuestions})
+                    </div>
+                  </div>
+                  <div className="history-card-details">
+                    <p>Time Taken: {record.durationSeconds === -1 ? 'Unlimited' : formatTime(record.durationSeconds)}</p>
+                    <div className="history-domains">
+                      <strong>Domain Performance:</strong>
+                      <ul>
+                        {record.domainPerformance.map((domain) => (
+                          <li key={domain.domain}>
+                            {domain.domain}: {domain.correct}/{domain.total} ({domain.accuracy}%)
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </section>
       </main>
     )
@@ -1364,7 +1488,7 @@ function App() {
           </div>
         </header>
 
-        <section className="result-page-card result-shell-card">
+        <section id="result-report-content" className="result-page-card result-shell-card">
           <div className="exam-utility-bar result-utility-bar">
             <div className="exam-utility-group">
               <span className="exam-utility-label">Section</span>
@@ -1577,6 +1701,9 @@ function App() {
             ) : null}
             <button className="exam-secondary-button" onClick={() => setPhase('landing')}>
               Return To Lobby
+            </button>
+            <button className="exam-secondary-button" onClick={downloadPDF}>
+              Download PDF
             </button>
             <button className="exam-primary-button" onClick={startExam}>
               Launch New Attempt
