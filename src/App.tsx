@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react'
-import html2pdf from 'html2pdf.js'
 import './App.css'
 import { questionBank, type ExamQuestion } from './data/questionBank'
 
@@ -672,19 +671,27 @@ function App() {
     })
   }
 
-  function downloadPDF() {
+  async function downloadPDF() {
     const element = document.getElementById('result-report-content')
     if (!element) return
 
-    const opt = {
-      margin:       0.5,
-      filename:     `aws-mock-exam-result-${Date.now()}.pdf`,
-      image:        { type: 'jpeg' as const, quality: 0.98 },
-      html2canvas:  { scale: 2, useCORS: true },
-      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-    }
+    try {
+      const html2pdfModule = await import('html2pdf.js')
+      const html2pdf = html2pdfModule.default
 
-    html2pdf().set(opt as any).from(element).save()
+      const opt = {
+        margin:       0.5,
+        filename:     `aws-mock-exam-result-${Date.now()}.pdf`,
+        image:        { type: 'jpeg' as const, quality: 0.98 },
+        html2canvas:  { scale: 2, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      }
+
+      html2pdf().set(opt as any).from(element).save()
+    } catch (err) {
+      console.error('PDF generation failed, falling back to print', err)
+      window.print()
+    }
   }
 
   function goToReviewScreen() {
