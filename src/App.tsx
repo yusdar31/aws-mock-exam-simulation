@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import './App.css'
 import { questionBank, type ExamQuestion } from './data/questionBank'
 
@@ -383,6 +383,10 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('')
   const [historyRecords, setHistoryRecords] = useState<ExamHistoryRecord[]>([])
   const [userId, setUserId] = useState<string>('')
+  const [practiceLoading, setPracticeLoading] = useState(false)
+  const [practiceNotice, setPracticeNotice] = useState('')
+  const [translations, setTranslations] = useState<Record<string, string>>({})
+  const [translatingIds, setTranslatingIds] = useState<string[]>([])
 
   useEffect(() => {
     // Initialize userId
@@ -694,6 +698,100 @@ function App() {
     }
   }
 
+  async function practiceWeakestDomain() {
+    // Find the weakest domain from history
+    const domainAccuracy = new Map<string, { correct: number; total: number }>()
+
+    for (const record of historyRecords) {
+      for (const dp of record.domainPerformance) {
+        const existing = domainAccuracy.get(dp.domain) ?? { correct: 0, total: 0 }
+        existing.correct += dp.correct
+        existing.total += dp.total
+        domainAccuracy.set(dp.domain, existing)
+      }
+    }
+
+    if (domainAccuracy.size === 0) {
+      setPracticeNotice('Anda belum memiliki riwayat ujian. Selesaikan satu ujian terlebih dahulu!')
+      return
+    }
+
+    // Find domain with lowest accuracy
+    let weakestDomain = ''
+    let lowestAccuracy = 101
+
+    for (const [domain, stats] of domainAccuracy) {
+      const accuracy = stats.total > 0 ? (stats.correct / stats.total) * 100 : 0
+      if (accuracy < lowestAccuracy) {
+        lowestAccuracy = accuracy
+        weakestDomain = domain
+      }
+    }
+
+    setPracticeLoading(true)
+    setPracticeNotice(`Generating practice questions for "${weakestDomain}" (${Math.round(lowestAccuracy)}% accuracy)...`)
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/questions/generate-practice`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ domain: weakestDomain, count: 5 }),
+      })
+
+      if (!response.ok) {
+        const payload = await response.json().catch(() => null)
+        throw new Error(payload?.error ?? 'Failed to generate practice questions')
+      }
+
+      const payload = await response.json()
+      const practiceQuestions = payload.items as ExamQuestion[]
+
+      // Start an exam session with these practice questions
+      setExamQuestions(practiceQuestions)
+      setPhase('exam')
+      setCurrentIndex(0)
+      setSelectedAnswers({})
+      setMarkedQuestionIds([])
+      setRemainingSeconds(-1) // unlimited time for practice
+      setSubmittedAt(null)
+      setShowDetailedReview(false)
+      setPracticeNotice('')
+    } catch (error) {
+      setPracticeNotice(error instanceof Error ? error.message : 'Failed to generate practice')
+    } finally {
+      setPracticeLoading(false)
+    }
+  }
+
+  const translateExplanation = useCallback(async (questionId: string, text: string) => {
+    if (translations[questionId] || translatingIds.includes(questionId)) return
+
+    setTranslatingIds((prev) => [...prev, questionId])
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/questions/translate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }),
+      })
+
+      if (!response.ok) {
+        const payload = await response.json().catch(() => null)
+        throw new Error(payload?.error ?? 'Translation failed')
+      }
+
+      const payload = await response.json()
+      setTranslations((prev) => ({ ...prev, [questionId]: payload.translated }))
+    } catch (error) {
+      setTranslations((prev) => ({
+        ...prev,
+        [questionId]: `[Gagal menerjemahkan: ${error instanceof Error ? error.message : 'Unknown error'}]`,
+      }))
+    } finally {
+      setTranslatingIds((prev) => prev.filter((id) => id !== questionId))
+    }
+  }, [translations, translatingIds])
+
   function goToReviewScreen() {
     setPhase('review')
   }
@@ -978,10 +1076,18 @@ function App() {
             <button className="exam-secondary-button" onClick={openAdminPanel}>
               Open Review Admin
             </button>
+            <button
+              className="exam-secondary-button practice-weakness-button"
+              disabled={practiceLoading}
+              onClick={practiceWeakestDomain}
+            >
+              {practiceLoading ? 'Generating...' : '🎯 Practice Weakest Domain'}
+            </button>
             <button className="exam-primary-button" disabled={examLoading} onClick={startExam}>
               {examLoading ? 'Loading...' : 'Begin Exam'}
             </button>
           </div>
+          {practiceNotice && <p className="lobby-notice">{practiceNotice}</p>}
           {examError && <p className="lobby-error">{examError}</p>}
         </section>
       </main>
@@ -1693,6 +1799,23 @@ function App() {
                     <div className="explanation-box">
                       <strong>Rationale</strong>
                       <p>{question.explanation}</p>
+
+                      {translations[question.id] ? (
+                        <div className="translation-box">
+                          <strong>🇮🇩 Penjelasan (Bahasa Indonesia)</strong>
+                          <p>{translations[question.id]}</p>
+                        </div>
+                      ) : (
+                        <button
+                          className="translate-button"
+                          disabled={translatingIds.includes(question.id)}
+                          onClick={() => translateExplanation(question.id, question.explanation)}
+                        >
+                          {translatingIds.includes(question.id)
+                            ? 'Menerjemahkan...'
+                            : '🇮🇩 Tampilkan Bahasa Indonesia'}
+                        </button>
+                      )}
                     </div>
                   </article>
                 )

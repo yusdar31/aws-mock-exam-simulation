@@ -4,7 +4,7 @@ import { parseRawDump } from '../services/dumpParser.js'
 import { createDraftQuestionsFromParsedEntries } from '../services/questionNormalizer.js'
 import { detectDuplicates } from '../services/similarity.js'
 import { readQuestions, writeQuestions } from '../storage.js'
-import { generateQuestionsFromAI } from '../services/aiGenerator.js'
+import { generateQuestionsFromAI, translateToIndonesian } from '../services/aiGenerator.js'
 
 export const questionRouter = express.Router()
 
@@ -288,3 +288,78 @@ questionRouter.post('/:id/reject', async (request, response, next) => {
   }
 })
 
+questionRouter.post('/generate-practice', async (request, response, next) => {
+  try {
+    const { domain, count = 5 } = request.body ?? {}
+
+    if (!domain || typeof domain !== 'string') {
+      response.status(400).json({ error: 'domain is required' })
+      return
+    }
+
+    const validCount = Math.min(Math.max(Number(count), 1), 15)
+    const generatedItems = await generateQuestionsFromAI(domain, validCount)
+
+    if (!Array.isArray(generatedItems) || generatedItems.length === 0) {
+      response.status(400).json({ error: 'AI returned empty results' })
+      return
+    }
+
+    const existingQuestions = await readQuestions()
+
+    const practiceQuestions = generatedItems.map((item) => {
+      const sanitized = sanitizeQuestionInput(item)
+      return {
+        id: crypto.randomUUID(),
+        sourceType: 'ai-practice',
+        sourceRef: 'weakness-practice',
+        status: 'approved',
+        ...sanitized,
+        issues: [],
+      }
+    })
+
+    const updatedQuestions = [...practiceQuestions, ...existingQuestions]
+    await writeQuestions(updatedQuestions)
+
+    // Return the practice questions in exam-ready format
+    const examReady = practiceQuestions.map((q) => ({
+      id: q.id,
+      domain: q.domain,
+      type: q.type,
+      prompt: q.prompt,
+      options: q.options,
+      correctAnswers: q.correctAnswers,
+      explanation: q.explanation,
+    }))
+
+    response.status(201).json({
+      generated: practiceQuestions.length,
+      domain,
+      items: examReady,
+    })
+  } catch (error) {
+    next(error)
+  }
+})
+
+questionRouter.post('/translate', async (request, response, next) => {
+  try {
+    const { text } = request.body ?? {}
+
+    if (!text || typeof text !== 'string') {
+      response.status(400).json({ error: 'text is required' })
+      return
+    }
+
+    if (text.length > 5000) {
+      response.status(400).json({ error: 'Text too long (max 5000 chars)' })
+      return
+    }
+
+    const translated = await translateToIndonesian(text)
+    response.json({ translated })
+  } catch (error) {
+    next(error)
+  }
+})

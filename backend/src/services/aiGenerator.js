@@ -97,3 +97,35 @@ Criteria:
     throw new Error("Failed to generate questions using AI.");
   }
 }
+
+export async function translateToIndonesian(text) {
+  if (!process.env.GEMINI_API_KEY) {
+    throw new Error("GEMINI_API_KEY is not configured.");
+  }
+
+  const promptText = `Translate the following AWS exam explanation into Bahasa Indonesia (Indonesian).
+
+Rules:
+1. Keep all AWS service names in English (e.g. Amazon S3, AWS Lambda, EC2, CloudFront, etc.).
+2. Keep technical terms that are commonly used in English (e.g. "latency", "throughput", "endpoint").
+3. Make the translation natural and easy to understand for Indonesian learners.
+4. Translate ONLY the text below. Do NOT add any extra commentary.
+
+Text to translate:
+${text}`;
+
+  try {
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: promptText,
+      config: {
+        temperature: 0.3,
+      }
+    });
+
+    return response.text;
+  } catch (error) {
+    console.error("Translation Error:", error);
+    throw new Error("Failed to translate text.");
+  }
+}
