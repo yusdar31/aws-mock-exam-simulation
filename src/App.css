@@ -4,6 +4,551 @@
    ══════════════════════════════════════════════════════════════════════════════ */
 
 /* ─── Global Shells & Containers ─── */
+.dashboard-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--pvue-body-bg);
+}
+
+.dashboard-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 28px;
+  background: var(--pvue-header);
+  border-bottom: 1px solid var(--pvue-header-border);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: #f8fafc;
+  letter-spacing: -0.01em;
+}
+
+.topbar-divider {
+  color: #334155;
+  font-size: 12px;
+}
+
+.topbar-subtitle {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar-user {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 4px 10px;
+  margin-right: 6px;
+}
+
+.topbar-username {
+  font-size: 12px;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.topbar-useremail {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.topbar-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+  padding: 5px 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.topbar-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.topbar-btn-logout {
+  background: transparent;
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  border-radius: 5px;
+  padding: 5px 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #fca5a5;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.topbar-btn-logout:hover {
+  background: rgba(244, 63, 94, 0.15);
+  border-color: #f43f5e;
+  color: #ffffff;
+}
+
+/* ─── Dashboard Container & Split Grid ─── */
+.dashboard-container {
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.dashboard-main-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dashboard-side-col {
+  position: relative;
+}
+
+/* ─── Dashboard Cards (Left Column) ─── */
+.dash-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 24px 26px;
+  box-shadow: var(--shadow-card);
+}
+
+.dash-card-header {
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.dash-card-header h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+}
+
+.dash-card-header p {
+  font-size: 12.5px;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Track Selector Cards (Bento Style) */
+.track-selector-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.track-card {
+  text-align: left;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.track-card:hover {
+  border-color: #94a3b8;
+  background: #f8fafc;
+  transform: translateY(-1px);
+}
+
+.track-card.active {
+  border-color: #0f172a;
+  background: #f8fafc;
+  box-shadow: inset 0 0 0 1.5px #0f172a, var(--shadow-card);
+}
+
+.track-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.track-code-badge {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.track-card.active .track-code-badge {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+.track-level-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.track-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.35;
+}
+
+.track-desc {
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.track-footer-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: #64748b;
+  padding-top: 10px;
+  margin-top: 6px;
+  border-top: 1px dashed #e2e8f0;
+}
+
+/* Parameters Form Controls */
+.config-form-group {
+  margin-bottom: 18px;
+}
+
+.config-form-group:last-child {
+  margin-bottom: 0;
+}
+
+.config-group-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 8px;
+}
+
+.config-options-segmented {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.config-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Domain Selector Grid */
+.domain-selector-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+
+.domain-select-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  color: #334155;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.domain-select-item input[type='checkbox'] {
+  accent-color: #0f172a;
+  inline-size: 15px;
+  block-size: 15px;
+  cursor: pointer;
+}
+
+.domain-select-text {
+  line-height: 1.4;
+}
+
+.domain-empty-hint {
+  font-size: 12px;
+  color: #64748b;
+  grid-column: span 2;
+}
+
+/* ─── Launchpad Sticky Card (Right Column) ─── */
+.launchpad-sticky-card {
+  position: sticky;
+  top: 76px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.launchpad-header {
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 16px;
+}
+
+.launchpad-status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.launchpad-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #047857;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+
+.launchpad-tag::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.launchpad-code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.launchpad-header h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+}
+
+.launchpad-header p {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.launchpad-specs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 12.5px;
+}
+
+.spec-key {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.spec-value {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.spec-value.highlight {
+  color: #047857;
+  font-weight: 700;
+}
+
+.launchpad-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.launchpad-primary-btn {
+  width: 100%;
+  padding: 12px 18px;
+  background: #0f172a;
+  color: #ffffff;
+  border: 1px solid #0f172a;
+  border-radius: 6px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.launchpad-primary-btn:hover:not(:disabled) {
+  background: #1e293b;
+  border-color: #1e293b;
+  transform: translateY(-1px);
+}
+
+.launchpad-primary-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.launchpad-secondary-btn {
+  width: 100%;
+  padding: 10px 16px;
+  background: #ffffff;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.launchpad-secondary-btn:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.launchpad-notice {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: #0369a1;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  padding: 8px 10px;
+  border-radius: 4px;
+  margin: 0;
+}
+
+.launchpad-error {
+  font-size: 12px;
+  color: #be123c;
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  padding: 8px 10px;
+  border-radius: 4px;
+  margin: 0;
+}
+
+/* Quick Performance Snippet Box */
+.last-performance-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 12px 14px;
+  border-left: 3px solid #0f172a;
+}
+
+.last-perf-title {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.last-perf-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.last-perf-score {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.last-perf-score.pass { color: #047857; }
+.last-perf-score.warn { color: #d97706; }
+
+.last-perf-status {
+  font-size: 12px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.last-perf-date {
+  font-size: 11px;
+  color: #64748b;
+  display: block;
+}
+
+/* ─── Old Lobby Legacy Styles Kept for Sub-components ─── */
 .lobby-shell {
   min-height: 100vh;
   display: flex;
@@ -21,15 +566,6 @@
   border-radius: 8px;
   padding: 32px 36px;
   box-shadow: var(--shadow-card);
-}
-
-.lobby-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  align-items: flex-start;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--pvue-card-border);
 }
 
 .aws-badge {
@@ -1838,7 +2374,39 @@
 /* ══════════════════════════════════════════════════════════════════════════════
    RESPONSIVE LAYOUT (Mobile Breakpoints)
    ══════════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 992px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .launchpad-sticky-card {
+    position: static;
+  }
+}
+
 @media (max-width: 768px) {
+  .dashboard-topbar {
+    padding: 10px 16px;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .topbar-right {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .dashboard-container {
+    padding: 16px 12px 60px;
+  }
+
+  .track-selector-grid,
+  .config-split-grid,
+  .domain-selector-grid {
+    grid-template-columns: 1fr;
+  }
+
   .exam-body-layout {
     grid-template-columns: 1fr;
   }

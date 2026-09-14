@@ -1428,199 +1428,320 @@ function App() {
   }
 
   if (phase === 'landing') {
-    return (
-      <main className="lobby-shell">
-        <section className="lobby-card">
-          {authUser && (
-            <div className="user-bar">
-              <span className="user-bar-info"><strong>{authUser.name}</strong> ({authUser.email})</span>
-              <button className="user-bar-logout" onClick={handleLogout}>Logout</button>
-            </div>
-          )}
+    const latestHistory = historyRecords.length > 0 ? historyRecords[0] : null
 
-          {savedSession && (
-            <div className="resume-exam-banner">
-              <div className="resume-banner-info">
-                <span className="resume-badge">Sesi Ujian Tersimpan</span>
-                <h3>Lanjutkan Ujian {savedSession.examType === 'ccp' ? 'CLF-C02' : 'SAA-C03'}</h3>
-                <p>
-                  Tersimpan di soal nomor <strong>{(savedSession.currentIndex || 0) + 1}</strong> dari <strong>{savedSession.examQuestions.length}</strong> soal 
-                  ({Object.keys(savedSession.selectedAnswers || {}).length} sudah dijawab).
-                  {savedSession.remainingSeconds > 0 ? ` Sisa waktu: ${formatTime(savedSession.remainingSeconds)}.` : ' Mode tanpa batas waktu.'}
-                </p>
-              </div>
-              <div className="resume-banner-actions">
-                <button className="exam-primary-button resume-button" onClick={resumeSavedSession}>
-                  Lanjutkan Ujian
-                </button>
-                <button className="exam-secondary-button discard-button" onClick={discardSavedSession}>
-                  Hapus Sesi
-                </button>
-              </div>
-            </div>
-          )}
-          <div className="lobby-header">
-            <div>
-              <div className="aws-badge">AWS Certification</div>
-              <h1>{examType === 'ccp' ? 'AWS Certified Cloud Practitioner' : 'AWS Certified Solutions Architect - Associate'}</h1>
-              <p className="lobby-copy">
-                {examType === 'ccp'
-                  ? 'Simulasi ujian CCP berbasis bank soal Kahoot harian (205 soal). Cocok untuk latihan dasar cloud computing, security, billing, dan layanan AWS.'
-                  : 'Simulasi dibuat menyerupai exam delivery UI: timer di header, navigator soal, penanda review, dan halaman review akhir sebelum submit.'}
-              </p>
-            </div>
-            <div className="lobby-id-block">
-              <span>Exam Code</span>
-              <strong>{examType === 'ccp' ? 'CLF-C02 Mock' : 'SAA-C03 Mock'}</strong>
-            </div>
+    return (
+      <div className="dashboard-shell">
+        {/* Top Navigation Bar */}
+        <header className="dashboard-topbar">
+          <div className="topbar-left">
+            <div className="aws-badge">AWS-CERT</div>
+            <span className="topbar-title">Exam Simulator</span>
+            <span className="topbar-divider">/</span>
+            <span className="topbar-subtitle">Command Center</span>
           </div>
 
-          <div className="lobby-config-section">
-            <h2>Exam Setup</h2>
-
-            <div className="config-field" style={{ marginBottom: '16px' }}>
-              <label>Exam Type</label>
-              <div className="config-options">
-                <button
-                  className={`config-pill ${examType === 'ccp' ? 'active' : ''}`}
-                  onClick={() => setExamType('ccp')}
-                >
-                  CLF-C02 (Cloud Practitioner)
-                </button>
-                <button
-                  className={`config-pill ${examType === 'saa' ? 'active' : ''}`}
-                  onClick={() => setExamType('saa')}
-                >
-                  SAA-C03 (Solutions Architect)
-                </button>
+          <div className="topbar-right">
+            {authUser && (
+              <div className="topbar-user">
+                <span className="topbar-username">{authUser.name}</span>
+                <span className="topbar-useremail">({authUser.email})</span>
               </div>
-            </div>
+            )}
+            <button className="topbar-btn" onClick={() => setPhase('history')}>
+              Learning Analytics
+            </button>
+            <button className="topbar-btn" onClick={openAdminPanel}>
+              Question Admin
+            </button>
+            <button className="topbar-btn-logout" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+        </header>
 
-            <div className="config-field" style={{ marginBottom: '16px' }}>
-              <label>Bahasa Soal (Language)</label>
-              <div className="config-options">
-                <button
-                  className={`config-pill ${examLang === 'id' ? 'active' : ''}`}
-                  onClick={() => setExamLang('id')}
-                >
-                  Bahasa Indonesia {examType === 'ccp' ? `(${ccpQuestionBankId.length})` : ''}
-                </button>
-                <button
-                  className={`config-pill ${examLang === 'en' ? 'active' : ''}`}
-                  onClick={() => setExamLang('en')}
-                >
-                  English {examType === 'ccp' ? `(${ccpQuestionBankEn.length})` : `(${questionBank.length})`}
-                </button>
-                <button
-                  className={`config-pill ${examLang === 'all' ? 'active' : ''}`}
-                  onClick={() => setExamLang('all')}
-                >
-                  Semua Bahasa {examType === 'ccp' ? `(${ccpQuestionBank.length})` : ''}
-                </button>
-              </div>
-            </div>
-
-            <div className="config-grid">
-              <div className="config-field">
-                <label>Question Limit</label>
-                <div className="config-options">
-                  {[10, 20, 50, 'all'].map((val) => (
-                    <button
-                      key={val}
-                      className={`config-pill ${examConfigLimit === val ? 'active' : ''}`}
-                      onClick={() => setExamConfigLimit(val as any)}
-                    >
-                      {val === 'all' ? 'All' : val}
+        {/* Main Dashboard Layout */}
+        <main className="dashboard-container">
+          <div className="dashboard-grid">
+            
+            {/* Kolom Kiri: Konfigurasi & Domain Filter */}
+            <div className="dashboard-main-col">
+              
+              {/* Resume Exam Banner jika ada sesi belum selesai */}
+              {savedSession && (
+                <div className="resume-exam-banner">
+                  <div className="resume-banner-info">
+                    <span className="resume-badge">Sesi Ujian Tersimpan</span>
+                    <h3>Lanjutkan Ujian {savedSession.examType === 'ccp' ? 'CLF-C02' : 'SAA-C03'}</h3>
+                    <p>
+                      Tersimpan di nomor <strong>{(savedSession.currentIndex || 0) + 1}</strong> dari <strong>{savedSession.examQuestions.length}</strong> soal 
+                      ({Object.keys(savedSession.selectedAnswers || {}).length} sudah dijawab).
+                      {savedSession.remainingSeconds > 0 ? ` Sisa waktu: ${formatTime(savedSession.remainingSeconds)}.` : ' Mode tanpa batas waktu.'}
+                    </p>
+                  </div>
+                  <div className="resume-banner-actions">
+                    <button className="exam-primary-button resume-button" onClick={resumeSavedSession}>
+                      Lanjutkan Ujian
                     </button>
-                  ))}
-                  <input
-                    type="number"
-                    className="config-pill-input"
-                    placeholder="Custom"
-                    min={1}
-                    max={availableQuestions.length}
-                    value={typeof examConfigLimit === 'number' && ![10, 20, 50].includes(examConfigLimit as number) ? examConfigLimit : ''}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value)
-                      if (!isNaN(val) && val > 0) setExamConfigLimit(val)
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className="config-field">
-                <label>Time Limit</label>
-                <div className="config-options">
-                  {[15, 30, 45, 60, -1].map((val) => (
-                    <button
-                      key={val}
-                      className={`config-pill ${examConfigDuration === val ? 'active' : ''}`}
-                      onClick={() => setExamConfigDuration(val)}
-                    >
-                      {val === -1 ? 'Unlimited' : `${val} Min`}
+                    <button className="exam-secondary-button discard-button" onClick={discardSavedSession}>
+                      Hapus Sesi
                     </button>
-                  ))}
-                  <input
-                    type="number"
-                    className="config-pill-input"
-                    placeholder="Custom"
-                    min={1}
-                    value={examConfigDuration !== -1 && ![15, 30, 45, 60].includes(examConfigDuration) ? examConfigDuration : ''}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value)
-                      if (!isNaN(val) && val > 0) setExamConfigDuration(val)
-                    }}
-                  />
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {/* Card 1: Certification Track Selector */}
+              <section className="dash-card">
+                <div className="dash-card-header">
+                  <h3>Pilih Jalur Sertifikasi (Certification Track)</h3>
+                  <p>Tentukan silabus dan standar bank soal yang ingin Anda uji</p>
+                </div>
+
+                <div className="track-selector-grid">
+                  <button
+                    type="button"
+                    className={`track-card ${examType === 'ccp' ? 'active' : ''}`}
+                    onClick={() => setExamType('ccp')}
+                  >
+                    <div className="track-card-top">
+                      <span className="track-code-badge">CLF-C02</span>
+                      <span className="track-level-tag">Foundational</span>
+                    </div>
+                    <strong className="track-title">AWS Certified Cloud Practitioner</strong>
+                    <span className="track-desc">
+                      Dasar komputasi cloud, model tanggung jawab bersama, penagihan, dan arsitektur layanan inti AWS.
+                    </span>
+                    <div className="track-footer-meta">
+                      <span>205 Soal Bank Kahoot</span>
+                      <span>4 Domain Silabus</span>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    className={`track-card ${examType === 'saa' ? 'active' : ''}`}
+                    onClick={() => setExamType('saa')}
+                  >
+                    <div className="track-card-top">
+                      <span className="track-code-badge">SAA-C03</span>
+                      <span className="track-level-tag">Associate</span>
+                    </div>
+                    <strong className="track-title">AWS Certified Solutions Architect</strong>
+                    <span className="track-desc">
+                      Desain solusi multi-tier berketahanan tinggi, efisiensi biaya, skalabilitas, dan enkripsi VPC.
+                    </span>
+                    <div className="track-footer-meta">
+                      <span>Scenario-Based</span>
+                      <span>Multi-AZ Resilience</span>
+                    </div>
+                  </button>
+                </div>
+              </section>
+
+              {/* Card 2: Parameters Configuration */}
+              <section className="dash-card">
+                <div className="dash-card-header">
+                  <h3>Parameter Simulasi (Exam Parameters)</h3>
+                  <p>Sesuaikan bahasa pengantar, batasan waktu, dan kuota pertanyaan</p>
+                </div>
+
+                <div className="config-form-group">
+                  <label className="config-group-label">Bahasa Soal (Language)</label>
+                  <div className="config-options-segmented">
+                    <button
+                      type="button"
+                      className={`config-pill ${examLang === 'id' ? 'active' : ''}`}
+                      onClick={() => setExamLang('id')}
+                    >
+                      Bahasa Indonesia {examType === 'ccp' ? `(${ccpQuestionBankId.length})` : ''}
+                    </button>
+                    <button
+                      type="button"
+                      className={`config-pill ${examLang === 'en' ? 'active' : ''}`}
+                      onClick={() => setExamLang('en')}
+                    >
+                      English {examType === 'ccp' ? `(${ccpQuestionBankEn.length})` : `(${questionBank.length})`}
+                    </button>
+                    <button
+                      type="button"
+                      className={`config-pill ${examLang === 'all' ? 'active' : ''}`}
+                      onClick={() => setExamLang('all')}
+                    >
+                      Semua Bahasa {examType === 'ccp' ? `(${ccpQuestionBank.length})` : ''}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="config-split-grid">
+                  <div className="config-form-group">
+                    <label className="config-group-label">Jumlah Pertanyaan</label>
+                    <div className="config-options-segmented">
+                      {[10, 20, 50, 'all'].map((val) => (
+                        <button
+                          key={val}
+                          type="button"
+                          className={`config-pill ${examConfigLimit === val ? 'active' : ''}`}
+                          onClick={() => setExamConfigLimit(val as any)}
+                        >
+                          {val === 'all' ? 'Semua' : `${val} Soal`}
+                        </button>
+                      ))}
+                      <input
+                        type="number"
+                        className="config-pill-input"
+                        placeholder="Kustom"
+                        min={1}
+                        max={availableQuestions.length}
+                        value={typeof examConfigLimit === 'number' && ![10, 20, 50].includes(examConfigLimit as number) ? examConfigLimit : ''}
+                        onChange={(e) => {
+                          const val = parseInt(e.target.value)
+                          if (!isNaN(val) && val > 0) setExamConfigLimit(val)
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="config-form-group">
+                    <label className="config-group-label">Batas Waktu</label>
+                    <div className="config-options-segmented">
+                      {[15, 30, 45, 60, -1].map((val) => (
+                        <button
+                          key={val}
+                          type="button"
+                          className={`config-pill ${examConfigDuration === val ? 'active' : ''}`}
+                          onClick={() => setExamConfigDuration(val)}
+                        >
+                          {val === -1 ? 'Tanpa Batas' : `${val} Menit`}
+                        </button>
+                      ))}
+                      <input
+                        type="number"
+                        className="config-pill-input"
+                        placeholder="Menit"
+                        min={1}
+                        value={examConfigDuration !== -1 && ![15, 30, 45, 60].includes(examConfigDuration) ? examConfigDuration : ''}
+                        onChange={(e) => {
+                          const val = parseInt(e.target.value)
+                          if (!isNaN(val) && val > 0) setExamConfigDuration(val)
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Card 3: Domain Filter */}
+              <section className="dash-card">
+                <div className="dash-card-header">
+                  <h3>Cakupan Domain (Domain Scope)</h3>
+                  <p>Centang topik arsitektur yang ingin diujikan dalam percobaan ini</p>
+                </div>
+
+                <div className="domain-selector-grid">
+                  {availableDomains.map((domain) => (
+                    <label key={domain} className="domain-select-item">
+                      <input
+                        type="checkbox"
+                        checked={examConfigDomains.includes(domain)}
+                        onChange={() => toggleConfigDomain(domain)}
+                      />
+                      <span className="domain-select-text">{domain}</span>
+                    </label>
+                  ))}
+                  {availableDomains.length === 0 && (
+                    <span className="domain-empty-hint">Memuat domain yang tersedia...</span>
+                  )}
+                </div>
+              </section>
+
             </div>
 
-            <div className="config-field config-domains-field">
-              <label>Select Domains</label>
-              <div className="config-domains-list">
-                {availableDomains.map((domain) => (
-                  <label key={domain} className="config-domain-item">
-                    <input
-                      type="checkbox"
-                      checked={examConfigDomains.includes(domain)}
-                      onChange={() => toggleConfigDomain(domain)}
-                    />
-                    <span>{domain}</span>
-                  </label>
-                ))}
-                {availableDomains.length === 0 && (
-                  <span className="config-domain-empty">Loading domains...</span>
+            {/* Kolom Kanan: Sticky Launchpad & Quick Stats */}
+            <aside className="dashboard-side-col">
+              <div className="launchpad-sticky-card">
+                <div className="launchpad-header">
+                  <div className="launchpad-status-row">
+                    <span className="launchpad-tag">Engine Ready</span>
+                    <span className="launchpad-code">{examType === 'ccp' ? 'CLF-C02' : 'SAA-C03'}</span>
+                  </div>
+                  <h2>{examType === 'ccp' ? 'Cloud Practitioner Mock' : 'Solutions Architect Mock'}</h2>
+                  <p>Simulasi berjalan di engine ujian Pearson VUE dengan navigasi item, penanda bendera, dan laporan skor.</p>
+                </div>
+
+                <div className="launchpad-specs-list">
+                  <div className="spec-row">
+                    <span className="spec-key">Pool Pertanyaan</span>
+                    <strong className="spec-value">{availableQuestions.length} Soal Siap</strong>
+                  </div>
+                  <div className="spec-row">
+                    <span className="spec-key">Alokasi Ujian</span>
+                    <strong className="spec-value">
+                      {examConfigLimit === 'all' ? `${availableQuestions.length} Soal` : `${examConfigLimit} Soal`}
+                    </strong>
+                  </div>
+                  <div className="spec-row">
+                    <span className="spec-key">Durasi Waktu</span>
+                    <strong className="spec-value">
+                      {examConfigDuration === -1 ? 'Tanpa Batas Waktu' : `${examConfigDuration} Menit`}
+                    </strong>
+                  </div>
+                  <div className="spec-row">
+                    <span className="spec-key">Bahasa Aktif</span>
+                    <strong className="spec-value">
+                      {examLang === 'id' ? 'Bahasa Indonesia' : examLang === 'en' ? 'English' : 'Campuran'}
+                    </strong>
+                  </div>
+                  <div className="spec-row">
+                    <span className="spec-key">Standar Kelulusan</span>
+                    <strong className="spec-value highlight">72% Scaled Score</strong>
+                  </div>
+                </div>
+
+                <div className="launchpad-cta-group">
+                  <button
+                    className="launchpad-primary-btn"
+                    disabled={examLoading}
+                    onClick={startExam}
+                  >
+                    {examLoading ? 'Mempersiapkan Soal...' : 'Mulai Ujian Sekarang'}
+                  </button>
+                  <button
+                    className="launchpad-secondary-btn"
+                    disabled={practiceLoading}
+                    onClick={practiceWeakestDomain}
+                  >
+                    {practiceLoading ? 'Menganalisis...' : 'Latihan Domain Terlemah'}
+                  </button>
+                </div>
+
+                {practiceNotice && <p className="launchpad-notice">{practiceNotice}</p>}
+                {examError && <p className="launchpad-error">{examError}</p>}
+
+                {/* Quick Last Performance Snippet */}
+                {latestHistory && (
+                  <div className="last-performance-box">
+                    <div className="last-perf-title">Ujian Terakhir Anda:</div>
+                    <div className="last-perf-content">
+                      <strong className={`last-perf-score ${latestHistory.scoreRate >= 72 ? 'pass' : 'warn'}`}>
+                        {latestHistory.scoreRate}%
+                      </strong>
+                      <div>
+                        <div className="last-perf-status">
+                          {latestHistory.scoreRate >= 72 ? 'Lulus (Passed)' : 'Belum Lulus'}
+                        </div>
+                        <span className="last-perf-date">
+                          {new Date(latestHistory.submittedAt).toLocaleDateString()} • {latestHistory.totalQuestions} soal
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
-            </div>
-            
-            <p className="lobby-config-summary">
-              Available Pool: <strong>{availableQuestions.length}</strong> questions.
-            </p>
-          </div>
+            </aside>
 
-          <div className="lobby-actions split-actions">
-            <button className="exam-secondary-button" onClick={() => setPhase('history')}>
-              View History
-            </button>
-            <button className="exam-secondary-button" onClick={openAdminPanel}>
-              Open Review Admin
-            </button>
-            <button
-              className="exam-secondary-button practice-weakness-button"
-              disabled={practiceLoading}
-              onClick={practiceWeakestDomain}
-            >
-              {practiceLoading ? 'Generating...' : 'Practice Weakest Domain'}
-            </button>
-            <button className="exam-primary-button" disabled={examLoading} onClick={startExam}>
-              {examLoading ? 'Loading...' : 'Begin Exam'}
-            </button>
           </div>
-          {practiceNotice && <p className="lobby-notice">{practiceNotice}</p>}
-          {examError && <p className="lobby-error">{examError}</p>}
-        </section>
-      </main>
+        </main>
+      </div>
     )
   }
 
