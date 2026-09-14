@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import './App.css'
 import { questionBank, type ExamQuestion } from './data/questionBank'
-import { ccpQuestionBank } from './data/ccpQuestionBank'
+import { ccpQuestionBank, ccpQuestionBankId, ccpQuestionBankEn } from './data/ccpQuestionBank'
 
 type ExamType = 'saa' | 'ccp'
+type ExamLanguage = 'all' | 'id' | 'en'
 type ExamPhase = 'auth' | 'landing' | 'exam' | 'review' | 'result' | 'admin' | 'history'
 type AuthMode = 'login' | 'register'
 type QuestionStatus = 'answered-marked' | 'marked' | 'answered' | 'unanswered'
@@ -471,7 +472,8 @@ function App() {
   const [userId, setUserId] = useState<string>('')
   const [practiceLoading, setPracticeLoading] = useState(false)
   const [practiceNotice, setPracticeNotice] = useState('')
-  const [examType, setExamType] = useState<ExamType>('saa')
+  const [examType, setExamType] = useState<ExamType>('ccp')
+  const [examLang, setExamLang] = useState<ExamLanguage>('id')
   const [translations, setTranslations] = useState<Record<string, string>>({})
   const [translatingIds, setTranslatingIds] = useState<string[]>([])
 
@@ -705,24 +707,38 @@ function App() {
     }
   }
 
-  // Load available questions based on exam type
+  // Load available questions based on exam type and language
   useEffect(() => {
     async function loadAvailable() {
       if (examType === 'ccp') {
-        // CCP mode uses local kahoot question bank directly
-        setAvailableQuestions(ccpQuestionBank)
+        if (examLang === 'id') {
+          setAvailableQuestions(ccpQuestionBankId)
+        } else if (examLang === 'en') {
+          setAvailableQuestions(ccpQuestionBankEn)
+        } else {
+          setAvailableQuestions(ccpQuestionBank)
+        }
       } else {
         // SAA mode loads from backend (approved) or fallback to demo
+        let baseSAA: ExamQuestion[] = []
         try {
           const approved = await fetchApprovedQuestions()
-          setAvailableQuestions(approved.length > 0 ? approved : questionBank)
+          baseSAA = approved.length > 0 ? approved : questionBank
         } catch {
-          setAvailableQuestions(questionBank)
+          baseSAA = questionBank
+        }
+
+        if (examLang === 'id') {
+          setAvailableQuestions(baseSAA.filter((q) => q.lang === 'id'))
+        } else if (examLang === 'en') {
+          setAvailableQuestions(baseSAA.filter((q) => q.lang === 'en' || !q.lang))
+        } else {
+          setAvailableQuestions(baseSAA)
         }
       }
     }
     loadAvailable()
-  }, [examType])
+  }, [examType, examLang])
 
   const availableDomains = useMemo(() => {
     const list = new Set(availableQuestions.map((q) => q.domain).filter(Boolean))
@@ -1306,16 +1322,40 @@ function App() {
               <label>Exam Type</label>
               <div className="config-options">
                 <button
+                  className={`config-pill ${examType === 'ccp' ? 'active' : ''}`}
+                  onClick={() => setExamType('ccp')}
+                >
+                  CLF-C02 (Cloud Practitioner)
+                </button>
+                <button
                   className={`config-pill ${examType === 'saa' ? 'active' : ''}`}
                   onClick={() => setExamType('saa')}
                 >
                   SAA-C03 (Solutions Architect)
                 </button>
+              </div>
+            </div>
+
+            <div className="config-field" style={{ marginBottom: '16px' }}>
+              <label>Bahasa Soal (Language)</label>
+              <div className="config-options">
                 <button
-                  className={`config-pill ${examType === 'ccp' ? 'active' : ''}`}
-                  onClick={() => setExamType('ccp')}
+                  className={`config-pill ${examLang === 'id' ? 'active' : ''}`}
+                  onClick={() => setExamLang('id')}
                 >
-                  CLF-C02 (Cloud Practitioner)
+                  🇮🇩 Bahasa Indonesia {examType === 'ccp' ? `(${ccpQuestionBankId.length})` : ''}
+                </button>
+                <button
+                  className={`config-pill ${examLang === 'en' ? 'active' : ''}`}
+                  onClick={() => setExamLang('en')}
+                >
+                  🇬🇧 English {examType === 'ccp' ? `(${ccpQuestionBankEn.length})` : `(${questionBank.length})`}
+                </button>
+                <button
+                  className={`config-pill ${examLang === 'all' ? 'active' : ''}`}
+                  onClick={() => setExamLang('all')}
+                >
+                  🌐 Campuran / Semua {examType === 'ccp' ? `(${ccpQuestionBank.length})` : ''}
                 </button>
               </div>
             </div>
@@ -2257,6 +2297,10 @@ function App() {
                   ? 'Select one answer'
                   : `Select ${currentQuestion.correctAnswers.length} answers`}
               </strong>
+            </div>
+            <div>
+              <span className="question-meta-label">Language</span>
+              <strong>{currentQuestion.lang === 'id' ? '🇮🇩 Bahasa Indonesia' : '🇬🇧 English'}</strong>
             </div>
             <div>
               <span className="question-meta-label">Status</span>

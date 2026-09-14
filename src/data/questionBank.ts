@@ -12,10 +12,12 @@ export type ExamQuestion = {
   correctAnswers: string[]
   explanation: string
   difficulty?: string
+  lang?: 'en' | 'id'
 }
 
 export const questionBank: ExamQuestion[] = [
   {
+    lang: 'en',
     id: 'q1',
     domain: 'Resilient Architectures',
     type: 'single',
@@ -44,6 +46,7 @@ export const questionBank: ExamQuestion[] = [
       'An Auto Scaling group across multiple Availability Zones with an Application Load Balancer is the standard highly available design for EC2 workloads. It automatically replaces unhealthy instances and shifts traffic away from a failed Availability Zone without manual intervention.',
   },
   {
+    lang: 'en',
     id: 'q2',
     domain: 'Secure Architectures',
     type: 'multiple',
@@ -72,6 +75,7 @@ export const questionBank: ExamQuestion[] = [
       'S3 encryption at rest is achieved with server-side encryption, while private network restriction to a specific VPC endpoint is enforced with a bucket policy using the aws:sourceVpce condition key. S3 buckets are not placed in subnets, so option C is invalid.',
   },
   {
+    lang: 'en',
     id: 'q3',
     domain: 'High-Performing Architectures',
     type: 'single',
@@ -88,6 +92,7 @@ export const questionBank: ExamQuestion[] = [
       'ElastiCache for Redis is designed for in-memory workloads that require very low latency, such as session stores, leaderboards, and caching layers. The other services are storage or database options with higher latency characteristics.',
   },
   {
+    lang: 'en',
     id: 'q4',
     domain: 'Cost-Optimized Architectures',
     type: 'single',
@@ -104,6 +109,7 @@ export const questionBank: ExamQuestion[] = [
       'S3 Glacier Flexible Retrieval is intended for long-lived archive data with infrequent access and retrieval times measured in minutes to hours. It delivers significantly lower storage costs than frequently accessed classes.',
   },
   {
+    lang: 'en',
     id: 'q5',
     domain: 'Secure Architectures',
     type: 'multiple',
@@ -132,6 +138,7 @@ export const questionBank: ExamQuestion[] = [
       'IAM roles for EC2 provide temporary credentials automatically through the instance metadata service, which removes the need to manage or store long-term access keys on the server. This is the recommended AWS pattern for instance-to-service access.',
   },
   {
+    lang: 'en',
     id: 'q6',
     domain: 'Resilient Architectures',
     type: 'single',
@@ -148,6 +155,7 @@ export const questionBank: ExamQuestion[] = [
       'Amazon SQS decouples application components and absorbs bursts of work, allowing producers to continue operating while consumers process messages at their own pace. SNS and EventBridge are event delivery services, not durable work queues for this use case.',
   },
   {
+    lang: 'en',
     id: 'q7',
     domain: 'High-Performing Architectures',
     type: 'multiple',
@@ -164,6 +172,7 @@ export const questionBank: ExamQuestion[] = [
       'CloudFront caches content at edge locations to reduce latency for global users, and AWS WAF can be attached to the distribution to block common attacks such as SQL injection or bad bots. Direct S3 website access does not provide the same caching and protection layer.',
   },
   {
+    lang: 'en',
     id: 'q8',
     domain: 'Cost-Optimized Architectures',
     type: 'single',
@@ -180,6 +189,7 @@ export const questionBank: ExamQuestion[] = [
       'Spot Instances are ideal for fault-tolerant and interruption-tolerant workloads such as batch processing, data analysis, and stateless jobs. They typically provide the deepest discounts compared with other EC2 purchasing models.',
   },
   {
+    lang: 'en',
     id: 'q9',
     domain: 'Resilient Architectures',
     type: 'single',
@@ -196,6 +206,7 @@ export const questionBank: ExamQuestion[] = [
       'Amazon RDS Multi-AZ deployments provide synchronous standby infrastructure, automatic failover, managed backups, and patching with far less operational overhead than self-managed databases on EC2. DynamoDB is a different data model and Redshift is for analytics, not OLTP.',
   },
   {
+    lang: 'en',
     id: 'q10',
     domain: 'Secure Architectures',
     type: 'single',
@@ -212,6 +223,7 @@ export const questionBank: ExamQuestion[] = [
       'AWS Secrets Manager is designed for securely storing, retrieving, and rotating secrets such as database credentials, API keys, and tokens. It integrates directly with applications and AWS services using IAM-based access control.',
   },
   {
+    lang: 'en',
     id: 'q11',
     domain: 'High-Performing Architectures',
     type: 'single',
@@ -228,6 +240,7 @@ export const questionBank: ExamQuestion[] = [
       'S3 event notifications with Lambda provide an event-driven pattern that is fully managed, scalable, and requires minimal infrastructure management. Polling from EC2 introduces unnecessary operational overhead and latency.',
   },
   {
+    lang: 'en',
     id: 'q12',
     domain: 'Cost-Optimized Architectures',
     type: 'multiple',

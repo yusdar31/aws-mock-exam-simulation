@@ -1,7 +1,6 @@
 import type { ExamQuestion } from './questionBank'
 
-export const ccpQuestionBank: ExamQuestion[] = 
-[
+export const ccpQuestionBank: ExamQuestion[] = [
   {
     "id": "tech_001",
     "domain": "Technology & Services",
@@ -29,7 +28,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "aws s3 menyediakan perintah tingkat tinggi (sync, mb, cp), sedangkan aws s3api memberikan kontrol granular 1-to-1 terhadap S3 REST API.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_002",
@@ -58,7 +58,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Nama bucket S3 harus unik secara global di seluruh dunia dan mengikuti konvensi DNS: tidak boleh ada huruf kapital atau spasi.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_001",
@@ -87,7 +88,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Amazon GuardDuty adalah layanan intelligent threat detection berbasis machine learning yang memonitor anomali pada akun AWS.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_003",
@@ -116,7 +118,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Amazon EBS adalah block-level storage volume yang diformat menjadi filesystem untuk instance EC2.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_004",
@@ -145,7 +148,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Amazon EFS menyediakan file system bersama berbasis NFSv4 yang elastis dan multi-attach.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_005",
@@ -174,7 +178,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Amazon SQS adalah distributed message queue yang andal untuk decoupling antar komponen sistem.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_002",
@@ -203,7 +208,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Amazon Macie secara spesifik memindai bucket S3 untuk mendeteksi data sensitif/PII (Nomor KTP, Kartu Kredit).",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "id"
   },
   {
     "id": "tech_006",
@@ -232,7 +238,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Skalabilitas adalah kemampuan sistem untuk menangani lonjakan beban kerja dengan menambah sumber daya.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_007",
@@ -261,7 +268,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Tiap AZ memiliki fasilitas listrik, pendingin, dan keamanan fisik yang terisolasi dari AZ lain di Region yang sama.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "bill_001",
@@ -290,7 +298,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS Pricing Calculator adalah kalkulator web gratis untuk mengestimasi biaya rancangan arsitektur AWS.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_008",
@@ -319,7 +328,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon DynamoDB adalah key-value dan document database NoSQL terkelola yang serverless.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_009",
@@ -348,7 +358,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "S3 Event Notifications menerbitkan event ke SNS Topic yang kemudian menyiarkan notifikasi email/SMS ke subscribers.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_003",
@@ -377,7 +388,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS Artifact adalah portal self-service gratis untuk mengunduh laporan audit compliance pihak ketiga dan perjanjian kepatuhan AWS.",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "id"
   },
   {
     "id": "bill_002",
@@ -406,7 +418,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Dengan Pay-as-you-go, perusahaan tidak perlu membeli datacenter di muka (CapEx), melainkan membayar pemakaian berkala (OpEx).",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_010",
@@ -435,7 +448,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "SNS Topic memiliki Access Policy (Resource-based Policy) yang wajib memberikan izin Action: 'SNS:Publish' kepada s3.amazonaws.com.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "bill_003",
@@ -464,7 +478,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Spot Instances menawarkan diskon terbesar untuk workload toleran interupsi (batch processing, data testing).",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "sec_004",
@@ -493,7 +508,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "IAM Role memberikan kredensial temporer yang di-rotate otomatis tanpa perlu menyimpan Access Key statis di server.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_011",
@@ -522,7 +538,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "S3 Glacier Deep Archive adalah opsi penyimpanan data paling murah untuk arsip regulasi 7-10 tahun.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "sec_005",
@@ -551,7 +568,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Root user memiliki akses penuh tanpa batas. MFA adalah rekomendasi keamanan utama untuk melindungi root account.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "sec_006",
@@ -580,7 +598,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS WAF bekerja di Layer 7 (Application Layer) memfilter payload HTTP/HTTPS dari serangan eksploitasi web.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "bill_004",
@@ -609,7 +628,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "TAM (Technical Account Manager) adalah penasihat teknis khusus yang hanya didapatkan pada paket Enterprise Support (dan Enterprise On-Ramp).",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "id"
   },
   {
     "id": "tech_012",
@@ -638,7 +658,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Amazon Route 53 adalah layanan DNS domain dan routing lalu lintas jaringan cloud AWS.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "sec_007",
@@ -667,7 +688,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS bertanggung jawab 'Security OF the Cloud' (fasilitas fisik, daya, hardware, kabel jaringan, dan software virtualisasi dasar).",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_013",
@@ -696,7 +718,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS Lambda menjalankan kode berdasarkan trigger/event dan Anda hanya membayar waktu komputasi milidetik yang digunakan.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_014",
@@ -725,7 +748,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Service Control Policies (SCPs) di AWS Organizations menetapkan batas atas (guardrail) izin yang tidak dapat dilanggar akun member.",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "id"
   },
   {
     "id": "tech_015",
@@ -754,7 +778,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon Aurora adalah relational database engine buatan AWS yang kompatibel dengan MySQL dan PostgreSQL hingga 5x lebih cepat.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "sec_008",
@@ -783,7 +808,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Network ACL (NACL) adalah firewall di level subnet yang bersifat stateless (inbound dan outbound harus diatur eksplisit).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_009",
@@ -812,7 +838,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Principle of Least Privilege membatasi izin hanya pada aksi yang benar-benar esensial untuk tugas user.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_016",
@@ -841,7 +868,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon CloudFront adalah layanan CDN global yang melakukan caching data statis di Edge Locations terdekat dengan user.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "sec_010",
@@ -870,7 +898,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Di S3 folder disebut prefix. Kita membatasi izin user di IAM policy dengan Condition StringLike s3:prefix: images/*.",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "id"
   },
   {
     "id": "tech_017",
@@ -899,7 +928,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon EFS adalah serverless file system berbasis NFS yang elastis dan dapat diakses bersamaan oleh ribuan instance EC2 Linux.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_011",
@@ -928,7 +958,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Amazon GuardDuty adalah layanan intelligent threat detection yang terus memantau aktivitas mencurigakan dan akses tidak sah di akun AWS.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_012",
@@ -957,7 +988,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS bertanggung jawab atas keamanan OF the cloud (fisik, hypervisor), sedangkan pelanggan bertanggung jawab atas keamanan IN the cloud (OS tamu, firewall).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "bill_005",
@@ -986,7 +1018,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS Budgets memungkinkan pembuatan budget khusus untuk melacak biaya dan penggunaan, serta memicu notifikasi peringatan jika terlampaui.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_018",
@@ -1015,7 +1048,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Amazon SNS adalah layanan publish/subscribe terkelola untuk pesan fanout ke banyak endpoint pelanggan seperti email, SMS, SQS, atau Lambda.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "bill_006",
@@ -1044,7 +1078,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Di cloud, pelanggan beralih dari belanja modal di muka yang besar (CapEx) menjadi biaya operasional berjalan (OpEx) sesuai pemakaian (pay-as-you-go).",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_019",
@@ -1073,7 +1108,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Skalabilitas adalah kemampuan sistem untuk menangani lonjakan beban kerja dengan menambah sumber daya komputasi secara terarah.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "sec_013",
@@ -1102,7 +1138,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "IAM Role memberikan kredensial keamanan sementara (temporary credentials) kepada resource seperti instance EC2 tanpa hardcoded API keys.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_014",
@@ -1131,7 +1168,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Amazon Macie adalah layanan keamanan data berbasis ML untuk menemukan, mengklasifikasi, dan melindungi data sensitif/PII di Amazon S3.",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "id"
   },
   {
     "id": "cc_001",
@@ -1160,7 +1198,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Fault Tolerance adalah kemampuan sistem untuk tetap berfungsi normal tanpa downtime ketika terjadi kegagalan pada satu atau lebih komponen pendukung.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "bill_007",
@@ -1189,7 +1228,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS Pricing Calculator adalah alat estimasi berbasis web gratis untuk merencanakan dan memperkirakan biaya arsitektur AWS sebelum implementasi.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "bill_008",
@@ -1218,7 +1258,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Consolidated Billing menyatukan pembayaran seluruh member account ke satu management account dan menggabungkan penggunaan untuk diskon volume tiering.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_020",
@@ -1247,7 +1288,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Amazon SQS adalah distributed message queuing service untuk mendecouple dan menskalakan microservices serta distributed systems.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_015",
@@ -1276,7 +1318,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS Artifact adalah portal swalayan untuk mengunduh laporan audit kepatuhan dan perjanjian hukum (compliance reports) resmi dari AWS.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "bill_009",
@@ -1305,7 +1348,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Amazon EC2 Spot Instances menawarkan diskon hingga 90% dari harga On-Demand untuk beban kerja yang fleksibel terhadap interupsi.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_016",
@@ -1334,7 +1378,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Systems Manager Run Command memungkinkan eksekusi perintah administrasi dan instalasi software secara massal dan aman tanpa membuka port 22 (SSH).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_017",
@@ -1363,7 +1408,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Network ACL (NACL) adalah firewall stateless di tingkat subnet, yang mengevaluasi aturan inbound dan outbound secara terpisah.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_021",
@@ -1392,7 +1438,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Metric Filter memfilter baris log teks mentah berdasarkan pola tertentu (misal: status_code=404) dan mengubahnya menjadi metrik numerik time-series.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_018",
@@ -1421,7 +1468,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Principle of Least Privilege membatasi hak akses pengguna hanya pada aksi dan sumber daya yang benar-benar esensial untuk tugasnya.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_022",
@@ -1450,7 +1498,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Trusted Advisor memberikan panduan real-time untuk membantu mengoptimalkan biaya, meningkatkan performa, dan memperkuat keamanan arsitektur.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_019",
@@ -1479,7 +1528,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS Config berfungsi melacak inventaris, mengaudit histori konfigurasi resource, dan mengevaluasi kepatuhan terhadap aturan (seperti required-tags & ec2-volume-inuse-check).",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "id"
   },
   {
     "id": "sec_020",
@@ -1508,7 +1558,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS CloudTrail merekam aktivitas tata kelola, kepatuhan, dan audit operasional akun AWS melalui pencatatan setiap panggilan API.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_023",
@@ -1537,7 +1588,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Setiap AZ terdiri dari satu atau lebih data center diskrit dengan fasilitas daya, pendingin, dan jaringan yang terisolasi dalam satu AWS Region.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "bill_010",
@@ -1566,7 +1618,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Pilar Cost Optimization berfokus pada kemampuan menjalankan sistem untuk memberikan nilai bisnis optimal dengan pengeluaran biaya serendah mungkin.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_024",
@@ -1595,7 +1648,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon DynamoDB adalah database key-value dan document serverless yang menawarkan latensi satu digit milidetik pada skala beban berapapun.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_025",
@@ -1624,7 +1678,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Hypervisor AWS hanya memantau metrik eksternal host (CPU, disk I/O, network). RAM dan file sistem berada di dalam Guest OS sehingga memerlukan CloudWatch Agent.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_026",
@@ -1653,7 +1708,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "CloudWatch Events (kini berevolusi menjadi EventBridge) bersifat event-driven near real-time, mendeteksi perubahan status resource secara instan.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_027",
@@ -1682,7 +1738,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "S3 Glacier Deep Archive adalah storage class paling ekonomis di AWS untuk pengarsipan jangka panjang dengan waktu retrieval beberapa jam.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_028",
@@ -1711,7 +1768,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS Trusted Advisor memberikan rekomendasi real-time untuk 5 pilar: biaya, performa, keamanan, toleransi kesalahan, dan kuota layanan.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_021",
@@ -1740,7 +1798,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Amazon Athena adalah serverless query service interaktif yang memungkinkan analisis log CloudTrail di S3 menggunakan SQL standar tanpa ETL.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "cc_002",
@@ -1769,7 +1828,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Pilar Performance Efficiency berfokus pada penggunaan sumber daya komputasi secara efisien untuk memenuhi kebutuhan sistem dan mempertahankan efisiensi.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_029",
@@ -1798,7 +1858,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Service Control Policies (SCP) menetapkan batasan izin (guardrails) maksimum untuk akun member di AWS Organizations.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_022",
@@ -1827,7 +1888,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "CloudTrail Event History menyimpan catatan aktivitas API manajemen selama 90 hari secara gratis tanpa perlu membuat trail.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_030",
@@ -1856,7 +1918,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS Storage Gateway menyediakan integrasi penyimpanan hybrid (File, Volume, Tape Gateway) antara on-premise dan cloud AWS.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "bill_011",
@@ -1885,7 +1948,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Enterprise Support adalah paket dukungan AWS yang menyediakan Technical Account Manager (TAM) khusus dan Concierge Support 24/7.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_031",
@@ -1914,7 +1978,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Amazon CloudFront adalah Content Delivery Network (CDN) yang mengirimkan data, video, dan aplikasi secara aman dengan latensi rendah melalui Edge Locations.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_023",
@@ -1943,7 +2008,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Field userIdentity dalam struktur JSON log CloudTrail memuat informasi identitas pemanggil (userName, ARN, type, dsb).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_024",
@@ -1972,7 +2038,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "CloudTrail melacak aktivitas API dan audit ('WHO did WHAT'), sedangkan CloudWatch memantau performa sistem, log aplikasi, dan alarm.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "sec_025",
@@ -2001,7 +2068,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS Artifact adalah portal pusat untuk mengunduh laporan kepatuhan AWS (seperti ISO, SOC, PCI) dan perjanjian hukum secara mandiri.",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "id"
   },
   {
     "id": "sec_026",
@@ -2030,7 +2098,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Network ACL (NACL) adalah lapisan keamanan firewall stateless di level subnet yang memeriksa lalu lintas inbound dan outbound.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_027",
@@ -2059,7 +2128,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AuthorizeSecurityGroupIngress adalah API call yang dipanggil ketika sebuah rule masuk (inbound) baru ditambahkan ke Security Group.",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "id"
   },
   {
     "id": "sec_028",
@@ -2088,7 +2158,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Amazon GuardDuty menganalisis AWS CloudTrail events, VPC Flow Logs, dan DNS query logs untuk mendeteksi ancaman keamanan secara cerdas.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "bill_012",
@@ -2117,7 +2188,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Spot Instances memanfaatkan kapasitas komputasi cadangan AWS yang tidak terpakai dengan diskon hingga 90%, namun dapat dihentikan dengan pemberitahuan 2 menit.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_032",
@@ -2146,7 +2218,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS CloudFormation memungkinkan pengguna memodelkan dan mengonfigurasi seluruh sumber daya infrastruktur AWS melalui kode (IaC).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_029",
@@ -2175,7 +2248,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Mengubah 'PasswordAuthentication no' menonaktifkan login SSH berbasis password sehingga hanya autentikasi key pair kriptografis yang diizinkan.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_033",
@@ -2204,7 +2278,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Amazon DynamoDB adalah database NoSQL serverless fully-managed yang memberikan performa konsisten di bawah 10 milidetik pada skala apa pun.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "bill_013",
@@ -2233,7 +2308,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Consolidated Billing menggabungkan tagihan semua member account di bawah satu payer account sehingga penggunaan diakumulasi untuk diskon volume.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_034",
@@ -2262,7 +2338,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS Database Migration Service (AWS DMS) membantu memigrasikan database ke AWS dengan cepat, aman, dan meminimalkan downtime sistem sumber.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_030",
@@ -2291,7 +2368,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Pelanggan bertanggung jawab atas pengelolaan data pelanggan, klasifikasi aset, serta konfigurasi enkripsi (data at-rest & in-transit).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_035",
@@ -2320,7 +2398,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Amazon S3 Glacier Flexible Retrieval dan S3 Glacier Deep Archive adalah opsi penyimpanan arsip jangka panjang dengan biaya terendah di AWS.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "bill_014",
@@ -2349,7 +2428,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS Pricing Calculator adalah tool estimasi berbasis web untuk memperkirakan biaya pemakaian layanan AWS sebelum solusi diimplementasikan.",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "id"
   },
   {
     "id": "tech_036",
@@ -2378,7 +2458,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Lambda memungkinkan Anda menjalankan kode tanpa mengelola server, dengan penagihan hanya per milidetik saat kode dieksekusi.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "tech_037",
@@ -2407,7 +2488,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "VPC Endpoint memungkinkan koneksi privat antara VPC Anda dan layanan AWS yang didukung tanpa memerlukan Internet Gateway atau NAT.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_031",
@@ -2436,7 +2518,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS WAF membantu melindungi aplikasi web dari eksploitasi web umum (SQL Injection, Cross-Site Scripting) di level aplikasi (Layer 7).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "cc_003",
@@ -2465,7 +2548,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Loose Coupling (pengurangan dependensi antar komponen) memastikan bahwa jika satu komponen gagal, komponen lain tetap dapat beroperasi.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "sec_032",
@@ -2494,7 +2578,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS KMS adalah layanan terkelola yang memudahkan pembuatan, pengelolaan, dan kontrol kunci kriptografis yang digunakan untuk mengenkripsi data.",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "id"
   },
   {
     "id": "tech_038",
@@ -2523,7 +2608,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Elastisitas adalah kemampuan untuk menyesuaikan (tambah/kurangi) kapasitas komputasi secara dinamis dan otomatis sesuai fluktuasi permintaan.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "tech_039",
@@ -2552,7 +2638,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Keluarga AWS Snow (termasuk AWS Snowball) menyediakan perangkat keras fisik khusus untuk memindahkan data skala Petabyte ke AWS secara offline.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_089",
@@ -2581,7 +2668,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "IAM Role digunakan untuk memberikan temporary credentials ke resource AWS seperti EC2 tanpa perlu hardcode access key.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "gen_090",
@@ -2610,7 +2698,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "--filter menyaring data di server-side AWS (hemat bandwidth), sedangkan --query memproyeksikan data di client-side dengan JMESPath.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_091",
@@ -2639,7 +2728,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Network ACL (NACL) adalah virtual firewall stateless di tingkat subnet yang memeriksa traffic masuk (inbound) dan keluar (outbound).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_092",
@@ -2668,7 +2758,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS menetapkan batas kuota maksimal 50 user-defined tags untuk sebagian besar resource AWS.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_093",
@@ -2697,7 +2788,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Amazon Elastic Block Store (EBS) menyediakan raw block storage persisten berkinerja tinggi untuk instance EC2.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "gen_094",
@@ -2726,7 +2818,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Service Control Policies (SCP) dan Tag Policies di AWS Organizations dapat memberlakukan guardrail wajib tag (preventive control).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_095",
@@ -2755,7 +2848,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon Simple Queue Service (SQS) adalah antrean pesan terkelola penuh untuk decoupling komponen aplikasi dan microservices.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_096",
@@ -2784,7 +2878,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Amazon GuardDuty adalah layanan intelligent threat detection berbasis Machine Learning yang menganalisis CloudTrail, VPC Flow, dan DNS Logs.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_097",
@@ -2813,7 +2908,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Amazon Elastic File System (EFS) adalah serverless shared file storage berbasis NFS v4 untuk instance Linux yang dapat diakses bersamaan.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "gen_098",
@@ -2842,7 +2938,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Custom tag tidak otomatis muncul di laporan tagihan; administrator harus mengaktifkannya di menu Cost Allocation Tags pada AWS Billing Console.",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "id"
   },
   {
     "id": "gen_099",
@@ -2871,7 +2968,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Amazon Macie adalah layanan data security dan privacy yang menggunakan pattern matching dan ML untuk menemukan data sensitif (PII) di S3.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_100",
@@ -2900,7 +2998,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Consolidated Billing menggabungkan seluruh tagihan member accounts ke payer account untuk mendapatkan diskon volume secara agregat.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "gen_101",
@@ -2929,7 +3028,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Tag-or-terminate policy adalah governance strict di mana resource liar tanpa tag wajib langsung diterminasi untuk mencegah security risk & unbudgeted cost.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_102",
@@ -2958,7 +3058,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Artifact adalah portal compliance on-demand resmi untuk mengunduh laporan keamanan (SOC 1/2/3, ISO, PCI-DSS) dan perjanjian kepatuhan.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_103",
@@ -2987,7 +3088,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Pricing Calculator adalah web tool gratis untuk membuat arsitektur perkiraan biaya AWS sebelum workload dibangun.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "gen_104",
@@ -3016,7 +3118,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon Aurora adalah relational database enterprise eksklusif AWS yang kompatibel dengan MySQL dan PostgreSQL dengan performa hingga 5x lipat.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "gen_105",
@@ -3045,7 +3148,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "EC2 Spot Instances memanfaatkan spare compute capacity AWS dengan diskon hingga 90%, cocok untuk fault-tolerant & flexible workloads.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_106",
@@ -3074,7 +3178,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Berdasarkan Shared Responsibility Model (Security IN the Cloud), pelanggan bertanggung jawab atas konfigurasi OS, patching OS EC2, dan firewall.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_107",
@@ -3103,7 +3208,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon Simple Notification Service (SNS) adalah layanan pub/sub messaging terkelola untuk pengiriman pesan fanout ke subscriber (email, SMS, Lambda, SQS).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_108",
@@ -3132,7 +3238,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Cloud computing mengubah Capital Expenditures (CapEx) besar di awal menjadi Operational Expenditures (OpEx) variabel yang fleksibel (pay-as-you-go).",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "gen_109",
@@ -3161,7 +3268,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Amazon Route 53 adalah layanan cloud Domain Name System (DNS) terkelola yang sangat andal dan dapat diskalakan secara global.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "gen_110",
@@ -3190,7 +3298,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Pilar Cost Optimization berfokus pada kemampuan menjalankan sistem untuk memberikan nilai bisnis dengan harga serendah mungkin.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_111",
@@ -3219,7 +3328,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Amazon DynamoDB adalah database NoSQL serverless terkelola penuh yang menawarkan single-digit millisecond latency pada skala apa pun.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_112",
@@ -3248,7 +3358,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS Lambda adalah layanan compute serverless berbasis event yang menjalankan kode tanpa perlu provisioning atau mengelola server.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_113",
@@ -3277,7 +3388,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Mengaktifkan MFA dan tidak membuat access key untuk root user adalah best practice keamanan utama untuk mengamankan akun AWS.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "gen_114",
@@ -3306,7 +3418,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Config mencatat perubahan konfigurasi resource cloud dari waktu ke waktu dan mengevaluasi kepatuhannya terhadap aturan tata kelola (Config Rules).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_115",
@@ -3335,7 +3448,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Service Control Policies (SCP) menetapkan batasan izin maksimum di tingkat Organization Unit (OU) atau member accounts.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_116",
@@ -3364,7 +3478,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Decoupling (loosely coupled architecture) memisahkan komponen sistem (misalnya menggunakan queue/broker) agar kegagalan satu komponen terisolasi.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_117",
@@ -3393,7 +3508,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Elasticity adalah kemampuan mengalokasikan dan melepaskan resource komputasi secara dinamis dan otomatis sesuai fluktuasi workload real-time.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "id"
   },
   {
     "id": "gen_118",
@@ -3422,7 +3538,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Availability Zone (AZ) terdiri dari satu atau lebih data center fisik terpisah dalam satu AWS Region yang dilengkapi catu daya dan jaringan redundan.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "id"
   },
   {
     "id": "gen_119",
@@ -3451,7 +3568,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS CloudFormation is Infrastructure as Code (IaC) — it provisions and manages AWS resources from a declarative template.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_120",
@@ -3480,7 +3598,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Elastic Load Balancing automatically distributes incoming traffic across multiple targets (EC2, containers, IPs) in one or more AZs.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_121",
@@ -3509,7 +3628,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Application Load Balancer (ALB) works at OSI Layer 7 and supports advanced routing based on HTTP headers, host names, and URL paths.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_122",
@@ -3538,7 +3658,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Auto Scaling automatically adds or removes EC2 instances based on CloudWatch metrics (e.g. CPU > 70%) to match demand.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_123",
@@ -3567,7 +3688,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "RDS Multi-AZ creates a synchronous standby replica in a separate AZ. If the primary fails, AWS automatically fails over — no data loss.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_124",
@@ -3596,7 +3718,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Read Replicas serve read-only queries (scalability). Multi-AZ standby is passive — only activated during a primary failure (high availability).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_125",
@@ -3625,7 +3748,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Elastic Beanstalk is a PaaS that automatically handles deployment, capacity provisioning, load balancing, and monitoring.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_126",
@@ -3654,7 +3778,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "CloudWatch Alarms monitor a single metric and trigger actions (SNS notification, Auto Scaling) when the metric breaches a threshold.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_127",
@@ -3683,7 +3808,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS Backup is a fully managed centralized backup service that automates backup scheduling, retention, and monitoring across AWS services.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_128",
@@ -3712,7 +3838,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Systems Manager provides operational management of EC2 fleets — patch management, run command, and Session Manager (no SSH needed).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_129",
@@ -3741,7 +3868,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS CodePipeline is a fully managed CI/CD service that automates build, test, and deploy phases into a release pipeline.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_130",
@@ -3770,7 +3898,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS CodeBuild is a fully managed build service that compiles source code, runs unit tests, and produces deployable artifacts.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_131",
@@ -3799,7 +3928,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Global Accelerator routes traffic through the AWS backbone network to the optimal endpoint, reducing latency and improving availability.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_132",
@@ -3828,7 +3958,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS WAF (Web Application Firewall) filters HTTP/HTTPS requests and blocks common web exploits like SQLi, XSS using managed or custom rules.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_133",
@@ -3857,7 +3988,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS Shield Standard is automatically applied at no charge to all AWS customers, protecting against common Layer 3/4 DDoS attacks.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_134",
@@ -3886,7 +4018,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon Rekognition is AWS's computer vision service for image and video analysis — detecting objects, faces, celebrities, and unsafe content.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_135",
@@ -3915,7 +4048,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Amazon Comprehend is a NLP service that detects sentiment, entities, key phrases, and language in unstructured text.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_136",
@@ -3944,7 +4078,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon Translate is a neural machine translation service that delivers fast, high-quality language translation between supported languages.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_137",
@@ -3973,7 +4108,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Amazon Polly uses deep learning to synthesize natural-sounding speech from text in multiple languages and voices.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_138",
@@ -4002,7 +4138,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Snowmobile is a 100 PB exabyte-scale data transfer service using a physical secure shipping container pulled by a truck.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_139",
@@ -4031,7 +4168,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Snowcone is the smallest (4.5 lbs) Snow Family device with 8TB storage, designed for edge computing and small data transfers.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_140",
@@ -4060,7 +4198,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Migration Evaluator (formerly TSO Logic) provides a TCO analysis and business case for migrating on-premises workloads to AWS.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_141",
@@ -4089,7 +4228,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Personal Health Dashboard provides alerts and remediation guidance for AWS events that may specifically impact your resources.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_142",
@@ -4118,7 +4258,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon Neptune is a fully managed graph database service supporting Property Graph (Gremlin) and RDF (SPARQL) for connected datasets.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_143",
@@ -4147,7 +4288,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon Keyspaces is a scalable, highly available managed Apache Cassandra-compatible database service, serverless and fully managed.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_144",
@@ -4176,7 +4318,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Physical security of AWS data centers (facilities, power, hardware) is Security OF the Cloud — entirely AWS's responsibility.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_145",
@@ -4205,7 +4348,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Nested Stacks allow referencing other CloudFormation stacks as resources, enabling modular and reusable infrastructure templates.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_146",
@@ -4234,7 +4378,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "CloudFormation StackSets extends stacks to deploy across multiple AWS accounts and regions with a single CloudFormation operation.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_147",
@@ -4263,7 +4408,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "On-Demand Instances have zero upfront cost and no commitment — pay by the second/hour. Best for unpredictable or short-term workloads.",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "en"
   },
   {
     "id": "gen_148",
@@ -4292,7 +4438,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Compute Savings Plans offer up to 66% discount vs On-Demand by committing to a consistent hourly spend, applying across EC2, Lambda, and Fargate.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_149",
@@ -4321,7 +4468,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS CloudFormation dipilih karena ia adalah layanan Infrastructure as Code (IaC) yang memungkinkan kita mendefinisikan seluruh infrastruktur AWS secara deklaratif dalam file YAML atau JSON, lalu AWS yang menentukan urutan pembuatannya secara otomatis.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_150",
@@ -4350,7 +4498,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Application Load Balancer (ALB) dipilih karena ia beroperasi di Layer 7 (application layer) dan mendukung routing berdasarkan host name atau URL path. Network Load Balancer bekerja di Layer 4 (transport layer) untuk traffic TCP/UDP berkecepatan tinggi.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_151",
@@ -4379,7 +4528,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS Auto Scaling dipilih karena tugasnya memang secara otomatis menambah atau mengurangi jumlah EC2 instance berdasarkan metrik seperti CPU utilization. CloudWatch hanya memonitor dan memberikan alarm, bukan yang mengeksekusi penambahan instance.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_152",
@@ -4408,7 +4558,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "RDS Multi-AZ Deployment dipilih karena ia secara otomatis membuat replica standby sinkron di AZ berbeda. Jika primary gagal, AWS otomatis failover ke standby tanpa kehilangan data. Read Replica berbeda karena dipakai untuk membagi beban baca (read scaling), bukan failover.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_153",
@@ -4437,7 +4588,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Jawabannya Read Replica melayani query baca (scalability), sedangkan Multi-AZ standby hanya aktif saat primary gagal (high availability). Keduanya berbeda tujuan: Read Replica untuk performa, Multi-AZ untuk ketersediaan. Read Replica menggunakan replikasi asinkron, Multi-AZ menggunakan replikasi sinkron.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_154",
@@ -4466,7 +4618,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Elastic Beanstalk dipilih karena ia adalah layanan PaaS yang secara otomatis mengurus provisioning server, load balancing, auto scaling, dan monitoring. Developer cukup upload kode aplikasinya, sisanya diurus Elastic Beanstalk.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_155",
@@ -4495,7 +4648,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "CloudWatch Alarms dipilih karena fungsinya spesifik untuk memantau satu metrik dan memicu tindakan (notifikasi SNS, Auto Scaling) ketika metrik melampaui batas yang ditentukan. CloudWatch Logs Insights untuk query log, Dashboards untuk visualisasi, Events untuk memicu aksi berdasarkan perubahan status resource.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_156",
@@ -4524,7 +4678,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS Backup dipilih karena ia adalah satu-satunya layanan yang menyediakan backup terpusat dan terkelola penuh untuk berbagai layanan AWS sekaligus (RDS, EBS, DynamoDB, EFS, S3) dalam satu konsol. S3 Lifecycle Policy hanya mengelola objek di S3, bukan layanan lain.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_157",
@@ -4553,7 +4708,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS Systems Manager dipilih karena menyediakan fitur patch management, Run Command, dan Session Manager yang memungkinkan pengelolaan EC2 tanpa membuka port 22 (SSH). CloudTrail hanya untuk audit log API, Inspector untuk vulnerability scanning, Config untuk compliance resource.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_158",
@@ -4582,7 +4738,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS CodePipeline dipilih karena ia adalah layanan CI/CD yang mengotomatisasi seluruh alur rilis software dari build, test, hingga deploy ke production. CodeBuild hanya mengkompilasi kode, CodeDeploy hanya mendeploy, sedangkan CodePipeline mengorkestrasikan ketiganya.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_159",
@@ -4611,7 +4768,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS CodeBuild dipilih karena tugasnya spesifik pada proses build: mengkompilasi source code, menjalankan unit test, dan menghasilkan artifact yang siap dideploy (misal file .jar, .zip, atau Docker image). CodePipeline mengatur alurnya, CodeBuild yang mengeksekusi proses build.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_160",
@@ -4640,7 +4798,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS Global Accelerator dipilih karena ia mengarahkan traffic pengguna melalui jaringan backbone global AWS (bukan internet publik) ke endpoint terdekat yang optimal. Berbeda dengan CloudFront yang fokus pada caching konten statis, Global Accelerator meningkatkan performa koneksi TCP/UDP ke aplikasi.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_161",
@@ -4669,7 +4828,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS WAF (Web Application Firewall) dipilih karena dirancang khusus untuk memfilter request HTTP/HTTPS dan memblokir eksploitasi web umum seperti SQL Injection dan Cross-Site Scripting. AWS Shield melindungi dari DDoS di Layer 3/4, bukan dari serangan aplikasi Layer 7.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_162",
@@ -4698,7 +4858,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS Shield Standard dipilih karena perlindungan DDoS dasar ini otomatis aktif untuk semua pelanggan AWS tanpa biaya tambahan. Shield Advanced berbayar dan memberikan perlindungan lebih canggih, sedangkan WAF membutuhkan konfigurasi rule dan berbayar terpisah.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_163",
@@ -4727,7 +4888,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon Rekognition dipilih karena ia adalah layanan computer vision AWS yang khusus untuk analisis gambar dan video. Rekognition dapat mendeteksi objek, wajah, selebriti, teks dalam gambar, dan konten tidak pantas. Textract fokus pada ekstraksi teks dari dokumen, bukan analisis gambar umum.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_164",
@@ -4756,7 +4918,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Amazon Comprehend dipilih karena ia adalah layanan Natural Language Processing (NLP) yang menganalisis teks untuk mendeteksi sentimen (positif/negatif/netral), entitas, frasa kunci, dan bahasa. Amazon Translate hanya menerjemahkan bahasa, bukan menganalisis makna atau sentimen teks.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_165",
@@ -4785,7 +4948,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS Snowmobile dipilih karena ia adalah satu-satunya perangkat Snow Family yang mampu memindahkan hingga 100 Petabyte data sekaligus menggunakan kontainer fisik berukuran besar yang ditarik truk. Snowball Edge hanya mampu sekitar 80TB per perangkat.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_166",
@@ -4814,7 +4978,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Snowcone dipilih karena ia adalah perangkat Snow Family terkecil dan teringan (sekitar 2 kg / 4.5 lbs) dengan kapasitas 8TB, dirancang untuk edge location terpencil dan migrasi data skala kecil. Snowball Edge jauh lebih besar dan kapasitasnya mencapai 80TB.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_167",
@@ -4843,7 +5008,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS Migration Evaluator (sebelumnya TSO Logic) dipilih karena ia menganalisis infrastruktur on-premises yang ada dan menghasilkan laporan Total Cost of Ownership (TCO) perbandingan biaya on-premises vs AWS. AWS Pricing Calculator untuk estimasi biaya layanan baru, bukan untuk perbandingan migrasi.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_168",
@@ -4872,7 +5038,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS Personal Health Dashboard dipilih karena ia menampilkan notifikasi yang dipersonalisasi khusus untuk resource di akun AWS Anda. Service Health Dashboard hanya menampilkan status layanan AWS secara global, bukan yang berdampak spesifik ke akun kita.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_169",
@@ -4901,7 +5068,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon Neptune dipilih karena ia adalah satu-satunya database AWS yang dibangun khusus untuk data berbentuk graf (graph database), seperti jaringan sosial, knowledge graph, atau fraud detection. DynamoDB adalah NoSQL key-value, DocumentDB untuk dokumen JSON, Keyspaces untuk Cassandra.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_170",
@@ -4930,7 +5098,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Amazon Keyspaces dipilih karena ia adalah layanan database AWS yang kompatibel dengan Apache Cassandra, sehingga aplikasi yang sebelumnya menggunakan Cassandra on-premises bisa bermigrasi tanpa mengubah kode. DynamoDB bukan kompatibel dengan Cassandra.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_171",
@@ -4959,7 +5128,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Keamanan fisik data center (gedung, listrik, hardware, jaringan fisik) adalah tanggung jawab AWS sepenuhnya sebagai 'Security OF the Cloud'. Enkripsi data di S3, konfigurasi Security Group, dan manajemen IAM adalah tanggung jawab pelanggan sebagai 'Security IN the Cloud'.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_172",
@@ -4988,7 +5158,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "CloudFormation Nested Stacks dipilih karena memungkinkan satu template mereferensikan template lain sebagai resource, sehingga infrastruktur bisa dimodularisasi menjadi komponen yang reusable (misal modul VPC, modul database). StackSets untuk deploy ke banyak akun/region sekaligus.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_173",
@@ -5017,7 +5188,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "CloudFormation StackSets dipilih karena memungkinkan deployment satu template CloudFormation ke banyak akun AWS dan banyak region sekaligus dalam satu operasi. Nested Stacks hanya memodularisasi template dalam satu stack, bukan multi-akun.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_174",
@@ -5046,7 +5218,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "On-Demand Instances dipilih karena tidak ada biaya di muka dan tidak ada komitmen jangka panjang — bayar per detik atau per jam sesuai pemakaian. Reserved Instances butuh komitmen 1-3 tahun, Spot Instances bisa diinterrupsi kapan saja, Savings Plans butuh komitmen penggunaan per jam.",
-    "difficulty": "Sulit"
+    "difficulty": "Sulit",
+    "lang": "en"
   },
   {
     "id": "gen_175",
@@ -5075,7 +5248,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "Compute Savings Plans dipilih karena memberikan diskon hingga 66% vs On-Demand dengan cara berkomitmen pada jumlah pengeluaran compute per jam (bukan tipe instance tertentu) selama 1 atau 3 tahun. Lebih fleksibel dari Reserved Instances karena berlaku untuk EC2, Lambda, dan Fargate lintas region.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_176",
@@ -5104,7 +5278,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "S3 Standard-IA (Infrequent Access) dipilih karena dirancang untuk data yang jarang diakses tapi tetap butuh retrieval cepat, dengan biaya storage lebih rendah dari S3 Standard. S3 Glacier untuk archival jangka panjang dengan retrieval lebih lambat.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_177",
@@ -5133,7 +5308,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS Direct Connect dipilih karena menyediakan koneksi jaringan fisik yang dedicated dan private dari data center on-premises ke AWS — bukan melewati internet publik. AWS VPN tetap melewati internet tapi dienkripsi.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_178",
@@ -5162,7 +5338,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "NAT Gateway dipilih karena memungkinkan instance di private subnet melakukan koneksi outbound ke internet tanpa mengekspos instance tersebut ke inbound traffic dari internet. Internet Gateway dibutuhkan oleh public subnet, bukan private.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_179",
@@ -5191,7 +5368,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Amazon Athena dipilih karena merupakan layanan query serverless yang memungkinkan analisis data langsung di S3 menggunakan SQL standar — tanpa perlu provisioning atau mengelola infrastruktur apapun. Redshift membutuhkan cluster yang di-provision.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_180",
@@ -5220,7 +5398,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Secrets Manager dipilih karena fitur utamanya adalah manajemen siklus hidup secrets termasuk automatic rotation secara terjadwal. Parameter Store bisa menyimpan secrets tapi tidak memiliki fitur automatic rotation bawaan seperti Secrets Manager.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_181",
@@ -5249,7 +5428,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS Key Management Service (KMS) dipilih karena merupakan layanan terpusat untuk membuat, mengelola, dan mengontrol penggunaan encryption keys di seluruh layanan AWS. CloudHSM menyediakan dedicated hardware security module untuk kebutuhan compliance khusus.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_182",
@@ -5278,7 +5458,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon Inspector dipilih karena fungsi spesifiknya adalah automated vulnerability scanning terhadap EC2 instances dan container images untuk menemukan software vulnerabilities dan unintended network exposure. GuardDuty fokus pada threat detection dari log, bukan vulnerability scanning.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_183",
@@ -5307,7 +5488,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS Security Hub dipilih karena mengagregasi, mengorganisasi, dan memprioritaskan security alerts dan findings dari berbagai layanan AWS (GuardDuty, Inspector, Macie, dll) ke dalam satu dashboard terpusat. GuardDuty hanya menghasilkan findings, Security Hub yang mengumpulkannya.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_184",
@@ -5336,7 +5518,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "VPC Endpoint dipilih karena memungkinkan instance di VPC mengakses layanan AWS (seperti S3, DynamoDB) secara private melalui jaringan AWS — tanpa membutuhkan Internet Gateway, NAT, atau koneksi internet. Ini meningkatkan keamanan dan mengurangi biaya transfer data.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_185",
@@ -5365,7 +5548,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS Transit Gateway dipilih karena bertindak sebagai hub terpusat yang menghubungkan ratusan VPC dan koneksi on-premises dalam satu arsitektur hub-and-spoke. VPC Peering hanya menghubungkan dua VPC secara point-to-point dan tidak mendukung transitive routing.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_186",
@@ -5394,7 +5578,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "S3 Versioning dipilih karena menyimpan setiap versi objek yang diupload atau dihapus, sehingga memungkinkan pemulihan ke versi sebelumnya jika terjadi penghapusan atau overwrite yang tidak disengaja. S3 Object Lock lebih spesifik untuk compliance write-once-read-many (WORM).",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_187",
@@ -5423,7 +5608,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "S3 Cross-Region Replication (CRR) dipilih karena secara otomatis mereplikasi objek dari bucket sumber di satu Region ke bucket tujuan di Region berbeda untuk kebutuhan disaster recovery dan compliance data residency. S3 Versioning harus aktif sebagai prasyarat CRR.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_188",
@@ -5452,7 +5638,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS Enterprise Support dipilih karena satu-satunya plan yang menyertakan dedicated Technical Account Manager (TAM) yang bertindak sebagai advisor proaktif, membantu optimasi arsitektur dan perencanaan operasional jangka panjang. Business Support hanya memberikan akses ke AWS Support API.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_189",
@@ -5481,7 +5668,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Amazon ECS on Fargate dipilih karena Fargate adalah serverless compute engine untuk container yang menghilangkan kebutuhan provisioning dan pengelolaan EC2 instance. Pengguna cukup mendefinisikan resource CPU/memory container, Fargate yang mengelola infrastrukturnya.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_190",
@@ -5510,7 +5698,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Pilar Operational Excellence dipilih karena berfokus pada kemampuan menjalankan workload secara efektif, mendapatkan insight operasional, dan terus meningkatkan proses serta prosedur. Reliability fokus pada kemampuan workload untuk recover dari failure.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_191",
@@ -5539,7 +5728,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS Step Functions dipilih karena menyediakan visual workflow orchestration untuk mengoordinasikan serangkaian Lambda functions, services, atau manual tasks dalam urutan langkah yang terdefinisi. SQS hanya untuk queueing, bukan untuk orchestration workflow multi-step.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_192",
@@ -5568,7 +5758,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Amazon EventBridge dipilih karena merupakan serverless event bus yang menghubungkan aplikasi menggunakan event dari layanan AWS, aplikasi custom, dan SaaS partners secara real-time. SNS adalah pub/sub untuk fanout notification, EventBridge untuk event-driven routing yang lebih kompleks.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_193",
@@ -5597,7 +5788,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "Amazon Redshift dipilih karena merupakan cloud data warehouse yang dioptimalkan untuk OLAP (Online Analytical Processing) dan query analitik terhadap dataset berukuran petabyte menggunakan columnar storage. RDS dan Aurora dioptimalkan untuk OLTP (transactional workloads).",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_194",
@@ -5626,7 +5818,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS Certificate Manager (ACM) dipilih karena menyediakan provisioning, manajemen, dan deployment SSL/TLS certificates secara gratis untuk digunakan dengan layanan AWS seperti ELB, CloudFront, dan API Gateway. Sertifikat ACM di-renew secara otomatis.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_195",
@@ -5655,7 +5848,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Glue dipilih karena merupakan layanan ETL serverless yang secara otomatis menemukan, mengkatalogkan, dan mentransformasi data dari berbagai sumber untuk keperluan analytics. Athena digunakan untuk query data yang sudah siap, bukan untuk ETL.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_196",
@@ -5684,7 +5878,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "Amazon Kinesis Data Streams dipilih karena didesain khusus untuk ingestion dan processing data streaming real-time dalam volume besar (log, clickstream, IoT telemetry) dengan latency rendah. SQS adalah message queue untuk decoupling, bukan untuk streaming analytics.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_197",
@@ -5713,7 +5908,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "IAM Permission Boundary dipilih karena merupakan managed policy yang digunakan untuk menetapkan batas izin maksimum yang bisa dimiliki oleh IAM user atau role — bahkan jika identity policy memberikan izin lebih luas. SCP serupa tapi bekerja di level AWS Organizations, bukan per entitas IAM.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_198",
@@ -5742,7 +5938,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS IAM Identity Center (sebelumnya AWS SSO) dipilih karena menyediakan centralized SSO untuk mengakses beberapa akun AWS dan aplikasi bisnis (Salesforce, Office 365) dari satu portal. Amazon Cognito untuk autentikasi end-user pada aplikasi web/mobile, bukan untuk akses multi-akun AWS.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_199",
@@ -5771,7 +5968,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS Control Tower dipilih karena secara otomatis menyiapkan landing zone multi-akun yang aman dengan guardrails (preventive dan detective controls) berdasarkan AWS best practices. AWS Organizations menyediakan struktur akun, tapi Control Tower yang mengotomatisasi setup dan governance-nya.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_200",
@@ -5800,7 +5998,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Pilar Performance Efficiency dipilih karena berfokus pada penggunaan computing resources secara efisien sesuai kebutuhan workload — memilih tipe instance, database, dan storage yang tepat. Cost Optimization lebih fokus pada menghilangkan pemborosan biaya, bukan tentang memilih resource yang tepat untuk performa.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_201",
@@ -5829,7 +6028,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "C"
     ],
     "explanation": "AWS Business Support dipilih karena merupakan plan terendah yang menyertakan akses 24/7 ke Cloud Support Engineers via phone, chat, dan email untuk semua jenis kasus. Developer Support hanya memberikan akses email ke Cloud Support Associates di jam kerja.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_202",
@@ -5858,7 +6058,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "B"
     ],
     "explanation": "AWS Cost and Usage Report (CUR) dipilih karena menghasilkan laporan tagihan paling detail dan komprehensif (hingga per resource, per tag, per jam) yang secara otomatis dikirim ke S3. Cost Explorer hanya menampilkan visualisasi biaya historis, bukan raw data granular.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_203",
@@ -5887,7 +6088,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "AWS Budgets dipilih karena memungkinkan pengguna menetapkan batas biaya, penggunaan, atau Reserved Instance/Savings Plans, lalu mengirim alert (email/SNS) saat threshold terlampaui. Cost Explorer untuk analisis historis, bukan untuk alerting threshold.",
-    "difficulty": "Mudah"
+    "difficulty": "Mudah",
+    "lang": "en"
   },
   {
     "id": "gen_204",
@@ -5916,7 +6118,8 @@ export const ccpQuestionBank: ExamQuestion[] =
       "A"
     ],
     "explanation": "AWS Resource Access Manager (RAM) dipilih karena memungkinkan berbagi resource AWS (subnet, Transit Gateway, Route 53 Resolver rules) secara aman ke akun AWS lain atau dalam satu Organization tanpa perlu duplikasi resource. VPC Peering hanya menghubungkan VPC, bukan berbagi resource.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   },
   {
     "id": "gen_205",
@@ -5945,6 +6148,10 @@ export const ccpQuestionBank: ExamQuestion[] =
       "D"
     ],
     "explanation": "Amazon ElastiCache dipilih karena merupakan layanan in-memory caching terkelola (Redis atau Memcached) yang ideal untuk menyimpan hasil query database sehingga permintaan berikutnya dilayani dari cache dengan latency microsecond. DAX spesifik hanya untuk DynamoDB, bukan untuk database lain.",
-    "difficulty": "Sedang"
+    "difficulty": "Sedang",
+    "lang": "en"
   }
 ]
+
+export const ccpQuestionBankId: ExamQuestion[] = ccpQuestionBank.filter((q) => q.lang === 'id')
+export const ccpQuestionBankEn: ExamQuestion[] = ccpQuestionBank.filter((q) => q.lang === 'en')
