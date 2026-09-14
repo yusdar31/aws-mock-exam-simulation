@@ -1,17 +1,16 @@
 :root {
-  /* UI/UX Pro Max - High-Precision Engineering Design System */
-  --font-sans: 'IBM Plex Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  /* High-Precision Engineering Design System (AWS Console meets Linear) */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-display: 'Plus Jakarta Sans', var(--font-sans);
   --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Neutral Surface Palette (Deep Ink & Precision Slate) */
-  --pvue-dark: #090d16;
-  --pvue-header: #0d131f;
+  /* Neutral Surface Palette (Slate & Ink) */
+  --pvue-dark: #0f172a;
+  --pvue-header: #090d16;
   --pvue-header-border: #1e293b;
   --pvue-body-bg: #f8fafc;
   --pvue-card-bg: #ffffff;
   --pvue-card-border: #e2e8f0;
-  --pvue-card-border-hover: #94a3b8;
   --pvue-subtle-bg: #f1f5f9;
   --pvue-border-light: #f1f5f9;
 
@@ -20,21 +19,17 @@
   --pvue-text-secondary: #475569;
   --pvue-text-muted: #64748b;
 
-  /* AWS Signature Squawk Brand Accent */
+  /* Singular AWS Squawk Brand Accent */
   --pvue-aws-orange: #ff9900;
-  --pvue-aws-orange-dark: #d97706;
   --pvue-accent: #0f172a;
   --pvue-accent-hover: #1e293b;
 
   /* Functional Status Accents */
-  --pvue-success: #10b981;
-  --pvue-success-dark: #047857;
+  --pvue-success: #059669;
   --pvue-success-bg: #ecfdf5;
-  --pvue-success-border: #a7f3d0;
-  --pvue-danger: #f43f5e;
-  --pvue-danger-dark: #be123c;
+  --pvue-danger: #e11d48;
   --pvue-danger-bg: #fff1f2;
-  --pvue-warning: #f59e0b;
+  --pvue-warning: #d97706;
   --pvue-warning-bg: #fffbeb;
 
   /* Selection States */
@@ -42,14 +37,8 @@
   --pvue-selection-border: #0f172a;
 
   /* Monospace Micro-Timer */
-  --pvue-timer-bg: rgba(255, 255, 255, 0.06);
-  --pvue-timer-border: rgba(255, 255, 255, 0.14);
-
-  /* Elevation Shadows */
-  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
-  --shadow-elevated: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-focus: 0 0 0 2px #ffffff, 0 0 0 4px #0f172a;
+  --pvue-timer-bg: rgba(255, 255, 255, 0.05);
+  --pvue-timer-border: rgba(255, 255, 255, 0.12);
 
   font-family: var(--font-sans);
   line-height: 1.5;
@@ -71,9 +60,8 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.011em;
   background-color: var(--pvue-body-bg);
-  color: var(--pvue-text-primary);
 }
 
 button,
@@ -94,21 +82,15 @@ h4 {
 }
 
 h1 {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   line-height: 1.25;
   font-weight: 700;
 }
 
 h2 {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   line-height: 1.35;
   font-weight: 700;
-}
-
-h3 {
-  font-size: 0.95rem;
-  line-height: 1.4;
-  font-weight: 600;
 }
 
 p {
@@ -124,22 +106,6 @@ pre {
   font-family: var(--font-mono);
 }
 
-:focus-visible {
-  outline: none;
-  box-shadow: var(--shadow-focus);
-}
-
 #root {
   min-height: 100vh;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  ::before,
-  ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
 }
