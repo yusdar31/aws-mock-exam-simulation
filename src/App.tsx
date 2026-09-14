@@ -63,7 +63,7 @@ const EXAM_DURATION_SECONDS = 45 * 60
 const API_BASE_URL = import.meta.env.VITE_API_URL
   ?? (window.location.hostname === 'localhost'
     ? 'http://localhost:4000'
-    : `${window.location.origin}`)
+    : '')
 
 function formatTime(totalSeconds: number) {
   const safeSeconds = Math.max(totalSeconds, 0)
