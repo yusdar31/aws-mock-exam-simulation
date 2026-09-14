@@ -11,6 +11,7 @@ export type ExamQuestion = {
   options: QuestionOption[]
   correctAnswers: string[]
   explanation: string
+  difficulty?: string
 }
 
 export const questionBank: ExamQuestion[] = [

@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import './App.css'
 import { questionBank, type ExamQuestion } from './data/questionBank'
+import { ccpQuestionBank } from './data/ccpQuestionBank'
 
+type ExamType = 'saa' | 'ccp'
 type ExamPhase = 'landing' | 'exam' | 'review' | 'result' | 'admin' | 'history'
 type QuestionStatus = 'answered-marked' | 'marked' | 'answered' | 'unanswered'
 
@@ -385,6 +387,7 @@ function App() {
   const [userId, setUserId] = useState<string>('')
   const [practiceLoading, setPracticeLoading] = useState(false)
   const [practiceNotice, setPracticeNotice] = useState('')
+  const [examType, setExamType] = useState<ExamType>('saa')
   const [translations, setTranslations] = useState<Record<string, string>>({})
   const [translatingIds, setTranslatingIds] = useState<string[]>([])
 
@@ -551,18 +554,24 @@ function App() {
     }
   }
 
-  // Load available questions for configuration on mount
+  // Load available questions based on exam type
   useEffect(() => {
     async function loadAvailable() {
-      try {
-        const approved = await fetchApprovedQuestions()
-        setAvailableQuestions(approved.length > 0 ? approved : questionBank)
-      } catch {
-        setAvailableQuestions(questionBank)
+      if (examType === 'ccp') {
+        // CCP mode uses local kahoot question bank directly
+        setAvailableQuestions(ccpQuestionBank)
+      } else {
+        // SAA mode loads from backend (approved) or fallback to demo
+        try {
+          const approved = await fetchApprovedQuestions()
+          setAvailableQuestions(approved.length > 0 ? approved : questionBank)
+        } catch {
+          setAvailableQuestions(questionBank)
+        }
       }
     }
     loadAvailable()
-  }, [])
+  }, [examType])
 
   const availableDomains = useMemo(() => {
     const list = new Set(availableQuestions.map((q) => q.domain).filter(Boolean))
@@ -975,20 +984,39 @@ function App() {
           <div className="lobby-header">
             <div>
               <div className="aws-badge">AWS Certification</div>
-              <h1>AWS Certified Solutions Architect - Associate</h1>
+              <h1>{examType === 'ccp' ? 'AWS Certified Cloud Practitioner' : 'AWS Certified Solutions Architect - Associate'}</h1>
               <p className="lobby-copy">
-                Simulasi dibuat menyerupai exam delivery UI: timer di header,
-                navigator soal, penanda review, dan halaman review akhir sebelum submit.
+                {examType === 'ccp'
+                  ? 'Simulasi ujian CCP berbasis bank soal Kahoot harian (205 soal). Cocok untuk latihan dasar cloud computing, security, billing, dan layanan AWS.'
+                  : 'Simulasi dibuat menyerupai exam delivery UI: timer di header, navigator soal, penanda review, dan halaman review akhir sebelum submit.'}
               </p>
             </div>
             <div className="lobby-id-block">
               <span>Exam Code</span>
-              <strong>SAA-C03 Mock</strong>
+              <strong>{examType === 'ccp' ? 'CLF-C02 Mock' : 'SAA-C03 Mock'}</strong>
             </div>
           </div>
 
           <div className="lobby-config-section">
             <h2>Exam Setup</h2>
+
+            <div className="config-field" style={{ marginBottom: '16px' }}>
+              <label>Exam Type</label>
+              <div className="config-options">
+                <button
+                  className={`config-pill ${examType === 'saa' ? 'active' : ''}`}
+                  onClick={() => setExamType('saa')}
+                >
+                  SAA-C03 (Solutions Architect)
+                </button>
+                <button
+                  className={`config-pill ${examType === 'ccp' ? 'active' : ''}`}
+                  onClick={() => setExamType('ccp')}
+                >
+                  CLF-C02 (Cloud Practitioner)
+                </button>
+              </div>
+            </div>
 
             <div className="config-grid">
               <div className="config-field">
@@ -1501,7 +1529,7 @@ function App() {
           <div className="exam-utility-bar review-utility-bar">
             <div className="exam-utility-group">
               <span className="exam-utility-label">Section</span>
-              <strong>AWS Solutions Architect Associate</strong>
+              <strong>{examType === 'ccp' ? 'AWS Cloud Practitioner' : 'AWS Solutions Architect Associate'}</strong>
             </div>
             <div className="exam-utility-group">
               <span className="exam-utility-label">Review Status</span>
@@ -1605,7 +1633,7 @@ function App() {
           <div className="exam-utility-bar result-utility-bar">
             <div className="exam-utility-group">
               <span className="exam-utility-label">Section</span>
-              <strong>AWS Solutions Architect Associate</strong>
+              <strong>{examType === 'ccp' ? 'AWS Cloud Practitioner' : 'AWS Solutions Architect Associate'}</strong>
             </div>
             <div className="exam-utility-group">
               <span className="exam-utility-label">Score</span>
@@ -1657,7 +1685,7 @@ function App() {
             </div>
           </div>
 
-          <div className="exam-coaching-strip result-coaching-strip" aria-label="SAA post-exam guidance">
+          <div className="exam-coaching-strip result-coaching-strip" aria-label="post-exam guidance">
             <span className="exam-coaching-label">Study Focus</span>
             <p>
               Review missed items by domain and note whether the mistake came from service selection, requirement prioritization, or cost-versus-resilience trade-offs.
@@ -1683,7 +1711,7 @@ function App() {
             <div className="domain-performance-header">
               <div>
                 <span className="review-question-label">Domain Analysis</span>
-                <h2>SAA Domain Performance</h2>
+                <h2>{examType === 'ccp' ? 'CCP Domain Performance' : 'SAA Domain Performance'}</h2>
                 <p>Use this breakdown to decide which architecture domain needs the next study block.</p>
               </div>
               <div className="domain-performance-summary">
@@ -1853,7 +1881,7 @@ function App() {
         <div className="exam-topbar-left">
           <span className="exam-brand">AWS Mock Exam</span>
           <span className="exam-separator">|</span>
-          <span>SAA-C03</span>
+          <span>{examType === 'ccp' ? 'CLF-C02' : 'SAA-C03'}</span>
         </div>
         <div className="exam-topbar-center">
           <span className="exam-session-label">Delivery Screen</span>
@@ -1950,7 +1978,7 @@ function App() {
           </div>
 
           <div className="exam-coaching-strip" aria-label="Exam strategy guidance">
-            <span className="exam-coaching-label">SAA Exam Tip</span>
+            <span className="exam-coaching-label">{examType === 'ccp' ? 'CCP Exam Tip' : 'SAA Exam Tip'}</span>
             <p>
               Prioritize keywords around operational overhead, resilience, security boundaries, and cost trade-offs before comparing answer choices.
             </p>
