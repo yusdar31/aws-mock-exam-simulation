@@ -1,14 +1,21 @@
 import express from 'express'
 import { config } from './config.js'
 import { questionRouter } from './routes/questions.js'
+import { authRouter } from './routes/auth.js'
 import { startAutoGenerator } from './scheduler.js'
 
 const app = express()
 
-app.use((_, response, next) => {
+app.use((request, response, next) => {
   response.setHeader('Access-Control-Allow-Origin', '*')
   response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-  response.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+  response.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+
+  if (request.method === 'OPTIONS') {
+    response.status(204).end()
+    return
+  }
+
   next()
 })
 
@@ -19,6 +26,7 @@ app.get('/health', (_request, response) => {
 })
 
 app.use('/api/questions', questionRouter)
+app.use('/api/auth', authRouter)
 
 app.use((error, _request, response, _next) => {
   response.status(500).json({
@@ -26,7 +34,7 @@ app.use((error, _request, response, _next) => {
   })
 })
 
-app.listen(config.port, () => {
-  console.log(`Backend listening on http://localhost:${config.port}`)
+app.listen(config.port, '0.0.0.0', () => {
+  console.log(`Backend listening on http://0.0.0.0:${config.port}`)
   startAutoGenerator()
 })

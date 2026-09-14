@@ -4,12 +4,20 @@ import { questionBank, type ExamQuestion } from './data/questionBank'
 import { ccpQuestionBank } from './data/ccpQuestionBank'
 
 type ExamType = 'saa' | 'ccp'
-type ExamPhase = 'landing' | 'exam' | 'review' | 'result' | 'admin' | 'history'
+type ExamPhase = 'auth' | 'landing' | 'exam' | 'review' | 'result' | 'admin' | 'history'
+type AuthMode = 'login' | 'register'
 type QuestionStatus = 'answered-marked' | 'marked' | 'answered' | 'unanswered'
+
+type AuthUser = {
+  id: string
+  name: string
+  email: string
+}
 
 type ExamHistoryRecord = {
   id: string
   userId: string
+  examType?: string
   submittedAt: number
   score: number
   totalQuestions: number
@@ -52,9 +60,10 @@ type ErrorInsight = {
 }
 
 const EXAM_DURATION_SECONDS = 45 * 60
-const API_BASE_URL = window.location.hostname === 'localhost' 
-  ? 'http://localhost:4000' 
-  : `http://${window.location.hostname}:4000`
+const API_BASE_URL = import.meta.env.VITE_API_URL
+  ?? (window.location.hostname === 'localhost'
+    ? 'http://localhost:4000'
+    : `${window.location.origin}`)
 
 function formatTime(totalSeconds: number) {
   const safeSeconds = Math.max(totalSeconds, 0)
@@ -348,8 +357,73 @@ async function fetchApprovedQuestions() {
   return payload.items as ExamQuestion[]
 }
 
+// ─── Auth API Helpers ───
+
+function getAuthToken(): string | null {
+  return localStorage.getItem('mockExamToken')
+}
+
+function authHeaders(): Record<string, string> {
+  const token = getAuthToken()
+  return token ? { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' }
+}
+
+async function apiLogin(email: string, password: string) {
+  const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password }),
+  })
+  if (!response.ok) {
+    const payload = await response.json().catch(() => null)
+    throw new Error(payload?.error ?? 'Login gagal')
+  }
+  return response.json() as Promise<{ token: string; user: AuthUser }>
+}
+
+async function apiRegister(name: string, email: string, password: string) {
+  const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, email, password }),
+  })
+  if (!response.ok) {
+    const payload = await response.json().catch(() => null)
+    throw new Error(payload?.error ?? 'Registrasi gagal')
+  }
+  return response.json() as Promise<{ token: string; user: AuthUser }>
+}
+
+async function apiGetMe() {
+  const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
+    headers: authHeaders(),
+  })
+  if (!response.ok) throw new Error('Session expired')
+  return response.json() as Promise<{ user: AuthUser }>
+}
+
+async function apiSaveHistory(record: ExamHistoryRecord) {
+  const response = await fetch(`${API_BASE_URL}/api/auth/history`, {
+    method: 'POST',
+    headers: authHeaders(),
+    body: JSON.stringify(record),
+  })
+  if (!response.ok) {
+    console.error('Failed to save history to server')
+  }
+}
+
+async function apiGetHistory() {
+  const response = await fetch(`${API_BASE_URL}/api/auth/history`, {
+    headers: authHeaders(),
+  })
+  if (!response.ok) return []
+  const payload = await response.json()
+  return payload.history as ExamHistoryRecord[]
+}
+
 function App() {
-  const [phase, setPhase] = useState<ExamPhase>('landing')
+  const [phase, setPhase] = useState<ExamPhase>('auth')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [selectedAnswers, setSelectedAnswers] = useState<Record<string, string[]>>({})
   const [markedQuestionIds, setMarkedQuestionIds] = useState<string[]>([])
@@ -357,9 +431,19 @@ function App() {
   const [submittedAt, setSubmittedAt] = useState<number | null>(null)
   const [showDetailedReview, setShowDetailedReview] = useState(false)
   
+  // Auth State
+  const [authMode, setAuthMode] = useState<AuthMode>('login')
+  const [authUser, setAuthUser] = useState<AuthUser | null>(null)
+  const [authLoading, setAuthLoading] = useState(true)
+  const [authError, setAuthError] = useState('')
+  const [authName, setAuthName] = useState('')
+  const [authEmail, setAuthEmail] = useState('')
+  const [authPassword, setAuthPassword] = useState('')
+  const [authConfirmPassword, setAuthConfirmPassword] = useState('')
+
   // Configuration State
   const [availableQuestions, setAvailableQuestions] = useState<ExamQuestion[]>([])
-  const [examConfigDuration, setExamConfigDuration] = useState<number>(45) // minutes, -1 for unlimited
+  const [examConfigDuration, setExamConfigDuration] = useState<number>(45)
   const [examConfigLimit, setExamConfigLimit] = useState<number | 'all'>(20)
   const [examConfigDomains, setExamConfigDomains] = useState<string[]>([])
 
@@ -391,24 +475,32 @@ function App() {
   const [translations, setTranslations] = useState<Record<string, string>>({})
   const [translatingIds, setTranslatingIds] = useState<string[]>([])
 
+  // Auto-login from stored token on mount
   useEffect(() => {
-    // Initialize userId
-    let storedUserId = localStorage.getItem('mockExamUserId')
-    if (!storedUserId) {
-      storedUserId = 'user_' + Math.random().toString(36).substring(2, 9)
-      localStorage.setItem('mockExamUserId', storedUserId)
-    }
-    setUserId(storedUserId)
-
-    // Load history
-    try {
-      const stored = localStorage.getItem('mockExamHistory')
-      if (stored) {
-        setHistoryRecords(JSON.parse(stored))
+    async function tryAutoLogin() {
+      const token = getAuthToken()
+      if (!token) {
+        setAuthLoading(false)
+        return
       }
-    } catch (e) {
-      console.error('Failed to load history', e)
+      try {
+        const { user } = await apiGetMe()
+        setAuthUser(user)
+        setUserId(user.id)
+        setPhase('landing')
+
+        // Load history from server
+        const serverHistory = await apiGetHistory()
+        if (serverHistory.length > 0) {
+          setHistoryRecords(serverHistory)
+        }
+      } catch {
+        localStorage.removeItem('mockExamToken')
+      } finally {
+        setAuthLoading(false)
+      }
     }
+    tryAutoLogin()
   }, [])
 
   const currentQuestion = examQuestions[currentIndex]
@@ -536,6 +628,65 @@ function App() {
   useEffect(() => {
     setReviewDraft(createDraftFromQuestion(selectedReviewQuestion))
   }, [selectedReviewQuestion])
+
+  // ─── Auth Handlers ───
+
+  async function handleLogin(e: React.FormEvent) {
+    e.preventDefault()
+    setAuthError('')
+    setAuthLoading(true)
+    try {
+      const { token, user } = await apiLogin(authEmail, authPassword)
+      localStorage.setItem('mockExamToken', token)
+      setAuthUser(user)
+      setUserId(user.id)
+      setPhase('landing')
+      setAuthEmail('')
+      setAuthPassword('')
+
+      const serverHistory = await apiGetHistory()
+      if (serverHistory.length > 0) setHistoryRecords(serverHistory)
+    } catch (err) {
+      setAuthError(err instanceof Error ? err.message : 'Login gagal')
+    } finally {
+      setAuthLoading(false)
+    }
+  }
+
+  async function handleRegister(e: React.FormEvent) {
+    e.preventDefault()
+    setAuthError('')
+
+    if (authPassword !== authConfirmPassword) {
+      setAuthError('Password dan konfirmasi password tidak sama')
+      return
+    }
+
+    setAuthLoading(true)
+    try {
+      const { token, user } = await apiRegister(authName, authEmail, authPassword)
+      localStorage.setItem('mockExamToken', token)
+      setAuthUser(user)
+      setUserId(user.id)
+      setPhase('landing')
+      setAuthName('')
+      setAuthEmail('')
+      setAuthPassword('')
+      setAuthConfirmPassword('')
+    } catch (err) {
+      setAuthError(err instanceof Error ? err.message : 'Registrasi gagal')
+    } finally {
+      setAuthLoading(false)
+    }
+  }
+
+  function handleLogout() {
+    localStorage.removeItem('mockExamToken')
+    setAuthUser(null)
+    setUserId('')
+    setHistoryRecords([])
+    setPhase('auth')
+  }
 
   async function openAdminPanel() {
     setPhase('admin')
@@ -669,6 +820,7 @@ function App() {
     const newRecord: ExamHistoryRecord = {
       id: 'result_' + Math.random().toString(36).substring(2, 9),
       userId,
+      examType,
       submittedAt: now,
       score,
       totalQuestions: examQuestions.length,
@@ -679,9 +831,13 @@ function App() {
 
     setHistoryRecords((current) => {
       const updated = [newRecord, ...current]
-      localStorage.setItem('mockExamHistory', JSON.stringify(updated))
       return updated
     })
+
+    // Save to server
+    if (authUser) {
+      apiSaveHistory(newRecord).catch(() => {})
+    }
   }
 
   async function downloadPDF() {
@@ -977,10 +1133,156 @@ function App() {
   }
 
 
+  // ─── AUTH SCREEN ───
+  if (phase === 'auth') {
+    if (authLoading) {
+      return (
+        <main className="lobby-shell">
+          <section className="lobby-card" style={{ textAlign: 'center', padding: '60px 40px' }}>
+            <div className="aws-badge">AWS Mock Exam</div>
+            <h1>Loading...</h1>
+          </section>
+        </main>
+      )
+    }
+
+    return (
+      <main className="lobby-shell">
+        <section className="lobby-card auth-card">
+          <div className="auth-header">
+            <div className="aws-badge">AWS Certification</div>
+            <h1>AWS Mock Exam Simulator</h1>
+            <p className="lobby-copy">
+              Simulasi ujian AWS (SAA-C03 & CLF-C02) dengan timer, navigator, review, dan score report.
+            </p>
+          </div>
+
+          <div className="auth-tabs">
+            <button
+              className={`auth-tab ${authMode === 'login' ? 'active' : ''}`}
+              onClick={() => { setAuthMode('login'); setAuthError('') }}
+            >
+              Login
+            </button>
+            <button
+              className={`auth-tab ${authMode === 'register' ? 'active' : ''}`}
+              onClick={() => { setAuthMode('register'); setAuthError('') }}
+            >
+              Register
+            </button>
+          </div>
+
+          {authMode === 'login' ? (
+            <form className="auth-form" onSubmit={handleLogin}>
+              <label className="auth-field">
+                <span>Email</span>
+                <input
+                  type="email"
+                  placeholder="you@email.com"
+                  value={authEmail}
+                  onChange={(e) => setAuthEmail(e.target.value)}
+                  required
+                  autoComplete="email"
+                />
+              </label>
+              <label className="auth-field">
+                <span>Password</span>
+                <input
+                  type="password"
+                  placeholder="Masukkan password"
+                  value={authPassword}
+                  onChange={(e) => setAuthPassword(e.target.value)}
+                  required
+                  autoComplete="current-password"
+                />
+              </label>
+              {authError && <p className="auth-error">{authError}</p>}
+              <button type="submit" className="exam-primary-button auth-submit" disabled={authLoading}>
+                {authLoading ? 'Logging in...' : 'Login'}
+              </button>
+              <p className="auth-switch">
+                Belum punya akun?{' '}
+                <button type="button" className="auth-link" onClick={() => { setAuthMode('register'); setAuthError('') }}>
+                  Daftar di sini
+                </button>
+              </p>
+            </form>
+          ) : (
+            <form className="auth-form" onSubmit={handleRegister}>
+              <label className="auth-field">
+                <span>Nama Lengkap</span>
+                <input
+                  type="text"
+                  placeholder="Nama Anda"
+                  value={authName}
+                  onChange={(e) => setAuthName(e.target.value)}
+                  required
+                  minLength={2}
+                  autoComplete="name"
+                />
+              </label>
+              <label className="auth-field">
+                <span>Email</span>
+                <input
+                  type="email"
+                  placeholder="you@email.com"
+                  value={authEmail}
+                  onChange={(e) => setAuthEmail(e.target.value)}
+                  required
+                  autoComplete="email"
+                />
+              </label>
+              <label className="auth-field">
+                <span>Password</span>
+                <input
+                  type="password"
+                  placeholder="Minimal 6 karakter"
+                  value={authPassword}
+                  onChange={(e) => setAuthPassword(e.target.value)}
+                  required
+                  minLength={6}
+                  autoComplete="new-password"
+                />
+              </label>
+              <label className="auth-field">
+                <span>Konfirmasi Password</span>
+                <input
+                  type="password"
+                  placeholder="Ulangi password"
+                  value={authConfirmPassword}
+                  onChange={(e) => setAuthConfirmPassword(e.target.value)}
+                  required
+                  minLength={6}
+                  autoComplete="new-password"
+                />
+              </label>
+              {authError && <p className="auth-error">{authError}</p>}
+              <button type="submit" className="exam-primary-button auth-submit" disabled={authLoading}>
+                {authLoading ? 'Mendaftar...' : 'Daftar'}
+              </button>
+              <p className="auth-switch">
+                Sudah punya akun?{' '}
+                <button type="button" className="auth-link" onClick={() => { setAuthMode('login'); setAuthError('') }}>
+                  Login di sini
+                </button>
+              </p>
+            </form>
+          )}
+        </section>
+      </main>
+    )
+  }
+
   if (phase === 'landing') {
     return (
       <main className="lobby-shell">
         <section className="lobby-card">
+          {authUser && (
+            <div className="user-bar">
+              <span className="user-bar-info">👤 <strong>{authUser.name}</strong> ({authUser.email})</span>
+              <button className="user-bar-logout" onClick={handleLogout}>Logout</button>
+            </div>
+          )}
           <div className="lobby-header">
             <div>
               <div className="aws-badge">AWS Certification</div>
