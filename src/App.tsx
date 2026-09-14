@@ -1625,13 +1625,53 @@ function App() {
   }
 
   if (phase === 'history') {
+    // Analisis kronologis dari tes pertama ke tes terbaru
+    const chronological = [...historyRecords].sort((a, b) => a.submittedAt - b.submittedAt)
+    const attemptsWithMetrics = chronological.map((record, idx) => {
+      const prev = idx > 0 ? chronological[idx - 1] : null
+      const delta = prev ? record.scoreRate - prev.scoreRate : null
+      return {
+        ...record,
+        attemptNumber: idx + 1,
+        delta,
+      }
+    })
+
+    // Tampilkan terbalik (terbaru di atas) untuk daftar riwayat
+    const displayList = [...attemptsWithMetrics].reverse()
+
+    const totalAttempts = historyRecords.length
+    const scores = historyRecords.map((r) => r.scoreRate)
+    const bestScore = scores.length ? Math.max(...scores) : 0
+    const latestScore = chronological.length ? chronological[chronological.length - 1].scoreRate : 0
+    const firstScore = chronological.length ? chronological[0].scoreRate : 0
+    const averageScore = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0
+    const totalGrowth = attemptsWithMetrics.length > 1 ? latestScore - firstScore : 0
+
+    // Akumulasi domain
+    const cumulativeDomainMap = new Map<string, { total: number; correct: number }>()
+    for (const rec of historyRecords) {
+      for (const dp of rec.domainPerformance) {
+        const curr = cumulativeDomainMap.get(dp.domain) || { total: 0, correct: 0 }
+        curr.total += dp.total
+        curr.correct += dp.correct
+        cumulativeDomainMap.set(dp.domain, curr)
+      }
+    }
+    const cumulativeDomains = Array.from(cumulativeDomainMap.entries()).map(([domain, stats]) => ({
+      domain,
+      accuracy: stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0,
+      total: stats.total,
+      correct: stats.correct,
+    })).sort((a, b) => a.accuracy - b.accuracy)
+
     return (
       <main className="admin-shell">
         <header className="admin-header">
           <div>
-            <div className="aws-badge">History</div>
-            <h1>Your Exam History</h1>
-            <p>Review your previous mock exam scores and performance.</p>
+            <div className="aws-badge">Analytics & History</div>
+            <h1>Performance & Learning Curve</h1>
+            <p>Pantau perkembangan skor dari tes pertama ke tes berikutnya serta pemetaan penguasaan materi.</p>
           </div>
           <div className="admin-header-actions">
             <button className="exam-secondary-button" onClick={() => setPhase('landing')}>
@@ -1643,35 +1683,152 @@ function App() {
         <section className="history-layout">
           {historyRecords.length === 0 ? (
             <div className="admin-empty-state">
-              <h2>No history found</h2>
-              <p>You haven't completed any mock exams yet. Start an exam from the lobby!</p>
+              <h2>Belum Ada Riwayat Ujian</h2>
+              <p>Anda belum menyelesaikan simulasi ujian. Selesaikan ujian pertama dari Lobby untuk melihat kurva belajar Anda!</p>
             </div>
           ) : (
-            <div className="history-list">
-              {historyRecords.map((record) => (
-                <div key={record.id} className="history-card">
-                  <div className="history-card-header">
-                    <h3>{new Date(record.submittedAt).toLocaleDateString()} {new Date(record.submittedAt).toLocaleTimeString()}</h3>
-                    <div className="history-score-badge">
-                      Score: {record.scoreRate}% ({record.score}/{record.totalQuestions})
-                    </div>
+            <>
+              {/* KPI Summary Cards */}
+              <div className="analytics-kpi-grid">
+                <div className="analytics-kpi-card">
+                  <span className="kpi-label">Total Percobaan</span>
+                  <strong className="kpi-value">{totalAttempts}x</strong>
+                  <span className="kpi-sub">Simulasi Selesai</span>
+                </div>
+                <div className="analytics-kpi-card">
+                  <span className="kpi-label">Rata-Rata Skor</span>
+                  <strong className={`kpi-value ${averageScore >= 72 ? 'pass' : 'warn'}`}>{averageScore}%</strong>
+                  <span className="kpi-sub">Passing Grade: 72%</span>
+                </div>
+                <div className="analytics-kpi-card">
+                  <span className="kpi-label">Skor Tertinggi (PB)</span>
+                  <strong className="kpi-value highlight">{bestScore}%</strong>
+                  <span className="kpi-sub">Pencapaian Terbaik</span>
+                </div>
+                <div className="analytics-kpi-card">
+                  <span className="kpi-label">Pertumbuhan Belajar</span>
+                  <strong className={`kpi-value ${totalGrowth >= 0 ? 'growth-up' : 'growth-down'}`}>
+                    {totalGrowth > 0 ? `+${totalGrowth}%` : `${totalGrowth}%`}
+                  </strong>
+                  <span className="kpi-sub">Sejak Tes Pertama</span>
+                </div>
+              </div>
+
+              {/* Learning Progress Timeline Chart */}
+              <div className="analytics-card">
+                <div className="analytics-card-header">
+                  <h3>📈 Kurva Perkembangan Skor per Percobaan (Learning Curve)</h3>
+                  <span className="analytics-card-sub">Membandingkan hasil tes pertama, kedua, dan seterusnya</span>
+                </div>
+                <div className="progress-chart-container">
+                  <div className="chart-passing-line" title="Passing threshold (72%)">
+                    <span>Passing Grade 72%</span>
                   </div>
-                  <div className="history-card-details">
-                    <p>Time Taken: {record.durationSeconds === -1 ? 'Unlimited' : formatTime(record.durationSeconds)}</p>
-                    <div className="history-domains">
-                      <strong>Domain Performance:</strong>
-                      <ul>
-                        {record.domainPerformance.map((domain) => (
-                          <li key={domain.domain}>
-                            {domain.domain}: {domain.correct}/{domain.total} ({domain.accuracy}%)
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                  <div className="progress-chart-bars">
+                    {chronological.map((rec, idx) => {
+                      const prev = idx > 0 ? chronological[idx - 1] : null
+                      const delta = prev ? rec.scoreRate - prev.scoreRate : null
+                      const isPassing = rec.scoreRate >= 72
+                      return (
+                        <div key={rec.id} className="chart-bar-item">
+                          <span className="chart-bar-score">{rec.scoreRate}%</span>
+                          <div className="chart-bar-track">
+                            <div
+                              className={`chart-bar-fill ${isPassing ? 'bar-pass' : 'bar-fail'}`}
+                              style={{ height: `${Math.max(rec.scoreRate, 8)}%` }}
+                            />
+                          </div>
+                          <span className="chart-bar-label">Tes #{idx + 1}</span>
+                          {delta !== null && (
+                            <span className={`chart-bar-delta ${delta >= 0 ? 'up' : 'down'}`}>
+                              {delta >= 0 ? `+${delta}%` : `${delta}%`}
+                            </span>
+                          )}
+                        </div>
+                      )
+                    })}
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+
+              {/* Cumulative Domain Mastery */}
+              {cumulativeDomains.length > 0 && (
+                <div className="analytics-card">
+                  <div className="analytics-card-header">
+                    <h3>🎯 Penguasaan Materi per Domain (Kumulatif)</h3>
+                    <span className="analytics-card-sub">Akumulasi seluruh soal yang pernah Anda kerjakan</span>
+                  </div>
+                  <div className="cumulative-domain-grid">
+                    {cumulativeDomains.map((dom) => (
+                      <div key={dom.domain} className="cumulative-domain-item">
+                        <div className="domain-row-top">
+                          <span className="domain-name">{dom.domain}</span>
+                          <strong className={`domain-acc ${dom.accuracy >= 72 ? 'pass' : 'warn'}`}>
+                            {dom.accuracy}% ({dom.correct}/{dom.total})
+                          </strong>
+                        </div>
+                        <div className="domain-bar-track">
+                          <div
+                            className={`domain-bar-fill ${dom.accuracy >= 72 ? 'pass' : 'warn'}`}
+                            style={{ width: `${dom.accuracy}%` }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Detailed Exam History Cards */}
+              <div className="history-list">
+                <h3 className="history-section-title">📋 Riwayat Detail Setiap Percobaan</h3>
+                {displayList.map((record) => {
+                  const isPassing = record.scoreRate >= 72
+                  return (
+                    <div key={record.id} className={`history-card ${isPassing ? 'card-passed' : ''}`}>
+                      <div className="history-card-header">
+                        <div>
+                          <div className="history-attempt-badge">
+                            Percobaan #{record.attemptNumber}
+                            {record.attemptNumber === 1 && <span className="baseline-tag">Baseline Awal</span>}
+                          </div>
+                          <h3>
+                            {new Date(record.submittedAt).toLocaleDateString()} {new Date(record.submittedAt).toLocaleTimeString()}
+                          </h3>
+                        </div>
+                        <div className="history-header-right">
+                          {record.delta !== null && (
+                            <div className={`history-delta-pill ${record.delta >= 0 ? 'up' : 'down'}`}>
+                              {record.delta >= 0 ? `▲ +${record.delta}%` : `▼ ${record.delta}%`} dibanding Tes #{record.attemptNumber - 1}
+                            </div>
+                          )}
+                          <div className={`history-score-badge ${isPassing ? 'badge-pass' : 'badge-fail'}`}>
+                            {record.scoreRate}% ({record.score}/{record.totalQuestions})
+                          </div>
+                        </div>
+                      </div>
+                      <div className="history-card-details">
+                        <p>
+                          ⏱️ Waktu Pengerjaan: <strong>{record.durationSeconds === -1 ? 'Unlimited' : formatTime(record.durationSeconds)}</strong>
+                          &nbsp;|&nbsp; 🏷️ Ujian: <strong>{record.examType === 'ccp' ? 'CLF-C02 (Cloud Practitioner)' : 'SAA-C03'}</strong>
+                          &nbsp;|&nbsp; 🎯 Status: <strong style={{ color: isPassing ? '#16a34a' : '#ea580c' }}>{isPassing ? 'LULUS (Passed)' : 'BELUM LULUS'}</strong>
+                        </p>
+                        <div className="history-domains">
+                          <strong>Performa per Topik:</strong>
+                          <div className="history-domain-chips">
+                            {record.domainPerformance.map((domain) => (
+                              <span key={domain.domain} className={`domain-chip ${domain.accuracy >= 72 ? 'chip-pass' : 'chip-warn'}`}>
+                                {domain.domain}: {domain.accuracy}% ({domain.correct}/{domain.total})
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </>
           )}
         </section>
       </main>
