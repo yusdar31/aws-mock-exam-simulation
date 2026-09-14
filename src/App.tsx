@@ -1047,7 +1047,7 @@ function App() {
     }
 
     setPracticeLoading(true)
-    setPracticeNotice(`🎯 Mempersiapkan latihan khusus domain "${weakestDomain}" (Akurasi sebelumnya: ${Math.round(lowestAccuracy)}%)...`)
+    setPracticeNotice(`Mempersiapkan sesi latihan domain "${weakestDomain}" (Akurasi: ${Math.round(lowestAccuracy)}%)...`)
 
     try {
       // 1. Ambil soal dari bank soal yang sedang aktif yang cocok dengan domain terlemah
@@ -1433,7 +1433,7 @@ function App() {
         <section className="lobby-card">
           {authUser && (
             <div className="user-bar">
-              <span className="user-bar-info">👤 <strong>{authUser.name}</strong> ({authUser.email})</span>
+              <span className="user-bar-info"><strong>{authUser.name}</strong> ({authUser.email})</span>
               <button className="user-bar-logout" onClick={handleLogout}>Logout</button>
             </div>
           )}
@@ -1441,7 +1441,7 @@ function App() {
           {savedSession && (
             <div className="resume-exam-banner">
               <div className="resume-banner-info">
-                <span className="resume-badge">⏳ Sesi Ujian Belum Selesai</span>
+                <span className="resume-badge">Sesi Ujian Tersimpan</span>
                 <h3>Lanjutkan Ujian {savedSession.examType === 'ccp' ? 'CLF-C02' : 'SAA-C03'}</h3>
                 <p>
                   Tersimpan di soal nomor <strong>{(savedSession.currentIndex || 0) + 1}</strong> dari <strong>{savedSession.examQuestions.length}</strong> soal 
@@ -1451,7 +1451,7 @@ function App() {
               </div>
               <div className="resume-banner-actions">
                 <button className="exam-primary-button resume-button" onClick={resumeSavedSession}>
-                  ▶️ Lanjutkan Ujian
+                  Lanjutkan Ujian
                 </button>
                 <button className="exam-secondary-button discard-button" onClick={discardSavedSession}>
                   Hapus Sesi
@@ -1503,19 +1503,19 @@ function App() {
                   className={`config-pill ${examLang === 'id' ? 'active' : ''}`}
                   onClick={() => setExamLang('id')}
                 >
-                  🇮🇩 Bahasa Indonesia {examType === 'ccp' ? `(${ccpQuestionBankId.length})` : ''}
+                  Bahasa Indonesia {examType === 'ccp' ? `(${ccpQuestionBankId.length})` : ''}
                 </button>
                 <button
                   className={`config-pill ${examLang === 'en' ? 'active' : ''}`}
                   onClick={() => setExamLang('en')}
                 >
-                  🇬🇧 English {examType === 'ccp' ? `(${ccpQuestionBankEn.length})` : `(${questionBank.length})`}
+                  English {examType === 'ccp' ? `(${ccpQuestionBankEn.length})` : `(${questionBank.length})`}
                 </button>
                 <button
                   className={`config-pill ${examLang === 'all' ? 'active' : ''}`}
                   onClick={() => setExamLang('all')}
                 >
-                  🌐 Campuran / Semua {examType === 'ccp' ? `(${ccpQuestionBank.length})` : ''}
+                  Semua Bahasa {examType === 'ccp' ? `(${ccpQuestionBank.length})` : ''}
                 </button>
               </div>
             </div>
@@ -1611,7 +1611,7 @@ function App() {
               disabled={practiceLoading}
               onClick={practiceWeakestDomain}
             >
-              {practiceLoading ? 'Generating...' : '🎯 Practice Weakest Domain'}
+              {practiceLoading ? 'Generating...' : 'Practice Weakest Domain'}
             </button>
             <button className="exam-primary-button" disabled={examLoading} onClick={startExam}>
               {examLoading ? 'Loading...' : 'Begin Exam'}
@@ -1717,7 +1717,7 @@ function App() {
               {/* Learning Progress Timeline Chart */}
               <div className="analytics-card">
                 <div className="analytics-card-header">
-                  <h3>📈 Kurva Perkembangan Skor per Percobaan (Learning Curve)</h3>
+                  <h3>Kurva Perkembangan Skor per Percobaan</h3>
                   <span className="analytics-card-sub">Membandingkan hasil tes pertama, kedua, dan seterusnya</span>
                 </div>
                 <div className="progress-chart-container">
@@ -1755,7 +1755,7 @@ function App() {
               {cumulativeDomains.length > 0 && (
                 <div className="analytics-card">
                   <div className="analytics-card-header">
-                    <h3>🎯 Penguasaan Materi per Domain (Kumulatif)</h3>
+                    <h3>Penguasaan Materi per Domain</h3>
                     <span className="analytics-card-sub">Akumulasi seluruh soal yang pernah Anda kerjakan</span>
                   </div>
                   <div className="cumulative-domain-grid">
@@ -1781,7 +1781,7 @@ function App() {
 
               {/* Detailed Exam History Cards */}
               <div className="history-list">
-                <h3 className="history-section-title">📋 Riwayat Detail Setiap Percobaan</h3>
+                <h3 className="history-section-title">Riwayat Detail Setiap Percobaan</h3>
                 {displayList.map((record) => {
                   const isPassing = record.scoreRate >= 72
                   return (
@@ -1799,7 +1799,7 @@ function App() {
                         <div className="history-header-right">
                           {record.delta !== null && (
                             <div className={`history-delta-pill ${record.delta >= 0 ? 'up' : 'down'}`}>
-                              {record.delta >= 0 ? `▲ +${record.delta}%` : `▼ ${record.delta}%`} dibanding Tes #{record.attemptNumber - 1}
+                              {record.delta >= 0 ? `+${record.delta}%` : `${record.delta}%`} dibanding Tes #{record.attemptNumber - 1}
                             </div>
                           )}
                           <div className={`history-score-badge ${isPassing ? 'badge-pass' : 'badge-fail'}`}>
@@ -1809,9 +1809,9 @@ function App() {
                       </div>
                       <div className="history-card-details">
                         <p>
-                          ⏱️ Waktu Pengerjaan: <strong>{record.durationSeconds === -1 ? 'Unlimited' : formatTime(record.durationSeconds)}</strong>
-                          &nbsp;|&nbsp; 🏷️ Ujian: <strong>{record.examType === 'ccp' ? 'CLF-C02 (Cloud Practitioner)' : 'SAA-C03'}</strong>
-                          &nbsp;|&nbsp; 🎯 Status: <strong style={{ color: isPassing ? '#16a34a' : '#ea580c' }}>{isPassing ? 'LULUS (Passed)' : 'BELUM LULUS'}</strong>
+                          Waktu: <strong>{record.durationSeconds === -1 ? 'Unlimited' : formatTime(record.durationSeconds)}</strong>
+                          &nbsp;|&nbsp; Ujian: <strong>{record.examType === 'ccp' ? 'CLF-C02 (Cloud Practitioner)' : 'SAA-C03'}</strong>
+                          &nbsp;|&nbsp; Status: <strong style={{ color: isPassing ? '#16a34a' : '#ea580c' }}>{isPassing ? 'LULUS (Passed)' : 'BELUM LULUS'}</strong>
                         </p>
                         <div className="history-domains">
                           <strong>Performa per Topik:</strong>
@@ -1927,7 +1927,7 @@ function App() {
                       disabled={importLoading}
                       onClick={importTab === 'ai' ? handleImportAi : importTab === 'json' ? handleImportJson : handleImportDump}
                     >
-                      {importLoading ? 'Processing...' : importTab === 'ai' ? 'Generate ✨' : `Import ${importTab === 'json' ? 'JSON' : 'Dump'}`}
+                      {importLoading ? 'Processing...' : importTab === 'ai' ? 'Generate AI' : `Import ${importTab === 'json' ? 'JSON' : 'Dump'}`}
                     </button>
                   </div>
 
@@ -1936,7 +1936,7 @@ function App() {
                       className={`admin-import-tab ${importTab === 'ai' ? 'active' : ''}`}
                       onClick={() => setImportTab('ai')}
                     >
-                      Generate AI ✨
+                      Generate AI
                     </button>
                     <button
                       className={`admin-import-tab ${importTab === 'json' ? 'active' : ''}`}
@@ -2259,7 +2259,7 @@ function App() {
 
           <div className="review-footer-actions">
             <button className="exam-secondary-button" onClick={saveAndExitToLobby}>
-              💾 Simpan & Jeda (Lanjutkan Nanti)
+              Simpan & Jeda (Lanjutkan Nanti)
             </button>
             <button className="exam-secondary-button" onClick={backToExam}>
               Return To Section
@@ -2492,7 +2492,7 @@ function App() {
 
                       {translations[question.id] ? (
                         <div className="translation-box">
-                          <strong>🇮🇩 Penjelasan (Bahasa Indonesia)</strong>
+                          <strong>Penjelasan (Bahasa Indonesia)</strong>
                           <p>{translations[question.id]}</p>
                         </div>
                       ) : (
@@ -2503,7 +2503,7 @@ function App() {
                         >
                           {translatingIds.includes(question.id)
                             ? 'Menerjemahkan...'
-                            : '🇮🇩 Tampilkan Bahasa Indonesia'}
+                            : 'Tampilkan Bahasa Indonesia'}
                         </button>
                       )}
                     </div>
@@ -2620,7 +2620,7 @@ function App() {
             </div>
             <div>
               <span className="question-meta-label">Language</span>
-              <strong>{currentQuestion.lang === 'id' ? '🇮🇩 Bahasa Indonesia' : '🇬🇧 English'}</strong>
+              <strong>{currentQuestion.lang === 'id' ? 'Bahasa Indonesia' : 'English'}</strong>
             </div>
             <div>
               <span className="question-meta-label">Status</span>
@@ -2708,7 +2708,7 @@ function App() {
               : 'Flag For Review'}
           </button>
           <button className="exam-secondary-button pause-exam-button" onClick={saveAndExitToLobby} title="Simpan progres dan kembali ke Lobby untuk melanjutkan nanti">
-            💾 Simpan & Jeda
+            Simpan & Jeda
           </button>
         </div>
 
