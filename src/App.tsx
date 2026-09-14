@@ -923,7 +923,7 @@ function App() {
   }
 
   async function practiceWeakestDomain() {
-    // Find the weakest domain from history
+    // Cari domain dengan akurasi terendah dari riwayat ujian pengguna
     const domainAccuracy = new Map<string, { correct: number; total: number }>()
 
     for (const record of historyRecords) {
@@ -936,11 +936,11 @@ function App() {
     }
 
     if (domainAccuracy.size === 0) {
-      setPracticeNotice('Anda belum memiliki riwayat ujian. Selesaikan satu ujian terlebih dahulu!')
+      setPracticeNotice('Anda belum memiliki riwayat ujian. Selesaikan minimal satu ujian terlebih dahulu agar sistem dapat mendeteksi domain terlemah Anda!')
       return
     }
 
-    // Find domain with lowest accuracy
+    // Cari domain dengan persentase akurasi paling rendah
     let weakestDomain = ''
     let lowestAccuracy = 101
 
@@ -953,35 +953,38 @@ function App() {
     }
 
     setPracticeLoading(true)
-    setPracticeNotice(`Generating practice questions for "${weakestDomain}" (${Math.round(lowestAccuracy)}% accuracy)...`)
+    setPracticeNotice(`🎯 Mempersiapkan latihan khusus domain "${weakestDomain}" (Akurasi sebelumnya: ${Math.round(lowestAccuracy)}%)...`)
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/questions/generate-practice`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ domain: weakestDomain, count: 5 }),
-      })
+      // 1. Ambil soal dari bank soal yang sedang aktif yang cocok dengan domain terlemah
+      let matchingQuestions = availableQuestions.filter((q) => q.domain.toLowerCase() === weakestDomain.toLowerCase())
 
-      if (!response.ok) {
-        const payload = await response.json().catch(() => null)
-        throw new Error(payload?.error ?? 'Failed to generate practice questions')
+      // Fallback: Jika tidak ada di pool aktif, cari di seluruh bank soal CCP / SAA
+      if (matchingQuestions.length === 0) {
+        const allPool = [...ccpQuestionBank, ...questionBank]
+        matchingQuestions = allPool.filter((q) => q.domain.toLowerCase() === weakestDomain.toLowerCase())
       }
 
-      const payload = await response.json()
-      const practiceQuestions = payload.items as ExamQuestion[]
+      if (matchingQuestions.length === 0) {
+        throw new Error(`Tidak ditemukan soal untuk domain "${weakestDomain}". Silakan coba domain lain.`)
+      }
 
-      // Start an exam session with these practice questions
+      // 2. Acak soal dan ambil hingga 10 soal untuk latihan intensif
+      const shuffled = [...matchingQuestions].sort(() => Math.random() - 0.5)
+      const practiceQuestions = shuffled.slice(0, Math.min(10, shuffled.length))
+
+      // 3. Mulai sesi latihan instan (waktu unlimited)
       setExamQuestions(practiceQuestions)
       setPhase('exam')
       setCurrentIndex(0)
       setSelectedAnswers({})
       setMarkedQuestionIds([])
-      setRemainingSeconds(-1) // unlimited time for practice
+      setRemainingSeconds(-1) // unlimited time untuk mode latihan
       setSubmittedAt(null)
       setShowDetailedReview(false)
       setPracticeNotice('')
     } catch (error) {
-      setPracticeNotice(error instanceof Error ? error.message : 'Failed to generate practice')
+      setPracticeNotice(error instanceof Error ? error.message : 'Gagal menyiapkan sesi latihan')
     } finally {
       setPracticeLoading(false)
     }
@@ -993,23 +996,21 @@ function App() {
     setTranslatingIds((prev) => [...prev, questionId])
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/questions/translate`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text }),
-      })
+      // Terjemahkan client-side menggunakan API publik MyMemory (bebas 404)
+      const encodedText = encodeURIComponent(text.slice(0, 500))
+      const response = await fetch(`https://api.mymemory.translated.net/get?q=${encodedText}&langpair=en|id`)
 
       if (!response.ok) {
-        const payload = await response.json().catch(() => null)
-        throw new Error(payload?.error ?? 'Translation failed')
+        throw new Error('Gagal menghubungi layanan penerjemah')
       }
 
       const payload = await response.json()
-      setTranslations((prev) => ({ ...prev, [questionId]: payload.translated }))
+      const translatedText = payload?.responseData?.translatedText || text
+      setTranslations((prev) => ({ ...prev, [questionId]: translatedText }))
     } catch (error) {
       setTranslations((prev) => ({
         ...prev,
-        [questionId]: `[Gagal menerjemahkan: ${error instanceof Error ? error.message : 'Unknown error'}]`,
+        [questionId]: `[Terjemahan otomatis tidak tersedia: ${error instanceof Error ? error.message : 'Silakan baca penjelasan dalam bahasa asli'}]`,
       }))
     } finally {
       setTranslatingIds((prev) => prev.filter((id) => id !== questionId))
