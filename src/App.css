@@ -2091,3 +2091,99 @@
   border-color: #fca5a5;
   color: #dc2626;
 }
+
+/* ═══════ RESUME EXAM BANNER ═══════ */
+
+.resume-exam-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  gap: 16px;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.05);
+}
+
+.resume-banner-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.resume-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #1d4ed8;
+  background: #dbeafe;
+  padding: 3px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.resume-banner-info h3 {
+  margin: 2px 0 0;
+  font-size: 16px;
+  color: #1e3a8a;
+}
+
+.resume-banner-info p {
+  margin: 0;
+  font-size: 13px;
+  color: #3b82f6;
+}
+
+.resume-banner-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.resume-button {
+  background: #2563eb;
+  padding: 8px 18px;
+  font-size: 14px;
+}
+
+.resume-button:hover {
+  background: #1d4ed8;
+}
+
+.discard-button {
+  font-size: 13px;
+  padding: 8px 14px;
+  color: #64748b;
+}
+
+.discard-button:hover {
+  color: #dc2626;
+  border-color: #fca5a5;
+  background: #fee2e2;
+}
+
+.pause-exam-button {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+
+.pause-exam-button:hover {
+  background: #e2e8f0;
+}
+
+@media (max-width: 640px) {
+  .resume-exam-banner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .resume-banner-actions {
+    justify-content: flex-end;
+  }
+}
+

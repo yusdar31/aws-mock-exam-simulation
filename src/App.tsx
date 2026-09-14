@@ -28,6 +28,18 @@ type ExamHistoryRecord = {
   domainPerformance: { domain: string; total: number; correct: number; answered: number; accuracy: number }[]
 }
 
+type SavedExamSession = {
+  userId: string
+  examType: ExamType
+  examQuestions: ExamQuestion[]
+  currentIndex: number
+  selectedAnswers: Record<string, string[]>
+  markedQuestionIds: string[]
+  remainingSeconds: number
+  examConfigDuration: number
+  savedAt: number
+}
+
 type ReviewQuestion = {
   id: string
   sourceType: string
@@ -516,6 +528,24 @@ function App() {
   const [examLang, setExamLang] = useState<ExamLanguage>('id')
   const [translations, setTranslations] = useState<Record<string, string>>({})
   const [translatingIds, setTranslatingIds] = useState<string[]>([])
+  const [savedSession, setSavedSession] = useState<SavedExamSession | null>(null)
+
+  // Cek apakah ada sesi ujian tersimpan di localStorage untuk user ini
+  const checkSavedSession = useCallback((targetUserId: string) => {
+    try {
+      const raw = localStorage.getItem(`active_exam_session_${targetUserId}`)
+      if (raw) {
+        const parsed: SavedExamSession = JSON.parse(raw)
+        if (parsed && parsed.examQuestions && parsed.examQuestions.length > 0) {
+          setSavedSession(parsed)
+          return
+        }
+      }
+    } catch {
+      // ignore parse error
+    }
+    setSavedSession(null)
+  }, [])
 
   // Auto-login from Supabase session on mount
   useEffect(() => {
@@ -526,6 +556,8 @@ function App() {
           setAuthUser(user)
           setUserId(user.id)
           setPhase('landing')
+
+          checkSavedSession(user.id)
 
           const serverHistory = await apiGetHistory(user.id)
           if (serverHistory.length > 0) {
@@ -542,7 +574,7 @@ function App() {
       }
     }
     tryAutoLogin()
-  }, [])
+  }, [checkSavedSession])
 
   const currentQuestion = examQuestions[currentIndex]
   const selectedReviewQuestion =
@@ -666,6 +698,24 @@ function App() {
     return () => window.clearInterval(interval)
   }, [phase, remainingSeconds])
 
+  // ─── Auto-Save Active Exam Session ───
+  useEffect(() => {
+    if ((phase === 'exam' || phase === 'review') && examQuestions.length > 0 && userId) {
+      const sessionData: SavedExamSession = {
+        userId,
+        examType,
+        examQuestions,
+        currentIndex,
+        selectedAnswers,
+        markedQuestionIds,
+        remainingSeconds,
+        examConfigDuration,
+        savedAt: Date.now(),
+      }
+      localStorage.setItem(`active_exam_session_${userId}`, JSON.stringify(sessionData))
+    }
+  }, [phase, examQuestions, currentIndex, selectedAnswers, markedQuestionIds, remainingSeconds, examType, examConfigDuration, userId])
+
   useEffect(() => {
     setReviewDraft(createDraftFromQuestion(selectedReviewQuestion))
   }, [selectedReviewQuestion])
@@ -683,6 +733,8 @@ function App() {
       setPhase('landing')
       setAuthEmail('')
       setAuthPassword('')
+
+      checkSavedSession(user.id)
 
       const serverHistory = await apiGetHistory(user.id)
       if (serverHistory.length > 0) setHistoryRecords(serverHistory)
@@ -800,6 +852,12 @@ function App() {
   }
 
   function startExam() {
+    // Hapus sesi tersimpan sebelumnya jika user memulai ujian baru
+    if (userId) {
+      localStorage.removeItem(`active_exam_session_${userId}`)
+    }
+    setSavedSession(null)
+
     setExamLoading(true)
     setExamError('')
 
@@ -870,7 +928,43 @@ function App() {
     })
   }
 
+  function resumeSavedSession() {
+    if (!savedSession) return
+    setExamType(savedSession.examType)
+    setExamQuestions(savedSession.examQuestions)
+    setCurrentIndex(savedSession.currentIndex || 0)
+    setSelectedAnswers(savedSession.selectedAnswers || {})
+    setMarkedQuestionIds(savedSession.markedQuestionIds || [])
+    setRemainingSeconds(savedSession.remainingSeconds)
+    setExamConfigDuration(savedSession.examConfigDuration || 45)
+    setSubmittedAt(null)
+    setShowDetailedReview(false)
+    setPhase('exam')
+  }
+
+  function discardSavedSession() {
+    if (!window.confirm('Apakah Anda yakin ingin menghapus sesi ujian yang tersimpan ini?')) return
+    if (userId) {
+      localStorage.removeItem(`active_exam_session_${userId}`)
+    }
+    setSavedSession(null)
+  }
+
+  function saveAndExitToLobby() {
+    // Session sudah ter-auto-save via useEffect
+    if (userId) {
+      checkSavedSession(userId)
+    }
+    setPhase('landing')
+  }
+
   function finishExam() {
+    // Bersihkan sesi aktif karena ujian sudah di-submit
+    if (userId) {
+      localStorage.removeItem(`active_exam_session_${userId}`)
+    }
+    setSavedSession(null)
+
     setShowDetailedReview(false)
     const now = Date.now()
     setSubmittedAt(now)
@@ -1341,6 +1435,28 @@ function App() {
             <div className="user-bar">
               <span className="user-bar-info">👤 <strong>{authUser.name}</strong> ({authUser.email})</span>
               <button className="user-bar-logout" onClick={handleLogout}>Logout</button>
+            </div>
+          )}
+
+          {savedSession && (
+            <div className="resume-exam-banner">
+              <div className="resume-banner-info">
+                <span className="resume-badge">⏳ Sesi Ujian Belum Selesai</span>
+                <h3>Lanjutkan Ujian {savedSession.examType === 'ccp' ? 'CLF-C02' : 'SAA-C03'}</h3>
+                <p>
+                  Tersimpan di soal nomor <strong>{(savedSession.currentIndex || 0) + 1}</strong> dari <strong>{savedSession.examQuestions.length}</strong> soal 
+                  ({Object.keys(savedSession.selectedAnswers || {}).length} sudah dijawab).
+                  {savedSession.remainingSeconds > 0 ? ` Sisa waktu: ${formatTime(savedSession.remainingSeconds)}.` : ' Mode tanpa batas waktu.'}
+                </p>
+              </div>
+              <div className="resume-banner-actions">
+                <button className="exam-primary-button resume-button" onClick={resumeSavedSession}>
+                  ▶️ Lanjutkan Ujian
+                </button>
+                <button className="exam-secondary-button discard-button" onClick={discardSavedSession}>
+                  Hapus Sesi
+                </button>
+              </div>
             </div>
           )}
           <div className="lobby-header">
@@ -1985,6 +2101,9 @@ function App() {
           </div>
 
           <div className="review-footer-actions">
+            <button className="exam-secondary-button" onClick={saveAndExitToLobby}>
+              💾 Simpan & Jeda (Lanjutkan Nanti)
+            </button>
             <button className="exam-secondary-button" onClick={backToExam}>
               Return To Section
             </button>
@@ -2430,6 +2549,9 @@ function App() {
             {markedQuestionIds.includes(currentQuestion.id)
               ? 'Remove Review Flag'
               : 'Flag For Review'}
+          </button>
+          <button className="exam-secondary-button pause-exam-button" onClick={saveAndExitToLobby} title="Simpan progres dan kembali ke Lobby untuk melanjutkan nanti">
+            💾 Simpan & Jeda
           </button>
         </div>
 
