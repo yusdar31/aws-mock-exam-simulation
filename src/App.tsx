@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import './App.css'
 import { questionBank, type ExamQuestion } from './data/questionBank'
 import { ccpQuestionBank, ccpQuestionBankId, ccpQuestionBankEn } from './data/ccpQuestionBank'
+import { supabase } from './lib/supabase'
 
 type ExamType = 'saa' | 'ccp'
 type ExamLanguage = 'all' | 'id' | 'en'
@@ -358,69 +359,108 @@ async function fetchApprovedQuestions() {
   return payload.items as ExamQuestion[]
 }
 
-// ─── Auth API Helpers ───
+// ─── Supabase Auth & History Helpers ───
 
-function getAuthToken(): string | null {
-  return localStorage.getItem('mockExamToken')
-}
-
-function authHeaders(): Record<string, string> {
-  const token = getAuthToken()
-  return token ? { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' }
-}
-
-async function apiLogin(email: string, password: string) {
-  const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-  })
-  if (!response.ok) {
-    const payload = await response.json().catch(() => null)
-    throw new Error(payload?.error ?? 'Login gagal')
+async function apiLogin(email: string, password: string): Promise<AuthUser> {
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+  if (error) {
+    if (error.message.toLowerCase().includes('email not confirmed')) {
+      throw new Error('Email belum dikonfirmasi. Silakan buka inbox email Anda untuk verifikasi, atau matikan "Confirm email" di Supabase.')
+    }
+    throw new Error(error.message === 'Invalid login credentials' 
+      ? 'Email atau password salah' 
+      : error.message)
   }
-  return response.json() as Promise<{ token: string; user: AuthUser }>
-}
-
-async function apiRegister(name: string, email: string, password: string) {
-  const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, email, password }),
-  })
-  if (!response.ok) {
-    const payload = await response.json().catch(() => null)
-    throw new Error(payload?.error ?? 'Registrasi gagal')
-  }
-  return response.json() as Promise<{ token: string; user: AuthUser }>
-}
-
-async function apiGetMe() {
-  const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
-    headers: authHeaders(),
-  })
-  if (!response.ok) throw new Error('Session expired')
-  return response.json() as Promise<{ user: AuthUser }>
-}
-
-async function apiSaveHistory(record: ExamHistoryRecord) {
-  const response = await fetch(`${API_BASE_URL}/api/auth/history`, {
-    method: 'POST',
-    headers: authHeaders(),
-    body: JSON.stringify(record),
-  })
-  if (!response.ok) {
-    console.error('Failed to save history to server')
+  if (!data.user) throw new Error('User tidak ditemukan')
+  return {
+    id: data.user.id,
+    name: data.user.user_metadata?.name || data.user.email?.split('@')[0] || 'User',
+    email: data.user.email || email,
   }
 }
 
-async function apiGetHistory() {
-  const response = await fetch(`${API_BASE_URL}/api/auth/history`, {
-    headers: authHeaders(),
+async function apiRegister(name: string, email: string, password: string): Promise<{ user: AuthUser; hasSession: boolean }> {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: { name: name.trim() },
+    },
   })
-  if (!response.ok) return []
-  const payload = await response.json()
-  return payload.history as ExamHistoryRecord[]
+  if (error) {
+    throw new Error(error.message)
+  }
+  if (!data.user) throw new Error('Gagal mendaftar')
+  return {
+    user: {
+      id: data.user.id,
+      name: name.trim(),
+      email: data.user.email || email,
+    },
+    hasSession: !!data.session,
+  }
+}
+
+async function apiGetMe(): Promise<AuthUser | null> {
+  const { data: { session } } = await supabase.auth.getSession()
+  if (!session?.user) return null
+  return {
+    id: session.user.id,
+    name: session.user.user_metadata?.name || session.user.email?.split('@')[0] || 'User',
+    email: session.user.email || '',
+  }
+}
+
+async function apiSaveHistory(record: ExamHistoryRecord, userId: string) {
+  try {
+    const { error } = await supabase.from('exam_history').insert({
+      user_id: userId,
+      exam_type: record.examType || 'ccp',
+      submitted_at: record.submittedAt,
+      score: record.score,
+      total_questions: record.totalQuestions,
+      score_rate: record.scoreRate,
+      duration_seconds: record.durationSeconds,
+      domain_performance: record.domainPerformance,
+    })
+    if (error) {
+      console.warn('Gagal menyimpan riwayat ke Supabase (fallback ke local):', error.message)
+      // Simpan backup ke localStorage jika tabel belum dibuat
+      const current = JSON.parse(localStorage.getItem(`mockExamHistory_${userId}`) || '[]')
+      localStorage.setItem(`mockExamHistory_${userId}`, JSON.stringify([record, ...current]))
+    }
+  } catch (err) {
+    console.warn('Network error saving history:', err)
+  }
+}
+
+async function apiGetHistory(userId: string): Promise<ExamHistoryRecord[]> {
+  try {
+    const { data, error } = await supabase
+      .from('exam_history')
+      .select('*')
+      .order('submitted_at', { ascending: false })
+
+    if (error || !data) {
+      const local = localStorage.getItem(`mockExamHistory_${userId}`)
+      return local ? JSON.parse(local) : []
+    }
+
+    return data.map((row) => ({
+      id: row.id,
+      userId: row.user_id,
+      examType: row.exam_type,
+      submittedAt: Number(row.submitted_at),
+      score: row.score,
+      totalQuestions: row.total_questions,
+      scoreRate: row.score_rate,
+      durationSeconds: row.duration_seconds,
+      domainPerformance: row.domain_performance,
+    }))
+  } catch {
+    const local = localStorage.getItem(`mockExamHistory_${userId}`)
+    return local ? JSON.parse(local) : []
+  }
 }
 
 function App() {
@@ -477,27 +517,26 @@ function App() {
   const [translations, setTranslations] = useState<Record<string, string>>({})
   const [translatingIds, setTranslatingIds] = useState<string[]>([])
 
-  // Auto-login from stored token on mount
+  // Auto-login from Supabase session on mount
   useEffect(() => {
     async function tryAutoLogin() {
-      const token = getAuthToken()
-      if (!token) {
-        setAuthLoading(false)
-        return
-      }
       try {
-        const { user } = await apiGetMe()
-        setAuthUser(user)
-        setUserId(user.id)
-        setPhase('landing')
+        const user = await apiGetMe()
+        if (user) {
+          setAuthUser(user)
+          setUserId(user.id)
+          setPhase('landing')
 
-        // Load history from server
-        const serverHistory = await apiGetHistory()
-        if (serverHistory.length > 0) {
-          setHistoryRecords(serverHistory)
+          const serverHistory = await apiGetHistory(user.id)
+          if (serverHistory.length > 0) {
+            setHistoryRecords(serverHistory)
+          }
+        } else {
+          setPhase('auth')
         }
-      } catch {
-        localStorage.removeItem('mockExamToken')
+      } catch (err) {
+        console.warn('Session check failed:', err)
+        setPhase('auth')
       } finally {
         setAuthLoading(false)
       }
@@ -638,15 +677,14 @@ function App() {
     setAuthError('')
     setAuthLoading(true)
     try {
-      const { token, user } = await apiLogin(authEmail, authPassword)
-      localStorage.setItem('mockExamToken', token)
+      const user = await apiLogin(authEmail, authPassword)
       setAuthUser(user)
       setUserId(user.id)
       setPhase('landing')
       setAuthEmail('')
       setAuthPassword('')
 
-      const serverHistory = await apiGetHistory()
+      const serverHistory = await apiGetHistory(user.id)
       if (serverHistory.length > 0) setHistoryRecords(serverHistory)
     } catch (err) {
       setAuthError(err instanceof Error ? err.message : 'Login gagal')
@@ -666,11 +704,16 @@ function App() {
 
     setAuthLoading(true)
     try {
-      const { token, user } = await apiRegister(authName, authEmail, authPassword)
-      localStorage.setItem('mockExamToken', token)
-      setAuthUser(user)
-      setUserId(user.id)
-      setPhase('landing')
+      const { user, hasSession } = await apiRegister(authName, authEmail, authPassword)
+      if (hasSession) {
+        setAuthUser(user)
+        setUserId(user.id)
+        setPhase('landing')
+      } else {
+        // Confirm email masih aktif di Supabase
+        setAuthMode('login')
+        setAuthError('Registrasi berhasil! Silakan periksa inbox email Anda untuk konfirmasi akun sebelum login (atau matikan "Confirm email" di Supabase).')
+      }
       setAuthName('')
       setAuthEmail('')
       setAuthPassword('')
@@ -682,8 +725,8 @@ function App() {
     }
   }
 
-  function handleLogout() {
-    localStorage.removeItem('mockExamToken')
+  async function handleLogout() {
+    await supabase.auth.signOut()
     setAuthUser(null)
     setUserId('')
     setHistoryRecords([])
@@ -852,7 +895,7 @@ function App() {
 
     // Save to server
     if (authUser) {
-      apiSaveHistory(newRecord).catch(() => {})
+      apiSaveHistory(newRecord, authUser.id).catch(() => {})
     }
   }
 
