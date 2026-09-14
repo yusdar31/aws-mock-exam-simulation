@@ -1,31 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
 :root {
-  /* Pearson VUE color palette */
-  --pvue-dark: #1a2332;
-  --pvue-header: #232f3e;
-  --pvue-header-border: #3b4b5e;
-  --pvue-body-bg: #f0f2f5;
-  --pvue-card-bg: #ffffff;
-  --pvue-card-border: #dce1e8;
-  --pvue-text-primary: #1a2332;
-  --pvue-text-secondary: #5a6577;
-  --pvue-text-muted: #8b95a5;
-  --pvue-accent: #0066cc;
-  --pvue-accent-hover: #004999;
-  --pvue-success: #16803c;
-  --pvue-success-bg: #ecfdf5;
-  --pvue-danger: #c53030;
-  --pvue-danger-bg: #fff1f0;
-  --pvue-warning-bg: #fffbeb;
-  --pvue-selection-bg: #e8f0fe;
-  --pvue-selection-border: #0066cc;
-  --pvue-subtle-bg: #f7f8fa;
-  --pvue-border-light: #e8ecf0;
-  --pvue-timer-bg: rgba(255, 255, 255, 0.08);
-  --pvue-timer-border: rgba(255, 255, 255, 0.15);
+  /* High-Precision Engineering Design System (AWS Console meets Linear) */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Plus Jakarta Sans', var(--font-sans);
+  --font-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  /* Neutral Surface Palette (Slate & Ink) */
+  --pvue-dark: #0f172a;
+  --pvue-header: #090d16;
+  --pvue-header-border: #1e293b;
+  --pvue-body-bg: #f8fafc;
+  --pvue-card-bg: #ffffff;
+  --pvue-card-border: #e2e8f0;
+  --pvue-subtle-bg: #f1f5f9;
+  --pvue-border-light: #f1f5f9;
+
+  /* Text Hierarchy */
+  --pvue-text-primary: #0f172a;
+  --pvue-text-secondary: #475569;
+  --pvue-text-muted: #64748b;
+
+  /* Singular AWS Squawk Brand Accent */
+  --pvue-aws-orange: #ff9900;
+  --pvue-accent: #0f172a;
+  --pvue-accent-hover: #1e293b;
+
+  /* Functional Status Accents */
+  --pvue-success: #059669;
+  --pvue-success-bg: #ecfdf5;
+  --pvue-danger: #e11d48;
+  --pvue-danger-bg: #fff1f2;
+  --pvue-warning: #d97706;
+  --pvue-warning-bg: #fffbeb;
+
+  /* Selection States */
+  --pvue-selection-bg: #f8fafc;
+  --pvue-selection-border: #0f172a;
+
+  /* Monospace Micro-Timer */
+  --pvue-timer-bg: rgba(255, 255, 255, 0.05);
+  --pvue-timer-border: rgba(255, 255, 255, 0.12);
+
+  font-family: var(--font-sans);
   line-height: 1.5;
   font-weight: 400;
   color: var(--pvue-text-primary);
@@ -45,40 +60,50 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  letter-spacing: -0.011em;
+  background-color: var(--pvue-body-bg);
 }
 
 button,
 input,
 select,
 textarea {
-  font: inherit;
+  font-family: inherit;
 }
 
 h1,
 h2,
-p {
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
+  color: var(--pvue-text-primary);
   margin: 0;
 }
 
 h1 {
-  margin-top: 10px;
   font-size: 1.5rem;
-  line-height: 1.3;
+  line-height: 1.25;
   font-weight: 700;
-  color: var(--pvue-text-primary);
 }
 
 h2 {
-  font-size: 1rem;
-  line-height: 1.4;
-  font-weight: 600;
-  color: var(--pvue-text-primary);
+  font-size: 1.1rem;
+  line-height: 1.35;
+  font-weight: 700;
 }
 
 p {
   color: var(--pvue-text-secondary);
-  font-size: 13px;
-  line-height: 1.55;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-mono);
 }
 
 #root {
