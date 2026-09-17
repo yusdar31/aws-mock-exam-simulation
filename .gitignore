@@ -27,3 +27,4 @@ dist-ssr
 backend/.env
 terraform/aws-mock-exam-key.pem
 .vercel
+.env*
