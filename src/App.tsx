@@ -74,6 +74,7 @@ type ErrorInsight = {
 }
 
 const EXAM_DURATION_SECONDS = 45 * 60
+const ADMIN_EMAILS = ['andiyusdaralimran@gmail.com']
 const API_BASE_URL = import.meta.env.VITE_API_URL
   ?? (window.location.hostname === 'localhost'
     ? 'http://localhost:4000'
@@ -786,6 +787,10 @@ function App() {
   }
 
   async function openAdminPanel() {
+    if (!authUser || !ADMIN_EMAILS.includes(authUser.email.toLowerCase())) {
+      alert('Akses ditolak: Anda tidak memiliki izin untuk membuka panel ini.')
+      return
+    }
     setPhase('admin')
     setReviewLoading(true)
     setReviewError('')
@@ -1451,9 +1456,11 @@ function App() {
             <button className="topbar-btn" onClick={() => setPhase('history')}>
               Learning Analytics
             </button>
-            <button className="topbar-btn" onClick={openAdminPanel}>
-              Question Admin
-            </button>
+            {authUser && ADMIN_EMAILS.includes(authUser.email.toLowerCase()) && (
+              <button className="topbar-btn" onClick={openAdminPanel}>
+                Question Admin
+              </button>
+            )}
             <button className="topbar-btn-logout" onClick={handleLogout}>
               Logout
             </button>
