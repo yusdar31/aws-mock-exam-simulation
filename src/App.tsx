@@ -244,75 +244,180 @@ function createDraftFromQuestion(question: ReviewQuestion | null): ReviewDraft {
   }
 }
 
-async function fetchReviewQuestions() {
-  const response = await fetch(`${API_BASE_URL}/api/questions`)
+const ADMIN_QUESTIONS_STORAGE_KEY = 'aws_mock_admin_questions_v1'
 
-  if (!response.ok) {
-    const payload = await response.json().catch(() => null)
-    throw new Error(payload?.error ?? 'Failed to load review questions')
+async function fetchReviewQuestions() {
+  if (API_BASE_URL) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/questions`)
+      if (response.ok) {
+        const payload = await response.json()
+        if (Array.isArray(payload.items) && payload.items.length > 0) {
+          return payload.items as ReviewQuestion[]
+        }
+      }
+    } catch {
+      // Backend unreachable, fallback to local storage
+    }
   }
 
-  const payload = await response.json()
-  return payload.items as ReviewQuestion[]
+  const cached = localStorage.getItem(ADMIN_QUESTIONS_STORAGE_KEY)
+  if (cached) {
+    try {
+      const parsed = JSON.parse(cached)
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed as ReviewQuestion[]
+      }
+    } catch {
+      // ignore
+    }
+  }
+
+  // Initial seed from built-in questionBank
+  const seedItems: ReviewQuestion[] = questionBank.map((q, idx) => ({
+    id: q.id,
+    sourceType: 'bank-seed',
+    sourceRef: 'aws-saa-c03-bank',
+    sourceNumber: String(idx + 1),
+    status: 'approved',
+    domain: q.domain,
+    difficulty: 'intermediate',
+    type: q.type,
+    prompt: q.prompt,
+    options: q.options,
+    correctAnswers: q.correctAnswers,
+    explanation: q.explanation,
+    issues: [],
+    updatedAt: new Date().toISOString(),
+  }))
+
+  localStorage.setItem(ADMIN_QUESTIONS_STORAGE_KEY, JSON.stringify(seedItems))
+  return seedItems
 }
 
 async function saveReviewQuestion(id: string, draft: ReviewDraft, status: string) {
-  const response = await fetch(`${API_BASE_URL}/api/questions/${id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      status,
-      domain: draft.domain,
-      difficulty: draft.difficulty,
-      type: draft.type,
-      prompt: draft.prompt,
-      explanation: draft.explanation,
-      correctAnswers: draft.correctAnswers
-        .split(',')
-        .map((value) => value.trim().toUpperCase())
-        .filter(Boolean),
-      options: draft.options,
-    }),
-  })
+  if (API_BASE_URL) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/questions/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          status,
+          domain: draft.domain,
+          difficulty: draft.difficulty,
+          type: draft.type,
+          prompt: draft.prompt,
+          explanation: draft.explanation,
+          correctAnswers: draft.correctAnswers
+            .split(',')
+            .map((value) => value.trim().toUpperCase())
+            .filter(Boolean),
+          options: draft.options,
+        }),
+      })
 
-  if (!response.ok) {
-    const payload = await response.json().catch(() => null)
-    throw new Error(payload?.error ?? 'Failed to save question')
+      if (response.ok) {
+        const payload = await response.json()
+        return payload.item as ReviewQuestion
+      }
+    } catch {
+      // Fallback
+    }
   }
 
-  const payload = await response.json()
-  return payload.item as ReviewQuestion
+  const cached = localStorage.getItem(ADMIN_QUESTIONS_STORAGE_KEY)
+  const list: ReviewQuestion[] = cached ? JSON.parse(cached) : []
+  const idx = list.findIndex((q) => q.id === id)
+  const updatedItem: ReviewQuestion = {
+    id,
+    sourceType: list[idx]?.sourceType ?? 'client-storage',
+    sourceRef: list[idx]?.sourceRef ?? 'admin-editor',
+    sourceNumber: list[idx]?.sourceNumber,
+    status,
+    domain: draft.domain,
+    difficulty: draft.difficulty,
+    type: draft.type,
+    prompt: draft.prompt,
+    explanation: draft.explanation,
+    correctAnswers: draft.correctAnswers
+      .split(',')
+      .map((value) => value.trim().toUpperCase())
+      .filter(Boolean),
+    options: draft.options,
+    issues: list[idx]?.issues ?? [],
+    updatedAt: new Date().toISOString(),
+  }
+
+  if (idx !== -1) {
+    list[idx] = updatedItem
+  } else {
+    list.unshift(updatedItem)
+  }
+  localStorage.setItem(ADMIN_QUESTIONS_STORAGE_KEY, JSON.stringify(list))
+  return updatedItem
 }
 
 async function updateReviewStatus(id: string, action: 'approve' | 'reject') {
-  const response = await fetch(`${API_BASE_URL}/api/questions/${id}/${action}`, {
-    method: 'POST',
-  })
+  if (API_BASE_URL) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/questions/${id}/${action}`, {
+        method: 'POST',
+      })
 
-  if (!response.ok) {
-    const payload = await response.json().catch(() => null)
-    throw new Error(payload?.error ?? `Failed to ${action} question`)
+      if (response.ok) {
+        const payload = await response.json()
+        return payload.item as ReviewQuestion
+      }
+    } catch {
+      // Fallback
+    }
   }
 
-  const payload = await response.json()
-  return payload.item as ReviewQuestion
+  const cached = localStorage.getItem(ADMIN_QUESTIONS_STORAGE_KEY)
+  const list: ReviewQuestion[] = cached ? JSON.parse(cached) : []
+  const idx = list.findIndex((q) => q.id === id)
+  const nextStatus = action === 'approve' ? 'approved' : 'rejected'
+
+  if (idx !== -1) {
+    list[idx] = { ...list[idx], status: nextStatus, updatedAt: new Date().toISOString() }
+    localStorage.setItem(ADMIN_QUESTIONS_STORAGE_KEY, JSON.stringify(list))
+    return list[idx]
+  }
+
+  throw new Error('Question not found')
 }
 
 async function approveAllDrafts() {
-  const response = await fetch(`${API_BASE_URL}/api/questions/bulk/approve-drafts`, {
-    method: 'POST',
-  })
+  if (API_BASE_URL) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/questions/bulk/approve-drafts`, {
+        method: 'POST',
+      })
 
-  if (!response.ok) {
-    const payload = await response.json().catch(() => null)
-    throw new Error(payload?.error ?? `Failed to approve drafts`)
+      if (response.ok) {
+        return response.json() as Promise<{ approved: number }>
+      }
+    } catch {
+      // Fallback
+    }
   }
 
-  return response.json() as Promise<{ approved: number }>
-}
+  const cached = localStorage.getItem(ADMIN_QUESTIONS_STORAGE_KEY)
+  const list: ReviewQuestion[] = cached ? JSON.parse(cached) : []
+  let approvedCount = 0
+  const updated = list.map((q) => {
+    if (q.status === 'draft') {
+      approvedCount++
+      return { ...q, status: 'approved', updatedAt: new Date().toISOString() }
+    }
+    return q
+  })
 
+  localStorage.setItem(ADMIN_QUESTIONS_STORAGE_KEY, JSON.stringify(updated))
+  return { approved: approvedCount }
+}
 
 async function importDumpQuestions(sourceRef: string, rawText: string) {
   const response = await fetch(`${API_BASE_URL}/api/questions/import-dump-fast`, {
@@ -341,23 +446,49 @@ async function importJsonQuestions(sourceRef: string, jsonText: string) {
     throw new Error('JSON must be an array of questions')
   }
 
-  const response = await fetch(`${API_BASE_URL}/api/questions/import-json`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      sourceRef,
-      items,
-    }),
-  })
+  if (API_BASE_URL) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/questions/import-json`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sourceRef,
+          items,
+        }),
+      })
 
-  if (!response.ok) {
-    const payload = await response.json().catch(() => null)
-    throw new Error(payload?.error ?? 'Failed to import JSON questions')
+      if (response.ok) {
+        return response.json() as Promise<{ imported: number; items: ReviewQuestion[] }>
+      }
+    } catch {
+      // Fallback
+    }
   }
 
-  return response.json() as Promise<{ imported: number; items: ReviewQuestion[] }>
+  const cached = localStorage.getItem(ADMIN_QUESTIONS_STORAGE_KEY)
+  const existingList: ReviewQuestion[] = cached ? JSON.parse(cached) : []
+  const newItems: ReviewQuestion[] = items.map((item: any, idx: number) => ({
+    id: item.id || `q_imp_${Date.now()}_${idx}`,
+    sourceType: 'json',
+    sourceRef,
+    sourceNumber: item.sourceNumber,
+    status: item.status || 'draft',
+    domain: item.domain || 'Unclassified',
+    difficulty: item.difficulty || 'unknown',
+    type: item.type === 'multiple' ? 'multiple' : 'single',
+    prompt: item.prompt || '',
+    options: Array.isArray(item.options) ? item.options : [],
+    correctAnswers: Array.isArray(item.correctAnswers) ? item.correctAnswers : [],
+    explanation: item.explanation || '',
+    issues: Array.isArray(item.issues) ? item.issues : [],
+    updatedAt: new Date().toISOString(),
+  }))
+
+  const combined = [...newItems, ...existingList]
+  localStorage.setItem(ADMIN_QUESTIONS_STORAGE_KEY, JSON.stringify(combined))
+  return { imported: newItems.length, items: newItems }
 }
 
 async function fetchApprovedQuestions() {
@@ -519,6 +650,7 @@ function App() {
   const [importTab, setImportTab] = useState<'dump' | 'json' | 'ai'>('ai')
   const [importAiDomain, setImportAiDomain] = useState<string>('all')
   const [importAiCount, setImportAiCount] = useState<number>(5)
+  const [showImportCard, setShowImportCard] = useState<boolean>(false)
   const [adminStatusFilter, setAdminStatusFilter] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [historyRecords, setHistoryRecords] = useState<ExamHistoryRecord[]>([])
@@ -1976,6 +2108,12 @@ function App() {
           </div>
           <div className="admin-header-actions">
             <button
+              className="exam-secondary-button"
+              onClick={() => setShowImportCard(!showImportCard)}
+            >
+              {showImportCard ? 'Sembunyikan Import' : '+ Import / Generate'}
+            </button>
+            <button
               className="exam-primary-button"
               disabled={reviewActionLoading || !statusCounts['draft']}
               onClick={handleApproveAllDrafts}
@@ -2042,95 +2180,97 @@ function App() {
           </aside>
 
           <section className="admin-editor">
-            {selectedReviewQuestion ? (
-              <>
-                <div className="admin-import-card">
-                  <div className="admin-import-header">
-                    <div>
-                      <h2>Import Questions</h2>
-                      <p>Import from raw text dump, paste JSON, or auto-generate with AI.</p>
-                    </div>
-                    <button
-                      className="exam-primary-button"
-                      disabled={importLoading}
-                      onClick={importTab === 'ai' ? handleImportAi : importTab === 'json' ? handleImportJson : handleImportDump}
-                    >
-                      {importLoading ? 'Processing...' : importTab === 'ai' ? 'Generate AI' : `Import ${importTab === 'json' ? 'JSON' : 'Dump'}`}
-                    </button>
+            {showImportCard && (
+              <div className="admin-import-card">
+                <div className="admin-import-header">
+                  <div>
+                    <h2>Import Questions</h2>
+                    <p>Import from raw text dump, paste JSON, or auto-generate with AI.</p>
                   </div>
-
-                  <div className="admin-import-tabs">
-                    <button
-                      className={`admin-import-tab ${importTab === 'ai' ? 'active' : ''}`}
-                      onClick={() => setImportTab('ai')}
-                    >
-                      Generate AI
-                    </button>
-                    <button
-                      className={`admin-import-tab ${importTab === 'json' ? 'active' : ''}`}
-                      onClick={() => setImportTab('json')}
-                    >
-                      JSON (from AI)
-                    </button>
-                    <button
-                      className={`admin-import-tab ${importTab === 'dump' ? 'active' : ''}`}
-                      onClick={() => setImportTab('dump')}
-                    >
-                      Raw Dump
-                    </button>
-                  </div>
-
-                  <div className="admin-form-grid compact-form-grid">
-                    <label className="admin-field">
-                      <span>Source Reference</span>
-                      <input
-                        value={importSourceRef}
-                        onChange={(event) => setImportSourceRef(event.target.value)}
-                      />
-                    </label>
-
-                    {importTab === 'ai' ? (
-                      <>
-                        <label className="admin-field wide-field">
-                           <span>Target Domain</span>
-                           <select value={importAiDomain} onChange={e => setImportAiDomain(e.target.value)}>
-                              <option value="all">Mix (Semua Domain)</option>
-                              <option value="Design Secure Architectures">Design Secure Architectures</option>
-                              <option value="Design Resilient Architectures">Design Resilient Architectures</option>
-                              <option value="Design High-Performing Architectures">Design High-Performing Architectures</option>
-                              <option value="Design Cost-Optimized Architectures">Design Cost-Optimized Architectures</option>
-                           </select>
-                        </label>
-                        <label className="admin-field wide-field">
-                           <span>Jumlah Soal (Maksimal 30)</span>
-                           <input type="number" min={1} max={30} value={importAiCount} onChange={e => setImportAiCount(parseInt(e.target.value) || 5)} />
-                        </label>
-                      </>
-                    ) : importTab === 'json' ? (
-                      <label className="admin-field wide-field">
-                        <span>JSON Array</span>
-                        <textarea
-                          rows={10}
-                          placeholder={'[\n  {\n    "domain": "Resilient Architectures",\n    "type": "single",\n    "prompt": "A company runs...",\n    "options": [\n      { "id": "A", "text": "..." },\n      { "id": "B", "text": "..." },\n      { "id": "C", "text": "..." },\n      { "id": "D", "text": "..." }\n    ],\n    "correctAnswers": ["A"],\n    "explanation": "..."\n  }\n]'}
-                          value={importJsonText}
-                          onChange={(event) => setImportJsonText(event.target.value)}
-                        />
-                      </label>
-                    ) : (
-                      <label className="admin-field wide-field">
-                        <span>Raw Dump Text</span>
-                        <textarea
-                          rows={10}
-                          value={importRawText}
-                          onChange={(event) => setImportRawText(event.target.value)}
-                        />
-                      </label>
-                    )}
-                  </div>
-
-                  {importNotice ? <div className="admin-import-notice">{importNotice}</div> : null}
+                  <button
+                    className="exam-primary-button"
+                    disabled={importLoading}
+                    onClick={importTab === 'ai' ? handleImportAi : importTab === 'json' ? handleImportJson : handleImportDump}
+                  >
+                    {importLoading ? 'Processing...' : importTab === 'ai' ? 'Generate AI' : `Import ${importTab === 'json' ? 'JSON' : 'Dump'}`}
+                  </button>
                 </div>
 
+                <div className="admin-import-tabs">
+                  <button
+                    className={`admin-import-tab ${importTab === 'ai' ? 'active' : ''}`}
+                    onClick={() => setImportTab('ai')}
+                  >
+                    Generate AI
+                  </button>
+                  <button
+                    className={`admin-import-tab ${importTab === 'json' ? 'active' : ''}`}
+                    onClick={() => setImportTab('json')}
+                  >
+                    JSON (from AI)
+                  </button>
+                  <button
+                    className={`admin-import-tab ${importTab === 'dump' ? 'active' : ''}`}
+                    onClick={() => setImportTab('dump')}
+                  >
+                    Raw Dump
+                  </button>
+                </div>
+
+                <div className="admin-form-grid compact-form-grid">
+                  <label className="admin-field">
+                    <span>Source Reference</span>
+                    <input
+                      value={importSourceRef}
+                      onChange={(event) => setImportSourceRef(event.target.value)}
+                    />
+                  </label>
+
+                  {importTab === 'ai' ? (
+                    <>
+                      <label className="admin-field wide-field">
+                         <span>Target Domain</span>
+                         <select value={importAiDomain} onChange={e => setImportAiDomain(e.target.value)}>
+                            <option value="all">Mix (Semua Domain)</option>
+                            <option value="Design Secure Architectures">Design Secure Architectures</option>
+                            <option value="Design Resilient Architectures">Design Resilient Architectures</option>
+                            <option value="Design High-Performing Architectures">Design High-Performing Architectures</option>
+                            <option value="Design Cost-Optimized Architectures">Design Cost-Optimized Architectures</option>
+                         </select>
+                      </label>
+                      <label className="admin-field wide-field">
+                         <span>Jumlah Soal (Maksimal 30)</span>
+                         <input type="number" min={1} max={30} value={importAiCount} onChange={e => setImportAiCount(parseInt(e.target.value) || 5)} />
+                      </label>
+                    </>
+                  ) : importTab === 'json' ? (
+                    <label className="admin-field wide-field">
+                      <span>JSON Array</span>
+                      <textarea
+                        rows={10}
+                        placeholder={'[\n  {\n    "domain": "Resilient Architectures",\n    "type": "single",\n    "prompt": "A company runs...",\n    "options": [\n      { "id": "A", "text": "..." },\n      { "id": "B", "text": "..." },\n      { "id": "C", "text": "..." },\n      { "id": "D", "text": "..." }\n    ],\n    "correctAnswers": ["A"],\n    "explanation": "..."\n  }\n]'}
+                        value={importJsonText}
+                        onChange={(event) => setImportJsonText(event.target.value)}
+                      />
+                    </label>
+                  ) : (
+                    <label className="admin-field wide-field">
+                      <span>Raw Dump Text</span>
+                      <textarea
+                        rows={10}
+                        value={importRawText}
+                        onChange={(event) => setImportRawText(event.target.value)}
+                      />
+                    </label>
+                  )}
+                </div>
+
+                {importNotice ? <div className="admin-import-notice">{importNotice}</div> : null}
+              </div>
+            )}
+
+            {selectedReviewQuestion ? (
+              <>
                 <div className="admin-summary-grid">
                   <div>
                     <span>Status</span>
@@ -2285,7 +2425,16 @@ function App() {
             ) : (
               <div className="admin-empty-state">
                 <h2>No review item selected</h2>
-                <p>Import dump questions or select one from the left panel to begin.</p>
+                <p>Select a question from the left sidebar to edit, or click &quot;+ Import / Generate&quot; above to add questions.</p>
+                {!showImportCard && (
+                  <button
+                    className="exam-primary-button"
+                    style={{ marginTop: '16px' }}
+                    onClick={() => setShowImportCard(true)}
+                  >
+                    + Import / Generate Questions
+                  </button>
+                )}
               </div>
             )}
           </section>
