@@ -1,7 +1,8 @@
 import cron from 'node-cron'
 import crypto from 'node:crypto'
 import { generateQuestionsFromAI } from './services/aiGenerator.js'
-import { readQuestions, writeQuestions } from './storage.js'
+import { readQuestions, insertQuestions } from './database.js'
+import { normalizeQuestion, questionIssues } from './services/questionSchema.js'
 import { detectDuplicates } from './services/similarity.js'
 
 const BATCH_SIZE = 10
@@ -50,8 +51,8 @@ async function runAutoGenerate() {
     const existingQuestions = await readQuestions()
 
     const draftQuestions = generatedItems.map((item) => {
-      const sanitized = sanitizeQuestion(item)
-      const baseIssues = inferIssues(sanitized)
+      const sanitized = normalizeQuestion({ ...sanitizeQuestion(item), examType: 'saa', lang: 'en' })
+      const baseIssues = [...inferIssues(sanitized), ...questionIssues(sanitized)]
       const duplicateIssues = detectDuplicates(sanitized, existingQuestions)
 
       return {
@@ -64,8 +65,8 @@ async function runAutoGenerate() {
       }
     })
 
+    insertQuestions(draftQuestions)
     const updatedQuestions = [...draftQuestions, ...existingQuestions]
-    await writeQuestions(updatedQuestions)
 
     console.log(`[AI Scheduler] ${timestamp} — Successfully added ${draftQuestions.length} new draft questions. Total bank: ${updatedQuestions.length}`)
   } catch (error) {

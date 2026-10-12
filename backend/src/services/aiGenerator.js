@@ -1,8 +1,7 @@
 import { GoogleGenAI, Type } from '@google/genai';
 import crypto from 'node:crypto';
 
-// Use gemini-2.5-flash as it is fast and supports structured outputs very well.
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+function aiClient() { return new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY }); }
 
 const schema = {
   type: Type.ARRAY,
@@ -55,8 +54,8 @@ const schema = {
 };
 
 export async function generateQuestionsFromAI(domain, count) {
-  if (!process.env.GEMINI_API_KEY) {
-    throw new Error("GEMINI_API_KEY is not configured.");
+  if (!process.env.GEMINI_API_KEY || !process.env.GEMINI_MODEL) {
+    throw new Error("GEMINI_API_KEY and GEMINI_MODEL must be configured.");
   }
 
   const validCount = Math.min(Math.max(Number(count), 1), 30);
@@ -79,8 +78,8 @@ Criteria:
 5. You MUST return exactly ${validCount} questions.`;
 
   try {
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+    const response = await aiClient().models.generateContent({
+      model: process.env.GEMINI_MODEL,
       contents: promptText,
       config: {
         responseMimeType: "application/json",
@@ -99,8 +98,8 @@ Criteria:
 }
 
 export async function translateToIndonesian(text) {
-  if (!process.env.GEMINI_API_KEY) {
-    throw new Error("GEMINI_API_KEY is not configured.");
+  if (!process.env.GEMINI_API_KEY || !process.env.GEMINI_MODEL) {
+    throw new Error("GEMINI_API_KEY and GEMINI_MODEL must be configured.");
   }
 
   const promptText = `Translate the following AWS exam explanation into Bahasa Indonesia (Indonesian).
@@ -115,7 +114,7 @@ Text to translate:
 ${text}`;
 
   try {
-    const response = await ai.models.generateContent({
+    const response = await aiClient().models.generateContent({
       model: 'gemini-2.5-flash',
       contents: promptText,
       config: {

@@ -28,3 +28,12 @@ backend/.env
 terraform/aws-mock-exam-key.pem
 .vercel
 .env*
+!.env.example
+!.env.sample
+
+# Transactional data and test artifacts
+backend/data/*.sqlite*
+artifacts/
+backend/data/users.json
+
+backups/

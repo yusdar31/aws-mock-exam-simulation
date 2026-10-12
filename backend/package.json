@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch src/server.js",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "test": "node --test ../tests/backend.test.mjs"
   },
   "dependencies": {
     "@google/genai": "^1.50.1",
@@ -15,5 +16,8 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.3",
     "node-cron": "^4.2.1"
+  },
+  "engines": {
+    "node": ">=22.13.0"
   }
 }
