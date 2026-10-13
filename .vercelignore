@@ -1,0 +1,18 @@
+# Deploy frontend source and api/health.js; backend runs on a separate host.
+.git/
+.vercel/
+node_modules/
+dist/
+dist-ssr/
+.env
+.env.*
+*.local
+*.log
+backend/
+backups/
+artifacts/
+terraform/
+.docker-cache/
+.vscode/
+.idea/
+*.tsbuildinfo
