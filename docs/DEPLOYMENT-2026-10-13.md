@@ -2,6 +2,8 @@
 
 Frontend produksi aktif di https://aws-mock-exam-simulation.vercel.app.
 
+Pembaruan berikutnya menambahkan pemilihan bahasa Indonesia/English pada source commit `94d5314`, deployment `dpl_GvB6ncDJc1pwMdco4piGASKjrfBt`. Versi tersebut sudah dipromosikan dan lulus enam pemeriksaan bahasa pada domain publik; lihat [laporan bahasa](LANGUAGE-2026-10-13.md). Informasi di bawah mencatat rilis awal.
+
 - Deployment ID: `dpl_7EWQGL1vZZNbQS7bhykgGrvUZ5rd`, status `READY`, target `production`.
 - Source commit: `fc4197a`, termasuk implementasi `318f80b` dan `87a43f7`.
 - URL deployment: https://aws-mock-exam-simulation-l2yu4cycv.vercel.app (mengikuti proteksi deployment Vercel).
