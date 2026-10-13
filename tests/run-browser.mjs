@@ -1,5 +1,10 @@
 import { spawnSync } from "node:child_process";
-for (const file of ["browser.mjs", "admin-browser.mjs", "bank-browser.mjs"]) {
+for (const file of [
+  "browser.mjs",
+  "admin-browser.mjs",
+  "bank-browser.mjs",
+  "language-browser.mjs",
+]) {
   const result = spawnSync(process.execPath, [`tests/${file}`], {
     stdio: "inherit",
     windowsHide: true,

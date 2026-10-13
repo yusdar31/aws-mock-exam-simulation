@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context";
 import type { Question } from "../types";
 import { useState } from "react";
 import { loadBank } from "../lib/banks";
@@ -9,6 +10,7 @@ export default function QuestionReview({
   question: Question;
   selected: string[];
 }) {
+  const { t, language } = useLanguage();
   const [translation, setTranslation] = useState(""),
     [busy, setBusy] = useState(false),
     [notice, setNotice] = useState("");
@@ -44,53 +46,69 @@ export default function QuestionReview({
   }
   return (
     <div className="rationale">
-      <strong>Pembahasan</strong>
-      <p>{question.explanation}</p>
+      <strong>{t("Pembahasan")}</strong>
+      <p lang={question.lang}>{question.explanation}</p>
       {question.lang === "en" &&
         (translation ? (
           <div className="translated-rationale">
-            <strong>Penjelasan Bahasa Indonesia</strong>
-            <p>{translation}</p>
+            <strong>{t("Penjelasan Bahasa Indonesia")}</strong>
+            <p lang="id">{translation}</p>
           </div>
         ) : (
           <button disabled={busy} onClick={translate}>
-            {busy ? "Menyiapkan terjemahan…" : "Tampilkan Bahasa Indonesia"}
+            {busy
+              ? t("Menyiapkan terjemahan…")
+              : t("Tampilkan Bahasa Indonesia")}
           </button>
         ))}
-      {notice && <p role="status">{notice}</p>}
+      {notice && <p role="status">{t(notice)}</p>}
       <ul>
         {question.options.map((option) => (
           <li key={option.id}>
             <strong>
               {option.id}.{" "}
               {question.correctAnswers.includes(option.id)
-                ? "Jawaban benar"
-                : "Distraktor"}
-              {selected.includes(option.id) ? " · Pilihan Anda" : ""}
+                ? t("Jawaban benar")
+                : t("Distraktor")}
+              {selected.includes(option.id) ? t(" · Pilihan Anda") : ""}
             </strong>
-            <p>
+            <p
+              lang={
+                question.optionExplanations?.[option.id] ||
+                question.correctAnswers.includes(option.id)
+                  ? question.lang
+                  : language
+              }
+            >
               {question.optionExplanations?.[option.id] ||
                 (question.correctAnswers.includes(option.id)
                   ? question.explanation
-                  : "Bandingkan opsi ini dengan persyaratan pada pertanyaan dan pembahasan di atas.")}
+                  : t(
+                      "Bandingkan opsi ini dengan persyaratan pada pertanyaan dan pembahasan di atas.",
+                    ))}
             </p>
           </li>
         ))}
       </ul>
       {question.sourceUrl && (
         <a href={question.sourceUrl} target="_blank" rel="noreferrer">
-          Dokumentasi AWS ↗
+          {" "}
+          {t("Dokumentasi AWS ↗")}{" "}
         </a>
       )}
       {!question.verifiedAt && (
         <small>
-          Soal arsip: sumber dan pembahasan per opsi masih perlu review
-          editorial.
+          {" "}
+          {t(
+            "Soal arsip: sumber dan pembahasan per opsi masih perlu review editorial.",
+          )}{" "}
         </small>
       )}
       {question.verifiedAt && (
         <small>
-          Referensi ditinjau {question.verifiedAt} · Versi {question.version}
+          {" "}
+          {t("Referensi ditinjau")} {question.verifiedAt} {t("· Versi")}{" "}
+          {question.version}
         </small>
       )}
     </div>

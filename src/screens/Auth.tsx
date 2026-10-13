@@ -1,6 +1,8 @@
+import { useLanguage } from "../i18n/context";
 import { useState } from "react";
 import { authConfigured, supabase } from "../lib/supabase";
 export default function Auth({ onGuest }: { onGuest: () => void }) {
+  const { t } = useLanguage();
   const [mode, setMode] = useState<"login" | "register" | "reset">("login");
   const [busy, setBusy] = useState(false),
     [message, setMessage] = useState("");
@@ -58,45 +60,49 @@ export default function Auth({ onGuest }: { onGuest: () => void }) {
   return (
     <main className="auth-shell">
       <div className="auth-intro">
-        <span className="eyebrow">AWS CERTIFICATION PRACTICE</span>
+        <span className="eyebrow">{t("AWS CERTIFICATION PRACTICE")}</span>
         <h1>
-          Latihan terarah.
-          <br />
-          Ujian lebih siap.
+          {" "}
+          {t("Latihan terarah.")} <br /> {t("Ujian lebih siap.")}{" "}
         </h1>
         <p>
-          Latih konsep, evaluasi keputusan, dan ulangi materi yang perlu Anda
-          kuasai.
+          {" "}
+          {t(
+            "Latih konsep, evaluasi keputusan, dan ulangi materi yang perlu Anda kuasai.",
+          )}{" "}
         </p>
         <div className="auth-facts">
           <span>CLF-C02 & SAA-C03</span>
-          <span>Bahasa Indonesia & English</span>
-          <span>Progres tersimpan otomatis</span>
+          <span>{t("Bahasa Indonesia & English")}</span>
+          <span>{t("Progres tersimpan otomatis")}</span>
         </div>
       </div>
       <section className="panel auth-panel">
         <h2>
           {mode === "register"
-            ? "Buat akun"
+            ? t("Buat akun")
             : mode === "reset"
-              ? "Pulihkan akun"
-              : "Selamat datang kembali"}
+              ? t("Pulihkan akun")
+              : t("Selamat datang kembali")}
         </h2>
-        <p>Gunakan akun untuk menyinkronkan progres antarperangkat.</p>
+        <p>{t("Gunakan akun untuk menyinkronkan progres antarperangkat.")}</p>
         <form onSubmit={submit}>
           {mode === "register" && (
             <label>
-              Nama lengkap
+              {" "}
+              {t("Nama lengkap")}{" "}
               <input name="name" autoComplete="name" required minLength={2} />
             </label>
           )}
           <label>
-            Email
+            {" "}
+            {t("Email")}{" "}
             <input name="email" type="email" autoComplete="email" required />
           </label>
           {mode !== "reset" && (
             <label>
-              Password
+              {" "}
+              {t("Password")}{" "}
               <input
                 name="password"
                 type="password"
@@ -110,7 +116,8 @@ export default function Auth({ onGuest }: { onGuest: () => void }) {
           )}
           {mode === "register" && (
             <label>
-              Konfirmasi password
+              {" "}
+              {t("Konfirmasi password")}{" "}
               <input
                 name="confirm"
                 type="password"
@@ -121,17 +128,17 @@ export default function Auth({ onGuest }: { onGuest: () => void }) {
           )}
           {message && (
             <p role="status" className="notice">
-              {message}
+              {t(message)}
             </p>
           )}
           <button className="primary" disabled={busy}>
             {busy
-              ? "Memproses…"
+              ? t("Memproses…")
               : mode === "register"
-                ? "Daftar"
+                ? t("Daftar")
                 : mode === "reset"
-                  ? "Kirim tautan"
-                  : "Masuk"}
+                  ? t("Kirim tautan")
+                  : t("Masuk")}
           </button>
         </form>
         <div className="auth-links">
@@ -142,23 +149,27 @@ export default function Auth({ onGuest }: { onGuest: () => void }) {
               setMessage("");
             }}
           >
-            {mode === "login" ? "Buat akun baru" : "Kembali ke login"}
+            {mode === "login" ? t("Buat akun baru") : t("Kembali ke login")}
           </button>
           {mode === "login" && (
             <button className="text-button" onClick={() => setMode("reset")}>
-              Lupa password?
+              {" "}
+              {t("Lupa password?")}{" "}
             </button>
           )}
         </div>
         <hr />
         <button onClick={onGuest} className="secondary full-width">
-          Coba latihan sebagai tamu
+          {" "}
+          {t("Coba latihan sebagai tamu")}{" "}
         </button>
-        <small>Progres tamu tersimpan di browser ini.</small>
+        <small>{t("Progres tamu tersimpan di browser ini.")}</small>
       </section>
       <p className="independent-note">
-        Platform latihan independen. Hasil latihan bukan skor sertifikasi resmi
-        AWS.
+        {" "}
+        {t(
+          "Platform latihan independen. Hasil latihan bukan skor sertifikasi resmi AWS.",
+        )}{" "}
       </p>
     </main>
   );

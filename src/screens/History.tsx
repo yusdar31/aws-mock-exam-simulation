@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context";
 import { useState } from "react";
 import type { Attempt, ExamType, Language, Question } from "../types";
 import { formatTime, matches, PRACTICE_TARGET } from "../lib/exam";
@@ -12,6 +13,7 @@ export default function History({
   onLoadMore: () => Promise<void>;
   onPractice: (questions: Question[]) => void;
 }) {
+  const { t, locale } = useLanguage();
   const [view, setView] = useState<"attempts" | "notebook">("attempts");
   const [type, setType] = useState<ExamType>("ccp"),
     [lang, setLang] = useState<Language>("id"),
@@ -42,19 +44,23 @@ export default function History({
     <main className="page">
       <div className="page-heading">
         <div>
-          <span className="eyebrow">LEARNING ANALYTICS</span>
-          <h1>Riwayat & perkembangan</h1>
+          <span className="eyebrow">{t("LEARNING ANALYTICS")}</span>
+          <h1>{t("Riwayat & perkembangan")}</h1>
           <p>
-            Bandingkan percobaan pada sertifikasi, bahasa, dan mode yang sama.
+            {" "}
+            {t(
+              "Bandingkan percobaan pada sertifikasi, bahasa, dan mode yang sama.",
+            )}{" "}
           </p>
         </div>
       </div>
       <section className="panel">
         <div className="filter-row">
           <label>
-            Sertifikasi
+            {" "}
+            {t("Sertifikasi")}{" "}
             <select
-              aria-label="Sertifikasi"
+              aria-label={t("Sertifikasi")}
               value={type}
               onChange={(e) => {
                 setType(e.target.value as ExamType);
@@ -66,47 +72,49 @@ export default function History({
             </select>
           </label>
           <label>
-            Bahasa
+            {" "}
+            {t("Bahasa")}{" "}
             <select
-              aria-label="Bahasa"
+              aria-label={t("Bahasa")}
               value={lang}
               onChange={(e) => {
                 setLang(e.target.value as Language);
                 setPage(1);
               }}
             >
-              <option value="id">Indonesia</option>
-              <option value="en">English</option>
+              <option value="id">{t("Indonesia")}</option>
+              <option value="en">{t("English")}</option>
             </select>
           </label>
           <label>
-            Mode
+            {" "}
+            {t("Mode")}{" "}
             <select
-              aria-label="Mode"
+              aria-label={t("Mode")}
               value={mode}
               onChange={(e) => {
                 setMode(e.target.value);
                 setPage(1);
               }}
             >
-              <option value="all">Semua mode</option>
-              <option value="practice">Latihan</option>
-              <option value="simulation">Simulasi penuh</option>
+              <option value="all">{t("Semua mode")}</option>
+              <option value="practice">{t("Latihan")}</option>
+              <option value="simulation">{t("Simulasi penuh")}</option>
             </select>
           </label>
         </div>
       </section>
       <div className="stat-grid">
         <section className="panel">
-          <small>Percobaan dimuat</small>
+          <small>{t("Percobaan dimuat")}</small>
           <strong>{list.length}</strong>
         </section>
         <section className="panel">
-          <small>Akurasi rata-rata</small>
+          <small>{t("Akurasi rata-rata")}</small>
           <strong>{average}%</strong>
         </section>
         <section className="panel">
-          <small>Soal perlu diperkuat</small>
+          <small>{t("Soal perlu diperkuat")}</small>
           <strong>{wrong.size}</strong>
         </section>
       </div>
@@ -118,7 +126,8 @@ export default function History({
             setPage(1);
           }}
         >
-          Riwayat percobaan
+          {" "}
+          {t("Riwayat percobaan")}{" "}
         </button>
         <button
           aria-pressed={view === "notebook"}
@@ -127,15 +136,17 @@ export default function History({
             setPage(1);
           }}
         >
-          Catatan soal salah ({notebook.length})
+          {t("Catatan soal salah ({count})", { count: notebook.length })}
         </button>
       </div>
       {view === "notebook" && (
         <section className="panel">
-          <h2>Catatan soal yang perlu diperkuat</h2>
+          <h2>{t("Catatan soal yang perlu diperkuat")}</h2>
           <p>
-            Jawaban terakhir per soal dari riwayat yang telah dimuat. Soal yang
-            sudah dijawab benar akan keluar dari catatan ini.
+            {" "}
+            {t(
+              "Jawaban terakhir per soal dari riwayat yang telah dimuat. Soal yang sudah dijawab benar akan keluar dari catatan ini.",
+            )}{" "}
           </p>
           <button
             className="primary"
@@ -144,22 +155,26 @@ export default function History({
               onPractice(notebook.slice(0, 20).map((item) => item.question))
             }
           >
-            Latih kembali hingga 20 soal
+            {" "}
+            {t("Latih kembali hingga 20 soal")}{" "}
           </button>
           {notebook.slice((page - 1) * 10, page * 10).map((item) => (
             <article className="review-question" key={item.question.id}>
-              <span className="eyebrow">{item.question.domain}</span>
-              <h3>{item.question.prompt}</h3>
+              <span className="eyebrow">{t(item.question.domain)}</span>
+              <h3 lang={item.question.lang}>{item.question.prompt}</h3>
               <p>
-                Pilihan terakhir: {item.answers.join(", ") || "Belum dijawab"} ?
-                Kunci: {item.question.correctAnswers.join(", ")}
+                {" "}
+                {t("Pilihan terakhir:")}{" "}
+                {item.answers.join(", ") || t("Belum dijawab")} {t("? Kunci:")}{" "}
+                {item.question.correctAnswers.join(", ")}
               </p>
-              <p>{item.question.explanation}</p>
+              <p lang={item.question.lang}>{item.question.explanation}</p>
             </article>
           ))}
           <div className="pagination">
             <button disabled={page === 1} onClick={() => setPage(page - 1)}>
-              Sebelumnya
+              {" "}
+              {t("Sebelumnya")}{" "}
             </button>
             <span>
               {page}/{Math.max(1, Math.ceil(notebook.length / 10))}
@@ -168,7 +183,8 @@ export default function History({
               disabled={page * 10 >= notebook.length}
               onClick={() => setPage(page + 1)}
             >
-              Berikutnya
+              {" "}
+              {t("Berikutnya")}{" "}
             </button>
           </div>
         </section>
@@ -176,54 +192,62 @@ export default function History({
       {view === "attempts" && (
         <>
           <section className="panel">
-            <h2>Tren akurasi</h2>
+            <h2>{t("Tren akurasi")}</h2>
             <div className="trend-list">
               {list
                 .slice(0, 10)
                 .reverse()
                 .map((a, index) => (
                   <div key={a.id}>
-                    <span>Percobaan {index + 1}</span>
+                    <span>
+                      {t("Percobaan")} {index + 1}
+                    </span>
                     <meter
                       value={a.scoreRate}
                       min={0}
                       max={100}
-                      aria-label={`Akurasi ${a.scoreRate}%`}
+                      aria-label={t("Akurasi {accuracy}%", {
+                        accuracy: a.scoreRate,
+                      })}
                     />
                     <strong>{a.scoreRate}%</strong>
                   </div>
                 ))}
             </div>
             <small>
-              Target latihan {PRACTICE_TARGET}% · Tidak ekuivalen dengan skor
-              resmi AWS.
+              {" "}
+              {t("Target latihan")} {PRACTICE_TARGET}
+              {t("% · Tidak ekuivalen dengan skor resmi AWS.")}{" "}
             </small>
           </section>
           <section className="panel">
-            <h2>Daftar percobaan</h2>
-            {!list.length && <p>Belum ada percobaan untuk filter ini.</p>}
+            <h2>{t("Daftar percobaan")}</h2>
+            {!list.length && (
+              <p>{t("Belum ada percobaan untuk filter ini.")}</p>
+            )}
             {list.slice((page - 1) * 10, page * 10).map((a) => (
               <article key={a.id} className="attempt-row">
                 <div>
                   <strong>
-                    {new Date(a.submittedAt).toLocaleString("id-ID")}
+                    {new Date(a.submittedAt).toLocaleString(locale)}
                   </strong>
                   <p>
-                    {a.mode === "simulation" ? "Simulasi" : "Latihan"} ·{" "}
-                    {a.score}/{a.totalQuestions} benar ·{" "}
+                    {a.mode === "simulation" ? t("Simulasi") : t("Latihan")} ·{" "}
+                    {a.score}/{a.totalQuestions} {t("benar ·")}{" "}
                     {formatTime(a.durationSeconds)}
                   </p>
                   <small>
-                    {a.synced ? "Tersinkron" : "Tersimpan di perangkat"}
+                    {a.synced ? t("Tersinkron") : t("Tersimpan di perangkat")}
                   </small>
                 </div>
                 <strong>{a.scoreRate}%</strong>
-                <button onClick={() => onOpen(a)}>Buka review</button>
+                <button onClick={() => onOpen(a)}>{t("Buka review")}</button>
               </article>
             ))}
             <div className="pagination">
               <button disabled={page === 1} onClick={() => setPage(page - 1)}>
-                Sebelumnya
+                {" "}
+                {t("Sebelumnya")}{" "}
               </button>
               <span>
                 {page}/{Math.max(1, Math.ceil(list.length / 10))}
@@ -232,7 +256,8 @@ export default function History({
                 disabled={page * 10 >= list.length}
                 onClick={() => setPage(page + 1)}
               >
-                Berikutnya
+                {" "}
+                {t("Berikutnya")}{" "}
               </button>
             </div>
             <button
@@ -247,7 +272,7 @@ export default function History({
                 }
               }}
             >
-              {loading ? "Memuat…" : "Muat riwayat cloud berikutnya"}
+              {loading ? t("Memuat…") : t("Muat riwayat cloud berikutnya")}
             </button>
           </section>
         </>

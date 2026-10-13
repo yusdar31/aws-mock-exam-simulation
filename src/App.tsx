@@ -1,4 +1,5 @@
-﻿import {
+import { useLanguage } from "./i18n/context";
+import {
   lazy,
   Suspense,
   useCallback,
@@ -36,6 +37,7 @@ import {
 } from "./lib/storage";
 import { supabase, authConfigured } from "./lib/supabase";
 import "./App.css";
+import LanguageSelector from "./components/LanguageSelector";
 const Auth = lazy(() => import("./screens/Auth"));
 const Lobby = lazy(() => import("./screens/Lobby"));
 const Exam = lazy(() => import("./screens/Exam"));
@@ -74,6 +76,7 @@ function accrue(s: Session, now = Date.now()): Session {
   };
 }
 export default function App() {
+  const { t } = useLanguage();
   const [user, setUser] = useState<User | null>(null),
     [boot, setBoot] = useState(true),
     [phase, setPhase] = useState<Phase>(route);
@@ -118,7 +121,7 @@ export default function App() {
       const value = await identity({
         id: account.id,
         email: account.email || "",
-        name: account.user_metadata?.name || "Peserta",
+        name: account.user_metadata?.name || "",
         role: "student",
       });
       if (epoch !== authEpoch.current) return;
@@ -370,7 +373,9 @@ export default function App() {
       if (
         saved &&
         !confirm(
-          "Memulai percobaan baru akan menggantikan sesi yang belum selesai. Lanjutkan?",
+          t(
+            "Memulai percobaan baru akan menggantikan sesi yang belum selesai. Lanjutkan?",
+          ),
         )
       )
         return;
@@ -558,11 +563,17 @@ export default function App() {
   if (boot)
     return (
       <main className="loading" role="status">
-        Memuat sesi…
+        {" "}
+        {t("Memuat sesi…")}{" "}
       </main>
     );
   return (
     <>
+      {!user && (
+        <div className="auth-language-bar">
+          <LanguageSelector />
+        </div>
+      )}
       <a
         className="skip-link"
         href="#main-content"
@@ -571,7 +582,8 @@ export default function App() {
           document.getElementById("main-content")?.focus();
         }}
       >
-        Lewati ke konten
+        {" "}
+        {t("Lewati ke konten")}{" "}
       </a>
       {user && !active && (
         <header className="app-header">
@@ -579,33 +591,40 @@ export default function App() {
             <span className="brand-mark">aws</span>
             <strong>Exam Studio</strong>
           </a>
-          <nav aria-label="Navigasi utama">
+          <nav aria-label={t("Navigasi utama")}>
             <a
               href="#lobby"
               aria-current={phase === "lobby" ? "page" : undefined}
             >
-              Ruang belajar
+              {" "}
+              {t("Ruang belajar")}{" "}
             </a>
             <a
               href="#history"
               aria-current={phase === "history" ? "page" : undefined}
             >
-              Riwayat
+              {" "}
+              {t("Riwayat")}{" "}
             </a>
-            {user.role !== "guest" && <a href="#coach">Kelas</a>}
+            {user.role !== "guest" && <a href="#coach">{t("Kelas")}</a>}
             {user.role === "admin" && <a href="#admin">Admin</a>}
           </nav>
-          <div className="account">
-            <span>{user.name}</span>
-            <button onClick={logout}>Keluar</button>
+          <div className="header-tools">
+            <LanguageSelector />
+            <div className="account">
+              <span>
+                {user.role === "guest" ? t("Tamu") : user.name || t("Peserta")}
+              </span>
+              <button onClick={logout}>{t("Keluar")}</button>
+            </div>
           </div>
         </header>
       )}
       {notice && (
         <div className="global-notice" role="alert">
-          {notice}
+          {t(notice)}
           <button
-            aria-label="Tutup pemberitahuan"
+            aria-label={t("Tutup pemberitahuan")}
             onClick={() => setNotice("")}
           >
             ×
@@ -614,7 +633,7 @@ export default function App() {
       )}
       {recovery && (
         <section className="panel recovery">
-          <h1>Atur password baru</h1>
+          <h1>{t("Atur password baru")}</h1>
           <form
             onSubmit={async (e) => {
               e.preventDefault();
@@ -630,7 +649,8 @@ export default function App() {
             }}
           >
             <label>
-              Password baru
+              {" "}
+              {t("Password baru")}{" "}
               <input
                 name="password"
                 type="password"
@@ -639,7 +659,7 @@ export default function App() {
                 required
               />
             </label>
-            <button className="primary">Simpan password</button>
+            <button className="primary">{t("Simpan password")}</button>
           </form>
         </section>
       )}
@@ -647,7 +667,8 @@ export default function App() {
         <Suspense
           fallback={
             <main className="loading" role="status">
-              Menyiapkan halaman…
+              {" "}
+              {t("Menyiapkan halaman…")}{" "}
             </main>
           }
         >
@@ -657,7 +678,7 @@ export default function App() {
             <Exam
               key={`${session.id}-${session.index}-${phase}`}
               session={session}
-              storageStatus={syncStatus}
+              storageStatus={t(syncStatus)}
               reviewing={phase === "review"}
               busy={busy}
               onAnswer={(option) =>
@@ -729,12 +750,12 @@ export default function App() {
               }}
               pool={pool}
               loading={loading}
-              bankNotice={bankNotice}
+              bankNotice={t(bankNotice)}
               attempts={attempts}
               saved={saved}
               onResume={() => void resume()}
               onDiscard={() => {
-                if (confirm("Hapus sesi yang belum selesai?"))
+                if (confirm(t("Hapus sesi yang belum selesai?")))
                   void removeSession(user.id).then(() => {
                     setSaved(null);
                     void clearCloudSession(user.id);
@@ -748,8 +769,8 @@ export default function App() {
       </div>
       {user && !active && (
         <footer className="app-footer">
-          <span>{syncStatus}</span>
-          <span>Latihan independen · Skor bukan hasil resmi AWS</span>
+          <span>{t(syncStatus)}</span>
+          <span>{t("Latihan independen · Skor bukan hasil resmi AWS")}</span>
         </footer>
       )}
     </>

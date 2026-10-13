@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context";
 import { useMemo, useState } from "react";
 import type { Attempt, Config, Question, Session } from "../types";
 import {
@@ -32,6 +33,7 @@ export default function Lobby({
   onStart: () => void;
   onPractice: (questions: Question[]) => void;
 }) {
+  const { t } = useLanguage();
   const [notice, setNotice] = useState("");
   const domains = Object.keys(BLUEPRINT[config.examType]);
   const counts = Object.fromEntries(
@@ -87,33 +89,34 @@ export default function Lobby({
     <main className="page">
       <div className="page-heading">
         <div>
-          <span className="eyebrow">RUANG BELAJAR</span>
-          <h1>Persiapkan percobaan Anda</h1>
-          <p>Pilih jalur, tentukan fokus, dan mulai saat Anda siap.</p>
+          <span className="eyebrow">{t("RUANG BELAJAR")}</span>
+          <h1>{t("Persiapkan percobaan Anda")}</h1>
+          <p>{t("Pilih jalur, tentukan fokus, dan mulai saat Anda siap.")}</p>
         </div>
       </div>
       {saved && (
         <section className="resume-banner" role="status">
           <div>
-            <strong>Ada sesi yang belum selesai</strong>
+            <strong>{t("Ada sesi yang belum selesai")}</strong>
             <p>
               {saved.config.examType.toUpperCase()} ·{" "}
-              {Object.keys(saved.answers).length}/{saved.questions.length} soal
-              memiliki jawaban
+              {Object.keys(saved.answers).length}/{saved.questions.length}{" "}
+              {t("soal memiliki jawaban")}{" "}
             </p>
           </div>
           <div className="actions">
             <button className="primary" onClick={onResume}>
-              Lanjutkan sesi
+              {" "}
+              {t("Lanjutkan sesi")}{" "}
             </button>
-            <button onClick={onDiscard}>Hapus sesi</button>
+            <button onClick={onDiscard}>{t("Hapus sesi")}</button>
           </div>
         </section>
       )}
       <div className="lobby-grid">
         <div className="stack">
           <section className="panel">
-            <h2>Jalur sertifikasi</h2>
+            <h2>{t("Jalur sertifikasi")}</h2>
             <div className="track-grid">
               {(["ccp", "saa"] as const).map((type) => (
                 <button
@@ -130,8 +133,8 @@ export default function Lobby({
                 >
                   <span className="eyebrow">
                     {type === "ccp"
-                      ? "CLF-C02 · FOUNDATIONAL"
-                      : "SAA-C03 · ASSOCIATE"}
+                      ? t("CLF-C02 · FOUNDATIONAL")
+                      : t("SAA-C03 · ASSOCIATE")}
                   </span>
                   <strong>
                     {type === "ccp"
@@ -140,15 +143,17 @@ export default function Lobby({
                   </strong>
                   <span>
                     {type === "ccp"
-                      ? "Konsep cloud, keamanan, layanan, dan biaya."
-                      : "Desain arsitektur aman, tangguh, cepat, dan efisien."}
+                      ? t("Konsep cloud, keamanan, layanan, dan biaya.")
+                      : t(
+                          "Desain arsitektur aman, tangguh, cepat, dan efisien.",
+                        )}
                   </span>
                 </button>
               ))}
             </div>
           </section>
           <section className="panel">
-            <h2>Mode belajar</h2>
+            <h2>{t("Mode belajar")}</h2>
             <div className="segmented">
               {(["practice", "simulation"] as const).map((mode) => (
                 <button
@@ -157,19 +162,25 @@ export default function Lobby({
                   key={mode}
                   onClick={() => onConfig({ ...config, mode })}
                 >
-                  {mode === "practice" ? "Latihan" : "Simulasi penuh"}
+                  {mode === "practice" ? t("Latihan") : t("Simulasi penuh")}
                 </button>
               ))}
             </div>
             <p>
               {config.mode === "practice"
-                ? "Pembahasan dapat dibuka setelah menjawab. Anda dapat menjeda sesi."
-                : `65 soal · ${EXAM_MINUTES[config.examType]} menit · waktu terus berjalan setelah keluar. Tanpa petunjuk jawaban.`}
+                ? t(
+                    "Pembahasan dapat dibuka setelah menjawab. Anda dapat menjeda sesi.",
+                  )
+                : t(
+                    "65 soal · {minutes} menit · waktu terus berjalan setelah keluar. Tanpa petunjuk jawaban.",
+                    { minutes: EXAM_MINUTES[config.examType] },
+                  )}
             </p>
             <label>
-              Bahasa soal
+              {" "}
+              {t("Bahasa soal")}{" "}
               <select
-                aria-label="Bahasa soal"
+                aria-label={t("Bahasa soal")}
                 value={config.lang}
                 onChange={(event) =>
                   onConfig({
@@ -178,14 +189,15 @@ export default function Lobby({
                   })
                 }
               >
-                <option value="id">Bahasa Indonesia</option>
-                <option value="en">English</option>
+                <option value="id">{t("Bahasa Indonesia")}</option>
+                <option value="en">{t("English")}</option>
               </select>
             </label>
             {config.mode === "practice" && (
               <div className="two-columns">
                 <label>
-                  Jumlah soal
+                  {" "}
+                  {t("Jumlah soal")}{" "}
                   <input
                     type="number"
                     aria-describedby="capacity"
@@ -198,18 +210,19 @@ export default function Lobby({
                   />
                 </label>
                 <label>
-                  Durasi
+                  {" "}
+                  {t("Durasi")}{" "}
                   <select
-                    aria-label="Durasi"
+                    aria-label={t("Durasi")}
                     value={config.duration}
                     onChange={(e) =>
                       onConfig({ ...config, duration: Number(e.target.value) })
                     }
                   >
-                    <option value={0}>Tanpa batas waktu</option>
+                    <option value={0}>{t("Tanpa batas waktu")}</option>
                     {[15, 30, 45, 60].map((value) => (
                       <option key={value} value={value}>
-                        {value} menit
+                        {value} {t("menit")}{" "}
                       </option>
                     ))}
                   </select>
@@ -218,12 +231,15 @@ export default function Lobby({
             )}
             <small id="capacity">
               {loading
-                ? "Memuat bank soal…"
-                : `${capacity} soal sesuai cakupan · ${pool.length} soal dalam bahasa ini`}
+                ? t("Memuat bank soal…")
+                : t(
+                    "{count} soal sesuai cakupan · {total} soal dalam bahasa ini",
+                    { count: capacity, total: pool.length },
+                  )}
             </small>
           </section>
           <section className="panel">
-            <h2>Cakupan domain</h2>
+            <h2>{t("Cakupan domain")}</h2>
             <div className="domain-list">
               {domains.map((domain) => (
                 <label key={domain}>
@@ -244,8 +260,10 @@ export default function Lobby({
                     }
                   />
                   <span>
-                    {domain}
-                    <small>{counts[domain] || 0} soal tersedia</small>
+                    {t(domain)}
+                    <small>
+                      {counts[domain] || 0} {t("soal tersedia")}
+                    </small>
                   </span>
                   <span className="domain-weight">
                     {BLUEPRINT[config.examType][domain]}%
@@ -254,8 +272,10 @@ export default function Lobby({
               ))}
             </div>
             <small>
-              Persentase mengikuti bobot blueprint untuk pemilihan soal
-              simulasi.
+              {" "}
+              {t(
+                "Persentase mengikuti bobot blueprint untuk pemilihan soal simulasi.",
+              )}{" "}
             </small>
           </section>
         </div>
@@ -263,8 +283,8 @@ export default function Lobby({
           <section className="panel launch-panel">
             <span className="eyebrow">
               {config.mode === "simulation"
-                ? "SIMULASI PENUH"
-                : "LATIHAN PERSONAL"}
+                ? t("SIMULASI PENUH")
+                : t("LATIHAN PERSONAL")}
             </span>
             <h2>
               {config.examType === "ccp"
@@ -273,33 +293,39 @@ export default function Lobby({
             </h2>
             <dl>
               <div>
-                <dt>Soal</dt>
+                <dt>{t("Soal")}</dt>
                 <dd>{config.mode === "simulation" ? 65 : config.limit}</dd>
               </div>
               <div>
-                <dt>Waktu</dt>
+                <dt>{t("Waktu")}</dt>
                 <dd>
                   {config.mode === "simulation"
-                    ? `${EXAM_MINUTES[config.examType]} menit`
+                    ? t("{minutes} menit", {
+                        minutes: EXAM_MINUTES[config.examType],
+                      })
                     : config.duration
-                      ? `${config.duration} menit`
-                      : "Tanpa batas"}
+                      ? t("{minutes} menit", { minutes: config.duration })
+                      : t("Tanpa batas")}
                 </dd>
               </div>
               <div>
-                <dt>Target latihan</dt>
-                <dd>{PRACTICE_TARGET}% akurasi</dd>
+                <dt>{t("Target latihan")}</dt>
+                <dd>
+                  {PRACTICE_TARGET}
+                  {t("% akurasi")}
+                </dd>
               </div>
             </dl>
-            <small>Target ini bukan skor kelulusan resmi AWS.</small>
-            {bankNotice && <p className="notice">{bankNotice}</p>}
+            <small>{t("Target ini bukan skor kelulusan resmi AWS.")}</small>
+            {bankNotice && <p className="notice">{t(bankNotice)}</p>}
             {config.mode === "simulation" && missing.length > 0 && (
               <p className="notice">
-                Bank belum cukup:{" "}
+                {" "}
+                {t("Bank belum cukup:")}{" "}
                 {missing
                   .map(
                     ([domain, count]) =>
-                      `${domain} (${simulationCounts[domain]}/${count})`,
+                      `${t(domain)} (${simulationCounts[domain]}/${count})`,
                   )
                   .join(", ")}
                 .
@@ -316,35 +342,44 @@ export default function Lobby({
               }
               onClick={onStart}
             >
-              Mulai {config.mode === "simulation" ? "simulasi" : "latihan"}
+              {config.mode === "simulation"
+                ? t("Mulai simulasi")
+                : t("Mulai latihan")}
             </button>
             <a
               href={`https://docs.aws.amazon.com/aws-certification/latest/${config.examType === "ccp" ? "cloud-practitioner-02/cloud-practitioner-02" : "solutions-architect-associate-03/solutions-architect-associate-03"}.html`}
               target="_blank"
               rel="noreferrer"
             >
-              Lihat panduan ujian AWS ↗
+              {" "}
+              {t("Lihat panduan ujian AWS ↗")}{" "}
             </a>
           </section>
           <section className="panel">
-            <h2>Belajar dari hasil</h2>
+            <h2>{t("Belajar dari hasil")}</h2>
             <p>
-              {due.length} soal perlu diulang. Rekomendasi berdasarkan riwayat{" "}
-              {config.examType.toUpperCase()} dalam bahasa ini.
+              {t(
+                "{count} soal perlu diulang. Rekomendasi berdasarkan riwayat {exam} dalam bahasa ini.",
+                { count: due.length, exam: config.examType.toUpperCase() },
+              )}
             </p>
             <button
               className="secondary full-width"
               disabled={!due.length}
               onClick={() => onPractice(due.slice(0, 20))}
             >
-              Ulangi materi terjadwal
+              {" "}
+              {t("Ulangi materi terjadwal")}{" "}
             </button>
             <button className="text-button" onClick={weakest}>
-              Latihan domain terlemah
+              {" "}
+              {t("Latihan domain terlemah")}{" "}
             </button>
-            {notice && <p role="status">{notice}</p>}
+            {notice && <p role="status">{t(notice)}</p>}
             {currentAttempts[0] && (
-              <small>Akurasi terakhir: {currentAttempts[0].scoreRate}%</small>
+              <small>
+                {t("Akurasi terakhir:")} {currentAttempts[0].scoreRate}%
+              </small>
             )}
           </section>
         </aside>

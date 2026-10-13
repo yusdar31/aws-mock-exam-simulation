@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context";
 import { useState } from "react";
 import type { Attempt } from "../types";
 import { formatTime, matches, PRACTICE_TARGET } from "../lib/exam";
@@ -9,6 +10,7 @@ export default function Result({
   attempt: Attempt;
   onBack: () => void;
 }) {
+  const { t, locale } = useLanguage();
   const [filter, setFilter] = useState("wrong"),
     [page, setPage] = useState(1),
     [busy, setBusy] = useState(false),
@@ -51,51 +53,59 @@ export default function Result({
       <div className="page-heading">
         <div>
           <span className="eyebrow">
-            HASIL {attempt.mode === "simulation" ? "SIMULASI" : "LATIHAN"}
+            {" "}
+            {t("HASIL")}{" "}
+            {attempt.mode === "simulation" ? t("SIMULASI") : t("LATIHAN")}
           </span>
-          <h1>Evaluasi percobaan Anda</h1>
+          <h1>{t("Evaluasi percobaan Anda")}</h1>
           <p>
             {attempt.examType.toUpperCase()} ·{" "}
-            {new Date(attempt.submittedAt).toLocaleString("id-ID")}
+            {new Date(attempt.submittedAt).toLocaleString(locale)}
           </p>
         </div>
-        <button onClick={onBack}>Kembali</button>
+        <button onClick={onBack}>{t("Kembali")}</button>
       </div>
       <div id="result-report">
         <section className="panel result-summary">
           <div>
-            <span className="eyebrow">AKURASI JAWABAN</span>
+            <span className="eyebrow">{t("AKURASI JAWABAN")}</span>
             <strong className="score">
               {attempt.scoreRate}
               <small>%</small>
             </strong>
             <p>
-              {attempt.score} dari {attempt.totalQuestions} benar
+              {t("{score} dari {total} benar", {
+                score: attempt.score,
+                total: attempt.totalQuestions,
+              })}
             </p>
           </div>
           <div>
             <h2>
               {attempt.scoreRate >= PRACTICE_TARGET
-                ? "Target latihan tercapai"
-                : "Masih ada ruang untuk berlatih"}
+                ? t("Target latihan tercapai")
+                : t("Masih ada ruang untuk berlatih")}
             </h2>
             <p>
-              Target internal {PRACTICE_TARGET}%. Persentase ini bukan scaled
-              score atau prediksi kelulusan resmi AWS.
+              {t(
+                "Target internal {target}%. Persentase ini bukan scaled score atau prediksi kelulusan resmi AWS.",
+                { target: PRACTICE_TARGET },
+              )}
             </p>
             <small>
-              Durasi aktif {formatTime(attempt.durationSeconds)} ·{" "}
-              {attempt.synced ? "Tersinkron" : "Tersimpan di perangkat"}
+              {" "}
+              {t("Durasi aktif")} {formatTime(attempt.durationSeconds)} ·{" "}
+              {attempt.synced ? t("Tersinkron") : t("Tersimpan di perangkat")}
             </small>
           </div>
         </section>
         <section className="panel">
-          <h2>Performa per domain</h2>
+          <h2>{t("Performa per domain")}</h2>
           <div className="performance-list">
             {attempt.domainPerformance.map((domain) => (
               <div key={domain.domain}>
                 <div>
-                  <span>{domain.domain}</span>
+                  <span>{t(domain.domain)}</span>
                   <strong>
                     {domain.accuracy}% · {domain.correct}/{domain.total}
                   </strong>
@@ -104,7 +114,9 @@ export default function Result({
                   min={0}
                   max={100}
                   value={domain.accuracy}
-                  aria-label={`Akurasi ${domain.domain}`}
+                  aria-label={t("Akurasi {domain}", {
+                    domain: t(domain.domain),
+                  })}
                 />
               </div>
             ))}
@@ -112,9 +124,10 @@ export default function Result({
         </section>
         <section className="panel">
           <div className="section-header">
-            <h2>Review jawaban</h2>
+            <h2>{t("Review jawaban")}</h2>
             <label className="inline-label">
-              Tampilkan
+              {" "}
+              {t("Tampilkan")}{" "}
               <select
                 value={filter}
                 onChange={(e) => {
@@ -122,31 +135,35 @@ export default function Result({
                   setPage(1);
                 }}
               >
-                <option value="wrong">Salah & belum tepat</option>
-                <option value="unanswered">Belum dijawab</option>
-                <option value="flagged">Ditandai</option>
-                <option value="all">Semua soal</option>
+                <option value="wrong">{t("Salah & belum tepat")}</option>
+                <option value="unanswered">{t("Belum dijawab")}</option>
+                <option value="flagged">{t("Ditandai")}</option>
+                <option value="all">{t("Semua soal")}</option>
               </select>
             </label>
           </div>
           {!session ? (
             <p>
-              Riwayat lama hanya berisi ringkasan. Percobaan baru menyimpan
-              jawaban dan versi soal.
+              {" "}
+              {t(
+                "Riwayat lama hanya berisi ringkasan. Percobaan baru menyimpan jawaban dan versi soal.",
+              )}{" "}
             </p>
           ) : !items.length ? (
-            <p>Tidak ada soal pada filter ini.</p>
+            <p>{t("Tidak ada soal pada filter ini.")}</p>
           ) : (
             items.slice((page - 1) * 10, page * 10).map((q) => (
               <article className="review-question" key={q.id}>
                 <span className="eyebrow">
-                  {q.domain} · {formatTime(session.questionTimes[q.id] || 0)}
+                  {t(q.domain)} · {formatTime(session.questionTimes[q.id] || 0)}
                 </span>
-                <h3>{q.prompt}</h3>
+                <h3 lang={q.lang}>{q.prompt}</h3>
                 <p>
-                  Jawaban Anda:{" "}
-                  {(session.answers[q.id] || []).join(", ") || "Belum dijawab"}{" "}
-                  · Jawaban benar: {q.correctAnswers.join(", ")}
+                  {" "}
+                  {t("Jawaban Anda:")}{" "}
+                  {(session.answers[q.id] || []).join(", ") ||
+                    t("Belum dijawab")}{" "}
+                  {t("· Jawaban benar:")} {q.correctAnswers.join(", ")}
                 </p>
                 <QuestionReview
                   question={q}
@@ -158,7 +175,8 @@ export default function Result({
           {items.length > 10 && (
             <div className="pagination">
               <button disabled={page === 1} onClick={() => setPage(page - 1)}>
-                Sebelumnya
+                {" "}
+                {t("Sebelumnya")}{" "}
               </button>
               <span>
                 {page}/{Math.ceil(items.length / 10)}
@@ -167,23 +185,27 @@ export default function Result({
                 disabled={page * 10 >= items.length}
                 onClick={() => setPage(page + 1)}
               >
-                Berikutnya
+                {" "}
+                {t("Berikutnya")}{" "}
               </button>
             </div>
           )}
           <small>
-            PDF mengekspor ringkasan dan halaman review yang sedang ditampilkan.
+            {" "}
+            {t(
+              "PDF mengekspor ringkasan dan halaman review yang sedang ditampilkan.",
+            )}{" "}
           </small>
         </section>
       </div>
       <div className="actions">
         <button className="primary" disabled={busy} onClick={pdf}>
-          {busy ? "Menyiapkan PDF…" : "Unduh PDF"}
+          {busy ? t("Menyiapkan PDF…") : t("Unduh PDF")}
         </button>
-        <button onClick={() => window.print()}>Cetak</button>
-        <button onClick={onBack}>Ruang belajar</button>
+        <button onClick={() => window.print()}>{t("Cetak")}</button>
+        <button onClick={onBack}>{t("Ruang belajar")}</button>
       </div>
-      {notice && <p role="status">{notice}</p>}
+      {notice && <p role="status">{t(notice)}</p>}
     </main>
   );
 }

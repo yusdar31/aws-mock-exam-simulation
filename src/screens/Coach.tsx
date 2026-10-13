@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import type { Config, User } from "../types";
@@ -25,6 +26,7 @@ export default function Coach({
   user: User;
   onAssignment: (assignment: Assignment) => void;
 }) {
+  const { t, locale } = useLanguage();
   const [batches, setBatches] = useState<Batch[]>([]),
     [batch, setBatch] = useState(""),
     [assignments, setAssignments] = useState<Assignment[]>([]),
@@ -124,42 +126,44 @@ export default function Coach({
     <main className="page">
       <div className="page-heading">
         <div>
-          <span className="eyebrow">RUANG KELAS</span>
-          <h1>{coach ? "Pendampingan batch" : "Penugasan belajar"}</h1>
-          <p>Penugasan simulasi dan rekap hasil kelas.</p>
+          <span className="eyebrow">{t("RUANG KELAS")}</span>
+          <h1>{coach ? t("Pendampingan batch") : t("Penugasan belajar")}</h1>
+          <p>{t("Penugasan simulasi dan rekap hasil kelas.")}</p>
         </div>
       </div>
       {notice && (
         <p role="status" className="notice">
-          {notice}
+          {t(notice)}
         </p>
       )}
       <section className="panel">
         <form onSubmit={(e) => void save(e, "join")}>
           <label>
-            Kode bergabung kelas
+            {" "}
+            {t("Kode bergabung kelas")}{" "}
             <input name="code" required minLength={8} />
           </label>
-          <button>Gabung kelas</button>
+          <button>{t("Gabung kelas")}</button>
         </form>
       </section>
       {coach && (
         <section className="panel">
-          <h2>Buat batch</h2>
+          <h2>{t("Buat batch")}</h2>
           <form onSubmit={(e) => void save(e, "batch")}>
             <label>
-              Nama batch
-              <input name="name" required maxLength={100} />
+              {" "}
+              {t("Nama batch")} <input name="name" required maxLength={100} />
             </label>
-            <button>Buat batch baru</button>
+            <button>{t("Buat batch baru")}</button>
           </form>
         </section>
       )}
       <section className="panel">
         <label>
-          Batch
+          {" "}
+          {t("Batch")}{" "}
           <select value={batch} onChange={(e) => setBatch(e.target.value)}>
-            <option value="">Pilih batch</option>
+            <option value="">{t("Pilih batch")}</option>
             {batches.map((b) => (
               <option key={b.id} value={b.id}>
                 {b.name}
@@ -169,72 +173,78 @@ export default function Coach({
         </label>
         {coach && batches.find((b) => b.id === batch)?.join_code && (
           <p>
-            Kode undangan:{" "}
+            {" "}
+            {t("Kode undangan:")}{" "}
             <code>{batches.find((b) => b.id === batch)?.join_code}</code>
           </p>
         )}
         {coach && batch && (
           <form onSubmit={(e) => void save(e, "assignment")}>
-            <h2>Tambah penugasan</h2>
+            <h2>{t("Tambah penugasan")}</h2>
             <label>
-              Judul
-              <input name="title" required />
+              {" "}
+              {t("Judul")} <input name="title" required />
             </label>
             <div className="two-columns">
               <label>
-                Sertifikasi
+                {" "}
+                {t("Sertifikasi")}{" "}
                 <select name="type">
                   <option value="ccp">CCP</option>
                   <option value="saa">SAA</option>
                 </select>
               </label>
               <label>
-                Bahasa
+                {" "}
+                {t("Bahasa")}{" "}
                 <select name="lang">
-                  <option value="id">Indonesia</option>
-                  <option value="en">English</option>
+                  <option value="id">{t("Indonesia")}</option>
+                  <option value="en">{t("English")}</option>
                 </select>
               </label>
             </div>
             <label>
-              Tenggat
-              <input name="due" type="datetime-local" required />
+              {" "}
+              {t("Tenggat")} <input name="due" type="datetime-local" required />
             </label>
-            <button>Simpan penugasan</button>
+            <button>{t("Simpan penugasan")}</button>
           </form>
         )}
       </section>
       <section className="panel">
-        <h2>Penugasan</h2>
+        <h2>{t("Penugasan")}</h2>
         {assignments.map((a) => (
           <article className="attempt-row" key={a.id}>
             <div>
               <strong>{a.title}</strong>
               <p>
-                {a.config.examType.toUpperCase()} · {a.config.lang} · Tenggat{" "}
-                {new Date(a.due_at).toLocaleString("id-ID")}
+                {a.config.examType.toUpperCase()} · {a.config.lang}{" "}
+                {t("· Tenggat")} {new Date(a.due_at).toLocaleString(locale)}
               </p>
             </div>
             <button className="primary" onClick={() => onAssignment(a)}>
-              Kerjakan
+              {" "}
+              {t("Kerjakan")}{" "}
             </button>
           </article>
         ))}
-        {!assignments.length && <p>Belum ada penugasan.</p>}
+        {!assignments.length && <p>{t("Belum ada penugasan.")}</p>}
       </section>
       {coach && (
         <>
           <section className="panel">
-            <h2>Domain kelas</h2>
+            <h2>{t("Domain kelas")}</h2>
             {[...domains].map(([name, s]) => (
               <p key={name}>
-                {name}: <strong>{Math.round(s.sum / s.total)}%</strong>
+                {t(name)}: <strong>{Math.round(s.sum / s.total)}%</strong>
               </p>
             ))}
-            {!reports.length && <p>Belum ada hasil tersinkron dari peserta.</p>}
+            {!reports.length && (
+              <p>{t("Belum ada hasil tersinkron dari peserta.")}</p>
+            )}
           </section>
           <section className="panel">
-            <h2>Peserta yang perlu pendampingan</h2>
+            <h2>{t("Peserta yang perlu pendampingan")}</h2>
             {reports
               .filter((r) => r.score_rate < 80)
               .map((r) => (
@@ -242,7 +252,7 @@ export default function Coach({
                   <strong>{r.name}</strong> · {r.score_rate}% ·{" "}
                   {r.domain_performance
                     .filter((d) => d.accuracy < 80)
-                    .map((d) => d.domain)
+                    .map((d) => t(d.domain))
                     .join(", ")}
                 </p>
               ))}

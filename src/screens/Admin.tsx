@@ -1,3 +1,4 @@
+import { useLanguage } from "../i18n/context";
 import { useCallback, useEffect, useState } from "react";
 import { api, ApiError } from "../lib/api";
 import { BLUEPRINT } from "../lib/exam";
@@ -5,6 +6,7 @@ import { getQueuedEdits, queueEdit, removeQueuedEdit } from "../lib/storage";
 import type { QueuedEdit } from "../lib/storage";
 import type { Question, User } from "../types";
 export default function Admin({ user }: { user: User }) {
+  const { t, locale } = useLanguage();
   const [items, setItems] = useState<Question[]>([]),
     [total, setTotal] = useState(0),
     [page, setPage] = useState(1);
@@ -140,50 +142,57 @@ export default function Admin({ user }: { user: User }) {
     <main className="page">
       <div className="page-heading">
         <div>
-          <span className="eyebrow">ADMINISTRATOR</span>
-          <h1>Bank soal & editorial</h1>
+          <span className="eyebrow">{t("ADMINISTRATOR")}</span>
+          <h1>{t("Bank soal & editorial")}</h1>
           <p>
-            Publikasi memerlukan kunci valid, pembahasan tiap opsi, sumber AWS,
-            serta tanggal review.
+            {" "}
+            {t(
+              "Publikasi memerlukan kunci valid, pembahasan tiap opsi, sumber AWS, serta tanggal review.",
+            )}{" "}
           </p>
         </div>
         <button onClick={load} disabled={busy}>
-          Muat ulang
+          {" "}
+          {t("Muat ulang")}{" "}
         </button>
       </div>
       {notice && (
         <p role="status" className="notice">
-          {notice}
+          {t(notice)}
         </p>
       )}
       {queue.length > 0 && (
         <section className="resume-banner">
-          <strong>{queue.length} perubahan lokal belum tersinkron</strong>
+          <strong>
+            {queue.length} {t("perubahan lokal belum tersinkron")}
+          </strong>
           <button disabled={busy} onClick={flush}>
-            Sinkronkan antrean
+            {" "}
+            {t("Sinkronkan antrean")}{" "}
           </button>
         </section>
       )}
       {queue.length > 0 && (
         <section className="panel">
-          <h2>Draft lokal belum tersinkron</h2>
+          <h2>{t("Draft lokal belum tersinkron")}</h2>
           {queue.map((edit) => (
             <details key={edit.id}>
               <summary>
-                {edit.action} · {new Date(edit.savedAt).toLocaleString("id-ID")}
+                {edit.action} · {new Date(edit.savedAt).toLocaleString(locale)}
               </summary>
               <pre className="queued-payload">
                 {JSON.stringify(edit.payload, null, 2)}
               </pre>
               <button
                 onClick={async () => {
-                  if (confirm("Hapus perubahan lokal ini dari antrean?")) {
+                  if (confirm(t("Hapus perubahan lokal ini dari antrean?"))) {
                     await removeQueuedEdit(edit.id);
                     await refreshQueue();
                   }
                 }}
               >
-                Hapus dari antrean
+                {" "}
+                {t("Hapus dari antrean")}{" "}
               </button>
             </details>
           ))}
@@ -199,16 +208,18 @@ export default function Admin({ user }: { user: User }) {
             }}
           >
             <label>
-              Cari soal
+              {" "}
+              {t("Cari soal")}{" "}
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </label>
-            <button>Cari</button>
+            <button>{t("Cari")}</button>
           </form>
           <label>
-            Status
+            {" "}
+            {t("Status")}{" "}
             <select
               value={filter}
               onChange={(e) => {
@@ -216,10 +227,10 @@ export default function Admin({ user }: { user: User }) {
                 setPage(1);
               }}
             >
-              <option value="all">Semua</option>
-              <option value="draft">Draft</option>
-              <option value="approved">Approved</option>
-              <option value="rejected">Rejected</option>
+              <option value="all">{t("Semua")}</option>
+              <option value="draft">{t("Draft")}</option>
+              <option value="approved">{t("Approved")}</option>
+              <option value="rejected">{t("Rejected")}</option>
             </select>
           </label>
           <div className="admin-question-list">
@@ -234,7 +245,8 @@ export default function Admin({ user }: { user: User }) {
                 </small>
                 <span>{q.prompt}</span>
                 <small>
-                  {q.issues?.length || 0} temuan · v{q.version}
+                  {q.issues?.length || 0} {t("temuan · v")}
+                  {q.version}
                 </small>
               </button>
             ))}
@@ -244,7 +256,8 @@ export default function Admin({ user }: { user: User }) {
               disabled={page === 1 || busy}
               onClick={() => setPage(page - 1)}
             >
-              Sebelumnya
+              {" "}
+              {t("Sebelumnya")}{" "}
             </button>
             <span>
               {page}/{Math.max(1, Math.ceil(total / 20))}
@@ -253,17 +266,19 @@ export default function Admin({ user }: { user: User }) {
               disabled={page * 20 >= total || busy}
               onClick={() => setPage(page + 1)}
             >
-              Berikutnya
+              {" "}
+              {t("Berikutnya")}{" "}
             </button>
           </div>
         </section>
         <section className="panel">
           {draft ? (
             <>
-              <h2>Edit soal</h2>
+              <h2>{t("Edit soal")}</h2>
               <div className="two-columns">
                 <label>
-                  Sertifikasi
+                  {" "}
+                  {t("Sertifikasi")}{" "}
                   <select
                     value={draft.examType}
                     onChange={(e) =>
@@ -281,7 +296,8 @@ export default function Admin({ user }: { user: User }) {
                   </select>
                 </label>
                 <label>
-                  Bahasa
+                  {" "}
+                  {t("Bahasa")}{" "}
                   <select
                     value={draft.lang}
                     onChange={(e) =>
@@ -291,13 +307,14 @@ export default function Admin({ user }: { user: User }) {
                       })
                     }
                   >
-                    <option value="id">Indonesia</option>
-                    <option value="en">English</option>
+                    <option value="id">{t("Indonesia")}</option>
+                    <option value="en">{t("English")}</option>
                   </select>
                 </label>
               </div>
               <label>
-                Domain
+                {" "}
+                {t("Domain")}{" "}
                 <select
                   value={draft.domain}
                   onChange={(e) =>
@@ -306,14 +323,17 @@ export default function Admin({ user }: { user: User }) {
                 >
                   {!Object.keys(BLUEPRINT[draft.examType]).includes(
                     draft.domain,
-                  ) && <option>{draft.domain}</option>}
+                  ) && <option value={draft.domain}>{t(draft.domain)}</option>}
                   {Object.keys(BLUEPRINT[draft.examType]).map((d) => (
-                    <option key={d}>{d}</option>
+                    <option key={d} value={d}>
+                      {t(d)}
+                    </option>
                   ))}
                 </select>
               </label>
               <label>
-                Pertanyaan
+                {" "}
+                {t("Pertanyaan")}{" "}
                 <textarea
                   rows={4}
                   value={draft.prompt}
@@ -325,7 +345,8 @@ export default function Admin({ user }: { user: User }) {
               {draft.options.map((option, index) => (
                 <div className="option-editor" key={option.id}>
                   <label>
-                    Opsi {option.id}
+                    {" "}
+                    {t("Opsi")} {option.id}
                     <textarea
                       value={option.text}
                       onChange={(e) =>
@@ -339,7 +360,8 @@ export default function Admin({ user }: { user: User }) {
                     />
                   </label>
                   <label>
-                    Alasan opsi {option.id}
+                    {" "}
+                    {t("Alasan opsi")} {option.id}
                     <textarea
                       value={draft.optionExplanations?.[option.id] || ""}
                       onChange={(e) =>
@@ -357,7 +379,8 @@ export default function Admin({ user }: { user: User }) {
               ))}
               <div className="two-columns">
                 <label>
-                  Tipe
+                  {" "}
+                  {t("Tipe")}{" "}
                   <select
                     value={draft.type}
                     onChange={(e) =>
@@ -367,12 +390,13 @@ export default function Admin({ user }: { user: User }) {
                       })
                     }
                   >
-                    <option value="single">Single</option>
-                    <option value="multiple">Multiple</option>
+                    <option value="single">{t("Single")}</option>
+                    <option value="multiple">{t("Multiple")}</option>
                   </select>
                 </label>
                 <label>
-                  Kunci (pisahkan koma)
+                  {" "}
+                  {t("Kunci (pisahkan koma)")}{" "}
                   <input
                     value={draft.correctAnswers.join(", ")}
                     onChange={(e) =>
@@ -388,7 +412,8 @@ export default function Admin({ user }: { user: User }) {
                 </label>
               </div>
               <label>
-                Pembahasan
+                {" "}
+                {t("Pembahasan")}{" "}
                 <textarea
                   rows={4}
                   value={draft.explanation}
@@ -398,7 +423,8 @@ export default function Admin({ user }: { user: User }) {
                 />
               </label>
               <label>
-                URL dokumentasi AWS
+                {" "}
+                {t("URL dokumentasi AWS")}{" "}
                 <input
                   type="url"
                   value={draft.sourceUrl || ""}
@@ -408,7 +434,8 @@ export default function Admin({ user }: { user: User }) {
                 />
               </label>
               <label>
-                Tanggal verifikasi
+                {" "}
+                {t("Tanggal verifikasi")}{" "}
                 <input
                   type="date"
                   value={draft.verifiedAt || ""}
@@ -428,49 +455,55 @@ export default function Admin({ user }: { user: User }) {
                         duplicateReviewed: e.target.checked,
                       })
                     }
-                  />
-                  Saya sudah meninjau dugaan duplikasi soal ini
+                  />{" "}
+                  {t("Saya sudah meninjau dugaan duplikasi soal ini")}{" "}
                 </label>
               )}
               <div className="actions">
                 <button disabled={busy} onClick={() => edit("save")}>
-                  Simpan draft
+                  {" "}
+                  {t("Simpan draft")}{" "}
                 </button>
                 <button
                   className="primary"
                   disabled={busy}
                   onClick={() => edit("approve")}
                 >
-                  Approve versi tersimpan
+                  {" "}
+                  {t("Approve versi tersimpan")}{" "}
                 </button>
                 <button disabled={busy} onClick={() => edit("reject")}>
-                  Reject
+                  {" "}
+                  {t("Reject")}{" "}
                 </button>
               </div>
               <small>
-                Simpan perubahan sebagai draft terlebih dahulu, lalu muat dan
-                approve versi terbaru.
+                {" "}
+                {t(
+                  "Simpan perubahan sebagai draft terlebih dahulu, lalu muat dan approve versi terbaru.",
+                )}{" "}
               </small>
             </>
           ) : (
-            <p>Pilih soal di daftar untuk meninjau dan mengedit.</p>
+            <p>{t("Pilih soal di daftar untuk meninjau dan mengedit.")}</p>
           )}
         </section>
       </div>
       <section className="panel">
-        <h2>Impor & generator</h2>
+        <h2>{t("Impor & generator")}</h2>
         <div className="segmented">
           <button aria-pressed={tab === "json"} onClick={() => setTab("json")}>
             JSON
           </button>
           <button aria-pressed={tab === "dump"} onClick={() => setTab("dump")}>
-            Teks
+            {" "}
+            {t("Teks")}{" "}
           </button>
         </div>
         <label>
           {tab === "json"
-            ? "Array JSON soal"
-            : "Teks soal berformat nomor/opsi/kunci"}
+            ? t("Array JSON soal")
+            : t("Teks soal berformat nomor/opsi/kunci")}
           <textarea
             rows={7}
             value={importText}
@@ -506,7 +539,8 @@ export default function Admin({ user }: { user: User }) {
               }
             }}
           >
-            Impor sebagai draft
+            {" "}
+            {t("Impor sebagai draft")}{" "}
           </button>
           <button
             disabled={busy}
@@ -527,14 +561,15 @@ export default function Admin({ user }: { user: User }) {
               }
             }}
           >
-            Buat 5 draft AI (SAA English)
+            {" "}
+            {t("Buat 5 draft AI (SAA English)")}{" "}
           </button>
           <button
             disabled={busy}
             onClick={async () => {
               if (
                 !confirm(
-                  "Publikasikan semua draft yang lolos validasi editorial?",
+                  t("Publikasikan semua draft yang lolos validasi editorial?"),
                 )
               )
                 return;
@@ -552,11 +587,15 @@ export default function Admin({ user }: { user: User }) {
               }
             }}
           >
-            Approve draft valid
+            {" "}
+            {t("Approve draft valid")}{" "}
           </button>
         </div>
         <small>
-          AI memerlukan konfigurasi server dan dapat menggunakan kuota layanan.
+          {" "}
+          {t(
+            "AI memerlukan konfigurasi server dan dapat menggunakan kuota layanan.",
+          )}{" "}
         </small>
       </section>
     </main>

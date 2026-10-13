@@ -7,6 +7,7 @@ Website: https://aws-mock-exam-simulation.vercel.app. Status aktivasi backend/cl
 ## Fitur
 
 - Latihan dengan pembahasan setelah menjawab, jeda/resume, serta durasi opsional.
+- Bahasa tampilan Indonesia/English tersedia pada halaman masuk, header, dan ujian. Pilihan diingat per browser dan terpisah dari bahasa soal; mengganti tampilan tidak mengganti soal atau mereset sesi.
 - Simulasi 65 soal: CCP 90 menit, SAA 130 menit; sampling mengikuti kuota domain blueprint, tanpa mengulang ID soal.
 - Bank Indonesia/English dimuat per pilihan. Materi arsip tersedia untuk latihan; simulasi memilih soal dengan sumber, tanggal review dan alasan opsi.
 - Timer absolut, penyimpanan IndexedDB, submit/expiry satu kali, snapshot versi soal dan waktu per soal.
