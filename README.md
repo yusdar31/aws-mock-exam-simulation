@@ -2,6 +2,8 @@
 
 Latihan AWS CLF-C02 dan SAA-C03 berbasis React, TypeScript, Vite, Supabase Auth, serta Express/SQLite untuk bank soal.
 
+Website: https://aws-mock-exam-simulation.vercel.app. Status aktivasi backend/cloud dan bukti smoke test tersedia di [laporan deployment](docs/DEPLOYMENT-2026-10-13.md).
+
 ## Fitur
 
 - Latihan dengan pembahasan setelah menjawab, jeda/resume, serta durasi opsional.

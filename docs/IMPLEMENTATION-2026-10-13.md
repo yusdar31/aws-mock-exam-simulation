@@ -1,6 +1,6 @@
 ﻿# Implementasi audit — 13 Oktober 2026
 
-Perubahan lokal menyelesaikan perbaikan fitur, desain, dan performa dari audit. Deployment dan migrasi Supabase produksi belum dijalankan.
+Perubahan lokal menyelesaikan perbaikan fitur, desain, dan performa dari audit. Frontend kini telah dipublikasikan ke Vercel; backend dan migrasi Supabase produksi masih perlu diaktifkan. Lihat [laporan deployment](DEPLOYMENT-2026-10-13.md).
 
 ## Hasil
 
@@ -41,4 +41,4 @@ CSS turun dari 43,84 KB menjadi 15,27 KB (gzip 7,85 menjadi 4,03 KB). Bank dipis
 4. Deploy backend/frontend dengan VITE_API_URL serta env auth; telemetry opsional memakai VITE_METRICS_URL.
 5. Jalankan smoke test pada deployment dan ukur p75 LCP/INP/CLS. Review pedagogis corpus tetap perlu dilakukan sebagai proses editorial berkelanjutan.
 
-Detail setup dan perintah ada di README.md. Tidak ada push/deployment produksi dalam sesi implementasi.
+Detail setup dan perintah ada di README.md. Frontend dipublikasikan pada sesi deployment berikutnya, sebagaimana dicatat dalam laporan deployment; tidak menjalankan push GitHub.
