@@ -53,6 +53,52 @@ const valid = normalizeQuestion({
     D: "Tidak sesuai.",
   },
 });
+test("participant reports are durable, idempotent and only readable or resolved by admins", async () => {
+  const report = {
+    id: "00000000-0000-4000-8000-000000000001",
+    questionId: "fixture",
+    version: 1,
+    reason: "answer",
+    detail: "Kunci jawaban tampaknya perlu diperiksa.",
+  };
+  assert.equal(
+    (await request("/questions/reports", null, "POST", report)).status,
+    201,
+  );
+  assert.equal(
+    (await request("/questions/reports", null, "POST", report)).status,
+    201,
+  );
+  assert.equal((await request("/questions/reports", null)).status, 401);
+  assert.equal((await request("/questions/reports", "student")).status, 403);
+  const list = await (await request("/questions/reports", "admin")).json();
+  assert.equal(list.items.filter((r) => r.id === report.id).length, 1);
+  assert.equal(
+    (
+      await request(`/questions/reports/${report.id}`, "student", "PATCH", {
+        status: "resolved",
+      })
+    ).status,
+    403,
+  );
+  assert.equal(
+    (
+      await request(`/questions/reports/${report.id}`, "admin", "PATCH", {
+        status: "resolved",
+      })
+    ).status,
+    200,
+  );
+  assert.equal(
+    (
+      await request("/questions/reports", null, "POST", {
+        ...report,
+        id: "invalid",
+      })
+    ).status,
+    400,
+  );
+});
 test("anonymous and student cannot access or mutate administration", async () => {
   for (const [token, status] of [
     [null, 401],

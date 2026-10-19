@@ -19,6 +19,9 @@ database.exec(`PRAGMA journal_mode=WAL; PRAGMA busy_timeout=5000;
   CREATE TABLE IF NOT EXISTS audit_log (id INTEGER PRIMARY KEY, actor TEXT NOT NULL, action TEXT NOT NULL, detail TEXT NOT NULL, created_at TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL);
   CREATE TABLE IF NOT EXISTS metrics (id INTEGER PRIMARY KEY, body TEXT NOT NULL, created_at TEXT NOT NULL);`);
+database.exec(
+  "CREATE TABLE IF NOT EXISTS question_reports (id TEXT PRIMARY KEY, question_id TEXT NOT NULL, version INTEGER NOT NULL, reason TEXT NOT NULL, detail TEXT NOT NULL, created_at TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'open')",
+);
 const put = database.prepare(
   "INSERT INTO questions VALUES (?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET status=excluded.status,exam_type=excluded.exam_type,lang=excluded.lang,domain=excluded.domain,version=excluded.version,body=excluded.body",
 );

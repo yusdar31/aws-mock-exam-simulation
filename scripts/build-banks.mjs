@@ -6,6 +6,8 @@ import resilience from "./curated/resilience.mjs";
 import performance from "./curated/performance.mjs";
 import cost from "./curated/cost.mjs";
 import multiple from "./curated/multiple.mjs";
+import { expand, optionConcept } from "./curated/expansion.mjs";
+import { deepen } from './curated/depth.mjs';
 async function legacy(path, name) {
   const source = fs.readFileSync(path, "utf8"),
     output = ts.transpileModule(source, {
@@ -88,15 +90,42 @@ const groups = [
   ["saa", "High-Performing Architectures", performance],
   ["saa", "Cost-Optimized Architectures", cost],
 ];
+for (const group of groups) {
+  const [, domain] = group;
+  const extra =
+    domain === "Cloud Concepts"
+      ? expand("cloud")
+      : /Security|Secure/.test(domain)
+        ? expand("security")
+        : domain === "Technology & Services"
+          ? [
+              ...expand("resilience").slice(0, 12),
+              ...expand("performance").slice(0, 11),
+            ]
+          : /Billing/.test(domain)
+            ? expand("cost").slice(0, 9)
+            : /Resilient/.test(domain)
+              ? expand("resilience")
+              : /High-Performing/.test(domain)
+                ? expand("performance")
+                : expand("cost");
+  // Keep existing curated IDs stable: append new rows after all existing rows below.
+  group.push(extra);
+}
 const rows = groups.flatMap(([type, domain, items]) =>
   items.map((row) => ({ type, domain, row })),
 );
 rows.push(...multiple.map(([type, domain, row]) => ({ type, domain, row })));
+rows.push(
+  ...groups.flatMap(([type, domain, , extra]) =>
+    extra.map((row) => ({ type, domain, row })),
+  ),
+);
 const banks = {};
 for (const type of ["ccp", "saa"])
   for (const lang of ["id", "en"]) {
     const old = (type === "ccp" ? legacyCcp : legacySaa)
-      .filter((q) => (q.lang || "en") === lang)
+      .filter((q) => lang === "id" && q.lang === "id")
       .map((q) => ({
         ...q,
         examType: type,
@@ -119,14 +148,15 @@ for (const type of ["ccp", "saa"])
               labels[(choices.length - offset + answer) % choices.length],
           ),
           explanation = lang === "id" ? whyId : whyEn;
+        const notes = lang === "id" ? metadata?.notesId : metadata?.notesEn;
         const optionExplanations = Object.fromEntries(
           options.map((o) => [
             o.id,
             answers.includes(o.id)
               ? explanation
-              : lang === "id"
-                ? `Opsi ${o.text} tidak memenuhi kebutuhan pada soal. ${whyId}`
-                : `${o.text} does not meet the stated requirement. ${whyEn}`,
+              : notes?.[(options.indexOf(o) + offset) % choices.length] ||
+                optionConcept(o.text)?.[lang === "id" ? 1 : 2] ||
+                explanation,
           ]),
         );
         return {
@@ -140,15 +170,15 @@ for (const type of ["ccp", "saa"])
           correctAnswers: answers,
           explanation,
           optionExplanations,
-          sourceUrl: refs[ref || "cloud"],
-          verifiedAt: "2026-10-13",
-          version: 1,
+          sourceUrl: metadata?.sourceUrl || refs[ref || "cloud"],
+          verifiedAt: notes ? "2026-10-18" : "2026-10-13",
+          version: 2,
           difficulty: "intermediate",
           status: "approved",
           sourceRef: "original-practice-scenarios",
         };
       });
-    banks[`${type}-${lang}`] = [...old, ...fresh];
+    banks[`${type}-${lang}`] = [...old, ...deepen(fresh,type,lang)];
     fs.mkdirSync("src/data/banks", { recursive: true });
     fs.writeFileSync(
       `src/data/banks/${type}-${lang}.json`,

@@ -1,45 +1,61 @@
 import { useLanguage } from "../i18n/context";
 import { useState } from "react";
-import type { Attempt } from "../types";
+import type { Attempt, Question } from "../types";
 import { formatTime, matches, PRACTICE_TARGET } from "../lib/exam";
-import QuestionReview from "../components/QuestionReview";
+import CompactReview from "../components/CompactReview";
+import { CERTIFICATIONS } from "../lib/catalog";
 export default function Result({
   attempt,
   onBack,
+  onPractice,
+  onRepeat,
 }: {
   attempt: Attempt;
   onBack: () => void;
+  onPractice: (questions: Question[]) => void;
+  onRepeat: () => void;
 }) {
-  const { t, locale } = useLanguage();
+  const { t, locale, language } = useLanguage();
   const [filter, setFilter] = useState("wrong"),
     [page, setPage] = useState(1),
     [busy, setBusy] = useState(false),
     [notice, setNotice] = useState("");
+  const [domain, setDomain] = useState("all"),
+    [search, setSearch] = useState(""),
+    [exportKind, setExportKind] = useState("all");
+  const [wrongCursor, setWrongCursor] = useState(-1);
   const session = attempt.session;
-  const items = (session?.questions || []).filter(
+  const all = session?.questions || [];
+  const wrong = all.filter(
+    (q) => !matches(session?.answers[q.id], q.correctAnswers),
+  );
+  const weak = [...attempt.domainPerformance].sort(
+    (a, b) => a.accuracy - b.accuracy,
+  )[0]?.domain;
+  const items = all.filter(
     (q) =>
-      filter === "all" ||
-      (filter === "wrong" &&
-        !matches(session?.answers[q.id], q.correctAnswers)) ||
-      (filter === "unanswered" && !session?.answers[q.id]?.length) ||
-      (filter === "flagged" && session?.flags.includes(q.id)),
+      (filter === "all" ||
+        (filter === "wrong" &&
+          !matches(session?.answers[q.id], q.correctAnswers)) ||
+        (filter === "unanswered" && !session?.answers[q.id]?.length) ||
+        (filter === "flagged" && session?.flags.includes(q.id)) ||
+        (filter === "unsure" && session?.confidence?.[q.id] === "unsure") ||
+        (filter === "slow" && (session?.questionTimes[q.id] || 0) > 90)) &&
+      (domain === "all" || q.domain === domain) &&
+      `${q.prompt} ${q.options.map((o) => o.text).join(" ")}`
+        .toLowerCase()
+        .includes(search.toLowerCase()),
   );
   async function pdf() {
     setBusy(true);
     setNotice("");
     try {
-      const element = document.getElementById("result-report");
-      if (!element) return;
-      const { default: html2pdf } = await import("html2pdf.js");
-      await html2pdf()
-        .set({
-          margin: 0.4,
-          filename: `${attempt.examType}-review-${attempt.id}.pdf`,
-          html2canvas: { scale: 1.5 },
-          jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-        })
-        .from(element)
-        .save();
+      const { exportPdf } = await import("../lib/pdf");
+      await exportPdf(
+        attempt,
+        exportKind === "summary" ? [] : exportKind === "wrong" ? wrong : all,
+        language === "en",
+      );
     } catch {
       setNotice(
         "Ekspor PDF belum berhasil. Gunakan tombol Cetak untuk menyimpan sebagai PDF.",
@@ -59,12 +75,40 @@ export default function Result({
           </span>
           <h1>{t("Evaluasi percobaan Anda")}</h1>
           <p>
-            {attempt.examType.toUpperCase()} ·{" "}
+            {CERTIFICATIONS[attempt.examType].code} ·{" "}
             {new Date(attempt.submittedAt).toLocaleString(locale)}
           </p>
         </div>
         <button onClick={onBack}>{t("Kembali")}</button>
       </div>
+      <section className="panel no-print">
+        <h2>{t("Langkah berikutnya")}</h2>
+        <p>
+          {weak
+            ? t("Fokus berikutnya: {domain}.", { domain: t(weak) })
+            : t("Mulai latihan berikutnya untuk memperluas cakupan materi.")}
+        </p>
+        <div className="actions">
+          <button
+            className="primary"
+            disabled={!wrong.length}
+            onClick={() => onPractice(wrong.slice(0, 20))}
+          >
+            {t("Latih soal salah")}
+          </button>
+          <button
+            disabled={!all.length}
+            onClick={() =>
+              onPractice(all.filter((q) => q.domain === weak).slice(0, 10))
+            }
+          >
+            {t("Latih domain terlemah")}
+          </button>
+          <button disabled={!session} onClick={onRepeat}>
+            {t("Ulangi konfigurasi ini")}
+          </button>
+        </div>
+      </section>
       <div id="result-report">
         <section className="panel result-summary">
           <div>
@@ -88,7 +132,7 @@ export default function Result({
             </h2>
             <p>
               {t(
-                "Target internal {target}%. Persentase ini bukan scaled score atau prediksi kelulusan resmi AWS.",
+                "Target internal {target}%. Persentase ini bukan scaled score atau prediksi kelulusan resmi.",
                 { target: PRACTICE_TARGET },
               )}
             </p>
@@ -129,6 +173,7 @@ export default function Result({
               {" "}
               {t("Tampilkan")}{" "}
               <select
+                aria-label={t("Tampilkan")}
                 value={filter}
                 onChange={(e) => {
                   setFilter(e.target.value);
@@ -138,10 +183,62 @@ export default function Result({
                 <option value="wrong">{t("Salah & belum tepat")}</option>
                 <option value="unanswered">{t("Belum dijawab")}</option>
                 <option value="flagged">{t("Ditandai")}</option>
+                <option value="unsure">{t("Ragu")}</option>
+                <option value="slow">{t("Lebih dari 90 detik")}</option>
                 <option value="all">{t("Semua soal")}</option>
               </select>
             </label>
           </div>
+          <div className="filter-row no-print">
+            <label>
+              {t("Domain")}
+              <select
+                aria-label={t("Domain")}
+                value={domain}
+                onChange={(e) => {
+                  setDomain(e.target.value);
+                  setPage(1);
+                }}
+              >
+                <option value="all">{t("Semua domain")}</option>
+                {attempt.domainPerformance.map((d) => (
+                  <option key={d.domain}>{d.domain}</option>
+                ))}
+              </select>
+            </label>
+            <label>
+              {t("Cari soal")}
+              <input
+                type="search"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setPage(1);
+                }}
+              />
+            </label>
+          </div>
+          {wrong.length > 0 && (
+            <button
+              onClick={() => {
+                const next = (wrongCursor + 1) % wrong.length;
+                setWrongCursor(next);
+                setFilter("wrong");
+                setDomain("all");
+                setSearch("");
+                setPage(Math.floor(next / 10) + 1);
+                setTimeout(() => {
+                  const target = document.getElementById(
+                    `result-question-${wrong[next].id}`,
+                  );
+                  target?.scrollIntoView({ block: "start" });
+                  target?.focus();
+                }, 0);
+              }}
+            >
+              {t("Soal salah berikutnya")}
+            </button>
+          )}
           {!session ? (
             <p>
               {" "}
@@ -150,22 +247,26 @@ export default function Result({
               )}{" "}
             </p>
           ) : !items.length ? (
-            <p>{t("Tidak ada soal pada filter ini.")}</p>
+            <p>
+              {t(
+                filter === "wrong" && !wrong.length
+                  ? "Semua jawaban benar. Coba materi baru untuk memperluas pemahaman."
+                  : "Tidak ada soal pada filter ini.",
+              )}
+            </p>
           ) : (
             items.slice((page - 1) * 10, page * 10).map((q) => (
-              <article className="review-question" key={q.id}>
+              <article
+                className="review-question"
+                key={q.id}
+                id={`result-question-${q.id}`}
+                tabIndex={-1}
+              >
                 <span className="eyebrow">
                   {t(q.domain)} · {formatTime(session.questionTimes[q.id] || 0)}
                 </span>
                 <h3 lang={q.lang}>{q.prompt}</h3>
-                <p>
-                  {" "}
-                  {t("Jawaban Anda:")}{" "}
-                  {(session.answers[q.id] || []).join(", ") ||
-                    t("Belum dijawab")}{" "}
-                  {t("· Jawaban benar:")} {q.correctAnswers.join(", ")}
-                </p>
-                <QuestionReview
+                <CompactReview
                   question={q}
                   selected={session.answers[q.id] || []}
                 />
@@ -193,11 +294,23 @@ export default function Result({
           <small>
             {" "}
             {t(
-              "PDF mengekspor ringkasan dan halaman review yang sedang ditampilkan.",
+              "Ekspor PDF mencakup seluruh pilihan ekspor, tanpa batas halaman review.",
             )}{" "}
           </small>
         </section>
       </div>
+      <label className="no-print">
+        {t("Isi ekspor PDF")}
+        <select
+          aria-label={t("Isi ekspor PDF")}
+          value={exportKind}
+          onChange={(e) => setExportKind(e.target.value)}
+        >
+          <option value="summary">{t("Ringkasan")}</option>
+          <option value="wrong">{t("Semua soal salah")}</option>
+          <option value="all">{t("Seluruh percobaan")}</option>
+        </select>
+      </label>
       <div className="actions">
         <button className="primary" disabled={busy} onClick={pdf}>
           {busy ? t("Menyiapkan PDF…") : t("Unduh PDF")}

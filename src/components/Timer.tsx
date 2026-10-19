@@ -32,13 +32,24 @@ export default function Timer({
   const remaining =
     deadline === null ? null : Math.max(0, Math.ceil((deadline - now) / 1000));
   return (
-    <span
-      className={`timer ${remaining !== null && remaining < 300 ? "warning" : ""}`}
-      aria-label={t("Waktu tersisa {time}", {
-        time: remaining === null ? t("Tanpa batas") : formatTime(remaining),
-      })}
-    >
-      {remaining === null ? t("Tanpa batas") : formatTime(remaining)}
-    </span>
+    <>
+      <span
+        role="timer"
+        aria-live="off"
+        className={`timer ${remaining !== null && remaining < 300 ? "warning" : ""}`}
+        aria-label={t("Waktu tersisa {time}", {
+          time: remaining === null ? t("Tanpa batas") : formatTime(remaining),
+        })}
+      >
+        {remaining === null ? t("Tanpa batas") : formatTime(remaining)}
+      </span>
+      <span className="sr-only" role="status">
+        {remaining !== null && remaining <= 60
+          ? t("Waktu tersisa satu menit atau kurang.")
+          : remaining !== null && remaining <= 300
+            ? t("Waktu tersisa lima menit atau kurang.")
+            : ""}
+      </span>
+    </>
   );
 }

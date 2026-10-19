@@ -3,9 +3,9 @@ services:
     name: aws-mock-exam-backend
     runtime: node
     plan: free
-    rootDir: backend
-    buildCommand: npm ci
-    startCommand: node src/server.js
+    rootDir: .
+    buildCommand: npm --prefix backend ci
+    startCommand: npm --prefix backend start
     envVars:
       - key: PORT
         value: 4000

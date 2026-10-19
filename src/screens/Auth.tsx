@@ -1,7 +1,14 @@
 import { useLanguage } from "../i18n/context";
 import { useState } from "react";
 import { authConfigured, supabase } from "../lib/supabase";
-export default function Auth({ onGuest }: { onGuest: () => void }) {
+import StudioIcon from "../components/StudioIcon";
+export default function Auth({
+  onGuest,
+  onQuick,
+}: {
+  onGuest: () => void;
+  onQuick: () => void;
+}) {
   const { t } = useLanguage();
   const [mode, setMode] = useState<"login" | "register" | "reset">("login");
   const [busy, setBusy] = useState(false),
@@ -60,7 +67,13 @@ export default function Auth({ onGuest }: { onGuest: () => void }) {
   return (
     <main className="auth-shell">
       <div className="auth-intro">
-        <span className="eyebrow">{t("AWS CERTIFICATION PRACTICE")}</span>
+        <div className="auth-wordmark">
+          <span className="brand-mark">
+            <StudioIcon name="layers" />
+          </span>
+          <strong>Exam Studio</strong>
+        </div>
+        <span className="eyebrow">AWS · GOOGLE CLOUD</span>
         <h1>
           {" "}
           {t("Latihan terarah.")} <br /> {t("Ujian lebih siap.")}{" "}
@@ -72,12 +85,42 @@ export default function Auth({ onGuest }: { onGuest: () => void }) {
           )}{" "}
         </p>
         <div className="auth-facts">
-          <span>CLF-C02 & SAA-C03</span>
-          <span>{t("Bahasa Indonesia & English")}</span>
-          <span>{t("Progres tersimpan otomatis")}</span>
+          <span>
+            <StudioIcon name="study" />
+            CLF-C02 · SAA-C03 · Google Cloud ACE
+          </span>
+          <span>
+            <StudioIcon name="layers" />
+            {t("Bahasa Indonesia & English")}
+          </span>
+          <span>
+            <StudioIcon name="check" />
+            {t("Progres tersimpan otomatis")}
+          </span>
         </div>
+        <button className="primary quick-start" onClick={onQuick}>
+          {t("Coba 10 soal tanpa akun")}
+          <StudioIcon name="arrow" />
+        </button>
+        <a className="button auth-class-entry" href="#live">
+          {t("Gabung ujian kelas")}
+        </a>
+        <button
+          className="text-button"
+          onClick={() => {
+            setMode("login");
+            document.getElementById("account-login")?.focus();
+          }}
+        >
+          {t("Masuk akun")}
+        </button>
+        <small>
+          {t(
+            "Pilih jalur Anda, lalu mulai diagnostik singkat. Progres tersimpan di browser ini.",
+          )}
+        </small>
       </div>
-      <section className="panel auth-panel">
+      <section className="panel auth-panel" id="account-login" tabIndex={-1}>
         <h2>
           {mode === "register"
             ? t("Buat akun")
@@ -168,7 +211,7 @@ export default function Auth({ onGuest }: { onGuest: () => void }) {
       <p className="independent-note">
         {" "}
         {t(
-          "Platform latihan independen. Hasil latihan bukan skor sertifikasi resmi AWS.",
+          "Platform latihan independen. Hasil latihan bukan skor sertifikasi resmi.",
         )}{" "}
       </p>
     </main>

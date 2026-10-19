@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { isQuestion } from "./exam";
 import type {
   Attempt,
   ExamType,
@@ -56,16 +57,27 @@ export async function loadApproved(type: ExamType, lang: Language) {
   const items: Question[] = [];
   const excluded = new Set<string>();
   let page = 1;
+  let source = "central";
   try {
     do {
       const payload = await api<{
         items: Question[];
         total: number;
+        source?: string;
         excludedIds?: string[];
       }>(
         `/questions/approved?examType=${type}&lang=${lang}&page=${page}&limit=200`,
         { signal: AbortSignal.timeout(4000) },
       );
+      if (
+        !Array.isArray(payload.items) ||
+        !payload.items.every(
+          (q) => isQuestion(q) && q.examType === type && q.lang === lang,
+        ) ||
+        !Number.isFinite(payload.total)
+      )
+        throw new Error("Respons bank tidak valid.");
+      source = payload.source || "central";
       items.push(...payload.items);
       for (const id of payload.excludedIds || []) excluded.add(id);
       if (items.length >= payload.total || !payload.items.length) break;
@@ -73,10 +85,10 @@ export async function loadApproved(type: ExamType, lang: Language) {
     } while (page <= 25);
     const cache = { id: `${type}-${lang}`, items, excludedIds: [...excluded] };
     await saveBankCache(cache).catch(() => {});
-    return { ...cache, offline: false };
+    return { ...cache, offline: false, source };
   } catch (error) {
     const cached = await getBankCache(`${type}-${lang}`);
-    if (cached) return { ...cached, offline: true };
+    if (cached) return { ...cached, offline: true, source: "cache" };
     throw error;
   }
 }

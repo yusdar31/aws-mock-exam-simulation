@@ -2,7 +2,8 @@ import { useLanguage } from "../i18n/context";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import type { Config, User } from "../types";
-import { BLUEPRINT } from "../lib/exam";
+import { CERTIFICATIONS } from "../lib/catalog";
+import { BLUEPRINT, EXAM_COUNTS, EXAM_MINUTES } from "../lib/exam";
 type Batch = { id: string; name: string; join_code?: string; coach_id: string };
 type Assignment = {
   id: string;
@@ -27,6 +28,9 @@ export default function Coach({
   onAssignment: (assignment: Assignment) => void;
 }) {
   const { t, locale } = useLanguage();
+  const [assignmentType, setAssignmentType] =
+      useState<Config["examType"]>("ccp"),
+    [assignmentLang, setAssignmentLang] = useState<Config["lang"]>("id");
   const [batches, setBatches] = useState<Batch[]>([]),
     [batch, setBatch] = useState(""),
     [assignments, setAssignments] = useState<Assignment[]>([]),
@@ -91,10 +95,14 @@ export default function Coach({
           due_at: new Date(String(f.get("due"))).toISOString(),
           config: {
             examType,
-            lang: f.get("lang"),
-            mode: "simulation",
-            limit: 65,
-            duration: examType === "ccp" ? 90 : 130,
+            lang: CERTIFICATIONS[examType].languages.includes(
+              String(f.get("lang")),
+            )
+              ? f.get("lang")
+              : "id",
+            mode: examType === "gcp-ace" ? "practice" : "simulation",
+            limit: examType === "gcp-ace" ? 20 : EXAM_COUNTS[examType],
+            duration: examType === "gcp-ace" ? 0 : EXAM_MINUTES[examType],
             domains: Object.keys(BLUEPRINT[examType]),
           },
         });
@@ -131,6 +139,11 @@ export default function Coach({
           <p>{t("Penugasan simulasi dan rekap hasil kelas.")}</p>
         </div>
       </div>
+      <section className="panel">
+        <h2>{t("Ujian bersama")}</h2>
+        <p>{t("Soal sama, waktu bersama, jawaban masing-masing.")}</p>
+        <a href="#live">{t("Buka sesi bersama")}</a>
+      </section>
       {notice && (
         <p role="status" className="notice">
           {t(notice)}
@@ -189,20 +202,54 @@ export default function Coach({
               <label>
                 {" "}
                 {t("Sertifikasi")}{" "}
-                <select name="type">
+                <select
+                  name="type"
+                  value={assignmentType}
+                  onChange={(e) => {
+                    const type = e.target.value as Config["examType"];
+                    setAssignmentType(type);
+                    if (
+                      !CERTIFICATIONS[type].languages.includes(assignmentLang)
+                    )
+                      setAssignmentLang("id");
+                  }}
+                >
                   <option value="ccp">CCP</option>
+                  <option value="gcp-ace">Google Cloud ACE</option>
                   <option value="saa">SAA</option>
                 </select>
               </label>
               <label>
                 {" "}
                 {t("Bahasa")}{" "}
-                <select name="lang">
+                <select
+                  name="lang"
+                  value={assignmentLang}
+                  onChange={(e) =>
+                    setAssignmentLang(e.target.value as Config["lang"])
+                  }
+                >
                   <option value="id">{t("Indonesia")}</option>
-                  <option value="en">{t("English")}</option>
+                  <option
+                    value="en"
+                    disabled={
+                      !CERTIFICATIONS[assignmentType].languages.includes("en")
+                    }
+                  >
+                    {t(
+                      CERTIFICATIONS[assignmentType].languages.includes("en")
+                        ? "English"
+                        : "English belum tersedia",
+                    )}
+                  </option>
                 </select>
               </label>
             </div>
+            {assignmentType === "gcp-ace" && (
+              <small>
+                {t("Penugasan ACE memakai latihan 20 soal tanpa batas waktu.")}
+              </small>
+            )}
             <label>
               {" "}
               {t("Tenggat")} <input name="due" type="datetime-local" required />

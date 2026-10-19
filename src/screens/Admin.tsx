@@ -1,3 +1,4 @@
+import EditorialReports from "../components/EditorialReports";
 import { useLanguage } from "../i18n/context";
 import { useCallback, useEffect, useState } from "react";
 import { api, ApiError } from "../lib/api";
@@ -147,7 +148,7 @@ export default function Admin({ user }: { user: User }) {
           <p>
             {" "}
             {t(
-              "Publikasi memerlukan kunci valid, pembahasan tiap opsi, sumber AWS, serta tanggal review.",
+              "Publikasi memerlukan kunci valid, pembahasan tiap opsi, referensi provider, serta tanggal review.",
             )}{" "}
           </p>
         </div>
@@ -156,6 +157,7 @@ export default function Admin({ user }: { user: User }) {
           {t("Muat ulang")}{" "}
         </button>
       </div>
+      <EditorialReports />
       {notice && (
         <p role="status" className="notice">
           {t(notice)}
@@ -292,6 +294,7 @@ export default function Admin({ user }: { user: User }) {
                     }
                   >
                     <option value="ccp">CCP</option>
+                    <option value="gcp-ace">Google Cloud ACE</option>
                     <option value="saa">SAA</option>
                   </select>
                 </label>

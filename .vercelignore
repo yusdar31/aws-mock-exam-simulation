@@ -1,4 +1,4 @@
-# Deploy frontend source and api/health.js; backend runs on a separate host.
+# Deploy frontend, public API gateway and health; editorial backend runs separately.
 .git/
 .vercel/
 node_modules/

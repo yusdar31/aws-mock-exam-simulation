@@ -5,6 +5,8 @@ import { answered, matches } from "../lib/exam";
 import Timer from "../components/Timer";
 import QuestionReview from "../components/QuestionReview";
 import LanguageSelector from "../components/LanguageSelector";
+import QuestionTools from "../components/QuestionTools";
+import { CERTIFICATIONS } from "../lib/catalog";
 export default function Exam({
   session,
   reviewing,
@@ -17,6 +19,7 @@ export default function Exam({
   onReview,
   onFinish,
   storageStatus,
+  onConfidence,
 }: {
   session: Session;
   reviewing: boolean;
@@ -29,6 +32,7 @@ export default function Exam({
   onReview: (value: boolean) => void;
   onFinish: () => void;
   storageStatus: string;
+  onConfidence: (value: "sure" | "unsure") => void;
 }) {
   const { t } = useLanguage();
   const [open, setOpen] = useState(false),
@@ -37,8 +41,8 @@ export default function Exam({
   const q = session.questions[session.index],
     selected = q ? session.answers[q.id] || [] : [];
   useEffect(() => {
-    heading.current?.focus();
-  }, [session.index, reviewing]);
+    if (!open) heading.current?.focus();
+  }, [session.index, reviewing, open]);
   const count = session.questions.filter((q) =>
     answered(q, session.answers),
   ).length;
@@ -63,9 +67,7 @@ export default function Exam({
     <main className="exam-shell">
       <header className="exam-header">
         <div>
-          <strong>
-            {session.config.examType === "ccp" ? "CLF-C02" : "SAA-C03"}
-          </strong>
+          <strong>{CERTIFICATIONS[session.config.examType].code}</strong>
           <small>
             {reviewing
               ? t("Review sebelum submit")
@@ -75,7 +77,15 @@ export default function Exam({
                 })}
           </small>
           <small className="save-state" role="status">
-            {t(storageStatus)}
+            <span title={t(storageStatus)}>
+              {t(
+                storageStatus.includes("Menyimpan")
+                  ? "Menyimpan…"
+                  : storageStatus.includes("tersinkron")
+                    ? "Tersinkron"
+                    : "Tersimpan lokal",
+              )}
+            </span>
           </small>
         </div>
         <div className="exam-tools">
@@ -104,6 +114,12 @@ export default function Exam({
               flagged: session.flags.length,
             })}
           </p>
+          <progress
+            className="answer-progress"
+            value={count}
+            max={session.questions.length}
+            aria-label={t("Progres jawaban")}
+          />
           <div className="navigator-grid">
             {session.questions.map((question, index) => {
               const done = answered(question, session.answers),
@@ -205,7 +221,7 @@ export default function Exam({
                   <div className="choice-list">
                     {q.options.map((option) => (
                       <label
-                        className={`choice ${selected.includes(option.id) ? "selected" : ""}`}
+                        className={`choice ${selected.includes(option.id) ? "selected" : ""} ${feedback && q.correctAnswers.includes(option.id) ? "correct" : ""} ${feedback && selected.includes(option.id) && !q.correctAnswers.includes(option.id) ? "incorrect" : ""}`}
                         key={option.id}
                       >
                         <input
@@ -227,6 +243,20 @@ export default function Exam({
                 </fieldset>
                 {session.config.mode === "practice" && (
                   <div className="practice-feedback">
+                    <fieldset className="confidence">
+                      <legend>{t("Seberapa yakin Anda? (opsional)")}</legend>
+                      <div className="confidence-options">
+                        {(["sure", "unsure"] as const).map((value) => (
+                          <button
+                            key={value}
+                            aria-pressed={session.confidence?.[q.id] === value}
+                            onClick={() => onConfidence(value)}
+                          >
+                            {t(value === "sure" ? "Yakin" : "Ragu")}
+                          </button>
+                        ))}
+                      </div>
+                    </fieldset>
                     {!feedback ? (
                       <button
                         className="secondary"
@@ -261,6 +291,9 @@ export default function Exam({
                       </>
                     )}
                   </div>
+                )}
+                {session.config.mode === "practice" && (
+                  <QuestionTools key={q.id} question={q} />
                 )}
               </article>
             </>

@@ -2,12 +2,22 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import ts from "typescript";
-const js = ts.transpileModule(fs.readFileSync("src/lib/exam.ts", "utf8"), {
-  compilerOptions: {
-    module: ts.ModuleKind.ESNext,
-    target: ts.ScriptTarget.ES2023,
+const js = ts.transpileModule(
+  fs
+    .readFileSync("src/lib/exam.ts", "utf8")
+    .replace(
+      /import catalog from .*?;/,
+      "const catalog = " +
+        fs.readFileSync("src/data/certifications.json", "utf8") +
+        ";",
+    ),
+  {
+    compilerOptions: {
+      module: ts.ModuleKind.ESNext,
+      target: ts.ScriptTarget.ES2023,
+    },
   },
-}).outputText;
+).outputText;
 const {
   quotas,
   selectQuestions,

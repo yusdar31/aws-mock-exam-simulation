@@ -4,6 +4,11 @@ for (const file of [
   "admin-browser.mjs",
   "bank-browser.mjs",
   "language-browser.mjs",
+  "usability-browser.mjs",
+  "studio-browser.mjs",
+  "classroom-browser.mjs",
+  "classroom-upgrade-browser.mjs",
+  "review-quality-browser.mjs",
 ]) {
   const result = spawnSync(process.execPath, [`tests/${file}`], {
     stdio: "inherit",

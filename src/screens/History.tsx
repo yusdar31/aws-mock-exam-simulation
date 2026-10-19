@@ -1,5 +1,6 @@
 import { useLanguage } from "../i18n/context";
 import { useState } from "react";
+import CompactReview from "../components/CompactReview";
 import type { Attempt, ExamType, Language, Question } from "../types";
 import { formatTime, matches, PRACTICE_TARGET } from "../lib/exam";
 export default function History({
@@ -7,7 +8,11 @@ export default function History({
   onOpen,
   onLoadMore,
   onPractice,
+  initialType,
+  initialLang,
 }: {
+  initialType: ExamType;
+  initialLang: Language;
   attempts: Attempt[];
   onOpen: (attempt: Attempt) => void;
   onLoadMore: () => Promise<void>;
@@ -15,8 +20,8 @@ export default function History({
 }) {
   const { t, locale } = useLanguage();
   const [view, setView] = useState<"attempts" | "notebook">("attempts");
-  const [type, setType] = useState<ExamType>("ccp"),
-    [lang, setLang] = useState<Language>("id"),
+  const [type, setType] = useState<ExamType>(initialType),
+    [lang, setLang] = useState<Language>(initialLang),
     [mode, setMode] = useState("all"),
     [page, setPage] = useState(1),
     [loading, setLoading] = useState(false);
@@ -55,6 +60,22 @@ export default function History({
         </div>
       </div>
       <section className="panel">
+        <p>
+          {t("{count} hasil tersimpan di semua filter.", {
+            count: attempts.length,
+          })}
+        </p>
+        <button
+          className="text-button"
+          onClick={() => {
+            setType(initialType);
+            setLang(initialLang);
+            setMode("all");
+            setPage(1);
+          }}
+        >
+          {t("Reset filter")}
+        </button>
         <div className="filter-row">
           <label>
             {" "}
@@ -69,6 +90,7 @@ export default function History({
             >
               <option value="ccp">CLF-C02</option>
               <option value="saa">SAA-C03</option>
+              <option value="gcp-ace">Google Cloud ACE</option>
             </select>
           </label>
           <label>
@@ -162,13 +184,7 @@ export default function History({
             <article className="review-question" key={item.question.id}>
               <span className="eyebrow">{t(item.question.domain)}</span>
               <h3 lang={item.question.lang}>{item.question.prompt}</h3>
-              <p>
-                {" "}
-                {t("Pilihan terakhir:")}{" "}
-                {item.answers.join(", ") || t("Belum dijawab")} {t("? Kunci:")}{" "}
-                {item.question.correctAnswers.join(", ")}
-              </p>
-              <p lang={item.question.lang}>{item.question.explanation}</p>
+              <CompactReview question={item.question} selected={item.answers} />
             </article>
           ))}
           <div className="pagination">
@@ -217,7 +233,7 @@ export default function History({
             <small>
               {" "}
               {t("Target latihan")} {PRACTICE_TARGET}
-              {t("% · Tidak ekuivalen dengan skor resmi AWS.")}{" "}
+              {t("% · Tidak ekuivalen dengan skor sertifikasi resmi.")}{" "}
             </small>
           </section>
           <section className="panel">

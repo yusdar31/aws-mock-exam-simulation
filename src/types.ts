@@ -1,4 +1,4 @@
-export type ExamType = "ccp" | "saa";
+export type ExamType = "ccp" | "saa" | "gcp-ace";
 export type Language = "id" | "en";
 export type Mode = "practice" | "simulation";
 export type Phase =
@@ -9,7 +9,10 @@ export type Phase =
   | "result"
   | "history"
   | "admin"
-  | "coach";
+  | "coach"
+  | "live"
+  | "study";
+// Study tools have a separate route from the active exam.
 export type Question = {
   id: string;
   examType: ExamType;
@@ -37,6 +40,7 @@ export type Config = {
   limit: number;
   duration: number;
   domains: string[];
+  content?: "all" | "new" | "reviewed" | "archive";
 };
 export type Session = {
   id: string;
@@ -53,6 +57,7 @@ export type Session = {
   savedAt: number;
   state: "active" | "paused";
   assignmentId?: string;
+  confidence?: Record<string, "sure" | "unsure">;
 };
 export type DomainPerformance = {
   domain: string;

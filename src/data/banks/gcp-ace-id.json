@@ -1,0 +1,3202 @@
+[
+  {
+    "id": "gcp_ace_id_001",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda baru saja menginstal Google Cloud SDK di laptop baru dan sudah menjalankan perintah gcloud init. Anda perlu memastikan bahwa semua perintah Compute Engine di masa mendatang menggunakan zona asia-southeast2-a secara default tanpa harus menyertakan flag --zone di setiap perintah. Perintah mana yang harus Anda jalankan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "gcloud compute config set zone asia-southeast2-a"
+      },
+      {
+        "id": "B",
+        "text": "gcloud config set compute/zone asia-southeast2-a"
+      },
+      {
+        "id": "C",
+        "text": "gcloud init --zone=asia-southeast2-a"
+      },
+      {
+        "id": "D",
+        "text": "gcloud compute zones set-default asia-southeast2-a"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Properti konfigurasi default untuk zona dan region Compute Engine di Google Cloud CLI disimpan di bawah bagian compute. Perintah yang tepat untuk mengatur properti tersebut adalah gcloud config set compute/zone [NAMA_ZONA].",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_002",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Sebagai seorang konsultan, Anda mengelola tiga proyek Google Cloud milik tiga klien yang berbeda. Setiap klien mengharuskan Anda menggunakan akun email korporat yang berbeda serta default region dan project ID yang berbeda pula. Bagaimana cara paling efisien untuk beralih antar lingkungan klien di terminal lokal Anda tanpa harus melakukan autentikasi ulang setiap saat?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menjalankan gcloud auth login setiap kali berganti proyek klien."
+      },
+      {
+        "id": "B",
+        "text": "Membuat dan mengelola named configurations menggunakan gcloud config configurations create dan beralih menggunakan gcloud config configurations activate."
+      },
+      {
+        "id": "C",
+        "text": "Membuka tiga jendela terminal terpisah dan mengatur variabel lingkungan GOOGLE_APPLICATION_CREDENTIALS di masing-masing terminal."
+      },
+      {
+        "id": "D",
+        "text": "Mengedit file ~/.boto secara manual setiap kali ingin berpindah proyek."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Fitur named configurations pada gcloud memungkinkan Anda menyimpan kumpulan properti independen (seperti account, project, compute/region, compute/zone) dan mengaktifkannya secara instan dengan gcloud config configurations activate [NAMA_KONFIGURASI].",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_003",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Perusahaan Anda baru saja mengakuisisi sebuah startup yang sudah menggunakan Google Cloud. Anda perlu menggabungkan seluruh proyek milik startup tersebut ke dalam struktur hierarki organisasi perusahaan Anda agar kebijakan keamanan terpusat (Organization Policy) dapat diterapkan. Apa langkah pertama yang harus dipastikan sebelum memigrasikan proyek-proyek tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menghapus semua Service Account di proyek startup."
+      },
+      {
+        "id": "B",
+        "text": "Memastikan Anda memiliki peran Project Mover (roles/resourcemanager.projectMover) dan Project Creator di kedua organisasi serta mengatur izin lintas organisasi yang diperlukan."
+      },
+      {
+        "id": "C",
+        "text": "Mengunduh seluruh VM image ke komputer lokal dan mengunggahnya kembali ke organisasi baru."
+      },
+      {
+        "id": "D",
+        "text": "Mengubah ID proyek (Project ID) startup agar sesuai dengan format penamaan perusahaan Anda."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Migrasi proyek antar organisasi memerlukan izin IAM khusus seperti roles/resourcemanager.projectMover pada proyek sumber dan izin pembuatan proyek di organisasi/folder tujuan. Project ID bersifat permanen dan tidak dapat diubah.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_004",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Tim keuangan ingin menerima peringatan email secara otomatis ketika total pengeluaran bulanan untuk proyek prod-ecommerce mencapai 50%, 90%, dan 100% dari batas anggaran sebesar $5.000. Namun, mereka juga ingin agar layanan di proyek tersebut otomatis dihentikan jika pengeluaran menyentuh 100% agar tidak terjadi pembengkakan biaya. Apa yang harus Anda lakukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengaktifkan opsi \"Stop all resources when budget reaches 100%\" langsung di halaman Cloud Billing Budgets."
+      },
+      {
+        "id": "B",
+        "text": "Membuat Cloud Billing Budget dengan ambang batas 50%, 90%, dan 100%, lalu menghubungkan notifikasi anggaran ke topik Cloud Pub/Sub yang memicu Cloud Run functions untuk menonaktifkan Cloud Billing pada proyek tersebut."
+      },
+      {
+        "id": "C",
+        "text": "Membuat kebijakan kuota di IAM untuk membatasi pengeluaran hingga $5.000."
+      },
+      {
+        "id": "D",
+        "text": "Mengirimkan log tagihan ke BigQuery dan membuat scheduled query untuk mematikan VM."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Cloud Billing Budgets secara bawaan hanya mengirimkan peringatan (email/Pub/Sub) dan tidak menghentikan resource secara otomatis. Untuk mengotomatiskan penghentian penggunaan/penagihan (cap billing), Anda harus meneruskan pesan dari anggaran ke topik Pub/Sub dan memicu fungsi (Cloud Run functions) yang memanggil Cloud Billing API guna melepas kaitan akun penagihan (disable billing) dari proyek.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_005",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda ingin menganalisis rincian biaya penggunaan Google Cloud secara mendetail hingga ke tingkat label resource (resource labels) dan membuat dasbor visualisasi di Looker Studio. Fitur mana yang harus Anda aktifkan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengunduh laporan invoice bulanan dalam format PDF."
+      },
+      {
+        "id": "B",
+        "text": "Mengaktifkan Cloud Billing Export ke dataset BigQuery."
+      },
+      {
+        "id": "C",
+        "text": "Menggunakan halaman Cost Table di Google Cloud Console."
+      },
+      {
+        "id": "D",
+        "text": "Membuat sink di Cloud Logging yang mengarah ke Cloud Storage."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Ekspor data penagihan (Cloud Billing Export) ke BigQuery menyediakan data penggunaan dan biaya yang sangat terperinci (termasuk label, SKU, dan lokasi) yang dapat dikueri secara langsung dan divisualisasikan dengan mudah menggunakan Looker Studio.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_006",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Departemen kepatuhan keamanan di perusahaan Anda mewajibkan bahwa tidak ada satu pun developer yang diizinkan membuat instance Compute Engine dengan alamat IP publik (eksternal) di seluruh proyek yang berada di bawah folder Production. Bagaimana cara paling efektif dan terpusat untuk menegakkan aturan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mencabut peran Compute Admin dari semua developer dan memberikan peran Compute Viewer."
+      },
+      {
+        "id": "B",
+        "text": "Membuat aturan firewall VPC yang memblokir semua trafik ingress dari 0.0.0.0/0."
+      },
+      {
+        "id": "C",
+        "text": "Menerapkan batasan (constraint) constraints/compute.vmExternalIpAccess melalui Organization Policy Service pada folder Production."
+      },
+      {
+        "id": "D",
+        "text": "Menjalankan skrip cron setiap 5 menit untuk menghapus IP eksternal dari semua VM."
+      }
+    ],
+    "correctAnswers": [
+      "C"
+    ],
+    "explanation": "Organization Policy Service memungkinkan administrator menerapkan pembatasan konfigurasi resource secara terpusat dan terwariskan ke folder atau proyek. Constraint constraints/compute.vmExternalIpAccess secara spesifik membatasi pembuatan VM dengan alamat IP eksternal.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_007",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda perlu mengotomatiskan pembuatan proyek baru menggunakan skrip bash dan segera mengaktifkan API Kubernetes Engine (container.googleapis.com) di proyek tersebut. Perintah gcloud mana yang harus Anda gunakan untuk mengaktifkan API tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "gcloud services enable container.googleapis.com --project=MY_PROJECT_ID"
+      },
+      {
+        "id": "B",
+        "text": "gcloud apis enable container.googleapis.com --project=MY_PROJECT_ID"
+      },
+      {
+        "id": "C",
+        "text": "gcloud config set api/container true --project=MY_PROJECT_ID"
+      },
+      {
+        "id": "D",
+        "text": "gcloud components install container.googleapis.com"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Grup perintah gcloud services digunakan untuk mengelola API dan layanan di dalam proyek Google Cloud. Perintah gcloud services enable [NAMA_SERVICE] akan mengaktifkan API yang ditentukan.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_008",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda sedang menyiapkan lingkungan kerja di Cloud Shell. Anda membuat sebuah skrip utilitas penting dan ingin memastikan skrip tersebut tetap tersimpan secara permanen meskipun sesi Cloud Shell berakhir dan VM pengelola dihentikan. Di direktori mana Anda harus menyimpan skrip tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "/tmp"
+      },
+      {
+        "id": "B",
+        "text": "/etc/profile.d"
+      },
+      {
+        "id": "C",
+        "text": "/var/local"
+      },
+      {
+        "id": "D",
+        "text": "$HOME (direktori home pengguna /home/username)"
+      }
+    ],
+    "correctAnswers": [
+      "D"
+    ],
+    "explanation": "Cloud Shell menyediakan penyimpanan persistent disk sebesar 5 GB yang dipasang (mounted) sebagai direktori $HOME pengguna. Semua file yang disimpan di luar $HOME (seperti /tmp atau /var) akan hilang ketika sesi Cloud Shell direset atau tidak aktif.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_009",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Tim HR dan Tim Finance berada di bawah satu Organisasi Google Cloud yang sama, tetapi menggunakan akun penagihan (Cloud Billing Account) yang sama pula. Direktur Finance meminta cara mudah untuk memisahkan laporan biaya antara resource Compute Engine yang digunakan oleh aplikasi HR dan aplikasi Finance di dalam proyek bersama (shared-app-project). Apa yang harus Anda terapkan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menerapkan Network Tags dept-hr dan dept-finance pada masing-masing VM."
+      },
+      {
+        "id": "B",
+        "text": "Menerapkan Labels dengan pasangan key-value seperti department:hr dan department:finance pada masing-masing VM dan persistent disk."
+      },
+      {
+        "id": "C",
+        "text": "Memindahkan semua VM ke zona yang berbeda untuk tiap departemen."
+      },
+      {
+        "id": "D",
+        "text": "Mengganti nama semua VM dengan awalan hr- dan fin- lalu melihatnya di halaman IAM."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Labels adalah pasangan key-value metadata yang diteruskan ke sistem Cloud Billing. Dengan memberi label pada resource, Anda dapat memfilter dan mengelompokkan biaya berdasarkan label di laporan tagihan atau BigQuery Billing Export. Network Tags hanya digunakan untuk aturan firewall dan rute jaringan, bukan untuk penagihan.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_010",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda mencoba men-deploy 20 instance VM baru menggunakan GPU NVIDIA T4 di region asia-southeast1, namun proses deployment gagal dengan pesan error QUOTA_EXCEEDED. Apa yang harus Anda lakukan untuk menyelesaikan masalah ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menghapus proyek saat ini dan membuat proyek baru karena kuota bersifat per proyek dan tidak dapat diubah."
+      },
+      {
+        "id": "B",
+        "text": "Membuka halaman IAM & Admin > Quotas di Google Cloud Console, memfilter kuota GPU NVIDIA T4 di asia-southeast1, dan mengajukan permintaan penambahan kuota (Edit Quotas)."
+      },
+      {
+        "id": "C",
+        "text": "Menjalankan perintah gcloud compute quotas increase dari Cloud Shell."
+      },
+      {
+        "id": "D",
+        "text": "Menambahkan saldo kredit ke akun Cloud Billing Anda."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Batas kuota regional/global melindungi pengguna dan Google Cloud dari lonjakan penggunaan tak terduga. Jika Anda membutuhkan kapasitas melebihi batas kuota saat ini, Anda dapat mengajukan permohonan peningkatan kuota melalui halaman Quotas di Google Cloud Console.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_011",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Seorang developer baru membutuhkan kemampuan untuk menginstal alat baris perintah kubectl dan komponen gke-gcloud-auth-plugin melalui instalasi Google Cloud SDK yang sudah ada di laptopnya. Perintah mana yang harus ia jalankan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "gcloud components install kubectl gke-gcloud-auth-plugin"
+      },
+      {
+        "id": "B",
+        "text": "gcloud services enable kubectl gke-gcloud-auth-plugin"
+      },
+      {
+        "id": "C",
+        "text": "gcloud config install kubectl gke-gcloud-auth-plugin"
+      },
+      {
+        "id": "D",
+        "text": "gcloud auth install-plugin kubectl"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Manajer paket bawaan Google Cloud SDK diakses melalui gcloud components. Untuk menginstal alat tambahan seperti kubectl, bq updates, atau emulator lokal, gunakan gcloud components install.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_012",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Perusahaan Anda beroperasi di industri perbankan yang diawasi ketat oleh regulator lokal di Indonesia. Regulator mewajibkan seluruh data pelanggan dan instance komputasi hanya boleh berada di dalam pusat data yang berlokasi di Jakarta (asia-southeast2). Batasan Organization Policy mana yang harus Anda konfigurasi?",
+    "options": [
+      {
+        "id": "A",
+        "text": "constraints/gcp.resourceLocations"
+      },
+      {
+        "id": "B",
+        "text": "constraints/compute.restrictVpcPeering"
+      },
+      {
+        "id": "C",
+        "text": "constraints/iam.allowedPolicyMemberDomains"
+      },
+      {
+        "id": "D",
+        "text": "constraints/storage.uniformBucketLevelAccess"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Constraint constraints/gcp.resourceLocations memungkinkan organisasi membatasi lokasi fisik (region atau multi-region) tempat pembuatan resource berbasis lokasi seperti Compute Engine, Cloud Storage, dan Cloud SQL.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_013",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda ingin memberikan akses kepada tim akuntansi eksternal agar mereka dapat melihat faktur, riwayat pembayaran, dan mengatur anggaran pada Cloud Billing Account perusahaan, tanpa memberikan mereka akses untuk melihat atau memodifikasi resource di dalam proyek mana pun. Peran IAM apa yang harus diberikan dan di tingkat mana?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Project Billing Manager pada tingkat Organisasi."
+      },
+      {
+        "id": "B",
+        "text": "Billing Account Viewer atau Billing Account Costs Manager pada tingkat Cloud Billing Account."
+      },
+      {
+        "id": "C",
+        "text": "Viewer pada tingkat Organisasi."
+      },
+      {
+        "id": "D",
+        "text": "Billing Account Creator pada tingkat Proyek."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Peran terkait penagihan yang diterapkan langsung pada Cloud Billing Account (seperti Billing Account Viewer atau Billing Account Costs Manager) hanya memberikan akses ke informasi keuangan dan anggaran tanpa memberikan akses ke resource di dalam proyek.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_014",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda memiliki sebuah proyek pengembangan (dev-project) yang saat ini tertaut ke akun penagihan lama (Billing-A). Perusahaan baru saja menandatangani kontrak baru dan membuat akun penagihan baru (Billing-B). Anda perlu memindahkan penagihan dev-project ke Billing-B tanpa menghentikan VM yang sedang berjalan. Peran apa yang minimal harus Anda miliki untuk melakukan tindakan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Project Owner pada dev-project saja."
+      },
+      {
+        "id": "B",
+        "text": "Project Billing Manager pada dev-project dan Billing Account User pada Billing-B."
+      },
+      {
+        "id": "C",
+        "text": "Organization Admin dan Compute Admin."
+      },
+      {
+        "id": "D",
+        "text": "Billing Account Viewer pada Billing-A dan Billing-B."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Untuk menautkan sebuah proyek ke akun penagihan, pengguna memerlukan izin untuk memodifikasi pengaturan penagihan proyek (Project Billing Manager atau Project Owner di proyek tersebut) dan izin untuk menggunakan akun penagihan tujuan (Billing Account User atau Billing Account Administrator di akun penagihan tersebut).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_015",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda sedang menulis skrip otomatisasi yang menggunakan perintah gcloud compute instances list untuk mengambil daftar nama dan alamat IP internal dari semua VM yang berstatus RUNNING, lalu menyimpannya dalam format JSON. Kombinasi flag gcloud mana yang paling tepat untuk kebutuhan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "gcloud compute instances list --status=RUNNING --output=json"
+      },
+      {
+        "id": "B",
+        "text": "gcloud compute instances list --filter=\"status=RUNNING\" --format=\"json(name, networkInterfaces[0].networkIP)\""
+      },
+      {
+        "id": "C",
+        "text": "gcloud compute instances list --where=\"status=RUNNING\" --json"
+      },
+      {
+        "id": "D",
+        "text": "gcloud compute instances list | grep RUNNING | to-json"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Di Google Cloud CLI, penyaringan hasil dilakukan menggunakan flag --filter, dan pembentukan format keluaran (seperti json, yaml, csv, value, table) beserta proyeksi atribut spesifik dilakukan dengan flag --format.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_016",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Manajer TI Anda ingin mendelegasikan pengelolaan folder Engineering kepada Kepala Teknik. Kepala Teknik harus bisa membuat sub-folder baru di bawah Engineering dan memberikan akses ke sub-folder tersebut kepada manajer timnya, tetapi tidak boleh memiliki akses ke folder Marketing. Apa yang harus Anda lakukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Memberikan peran Folder Admin (roles/resourcemanager.folderAdmin) kepada Kepala Teknik pada tingkat folder Engineering."
+      },
+      {
+        "id": "B",
+        "text": "Memberikan peran Organization Admin kepada Kepala Teknik pada tingkat Organisasi."
+      },
+      {
+        "id": "C",
+        "text": "Memberikan peran Project Creator pada folder Marketing."
+      },
+      {
+        "id": "D",
+        "text": "Membuat akun penagihan terpisah untuk Kepala Teknik."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Kebijakan IAM bersifat hierarkis. Memberikan peran Folder Admin pada folder Engineering akan memberikan kontrol penuh atas folder tersebut beserta sub-folder dan proyek di dalamnya, tanpa memberikan akses ke cabang folder lain seperti Marketing.\n\nBagian 2: Perencanaan dan Konfigurasi Solusi Cloud (Soal 17–34)",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_017",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Perusahaan Anda sedang membangun aplikasi pemesanan tiket berskala global yang membutuhkan database relasional dengan dukungan kueri SQL standar, konsistensi kuat (strong consistency) lintas negara, dan ketersediaan tinggi hingga 99,999%. Layanan database Google Cloud mana yang harus Anda rekomendasikan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud SQL for PostgreSQL dengan Read Replicas di berbagai region."
+      },
+      {
+        "id": "B",
+        "text": "Cloud Spanner dengan konfigurasi instance multi-region."
+      },
+      {
+        "id": "C",
+        "text": "Bigtable dengan replikasi global."
+      },
+      {
+        "id": "D",
+        "text": "Firestore dalam mode Native."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Cloud Spanner adalah satu-satunya layanan database relasional terkelola penuh di Google Cloud yang menawarkan skala horizontal tanpa batas, dukungan SQL transaksional (ACID), konsistensi kuat secara global, dan SLA hingga 99,999% pada konfigurasi multi-region.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_018",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Tim analitik data ingin membangun data warehouse terpusat untuk menjalankan kueri analitik kompleks (OLAP) menggunakan SQL standar terhadap data historis berukuran 50 Terabyte. Mereka tidak ingin mengelola infrastruktur server atau klaster database. Layanan mana yang paling tepat?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud SQL"
+      },
+      {
+        "id": "B",
+        "text": "Cloud Bigtable"
+      },
+      {
+        "id": "C",
+        "text": "BigQuery"
+      },
+      {
+        "id": "D",
+        "text": "Memorystore"
+      }
+    ],
+    "correctAnswers": [
+      "C"
+    ],
+    "explanation": "BigQuery adalah enterprise data warehouse yang sepenuhnya serverless, sangat skalabel, dan hemat biaya, dirancang khusus untuk analitik data berskala petabyte menggunakan SQL standar.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_019",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Sebuah perusahaan IoT mengumpulkan data sensor suhu dan tekanan dari jutaan perangkat pintar di seluruh dunia. Data ini masuk secara terus-menerus dengan kecepatan penulisan (write throughput) yang sangat tinggi dan latensi di bawah 10 milidetik. Data hanya diakses berdasarkan satu kunci indeks (row key) berupa ID perangkat dan waktu. Layanan penyimpanan mana yang harus dipilih?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud Bigtable"
+      },
+      {
+        "id": "B",
+        "text": "Cloud Spanner"
+      },
+      {
+        "id": "C",
+        "text": "Cloud SQL"
+      },
+      {
+        "id": "D",
+        "text": "Cloud Filestore"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Cloud Bigtable adalah database NoSQL wide-column yang dirancang untuk beban kerja analitik dan operasional berskala besar (seperti data deret waktu / time-series, IoT, dan finansial) yang membutuhkan throughput baca/tulis sangat tinggi dan latensi rendah.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_020",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Departemen kepatuhan mengharuskan semua dokumen transaksi disimpan di Cloud Storage selama 7 tahun. Dokumen sering diakses pada 30 hari pertama, diakses sebulan sekali setelah 30 hari, dan hampir tidak pernah diakses setelah 90 hari. Bagaimana cara memilih kelas penyimpanan (Storage Class) untuk meminimalkan biaya?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menyimpan semuanya di kelas Standard selama 7 tahun."
+      },
+      {
+        "id": "B",
+        "text": "Menggunakan kelas Standard untuk 30 hari pertama, transisi ke Nearline setelah 30 hari, dan transisi ke Archive setelah 90 hari menggunakan Object Lifecycle Management."
+      },
+      {
+        "id": "C",
+        "text": "Menggunakan kelas Archive sejak hari pertama agar biaya penyimpanan bulanan paling murah."
+      },
+      {
+        "id": "D",
+        "text": "Menyimpan data di Persistent Disk SSD dan membuat snapshot setiap bulan."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Kelas Standard optimal untuk data yang sering diakses (hot data). Nearline optimal untuk data yang diakses maksimal sekali dalam 30 hari. Archive optimal untuk pengarsipan jangka panjang (diakses kurang dari sekali setahun, durasi simpan minimal 365 hari). Menggabungkannya dengan Lifecycle Policy memberikan penghematan biaya paling optimal.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_021",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda memiliki seratus instance Compute Engine di satu zona yang menjalankan aplikasi pemrosesan video warisan (legacy). Semua instance tersebut harus dapat membaca dan menulis ke sistem penyimpanan file bersama (shared file system) secara bersamaan menggunakan protokol NFS standar. Layanan penyimpanan mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud Storage dengan gcsfuse"
+      },
+      {
+        "id": "B",
+        "text": "Persistent Disk dalam mode multi-writer untuk 100 VM"
+      },
+      {
+        "id": "C",
+        "text": "Cloud Filestore"
+      },
+      {
+        "id": "D",
+        "text": "Local SSD"
+      }
+    ],
+    "correctAnswers": [
+      "C"
+    ],
+    "explanation": "Cloud Filestore adalah layanan Network Attached Storage (NAS) terkelola penuh untuk Google Cloud yang menyediakan sistem file berbasis NFS yang dapat dipasang (mounted) secara bersamaan oleh ratusan instance Compute Engine atau pod GKE.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_022",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Tim pengembang menyerahkan sebuah container image yang mengekspose port HTTP untuk memproses laporan keuangan. Aplikasi ini hanya dipanggil beberapa kali sehari melalui webhook, membutuhkan waktu pemrosesan sekitar 20 detik per permintaan, dan perusahaan tidak ingin membayar biaya server saat aplikasi sedang tidak menerima trafik. Layanan komputasi mana yang harus Anda pilih?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Google Kubernetes Engine (GKE) Standard"
+      },
+      {
+        "id": "B",
+        "text": "Compute Engine dengan Preemptible VM"
+      },
+      {
+        "id": "C",
+        "text": "Cloud Run dengan konfigurasi jumlah instance minimum diatur ke 0"
+      },
+      {
+        "id": "D",
+        "text": "App Engine Flexible Environment"
+      }
+    ],
+    "correctAnswers": [
+      "C"
+    ],
+    "explanation": "Cloud Run adalah platform serverless untuk menjalankan container yang bersifat stateless. Cloud Run dapat melakukan skala otomatis hingga nol instance (scale to zero) saat tidak ada trafik masuk, sehingga Anda hanya membayar tepat saat kode sedang memproses permintaan.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_023",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Perusahaan Anda telah berkomitmen untuk menjalankan beban kerja produksi di Compute Engine di region asia-southeast2 selama 3 tahun ke depan dengan kebutuhan kapasitas minimum konstan sebesar 64 vCPU dan 256 GB RAM. Bagaimana cara menurunkan biaya Compute Engine hingga lebih dari 50% tanpa mengubah arsitektur aplikasi?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengubah semua VM menjadi Spot VMs."
+      },
+      {
+        "id": "B",
+        "text": "Membeli Committed Use Discounts (CUD) untuk periode 3 tahun."
+      },
+      {
+        "id": "C",
+        "text": "Mematikan VM setiap malam selama 2 jam."
+      },
+      {
+        "id": "D",
+        "text": "Memindahkan semua VM ke App Engine Standard."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Committed Use Discounts (CUD) memberikan diskon besar (hingga 57% untuk umum dan hingga 70% untuk mesin memory-optimized) sebagai imbalan atas komitmen penggunaan kapasitas (vCPU, memori, dll.) atau pengeluaran selama 1 atau 3 tahun.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_024",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda sedang merancang arsitektur untuk aplikasi rendering animasi 3D yang bersifat fault-tolerant dan berjalan secara batch di malam hari. Jika sebuah node komputasi dihentikan secara tiba-tiba oleh Google Cloud, pekerjaan pada node tersebut dapat dilanjutkan kembali oleh node lain tanpa merusak hasil akhir. Anda memiliki anggaran yang sangat terbatas. Opsi Compute Engine mana yang paling hemat biaya?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Standard VM dengan Sustained Use Discounts"
+      },
+      {
+        "id": "B",
+        "text": "Sole-tenant Nodes"
+      },
+      {
+        "id": "C",
+        "text": "Spot VMs (atau Preemptible VMs)"
+      },
+      {
+        "id": "D",
+        "text": "Shielded VMs dengan SSD Persistent Disk"
+      }
+    ],
+    "correctAnswers": [
+      "C"
+    ],
+    "explanation": "Spot VMs menawarkan diskon hingga 60–91% dibandingkan harga VM standar. Spot VM dapat direbut kembali (preempted) oleh Compute Engine kapan saja jika kapasitas dibutuhkan untuk tugas lain, sehingga sangat cocok untuk beban kerja batch yang tahan terhadap gangguan (fault-tolerant).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_025",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda perlu men-deploy aplikasi web global yang melayani pengguna di Amerika Utara, Eropa, dan Asia. Anda ingin pengguna diarahkan secara otomatis ke instance grup backend terdekat yang sehat menggunakan satu alamat IP Anycast global, serta mengaktifkan Cloud CDN dan Google Cloud Armor. Load balancer mana yang harus Anda konfigurasi?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Global External Application Load Balancer (HTTP/HTTPS Load Balancer)"
+      },
+      {
+        "id": "B",
+        "text": "Regional Internal Passthrough Network Load Balancer"
+      },
+      {
+        "id": "C",
+        "text": "Regional External Proxy Network Load Balancer"
+      },
+      {
+        "id": "D",
+        "text": "Cloud DNS dengan kebijakan Round Robin"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Global External Application Load Balancer beroperasi di Layer 7 (HTTP/HTTPS), mendukung IP Anycast global tunggal, perutean lintas region otomatis ke backend terdekat, integrasi Cloud CDN untuk caching konten statis, dan Cloud Armor untuk perlindungan DDoS/WAF.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_026",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Tim jaringan di kantor pusat ingin menghubungkan jaringan on-premises mereka ke Google Cloud VPC. Aplikasi mereka membutuhkan lebar pita (bandwidth) terjamin sebesar 20 Gbps dan latensi yang sangat rendah serta konsisten. Tim jaringan siap menyediakan perangkat router mereka di fasilitas kolokasi (colocation facility) yang didukung Google. Solusi konektivitas hybrid mana yang harus Anda pilih?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud VPN dengan High Availability (HA VPN)"
+      },
+      {
+        "id": "B",
+        "text": "Dedicated Interconnect"
+      },
+      {
+        "id": "C",
+        "text": "Partner Interconnect dengan kapasitas 50 Mbps"
+      },
+      {
+        "id": "D",
+        "text": "Peering langsung melalui internet publik"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Dedicated Interconnect menyediakan koneksi fisik langsung antara jaringan on-premises Anda dan jaringan Google di fasilitas kolokasi bersama, dengan pilihan koneksi 10 Gbps atau 100 Gbps per tautan. Cloud VPN hanya mendukung hingga sekitar 3 Gbps per terowongan.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_027",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda ingin membangun koneksi IPsec VPN antara jaringan kantor pusat dengan VPC Google Cloud untuk kebutuhan produksi yang kritis. Anda memerlukan Service Level Agreement (SLA) ketersediaan sebesar 99,99%. Bagaimana Anda harus mengonfigurasi Cloud VPN tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menggunakan Classic VPN dengan satu terowongan (tunnel) dan perutean statis."
+      },
+      {
+        "id": "B",
+        "text": "Menggunakan HA VPN dengan dua terowongan yang terhubung ke antarmuka berbeda dan mengonfigurasi perutean dinamis menggunakan Cloud Router (BGP)."
+      },
+      {
+        "id": "C",
+        "text": "Membuat instance VM dengan perangkat lunak OpenVPN di Compute Engine."
+      },
+      {
+        "id": "D",
+        "text": "Menggunakan VPC Network Peering."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "HA (High Availability) VPN adalah solusi Cloud VPN yang menyediakan SLA 99,99% ketika dikonfigurasi dengan dua terowongan (tunnels) dari dua antarmuka gateway HA VPN menuju gateway VPN pihak lawan, serta menggunakan Cloud Router untuk perutean dinamis BGP.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_028",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Tim pengembang seluler sedang membuat aplikasi obrolan (chat) dan kolaborasi dokumen waktu nyata (real-time) untuk perangkat Android dan iOS. Mereka membutuhkan database NoSQL berbasis dokumen yang dapat menyinkronkan data secara langsung ke klien seluler dan mendukung mode luring (offline support) tanpa harus membangun server backend sendiri. Layanan mana yang paling sesuai?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud SQL for MySQL"
+      },
+      {
+        "id": "B",
+        "text": "Firestore"
+      },
+      {
+        "id": "C",
+        "text": "Cloud Bigtable"
+      },
+      {
+        "id": "D",
+        "text": "Memorystore for Redis"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Firestore adalah database dokumen NoSQL serverless yang menyediakan sinkronisasi data real-time ke aplikasi klien (web, iOS, Android) dan memiliki dukungan penyimpanan cache lokal saat perangkat sedang offline.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_029",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Aplikasi e-commerce Anda mengalami penurunan performa karena database Cloud SQL terlalu sering menerima kueri pembacaan yang sama berulang kali untuk katalog produk populer dan data sesi pengguna (user session). Layanan mana yang harus Anda tambahkan di depan Cloud SQL untuk menyimpan cache di dalam memori (in-memory) guna mempercepat waktu respons?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud CDN"
+      },
+      {
+        "id": "B",
+        "text": "Cloud Memorystore (untuk Redis atau Valkey)"
+      },
+      {
+        "id": "C",
+        "text": "BigQuery BI Engine"
+      },
+      {
+        "id": "D",
+        "text": "Cloud Storage Standard"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Cloud Memorystore adalah layanan in-memory data store terkelola penuh untuk Redis, Valkey, dan Memcached yang digunakan untuk membangun lapisan caching aplikasi guna memberikan akses data berkecepatan sub-milidetik dan mengurangi beban pada database relasional.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_030",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda memiliki dua layanan mikro (microservices): Layanan Pemesanan (Order Service) dan Layanan Pengiriman (Shipping Service). Saat pelanggan membuat pesanan, Order Service tidak boleh menunggu Shipping Service selesai memproses resi pengiriman. Komunikasi harus dilakukan secara asinkron dan terlepas (decoupled) menggunakan sistem antrean pesan yang andal. Layanan mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud Pub/Sub"
+      },
+      {
+        "id": "B",
+        "text": "Cloud DNS"
+      },
+      {
+        "id": "C",
+        "text": "Cloud Endpoints"
+      },
+      {
+        "id": "D",
+        "text": "Cloud Load Balancing"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Cloud Pub/Sub adalah layanan perpesanan asinkron terkelola penuh yang memisahkan (decouples) layanan pengirim pesan (publisher) dari layanan pemroses pesan (subscriber), memungkinkan komunikasi antar mikroservis yang tangguh dan skalabel.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_031",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Perusahaan Anda ingin menggunakan Google Cloud sebagai tempat pencadangan (backup) dan pemulihan bencana (disaster recovery) untuk lingkungan VMware vSphere yang saat ini berjalan di pusat data lokal (on-premises). Anda ingin memigrasikan beban kerja VMware tersebut ke Google Cloud tanpa perlu mengonversi format VM atau mengubah arsitektur jaringan Layer-2 mereka. Layanan mana yang harus dipilih?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Google Kubernetes Engine (GKE)"
+      },
+      {
+        "id": "B",
+        "text": "Google Cloud VMware Engine (GCVE)"
+      },
+      {
+        "id": "C",
+        "text": "App Engine Standard"
+      },
+      {
+        "id": "D",
+        "text": "Cloud Run"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Google Cloud VMware Engine (GCVE) adalah layanan terkelola penuh yang menyediakan lingkungan VMware SDDC (vSphere, vCenter, vSAN, NSX-T) secara native di atas infrastruktur bare-metal Google Cloud, memungkinkan migrasi lift-and-shift beban kerja VMware tanpa perubahan.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_032",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda sedang mengestimasi total biaya bulanan untuk sebuah proyek baru yang akan menggunakan 10 instance Compute Engine e2-standard-4, 5 TB penyimpanan Cloud Storage Standard, dan 1 instance Cloud SQL dengan High Availability di region Jakarta (asia-southeast2). Alat resmi Google Cloud mana yang harus Anda gunakan untuk membuat estimasi biaya ini dan membagikannya kepada manajemen?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud Billing Reports"
+      },
+      {
+        "id": "B",
+        "text": "Google Cloud Pricing Calculator"
+      },
+      {
+        "id": "C",
+        "text": "Active Assist Cost Recommendations"
+      },
+      {
+        "id": "D",
+        "text": "BigQuery Dry Run"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Google Cloud Pricing Calculator adalah alat berbasis web gratis yang memungkinkan Anda memilih layanan, mengatur spesifikasi teknis (region, jenis mesin, jam penggunaan, storage), melihat estimasi biaya bulanan, dan membagikan tautan estimasi tersebut.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_033",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Aplikasi perbankan Anda berjalan di atas Compute Engine dan menggunakan Cloud SQL for PostgreSQL sebagai database utamanya. Untuk memenuhi standar ketersediaan produksi, database harus tetap dapat melayani transaksi secara otomatis jika seluruh zona tempat database utama berada mengalami pemadaman listrik total. Konfigurasi Cloud SQL mana yang harus Anda aktifkan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengaktifkan Automated Backups setiap hari."
+      },
+      {
+        "id": "B",
+        "text": "Membuat Read Replica di region yang berbeda."
+      },
+      {
+        "id": "C",
+        "text": "Mengaktifkan konfigurasi High Availability (HA / Regional) yang menyediakan standby instance di zona berbeda dalam region yang sama."
+      },
+      {
+        "id": "D",
+        "text": "Mengekspor database ke Cloud Storage setiap jam menggunakan Cloud Scheduler."
+      }
+    ],
+    "correctAnswers": [
+      "C"
+    ],
+    "explanation": "Konfigurasi High Availability (HA) pada Cloud SQL menggunakan replikasi sinkron pada tingkat penyimpanan regional antara primary instance di satu zona dan standby instance di zona lain pada region yang sama. Jika zona utama gagal, Cloud SQL akan melakukan automatic failover ke standby instance. Read Replica menggunakan replikasi asinkron dan ditujukan untuk mendistribusikan beban baca, bukan automatic failover tanpa kehilangan data.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_034",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Konfigurasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda perlu men-deploy aplikasi web berbasis Python yang membutuhkan lingkungan serverless yang sepenuhnya terkelola, dapat melakukan skala ke nol saat tidak ada trafik, mendukung pemisahan trafik (traffic splitting) bawaan antar versi aplikasi dengan sangat mudah, dan berjalan di dalam sandbox runtime bahasa standar yang disediakan Google. Selain Cloud Run, layanan PaaS klasik Google Cloud mana yang dirancang tepat untuk skenario ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "App Engine Standard Environment"
+      },
+      {
+        "id": "B",
+        "text": "App Engine Flexible Environment"
+      },
+      {
+        "id": "C",
+        "text": "Compute Engine Managed Instance Group"
+      },
+      {
+        "id": "D",
+        "text": "Cloud Composer"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "App Engine Standard Environment menjalankan aplikasi di dalam sandbox bahasa spesifik yang aman, dapat melakukan skala turun hingga 0 instance ketika tidak ada trafik, melakukan scaling dalam hitungan detik, serta memiliki fitur traffic splitting bawaan. (App Engine Flexible berjalan di atas container Compute Engine dan minimal memiliki 1 instance aktif).\n\nBagian 3: Penerapan dan Implementasi Solusi Cloud (Soal 35–60)",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_035",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda ingin membuat sebuah instance Compute Engine bernama web-server-1 di zona asia-southeast2-a dengan tipe mesin e2-medium yang menjalankan skrip instalasi Nginx secara otomatis saat pertama kali menyala, menggunakan skrip lokal bernama install-nginx.sh di laptop Anda. Perintah gcloud mana yang benar?",
+    "options": [
+      {
+        "id": "A",
+        "text": "gcloud compute instances create web-server-1 --zone=asia-southeast2-a --machine-type=e2-medium --metadata-from-file=startup-script=install-nginx.sh"
+      },
+      {
+        "id": "B",
+        "text": "gcloud compute instances create web-server-1 --zone=asia-southeast2-a --machine-type=e2-medium --startup-script=install-nginx.sh"
+      },
+      {
+        "id": "C",
+        "text": "gcloud compute instances create web-server-1 --zone=asia-southeast2-a --machine-type=e2-medium --metadata=startup-script=install-nginx.sh"
+      },
+      {
+        "id": "D",
+        "text": "gcloud compute ssh web-server-1 --command=\"bash install-nginx.sh\""
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Saat menyertakan file skrip startup yang tersimpan secara lokal di mesin tempat Anda menjalankan gcloud, Anda harus menggunakan flag --metadata-from-file=startup-script=PATH_TO_FILE. Flag --metadata=startup-script=... digunakan jika Anda menuliskan isi skripnya secara langsung sebagai string teks, atau menggunakan kunci startup-script-url jika skrip berada di Cloud Storage.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_036",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Tim keamanan Anda mengharuskan semua instance VM di seluruh proyek menggunakan citra sistem operasi (OS Image) standar yang telah diperkeras keamanannya (hardened), dilengkapi agen pemantauan internal, dan disetujui oleh perusahaan. Bagaimana cara terbaik untuk menyediakan citra dasar ini agar dapat digunakan oleh seluruh developer di berbagai proyek dalam organisasi?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Membuat Snapshot dari boot disk dan membagikannya melalui email."
+      },
+      {
+        "id": "B",
+        "text": "Membuat Custom Image di sebuah proyek terpusat, mengelompokkannya ke dalam Image Family, dan memberikan peran Compute Image User (roles/compute.imageUser) kepada developer atau service account proyek lain."
+      },
+      {
+        "id": "C",
+        "text": "Menyimpan file ISO di Cloud Storage publik."
+      },
+      {
+        "id": "D",
+        "text": "Mengharuskan setiap developer menjalankan skrip hardening manual setelah membuat VM."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Custom Images memungkinkan Anda membuat boot image kustom yang telah dikonfigurasi sebelumnya. Dengan menggunakan Image Family, skrip otomatisasi developer dapat selalu menunjuk ke versi terbaru dari citra yang sudah diperkeras tanpa perlu mengubah kode nama image. Peran roles/compute.imageUser memungkinkan penggunaan image lintas proyek.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_037",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda sedang menyiapkan sebuah Managed Instance Group (MIG) untuk aplikasi web yang membutuhkan ketersediaan tinggi di tingkat regional dan kemampuan untuk menambah atau mengurangi jumlah VM secara otomatis (autoscaling) berdasarkan penggunaan CPU. Komponen apa yang wajib Anda buat terlebih dahulu sebelum dapat membuat MIG tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Unmanaged Instance Group"
+      },
+      {
+        "id": "B",
+        "text": "Instance Template"
+      },
+      {
+        "id": "C",
+        "text": "Snapshot Schedule"
+      },
+      {
+        "id": "D",
+        "text": "Sole-tenant Node Group"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Managed Instance Group (MIG) menggunakan Instance Template sebagai cetak biru (blueprint) untuk membuat instance VM yang identik saat melakukan scaling out atau autohealing. Tanpa Instance Template, Anda tidak dapat membuat MIG.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_038",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda perlu memperbarui konfigurasi jenis mesin pada Managed Instance Group (MIG) produksi dari e2-medium ke e2-standard-2 karena peningkatan beban trafik. Karena Instance Template bersifat tidak dapat diubah (immutable), apa langkah yang benar untuk melakukan pembaruan ini tanpa downtime?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengedit file JSON dari Instance Template yang sedang berjalan secara langsung melalui Cloud Shell."
+      },
+      {
+        "id": "B",
+        "text": "Membuat Instance Template baru dengan tipe mesin e2-standard-2, lalu menjalankan rolling update pada MIG untuk menerapkan template baru tersebut secara bertahap."
+      },
+      {
+        "id": "C",
+        "text": "Menghentikan seluruh MIG, mengubah tipe mesin satu per satu di setiap VM, lalu menyalakan kembali MIG."
+      },
+      {
+        "id": "D",
+        "text": "Menghapus MIG dan Load Balancer, lalu membuatnya kembali dari awal."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Instance Template tidak dapat diedit setelah dibuat. Untuk memperbarui VM di dalam MIG, Anda harus membuat Instance Template baru, kemudian memperbarui MIG menggunakan fitur Rolling Update (Proactive) agar VM diganti secara bertahap tanpa menyebabkan downtime pada layanan.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_039",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda baru saja membuat sebuah klaster Google Kubernetes Engine (GKE) bernama prod-cluster di zona asia-southeast2-a. Sekarang Anda ingin menghubungkan alat baris perintah kubectl di terminal Anda agar mengarah ke klaster tersebut. Perintah mana yang harus Anda jalankan untuk memperbarui file ~/.kube/config secara otomatis?",
+    "options": [
+      {
+        "id": "A",
+        "text": "kubectl config set-cluster prod-cluster --zone=asia-southeast2-a"
+      },
+      {
+        "id": "B",
+        "text": "gcloud container clusters get-credentials prod-cluster --zone=asia-southeast2-a"
+      },
+      {
+        "id": "C",
+        "text": "gcloud kubernetes auth login prod-cluster"
+      },
+      {
+        "id": "D",
+        "text": "gcloud compute instances get-credentials prod-cluster"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Perintah gcloud container clusters get-credentials [NAMA_CLUSTER] mengambil informasi endpoint dan kredensial autentikasi klaster GKE, lalu memperbarui konfigurasi kubeconfig lokal sehingga kubectl dapat langsung berkomunikasi dengan klaster tersebut.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_040",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Tim engineering Anda ingin men-deploy aplikasi berbasis container di Google Kubernetes Engine (GKE), tetapi mereka memiliki sumber daya tim DevOps yang terbatas. Mereka tidak ingin repot mengelola ukuran node, memilih jenis mesin node pool, atau mengamankan konfigurasi sistem operasi worker node, dan hanya ingin membayar sesuai jumlah vCPU dan memori yang diminta oleh Pod. Mode operasi GKE mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "GKE Standard dengan Cluster Autoscaler dinonaktifkan"
+      },
+      {
+        "id": "B",
+        "text": "GKE Autopilot"
+      },
+      {
+        "id": "C",
+        "text": "GKE Enterprise di atas VMware"
+      },
+      {
+        "id": "D",
+        "text": "Menjalankan Kubernetes secara mandiri (self-managed) di atas Compute Engine menggunakan kubeadm"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Dalam mode GKE Autopilot, Google mengelola seluruh infrastruktur klaster termasuk control plane, nodes, node pools, penskalaan otomatis, dan konfigurasi keamanan sesuai best practice. Pengguna hanya perlu menentukan spesifikasi resource pada manifes Pod dan ditagih berdasarkan resource Pod yang digunakan.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_041",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda men-deploy aplikasi web di klaster GKE menggunakan objek Deployment bernama frontend-web yang menjalankan 3 replika Pod pada port 8080. Anda ingin mengekspos Pod-pod tersebut ke internet publik menggunakan Network Load Balancer eksternal bawaan Google Cloud melalui satu perintah kubectl. Tipe Service Kubernetes mana yang harus Anda tentukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "ClusterIP"
+      },
+      {
+        "id": "B",
+        "text": "NodePort"
+      },
+      {
+        "id": "C",
+        "text": "LoadBalancer"
+      },
+      {
+        "id": "D",
+        "text": "ExternalName"
+      }
+    ],
+    "correctAnswers": [
+      "C"
+    ],
+    "explanation": "Di GKE, membuat objek Kubernetes Service dengan type: LoadBalancer akan secara otomatis menginstruksikan pengontrol GKE untuk menyediakan External Passthrough Network Load Balancer dengan alamat IP publik yang meneruskan trafik ke Pod yang cocok dengan selector.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_042",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Aplikasi yang berjalan di dalam GKE membutuhkan variabel konfigurasi non-rahasia (seperti URL endpoint API publik dan pengaturan warna tema) serta kata sandi database yang sangat rahasia. Objek Kubernetes mana yang masing-masing harus Anda gunakan untuk menyimpan kedua jenis data tersebut sebelum dipasang ke dalam Pod?",
+    "options": [
+      {
+        "id": "A",
+        "text": "ConfigMap untuk konfigurasi non-rahasia, dan Secret untuk kata sandi database."
+      },
+      {
+        "id": "B",
+        "text": "PersistentVolume untuk konfigurasi non-rahasia, dan ConfigMap untuk kata sandi database."
+      },
+      {
+        "id": "C",
+        "text": "Annotation untuk konfigurasi non-rahasia, dan Label untuk kata sandi database."
+      },
+      {
+        "id": "D",
+        "text": "StatefulSet untuk konfigurasi non-rahasia, dan DaemonSet untuk kata sandi database."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Di Kubernetes, ConfigMap digunakan untuk memisahkan data konfigurasi tidak rahasia (berupa pasangan key-value atau file konfigurasi) dari kode image container, sedangkan Secret digunakan khusus untuk menyimpan informasi sensitif seperti kata sandi, token OAuth, atau kunci SSH.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_043",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda baru saja men-deploy versi baru (v2) dari aplikasi e-commerce di Cloud Run. Sebelum mengalihkan seluruh pengguna ke versi v2, Anda ingin melakukan pengujian canary dengan mengirimkan hanya 10% trafik ke revisi v2 dan tetap mempertahankan 90% trafik pada revisi stabil v1. Perintah gcloud mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "gcloud run services update-traffic my-service --to-revisions=v1=90,v2=10"
+      },
+      {
+        "id": "B",
+        "text": "gcloud run revisions split my-service --v1=90 --v2=10"
+      },
+      {
+        "id": "C",
+        "text": "gcloud compute backend-services update-traffic my-service --canary=10"
+      },
+      {
+        "id": "D",
+        "text": "gcloud run deploy my-service --image=gcr.io/my-proj/app:v2 --traffic=10"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Cloud Run membuat revisi baru yang bersifat immutable setiap kali terjadi perubahan konfigurasi atau deployment. Perintah gcloud run services update-traffic dengan flag --to-revisions memungkinkan Anda membagi persentase trafik secara presisi di antara beberapa revisi aktif.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_044",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda ingin membangun solusi pemrosesan gambar otomatis yang berjalan tanpa server (serverless). Setiap kali pengguna mengunggah foto berformat .jpg ke sebuah bucket Cloud Storage bernama user-uploads, sebuah fungsi Python harus langsung dijalankan untuk membuat gambar ukuran kecil (thumbnail) dan menyimpannya ke bucket lain. Layanan mana yang paling tepat untuk mengeksekusi kode Python tersebut secara event-driven?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud Run functions (sebelumnya Cloud Functions) yang dipicu oleh event google.cloud.storage.object.v1.finalized melalui Eventarc / Cloud Storage trigger."
+      },
+      {
+        "id": "B",
+        "text": "Compute Engine VM yang menjalankan infinite loop untuk memeriksa isi bucket setiap detik."
+      },
+      {
+        "id": "C",
+        "text": "Cloud SQL stored procedure."
+      },
+      {
+        "id": "D",
+        "text": "Cloud Composer (Apache Airflow)."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Cloud Run functions adalah solusi komputasi berbasis peristiwa (event-driven serverless compute) yang sangat cocok untuk mengeksekusi fungsi kode tunggal sebagai respons terhadap peristiwa di layanan Google Cloud, seperti saat sebuah objek baru selesai ditulis (finalized) di Cloud Storage.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_045",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda memiliki sebuah aplikasi yang berjalan di App Engine Standard. Anda baru saja men-deploy versi v2 menggunakan perintah gcloud app deploy. Secara default, perilaku gcloud app deploy akan langsung mengalihkan 100% trafik ke versi v2 yang baru di-deploy. Flag apa yang harus Anda tambahkan pada perintah gcloud app deploy jika Anda ingin men-deploy versi v2 untuk diuji terlebih dahulu melalui URL spesifik versi tanpa menerima trafik pengguna produksi?",
+    "options": [
+      {
+        "id": "A",
+        "text": "--no-promote"
+      },
+      {
+        "id": "B",
+        "text": "--canary"
+      },
+      {
+        "id": "C",
+        "text": "--stop-previous-version"
+      },
+      {
+        "id": "D",
+        "text": "--traffic=0"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Menambahkan flag --no-promote pada perintah gcloud app deploy akan men-deploy versi baru aplikasi ke App Engine tanpa memigrasikan trafik dari versi yang sedang melayani trafik saat ini. Anda kemudian dapat menguji versi baru melalui URL spesifik versinya.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_046",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Perusahaan Anda memiliki dua proyek: network-host-project yang dikelola oleh tim jaringan dan keamanan, serta app-service-project yang dikelola oleh tim developer aplikasi. Tim jaringan ingin mengelola semua subnet, rute, dan aturan firewall di satu VPC terpusat di dalam network-host-project, sementara tim developer tetap dapat men-deploy instance VM mereka di dalam app-service-project menggunakan IP dari subnet terpusat tersebut. Fitur VPC mana yang harus digunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "VPC Network Peering"
+      },
+      {
+        "id": "B",
+        "text": "Shared VPC"
+      },
+      {
+        "id": "C",
+        "text": "Cloud VPN"
+      },
+      {
+        "id": "D",
+        "text": "Private Service Connect"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Shared VPC memungkinkan organisasi menghubungkan resource dari beberapa proyek (Service Projects) ke satu jaringan VPC bersama (Host Project) di dalam organisasi yang sama, sehingga administrasi jaringan terpusat sementara pengelolaan beban kerja tetap terdesentralisasi di masing-masing proyek.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_047",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda memiliki dua jaringan VPC yang berada di dua organisasi Google Cloud yang berbeda (karena kemitraan bisnis). VPC pertama memiliki rentang subnet 10.10.0.0/16 dan VPC kedua memiliki rentang subnet 10.20.0.0/16. Anda ingin instance VM di kedua VPC dapat berkomunikasi menggunakan alamat IP internal secara langsung tanpa melalui internet publik dan tanpa biaya pembuatan gateway VPN. Apa yang harus Anda konfigurasi?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Shared VPC"
+      },
+      {
+        "id": "B",
+        "text": "VPC Network Peering"
+      },
+      {
+        "id": "C",
+        "text": "Cloud NAT"
+      },
+      {
+        "id": "D",
+        "text": "Cloud Router"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "VPC Network Peering memungkinkan konektivitas alamat IP internal RFC 1918 secara langsung di antara dua jaringan VPC, baik keduanya berada dalam proyek yang sama, proyek berbeda di organisasi yang sama, maupun di organisasi yang berbeda, selama tidak ada rentang subnet yang tumpang tindih (overlapping IP ranges).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_048",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda memiliki sekelompok instance VM di subnet subnet-internal yang tidak memiliki alamat IP eksternal demi alasan keamanan. Namun, aplikasi di dalam VM tersebut harus mengunduh pembaruan paket perangkat lunak dari repositori publik di internet dan sekaligus mengunggah file log ke Cloud Storage. Solusi jaringan mana yang paling tepat untuk memenuhi kedua kebutuhan tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menambahkan alamat IP eksternal sementara ke setiap VM saat ingin melakukan pembaruan."
+      },
+      {
+        "id": "B",
+        "text": "Mengaktifkan Private Google Access pada subnet-internal dan mengonfigurasi Cloud NAT menggunakan Cloud Router di region yang sama."
+      },
+      {
+        "id": "C",
+        "text": "Membuat aturan firewall egress dengan aksi ALLOW untuk 0.0.0.0/0 saja tanpa layanan tambahan."
+      },
+      {
+        "id": "D",
+        "text": "Menggunakan VPC Network Peering ke jaringan internet publik."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Private Google Access memungkinkan VM tanpa alamat IP eksternal untuk menjangkau API dan layanan Google (seperti Cloud Storage dan BigQuery) melalui jaringan internal Google. Sementara itu, Cloud NAT memungkinkan VM tanpa alamat IP eksternal untuk menginisiasi koneksi keluar (outbound/egress) ke internet publik untuk mengunduh pembaruan perangkat lunak.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_049",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda men-deploy tiga instance VM yang menjalankan server web Apache di port TCP 80. Ketiga VM tersebut telah diberikan network tag http-server. Namun, ketika Anda mencoba mengakses alamat IP eksternal VM dari peramban web di laptop Anda, koneksi gagal (connection timed out). Di VPC custom Anda belum ada aturan firewall ingress selain aturan bawaan (implied deny ingress). Perintah mana yang harus Anda jalankan untuk mengizinkan akses HTTP hanya ke ketiga VM tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "gcloud compute firewall-rules create allow-http --direction=INGRESS --action=ALLOW --rules=tcp:80 --source-ranges=0.0.0.0/0 --target-tags=http-server"
+      },
+      {
+        "id": "B",
+        "text": "gcloud compute firewall-rules create allow-http --direction=EGRESS --action=ALLOW --rules=tcp:80 --destination-ranges=0.0.0.0/0 --target-tags=http-server"
+      },
+      {
+        "id": "C",
+        "text": "gcloud compute firewall-rules create allow-http --direction=INGRESS --action=ALLOW --rules=tcp:80 --source-tags=http-server"
+      },
+      {
+        "id": "D",
+        "text": "gcloud compute instances add-tags allow-http --port=80"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Untuk mengizinkan trafik masuk dari internet (0.0.0.0/0) menuju port TCP 80 pada VM tertentu yang memiliki network tag http-server, Anda memerlukan aturan firewall INGRESS dengan --action=ALLOW, --rules=tcp:80, --source-ranges=0.0.0.0/0, dan --target-tags=http-server. (--source-tags hanya bisa digunakan untuk memfilter trafik yang berasal dari VM lain di dalam jaringan VPC yang sama).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_050",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Tim pengembangan meminta Anda membuat sistem resolusi nama domain internal agar instance VM di dalam VPC prod-vpc dapat saling memanggil menggunakan nama seperti db.internal.company.local alih-alih menghafal alamat IP internal. Nama domain ini tidak boleh dapat diakses atau dilihat dari internet publik. Fitur mana yang harus Anda konfigurasi?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengedit file /etc/hosts secara manual di setiap VM."
+      },
+      {
+        "id": "B",
+        "text": "Membuat Private Managed Zone di Cloud DNS dan mengaitkannya ke prod-vpc."
+      },
+      {
+        "id": "C",
+        "text": "Membuat Public Managed Zone di Cloud DNS dan mengaktifkan DNSSEC."
+      },
+      {
+        "id": "D",
+        "text": "Menggunakan Cloud Domains untuk membeli domain .local."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Cloud DNS Private Zones memungkinkan Anda mengelola catatan DNS kustom yang hanya terlihat dan dapat diresolusi oleh jaringan VPC yang berwenang yang Anda tentukan, menjaga privasi struktur topologi internal dari internet publik.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_051",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda ingin mengelola seluruh infrastruktur Google Cloud perusahaan (VPC, Subnet, Compute Engine, Cloud SQL, dan IAM) menggunakan pendekatan Infrastructure as Code (IaC) yang deklaratif, dapat disimpan di repositori Git, dan merupakan alat standar industri yang direkomendasikan secara resmi oleh Google Cloud saat ini. Alat mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Google Cloud Marketplace"
+      },
+      {
+        "id": "B",
+        "text": "Terraform (dengan Google Cloud Provider) atau Infrastructure Manager"
+      },
+      {
+        "id": "C",
+        "text": "Skrip Python manual menggunakan pustaka requests"
+      },
+      {
+        "id": "D",
+        "text": "Google Cloud Console Web UI"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Google Cloud secara resmi merekomendasikan Terraform dan layanan terkelolanya, Infrastructure Manager, untuk penerapan Infrastructure as Code (IaC) secara deklaratif di Google Cloud (menggantikan Cloud Deployment Manager yang sudah memasuki masa penghentian/deprecated).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_052",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Manajer proyek meminta Anda men-deploy tumpukan perangkat lunak WordPress lengkap beserta database MySQL dan konfigurasi jaringannya yang sudah teruji untuk produksi dalam waktu kurang dari 10 menit, tanpa perlu menulis skrip konfigurasi dari awal. Layanan mana di Google Cloud Console yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud Marketplace (sebelumnya Cloud Launcher)"
+      },
+      {
+        "id": "B",
+        "text": "Artifact Registry"
+      },
+      {
+        "id": "C",
+        "text": "Cloud Build"
+      },
+      {
+        "id": "D",
+        "text": "Cloud Source Repositories"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Cloud Marketplace memungkinkan Anda menemukan dan men-deploy paket perangkat lunak fungsional, tumpukan solusi siap pakai (click-to-deploy), maupun layanan pihak ketiga ke lingkungan Google Cloud Anda dengan cepat.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_053",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Saat men-deploy aplikasi di Kubernetes Engine, Anda memiliki agen pengumpul log keamanan (security log collector) yang wajib berjalan tepat satu Pod di setiap worker node yang ada di dalam klaster, termasuk pada node baru yang ditambahkan secara otomatis di masa mendatang oleh Cluster Autoscaler. Objek kontroler Kubernetes mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Deployment"
+      },
+      {
+        "id": "B",
+        "text": "StatefulSet"
+      },
+      {
+        "id": "C",
+        "text": "DaemonSet"
+      },
+      {
+        "id": "D",
+        "text": "Job"
+      }
+    ],
+    "correctAnswers": [
+      "C"
+    ],
+    "explanation": "DaemonSet memastikan bahwa semua (atau sebagian) Node di dalam klaster menjalankan satu salinan Pod yang ditentukan. Ketika node baru ditambahkan ke klaster, Pod secara otomatis ditambahkan ke node tersebut, sehingga ideal untuk agen pemantauan node atau pengumpul log.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_054",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda perlu men-deploy database terdistribusi berbasis container di dalam GKE yang membutuhkan identitas jaringan yang stabil dan unik untuk setiap Pod (misalnya db-0, db-1, db-2), urutan pembuatan dan penghentian yang teratur, serta penyimpanan Persistent Disk yang tetap melekat pada masing-masing identitas Pod meskipun Pod dijadwalkan ulang ke node lain. Objek Kubernetes mana yang harus digunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Deployment dengan ReplicaSet"
+      },
+      {
+        "id": "B",
+        "text": "StatefulSet"
+      },
+      {
+        "id": "C",
+        "text": "CronJob"
+      },
+      {
+        "id": "D",
+        "text": "DaemonSet"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "StatefulSet dirancang khusus untuk mengelola aplikasi yang bersifat stateful. Berbeda dengan Deployment yang menganggap semua Pod dapat dipertukarkan, StatefulSet mempertahankan identitas melekat (sticky identity) dan PersistentVolumeClaim unik untuk setiap Pod.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_055",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda sedang mengonfigurasi sebuah Deployment di GKE dan ingin jumlah replika Pod bertambah secara otomatis dari 2 hingga 15 Pod ketika rata-rata penggunaan CPU Pod melampaui 70%. Objek Kubernetes mana yang harus Anda buat untuk mengatur mekanisme ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "VerticalPodAutoscaler (VPA)"
+      },
+      {
+        "id": "B",
+        "text": "HorizontalPodAutoscaler (HPA)"
+      },
+      {
+        "id": "C",
+        "text": "ClusterAutoscaler"
+      },
+      {
+        "id": "D",
+        "text": "NodePool"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "HorizontalPodAutoscaler (HPA) secara otomatis mengubah jumlah replika Pod di dalam Deployment atau StatefulSet berdasarkan metrik yang diamati seperti penggunaan CPU, memori, atau metrik kustom. (VPA mengubah ukuran request/limit CPU dan RAM pada Pod, sedangkan Cluster Autoscaler menambah/mengurangi jumlah VM Node).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_056",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Tim CI/CD Anda menggunakan Cloud Build untuk membangun container image Docker dan artefak paket bahasa pemrograman (Maven/npm). Anda membutuhkan repositori privat terpusat di Google Cloud untuk menyimpan container image dan paket bahasa tersebut, lengkap dengan pemindaian kerentanan keamanan (vulnerability scanning) dan kontrol IAM per repositori. Layanan mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud Storage"
+      },
+      {
+        "id": "B",
+        "text": "Artifact Registry"
+      },
+      {
+        "id": "C",
+        "text": "Cloud Filestore"
+      },
+      {
+        "id": "D",
+        "text": "Persistent Disk"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Artifact Registry adalah layanan penerus Container Registry yang menyediakan satu lokasi terpusat untuk menyimpan dan mengelola container images serta paket bahasa pemrograman (seperti Maven, npm, Python, Go, Apt) yang terintegrasi penuh dengan Cloud Build, GKE, dan Cloud Run.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_057",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda memiliki aplikasi yang berjalan di instance Compute Engine di dalam VPC yang tidak memiliki koneksi langsung ke database Cloud SQL melalui IP publik. Anda ingin menghubungkan aplikasi di Compute Engine ke instance Cloud SQL menggunakan alamat IP internal RFC 1918 milik VPC Anda. Fitur apa yang harus Anda konfigurasikan pada Cloud SQL?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengaktifkan Private IP pada Cloud SQL menggunakan Private Services Access (VPC Peering ke jaringan layanan Google)."
+      },
+      {
+        "id": "B",
+        "text": "Membuka aturan firewall untuk mengizinkan 0.0.0.0/0 pada jaringan yang diizinkan (Authorized Networks) di IP publik Cloud SQL."
+      },
+      {
+        "id": "C",
+        "text": "Menyalin file database Cloud SQL ke dalam boot disk VM."
+      },
+      {
+        "id": "D",
+        "text": "Menggunakan Cloud CDN di depan Cloud SQL."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Mengonfigurasi Cloud SQL dengan Private IP memanfaatkan Private Services Access (yang membangun koneksi VPC Peering antara jaringan VPC Anda dan jaringan VPC milik Google Cloud tempat instance Cloud SQL berada), memungkinkan komunikasi latensi rendah dan aman sepenuhnya melalui jaringan internal.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_058",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Sebuah aplikasi microservice yang berjalan di dalam Pod GKE perlu terhubung ke database Cloud SQL secara aman dengan enkripsi TLS dan autentikasi berbasis IAM tanpa harus mengelola sertifikat SSL secara manual di dalam kode aplikasi. Bagaimana pola arsitektur terbaik yang direkomendasikan Google Cloud untuk skenario ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menjalankan Cloud SQL Auth Proxy sebagai sidecar container di dalam Pod yang sama dengan aplikasi."
+      },
+      {
+        "id": "B",
+        "text": "Mengizinkan seluruh rentang alamat IP publik internet di bagian Authorized Networks Cloud SQL."
+      },
+      {
+        "id": "C",
+        "text": "Menginstal server MySQL langsung di setiap worker node GKE."
+      },
+      {
+        "id": "D",
+        "text": "Menggunakan Cloud Pub/Sub sebagai jembatan kueri SQL."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Cloud SQL Auth Proxy menyediakan akses aman ke instance Cloud SQL tanpa perlu mengatur Authorized Networks atau mengelola sertifikat SSL secara manual. Di GKE, praktik terbaiknya adalah menjalankan proxy tersebut sebagai sidecar container di dalam Pod aplikasi sehingga aplikasi cukup terhubung ke localhost.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_059",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda sedang membuat jaringan VPC baru bernama custom-vpc untuk lingkungan produksi perusahaan yang akan memiliki cabang di 3 region berbeda dan nantinya akan dihubungkan ke jaringan on-premises menggunakan Cloud VPN. Mengapa Anda harus memilih Custom Mode Subnet Creation alih-alih Auto Mode Subnet Creation?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Karena Auto Mode VPC tidak mendukung aturan firewall."
+      },
+      {
+        "id": "B",
+        "text": "Karena Custom Mode VPC memberikan kontrol penuh atas rentang alamat IP CIDR di setiap subnet dan region, sehingga mencegah risiko tumpang tindih (overlapping) alamat IP dengan jaringan on-premises."
+      },
+      {
+        "id": "C",
+        "text": "Karena Auto Mode VPC hanya bisa membuat VM dengan sistem operasi Windows."
+      },
+      {
+        "id": "D",
+        "text": "Karena Custom Mode VPC gratis sedangkan Auto Mode VPC berbayar per jam."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Auto Mode VPC secara otomatis membuat satu subnet di setiap region Google Cloud menggunakan rentang IP yang sudah ditentukan sebelumnya (10.128.0.0/9), yang sangat berisiko mengalami konflik/tumpang tindih dengan rentang IP jaringan on-premises atau VPC lain saat melakukan VPN/Peering. Untuk lingkungan produksi, selalu gunakan Custom Mode VPC.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_060",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Penerapan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Anda ingin mengimpor data CSV berukuran 500 GB yang saat ini tersimpan di sebuah bucket Cloud Storage ke dalam sebuah tabel baru di BigQuery melalui baris perintah Cloud Shell. Alat baris perintah mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "gcloud storage cp gs://my-bucket/data.csv bq://my_dataset.my_table"
+      },
+      {
+        "id": "B",
+        "text": "bq load --source_format=CSV my_dataset.my_table gs://my-bucket/data.csv ./schema.json"
+      },
+      {
+        "id": "C",
+        "text": "kubectl apply -f gs://my-bucket/data.csv"
+      },
+      {
+        "id": "D",
+        "text": "gcloud sql import csv my_dataset gs://my-bucket/data.csv"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Alat baris perintah khusus untuk berinteraksi dengan BigQuery adalah bq. Perintah bq load digunakan untuk memuat data dari Cloud Storage atau file lokal ke dalam tabel BigQuery dengan format seperti CSV, JSON, Avro, atau Parquet.\n\nBagian 4: Memastikan Operasi Solusi Cloud yang Berhasil (Soal 61–85)",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_061",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Sebuah instance Compute Engine yang menjalankan database mandiri mengalami kehabisan ruang penyimpanan pada Persistent Disk berukuran 100 GB miliknya. Anda perlu meningkatkan ukuran disk tersebut menjadi 250 GB dengan gangguan seminimal mungkin. Apa yang harus Anda lakukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menghapus disk 100 GB dan membuat disk baru berukuran 250 GB."
+      },
+      {
+        "id": "B",
+        "text": "Mengubah ukuran disk menjadi 250 GB menggunakan perintah gcloud compute disks resize (tanpa perlu menghentikan VM), lalu masuk ke dalam sistem operasi VM untuk memperluas partisi dan file system."
+      },
+      {
+        "id": "C",
+        "text": "Mengunduh seluruh isi disk ke laptop lokal, lalu mengunggahnya ke disk baru."
+      },
+      {
+        "id": "D",
+        "text": "Mengubah tipe mesin VM dari e2-medium ke e2-standard-8 karena ukuran Persistent Disk ditentukan oleh jumlah vCPU."
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Anda dapat memperbesar kapasitas Persistent Disk kapan saja bahkan saat disk masih terpasang pada VM yang sedang berjalan (gcloud compute disks resize). Setelah kapasitas blok meningkat, Anda hanya perlu menjalankan perintah sistem operasi (seperti growpart dan resize2fs di Linux) untuk memperluas file system agar mengenali ruang tambahan tersebut.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_062",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Tim operasi ingin mencadangkan (backup) data dari semua Persistent Disk produksi setiap malam pukul 02.00 WIB dan secara otomatis menghapus cadangan yang sudah berusia lebih dari 14 hari untuk menghemat biaya penyimpanan. Bagaimana cara paling efisien untuk mengimplementasikan hal ini tanpa harus menulis dan memelihara skrip kustom?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Membuat Snapshot Schedule, mengatur kebijakan retensi selama 14 hari, dan melampirkan jadwal tersebut ke Persistent Disk yang diinginkan."
+      },
+      {
+        "id": "B",
+        "text": "Menyewa administrator sistem untuk login setiap pukul 02.00 pagi dan mengklik tombol Create Snapshot."
+      },
+      {
+        "id": "C",
+        "text": "Menggunakan Object Lifecycle Management di Cloud Storage untuk menghapus Persistent Disk."
+      },
+      {
+        "id": "D",
+        "text": "Mengaktifkan fitur Autohealing pada Managed Instance Group."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Snapshot Schedules pada Compute Engine memungkinkan Anda mengotomatiskan pembuatan snapshot berkala (per jam, harian, atau mingguan) untuk Persistent Disk dan menetapkan kebijakan retensi maksimum (misalnya 14 hari) setelah itu snapshot lama akan dihapus secara otomatis.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_063",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Anda mengelola sebuah Managed Instance Group (MIG) yang menjalankan aplikasi web di port 8080. Terkadang, aplikasi di dalam salah satu VM mengalami deadlock (macet) sehingga mengembalikan kode error HTTP 500 pada endpoint /healthz, meskipun sistem operasi Linux di VM tersebut masih menyala dan merespons ping jaringan. Bagaimana cara memastikan MIG secara otomatis menghapus dan membuat ulang VM yang aplikasinya macet tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengonfigurasi Autohealing policy pada MIG dengan melampirkan HTTP Health Check yang memeriksa jalur /healthz pada port 8080."
+      },
+      {
+        "id": "B",
+        "text": "Mengatur kebijakan Autoscaling berdasarkan metrik penggunaan disk."
+      },
+      {
+        "id": "C",
+        "text": "Mengaktifkan fitur Live Migration pada properti ketersediaan VM."
+      },
+      {
+        "id": "D",
+        "text": "Membuat aturan firewall yang memblokir port 8080 jika terjadi error."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Fitur Autohealing pada Managed Instance Group menggunakan sinyal dari Application-based Health Check (seperti HTTP, HTTPS, atau TCP). Jika endpoint aplikasi (/healthz) gagal merespons dengan status sehat secara berurutan, MIG akan menandai instance tersebut sebagai tidak sehat (unhealthy) dan secara otomatis membuatnya ulang (recreate).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_064",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Aplikasi web perusahaan Anda berjalan di atas Managed Instance Group (MIG) di Compute Engine. Trafik aplikasi sangat fluktuatif tetapi selalu memuncak setiap pagi pukul 08.00 WIB saat karyawan mulai bekerja. Saat puncak trafik terjadi, pengguna mengeluhkan kelambatan karena VM baru membutuhkan waktu 5 menit untuk menyelesaikan startup script sebelum siap melayani trafik. Bagaimana cara paling efektif untuk mengatasi masalah ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengaktifkan fitur predictive autoscaling atau membuat jadwal scheduled scaling agar kapasitas ditambahkan sebelum pukul 08.00 WIB."
+      },
+      {
+        "id": "B",
+        "text": "Mengurangi periode cool-down autoscaler menjadi 0 detik."
+      },
+      {
+        "id": "C",
+        "text": "Mengubah semua VM menjadi Preemptible VM."
+      },
+      {
+        "id": "D",
+        "text": "Menonaktifkan Load Balancer setiap pukul 08.00 WIB."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Untuk beban kerja yang memiliki pola trafik terjadwal atau dapat diprediksi namun membutuhkan waktu inisialisasi (startup) yang lama, Scheduled Scaling atau Predictive Autoscaling memungkinkan MIG menambah jumlah instance lebih awal sebelum lonjakan trafik tiba, sehingga kapasitas sudah siap tepat pada pukul 08.00 WIB.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_065",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Seorang administrator secara tidak sengaja mengubah konfigurasi file /etc/ssh/sshd_config di dalam sebuah instance Compute Engine Linux sehingga layanan SSH gagal berjalan. Akibatnya, Anda tidak lagi bisa masuk ke dalam VM tersebut menggunakan gcloud compute ssh maupun tombol SSH di konsol. Bagaimana cara Anda dapat masuk atau mendiagnosis dan memperbaiki konfigurasi di dalam VM tersebut tanpa kehilangan data?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengaktifkan Interactive Serial Console pada metadata VM dan login melalui konsol serial menggunakan akun pengguna lokal atau startup script darurat untuk memperbaiki file konfigurasi."
+      },
+      {
+        "id": "B",
+        "text": "Menghapus VM beserta boot disk-nya karena sudah tidak bisa diselamatkan."
+      },
+      {
+        "id": "C",
+        "text": "Mengubah alamat IP eksternal VM menjadi alamat IP statis."
+      },
+      {
+        "id": "D",
+        "text": "Menambahkan peran Compute Admin ke akun Anda."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Ketika akses jaringan atau daemon SSH pada VM bermasalah, Anda dapat mengaktifkan akses ke Interactive Serial Console (serial-port-enable=TRUE) untuk berinteraksi langsung dengan konsol tingkat sistem/bootloader VM tanpa melalui jaringan SSH, atau menggunakan startup script untuk mereset konfigurasi sshd_config.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_066",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Anda sedang mengelola klaster Google Kubernetes Engine (GKE) mode Standard. Anda akan men-deploy workload pemrosesan pembelajaran mesin (machine learning) yang membutuhkan GPU mahal, sementara puluhan aplikasi web biasa di klaster yang sama tidak memerlukan GPU. Bagaimana cara memastikan bahwa Pod aplikasi web biasa tidak akan pernah dijadwalkan di atas node yang memiliki GPU, dan hanya Pod machine learning yang boleh berjalan di sana?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menambahkan node pool baru dengan GPU, menerapkan taint pada node pool tersebut, dan menambahkan toleration serta nodeSelector yang sesuai pada manifes Pod machine learning."
+      },
+      {
+        "id": "B",
+        "text": "Membuat objek Service dengan tipe ClusterIP."
+      },
+      {
+        "id": "C",
+        "text": "Mengatur replicas: 1 pada semua Deployment aplikasi web."
+      },
+      {
+        "id": "D",
+        "text": "Menonaktifkan fitur auto-repair pada node pool utama."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Di Kubernetes, Taints dan Tolerations bekerja bersama untuk memastikan bahwa Pod tidak dijadwalkan ke node yang tidak semestinya. Ketika sebuah node pool diberi taint, tidak ada Pod yang bisa dijadwalkan di sana kecuali Pod tersebut memiliki toleration yang cocok. Menambahkan nodeSelector atau Node Affinity memastikan Pod ML secara aktif memilih node GPU tersebut.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_067",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Sebuah Pod di dalam klaster GKE Anda terus-menerus mengalami kegagalan dan berstatus CrashLoopBackOff atau Pending. Dua perintah kubectl mana yang paling utama harus Anda jalankan untuk memeriksa riwayat peristiwa (events) penjadwalan Pod dan melihat keluaran pesan error dari aplikasi di dalam container?",
+    "options": [
+      {
+        "id": "A",
+        "text": "kubectl get nodes dan kubectl delete pod [NAMA_POD]"
+      },
+      {
+        "id": "B",
+        "text": "kubectl describe pod [NAMA_POD] dan kubectl logs [NAMA_POD]"
+      },
+      {
+        "id": "C",
+        "text": "kubectl apply -f pod.yaml dan kubectl expose pod [NAMA_POD]"
+      },
+      {
+        "id": "D",
+        "text": "kubectl config view dan kubectl version"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "kubectl describe pod [NAMA_POD] menampilkan detail status Pod beserta bagian Events di bagian bawah (sangat berguna untuk mendiagnosis status Pending, ImagePullBackOff, atau kegagalan volume mount). Sementara itu, kubectl logs [NAMA_POD] (dan --previous jika sudah restart) menampilkan stdout/stderr dari aplikasi di dalam container untuk mendiagnosis penyebab CrashLoopBackOff.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_068",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Anda perlu menyimpan objek di bucket Cloud Storage dan menyalinnya ke bucket lain menggunakan alat baris perintah Google Cloud SDK generasi terbaru yang memiliki performa paralelisme lebih cepat dibandingkan alat gsutil lama. Perintah mana yang direkomendasikan Google Cloud saat ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "gcloud storage cp gs://source-bucket/file.txt gs://dest-bucket/"
+      },
+      {
+        "id": "B",
+        "text": "gcloud compute scp gs://source-bucket/file.txt gs://dest-bucket/"
+      },
+      {
+        "id": "C",
+        "text": "bq cp gs://source-bucket/file.txt gs://dest-bucket/"
+      },
+      {
+        "id": "D",
+        "text": "gcloud s3 cp gs://source-bucket/file.txt gs://dest-bucket/"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Grup perintah gcloud storage adalah CLI terbaru dan direkomendasikan untuk berinteraksi dengan Cloud Storage, menggantikan gsutil dengan algoritma paralelisasi yang jauh lebih cepat dan sintaks yang konsisten dengan perintah gcloud lainnya.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_069",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Departemen kepatuhan mengharuskan semua dokumen transaksi disimpan di Cloud Storage selama 7 tahun. Dokumen sering diakses pada 30 hari pertama, jarang diakses setelah 30 hari, dan hampir tidak pernah diakses setelah 1 tahun. Setelah 7 tahun (2555 hari), dokumen wajib dihapus secara permanen. Bagaimana cara mengonfigurasi Object Lifecycle Management pada bucket tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengatur kondisi Age: 30 dengan aksi SetStorageClass ke Nearline, kondisi Age: 365 dengan aksi SetStorageClass ke Archive, dan kondisi Age: 2555 dengan aksi Delete."
+      },
+      {
+        "id": "B",
+        "text": "Mengatur kondisi CreatedBefore untuk menghapus semua file setiap hari Minggu."
+      },
+      {
+        "id": "C",
+        "text": "Membuat tiga bucket berbeda dan memindahkan file secara manual setiap bulan."
+      },
+      {
+        "id": "D",
+        "text": "Mengaktifkan Object Versioning tanpa aturan tambahan."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Object Lifecycle Management mendukung aksi SetStorageClass (untuk menurunkan kelas penyimpanan ke kelas yang lebih dingin seiring bertambahnya usia objek) dan aksi Delete (untuk menghapus objek secara otomatis ketika mencapai usia tertentu dalam satuan hari).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_070",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Tim developer ingin melindungi data di dalam sebuah bucket Cloud Storage penting agar jika seorang pengguna atau skrip secara tidak sengaja menimpa (overwrite) atau menghapus sebuah file, versi sebelumnya dari file tersebut masih dapat dipulihkan dengan mudah. Fitur Cloud Storage mana yang harus Anda aktifkan pada bucket tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Object Versioning"
+      },
+      {
+        "id": "B",
+        "text": "Requester Pays"
+      },
+      {
+        "id": "C",
+        "text": "Public Access Prevention"
+      },
+      {
+        "id": "D",
+        "text": "Transfer Appliance"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Saat Object Versioning diaktifkan pada sebuah bucket, Cloud Storage menyimpan versi noncurrent setiap kali objek yang ada ditimpa atau dihapus, sehingga memungkinkan Anda memulihkan objek yang terhapus secara tidak sengaja atau kembali ke keadaan versi sebelumnya.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_071",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Perusahaan Anda bergerak di bidang pialang saham dan tunduk pada regulasi SEC Rule 17a-4. Anda diharuskan menyimpan catatan audit keuangan di dalam sebuah bucket Cloud Storage dengan jaminan bahwa begitu file ditulis ke dalam bucket, tidak ada seorang pun (termasuk Project Owner atau Organization Admin) yang dapat menghapus atau memodifikasi file tersebut sebelum masa waktu 5 tahun berakhir. Fitur mana yang harus Anda konfigurasikan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Retention Policy pada bucket yang telah dikunci secara permanen (Bucket Lock)."
+      },
+      {
+        "id": "B",
+        "text": "Memberikan peran Storage Object Viewer kepada semua orang."
+      },
+      {
+        "id": "C",
+        "text": "Mengubah kelas penyimpanan bucket menjadi Coldline."
+      },
+      {
+        "id": "D",
+        "text": "Menyimpan file dalam format .zip dengan kata sandi."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Retention Policy pada Cloud Storage menentukan durasi minimum objek harus disimpan sebelum boleh dihapus atau diganti (WORM - Write Once, Read Many). Ketika Anda mengunci kebijakan tersebut menggunakan Bucket Lock, kebijakan retensi tidak dapat lagi dihapus atau dipersingkat durasinya oleh siapa pun, sehingga memenuhi standar kepatuhan regulasi keuangan.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_072",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Anda ingin memantau penggunaan memori (RAM) dan persentase ruang disk yang terpakai di dalam sistem operasi Linux pada instance Compute Engine Anda, lalu menampilkan grafiknya di dasbor Cloud Monitoring. Secara default, Compute Engine hanya mengirimkan metrik tingkat hypervisor (seperti utilisasi CPU, byte jaringan, dan I/O disk). Apa yang harus Anda lakukan untuk mendapatkan metrik memori dan ruang disk internal OS tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menginstal dan mengonfigurasi Ops Agent pada instance Compute Engine tersebut."
+      },
+      {
+        "id": "B",
+        "text": "Mengaktifkan VPC Flow Logs pada subnet tempat VM berada."
+      },
+      {
+        "id": "C",
+        "text": "Membuka port TCP 22 ke seluruh internet agar Cloud Monitoring bisa masuk ke VM."
+      },
+      {
+        "id": "D",
+        "text": "Mengubah tipe boot disk dari Standard Persistent Disk menjadi SSD Persistent Disk."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Hypervisor tidak melihat penggunaan memori internal OS maupun ruang kosong file system secara langsung demi privasi dan isolasi. Untuk mengumpulkan telemetri internal sistem operasi (seperti penggunaan RAM, ruang disk, proses aktif) serta log aplikasi ke Cloud Monitoring dan Cloud Logging, Anda harus menginstal Google Cloud Ops Agent di dalam VM.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_073",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Anda ingin memverifikasi dari luar jaringan Google Cloud apakah situs web perusahaan Anda (https://www.perusahaansaya.co.id) selalu dapat diakses dari berbagai lokasi geografis di dunia (seperti Amerika Serikat, Eropa, dan Asia-Pasifik), dan langsung mengirimkan peringatan SMS ke tim on-call jika situs tersebut tidak merespons kode status 200 OK selama lebih dari 2 menit. Fitur Cloud Monitoring mana yang harus Anda buat?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Uptime Check yang dipadukan dengan Alerting Policy dan Notification Channel SMS."
+      },
+      {
+        "id": "B",
+        "text": "Audit Logs dengan filter protoPayload.methodName."
+      },
+      {
+        "id": "C",
+        "text": "Cloud Trace dengan sampel 100%."
+      },
+      {
+        "id": "D",
+        "text": "Error Reporting di dalam kode backend."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Uptime Checks di Cloud Monitoring melakukan permintaan secara berkala dari berbagai lokasi server Google di seluruh dunia ke alamat IP atau URL publik Anda untuk memverifikasi ketersediaan layanan eksternal, dan dapat dikaitkan langsung dengan Alerting Policy untuk memicu notifikasi.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_074",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Auditor hukum perusahaan meminta agar semua log di Cloud Logging dari proyek produksi disimpan selama 3 tahun untuk keperluan investigasi forensik jika sewaktu-waktu diperlukan, namun dengan biaya penyimpanan seminimal mungkin dan tanpa perlu dikueri menggunakan SQL. Ke tujuan (destination) mana Anda harus mengarahkan Log Router Sink Anda?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Bucket Cloud Storage dengan kelas penyimpanan Archive."
+      },
+      {
+        "id": "B",
+        "text": "Dataset BigQuery dengan partisi harian."
+      },
+      {
+        "id": "C",
+        "text": "Topik Cloud Pub/Sub."
+      },
+      {
+        "id": "D",
+        "text": "Instance Cloud SQL for MySQL."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Log Router Sink mendukung empat tujuan utama: Cloud Logging Buckets, Cloud Storage, BigQuery, dan Cloud Pub/Sub. Untuk retensi arsip jangka panjang dengan biaya paling murah tanpa kebutuhan kueri analitik langsung, mengekspor log ke bucket Cloud Storage (kelas Coldline atau Archive) adalah pilihan yang paling hemat biaya.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_075",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Tim keamanan menggunakan sistem SIEM pihak ketiga (seperti Splunk) yang berjalan di luar Google Cloud. Mereka ingin mengalirkan (stream) semua log aktivitas dari Google Cloud Logging ke sistem Splunk tersebut secara real-time. Ke tujuan mana Anda harus mengonfigurasi Log Router Sink untuk memfasilitasi integrasi streaming ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud Storage"
+      },
+      {
+        "id": "B",
+        "text": "Cloud Pub/Sub"
+      },
+      {
+        "id": "C",
+        "text": "Cloud Filestore"
+      },
+      {
+        "id": "D",
+        "text": "Persistent Disk"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Untuk mengintegrasikan log secara real-time (streaming) ke layanan eksternal atau sistem SIEM pihak ketiga seperti Splunk atau Datadog, praktik standar di Google Cloud adalah mengarahkan Log Router Sink ke topik Cloud Pub/Sub, yang kemudian dikonsumsi oleh sistem SIEM atau diteruskan melalui Dataflow.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_076",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Tim jaringan sedang menyelidiki lonjakan biaya egress jaringan yang tidak wajar dari beberapa instance VM di sebuah subnet produksi. Mereka ingin melihat catatan sampel paket jaringan IP yang masuk dan keluar dari antarmuka jaringan VM tersebut (termasuk alamat IP sumber, IP tujuan, port, dan jumlah byte) tanpa memengaruhi performa VM. Fitur apa yang harus Anda aktifkan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "VPC Flow Logs pada tingkat subnet yang bersangkutan."
+      },
+      {
+        "id": "B",
+        "text": "Admin Activity Audit Logs pada tingkat proyek."
+      },
+      {
+        "id": "C",
+        "text": "Cloud Armor Adaptive Protection."
+      },
+      {
+        "id": "D",
+        "text": "Cloud NAT Logging."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "VPC Flow Logs mencatat sampel arus jaringan yang dikirim dan diterima oleh instance VM di dalam sebuah subnet. Data ini sangat berguna untuk pemantauan jaringan, forensik keamanan, analisis trafik real-time, dan pengoptimalan biaya egress.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_077",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Seorang developer di tim Anda melaporkan bahwa saat ia mencoba menghubungkan instance VM app-vm (IP 10.10.1.5) ke instance database db-vm (IP 10.20.1.10) pada port TCP 5432, koneksi selalu gagal. Ada puluhan aturan firewall dan rute kustom di dalam VPC tersebut. Alat diagnostik bawaan Google Cloud mana yang dapat mensimulasikan jalur paket antara kedua VM tersebut dan langsung menunjukkan aturan firewall atau rute mana yang memblokir trafik?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Network Intelligence Center - Connectivity Tests"
+      },
+      {
+        "id": "B",
+        "text": "Cloud Profiler"
+      },
+      {
+        "id": "C",
+        "text": "Cloud Trace"
+      },
+      {
+        "id": "D",
+        "text": "BigQuery Query Plan Explanation"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Connectivity Tests (bagian dari Network Intelligence Center) adalah alat diagnostik yang menganalisis konfigurasi jaringan secara statis dan melakukan verifikasi data plane untuk menguji konektivitas antar endpoint (seperti VM ke VM, atau VM ke on-premises) dan mengidentifikasi secara tepat aturan firewall atau rute mana yang mengizinkan atau menolak paket.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_078",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Aplikasi berbasis microservice Anda tiba-tiba mengalami peningkatan waktu respons (latensi) yang signifikan saat pengguna melakukan proses checkout. Anda ingin melihat rincian waktu yang dihabiskan oleh setiap permintaan pengguna saat melintasi berbagai microservice, mulai dari API Gateway, layanan keranjang belanja, hingga layanan pembayaran untuk menemukan titik kemacetan (bottleneck). Layanan Google Cloud Observability mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cloud Trace"
+      },
+      {
+        "id": "B",
+        "text": "Cloud Audit Logs"
+      },
+      {
+        "id": "C",
+        "text": "Cloud Storage Access Logs"
+      },
+      {
+        "id": "D",
+        "text": "Cloud Billing Reports"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Cloud Trace adalah sistem distributed tracing yang mengumpulkan data latensi dari aplikasi Anda (seperti di App Engine, Cloud Run, atau GKE) dan menampilkan bagaimana sebuah permintaan merambat melalui berbagai layanan mikro, membantu mengidentifikasi layanan mana yang menyebabkan perlambatan.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_079",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Tim keuangan mengeluhkan bahwa tagihan bulanan BigQuery meningkat tajam karena banyak analis data menjalankan kueri SELECT * tanpa batas pada tabel yang berukuran puluhan Terabyte. Saat seorang analis sedang menulis kueri di konsol BigQuery atau menggunakan CLI bq query, bagaimana cara mereka mengetahui secara pasti berapa banyak byte data yang akan dipindai (processed) oleh kueri tersebut tanpa benar-benar mengeksekusi kueri dan tanpa dikenakan biaya?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Melihat indikator validator kueri di kanan atas editor konsol BigQuery atau menjalankan bq query --dry_run di CLI."
+      },
+      {
+        "id": "B",
+        "text": "Menjalankan kueri dengan menambahkan klausa LIMIT 5 di akhir kueri."
+      },
+      {
+        "id": "C",
+        "text": "Mengekspor seluruh tabel ke file CSV di laptop terlebih dahulu."
+      },
+      {
+        "id": "D",
+        "text": "Menghubungi dukungan pelanggan Google Cloud sebelum menjalankan setiap kueri."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Menjalankan dry run (baik otomatis melalui tanda centang hijau di UI BigQuery Console maupun menggunakan flag --dry_run pada CLI bq) akan memvalidasi sintaks kueri dan menghitung jumlah byte yang akan dibaca secara akurat tanpa mengeksekusi kueri tersebut dan gratis (tidak memakan kuota pemrosesan). Perlu diingat bahwa klausa LIMIT di BigQuery tidak mengurangi jumlah data yang dipindai.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_080",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Anda sedang menyiapkan tabel transaksi baru di BigQuery yang akan menyimpan miliaran baris data log selama bertahun-tahun. Analis data hampir selalu menyertakan filter berdasarkan kolom tanggal transaksi (WHERE transaction_date BETWEEN ...) dan kondisi berdasarkan kolom negara (WHERE country_code = 'ID'). Bagaimana cara Anda merancang skema tabel tersebut agar biaya pemindaian kueri jauh lebih murah dan performa kueri jauh lebih cepat?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Membuat tabel yang dipartisi (partitioned table) berdasarkan kolom transaction_date dan dikelompokkan (clustered) berdasarkan kolom country_code."
+      },
+      {
+        "id": "B",
+        "text": "Menyimpan semua data dalam satu kolom string besar berformat JSON tanpa partisi."
+      },
+      {
+        "id": "C",
+        "text": "Membuat satu tabel terpisah untuk setiap jam transaksi."
+      },
+      {
+        "id": "D",
+        "text": "Menggunakan indeks B-Tree seperti pada MySQL."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Partitioning membagi tabel besar menjadi segmen-segmen berdasarkan kolom waktu/tanggal atau integer, sedangkan Clustering mengurutkan data di dalam setiap partisi berdasarkan satu atau beberapa kolom (seperti country_code). Kombinasi keduanya memungkinkan BigQuery memangkas (prune) blok data yang tidak relevan, sehingga hanya memindai dan menagih sebagian kecil data yang benar-benar dibutuhkan kueri.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_081",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Sebuah instance Compute Engine produksi yang menjalankan beban kerja memori tinggi mengalami penghentian tak terduga ketika Google Cloud melakukan pemeliharaan perangkat keras (host maintenance event) pada server fisik tempat VM tersebut berada. Saat Anda memeriksa konfigurasi VM, opsi On host maintenance diatur ke Terminate. Apa yang harus Anda ubah agar di masa mendatang VM tetap berjalan tanpa gangguan saat ada pemeliharaan infrastruktur Google?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengubah pengaturan On host maintenance menjadi Migrate VM instance (Live Migration) dan mengaktifkan Automatic restart."
+      },
+      {
+        "id": "B",
+        "text": "Mengubah VM menjadi Spot VM."
+      },
+      {
+        "id": "C",
+        "text": "Memasang GPU ke dalam VM tersebut."
+      },
+      {
+        "id": "D",
+        "text": "Menonaktifkan alamat IP internal VM."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Fitur Live Migration (Migrate VM instance) menjaga agar instance Compute Engine tetap berjalan secara transparan dengan memindahkannya ke server host fisik lain di zona yang sama saat Google melakukan pemeliharaan perangkat keras atau perangkat lunak infrastruktur. (Catatan: VM dengan GPU yang terpasang atau Spot VM tidak mendukung Live Migration).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_082",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Anda baru saja memigrasikan klaster database ke Compute Engine. Setelah berjalan selama 3 minggu, Anda melihat tanda peringatan rekomendasi (Right-sizing recommendation) di halaman Compute Engine Console yang menyatakan bahwa beberapa VM n2-standard-16 rata-rata hanya menggunakan 8% CPU dan 15% RAM. Layanan latar belakang mana di Google Cloud yang secara otomatis menganalisis metrik penggunaan historis ini dan menghasilkan rekomendasi penghematan biaya tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Active Assist (Recommender / Compute Engine Rightsizing Recommendations)"
+      },
+      {
+        "id": "B",
+        "text": "Cloud Armor"
+      },
+      {
+        "id": "C",
+        "text": "Cloud Deployment Manager"
+      },
+      {
+        "id": "D",
+        "text": "Cloud Identity-Aware Proxy"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Active Assist (melalui mesin Recommender) menganalisis metrik utilisasi resource (seperti CPU dan memori VM selama 8–30 hari terakhir) serta pola konfigurasi IAM untuk memberikan rekomendasi cerdas, seperti mengubah ukuran jenis mesin (rightsizing), menghapus idle persistent disks, atau mencabut izin IAM yang berlebihan.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_083",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Anda perlu mentransfer data cadangan berukuran 50 GB dari server lokal di kantor Anda ke dalam bucket Cloud Storage. Koneksi internet kantor Anda tidak terlalu stabil sehingga proses unggah file besar berisiko terputus di tengah jalan. Fitur bawaan dari perintah gcloud storage cp mana yang memastikan jika proses unggah file besar terputus karena gangguan jaringan, proses unggah dapat dilanjutkan dari titik terakhir tanpa harus mengulang dari 0%?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Resumable uploads (unggulan yang dapat dilanjutkan secara otomatis untuk file berukuran besar)."
+      },
+      {
+        "id": "B",
+        "text": "Signed URLs."
+      },
+      {
+        "id": "C",
+        "text": "Object Lifecycle Management."
+      },
+      {
+        "id": "D",
+        "text": "Requester Pays."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Cloud Storage dan CLI gcloud storage secara otomatis menggunakan mekanisme resumable uploads (dan parallel composite uploads jika sesuai) ketika mengunggah file yang ukurannya melampaui ambang batas tertentu, sehingga jika terjadi kegagalan jaringan sementara, pengunggahan dapat dilanjutkan dari byte terakhir yang berhasil diterima.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_084",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Klaster GKE Standard Anda kehabisan kapasitas vCPU pada node pool saat ini sehingga beberapa Pod baru tertahan dalam status Pending dengan pesan error Insufficient cpu. Anda ingin klaster secara otomatis menambahkan worker node baru ke dalam node pool ketika ada Pod yang berstatus Pending karena kurangnya kapasitas, dan menghapus node ketika utilisasi node rendah. Fitur GKE mana yang harus Anda aktifkan pada node pool tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cluster Autoscaler (--enable-autoscaling dengan batas --min-nodes dan --max-nodes)."
+      },
+      {
+        "id": "B",
+        "text": "Horizontal Pod Autoscaler (HPA)."
+      },
+      {
+        "id": "C",
+        "text": "Node Auto-upgrade."
+      },
+      {
+        "id": "D",
+        "text": "Pod Disruption Budget (PDB)."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Cluster Autoscaler di GKE memantau permintaan resource dari Pod. Jika ada Pod yang tidak dapat dijadwalkan (Pending) karena kurangnya CPU atau memori di node yang ada, Cluster Autoscaler akan otomatis menambahkan node baru ke node pool hingga batas maksimum (--max-nodes).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_085",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Anda ingin melakukan pencadangan (backup) mandiri terhadap sebuah database Cloud SQL pada saat ini juga sebelum tim developer menjalankan skrip migrasi skema database yang berisiko tinggi. Perintah gcloud mana yang harus Anda jalankan untuk membuat on-demand backup tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "gcloud sql backups create --instance=[NAMA_INSTANCE_SQL]"
+      },
+      {
+        "id": "B",
+        "text": "gcloud compute disks snapshot [NAMA_INSTANCE_SQL]"
+      },
+      {
+        "id": "C",
+        "text": "gcloud sql instances restart [NAMA_INSTANCE_SQL]"
+      },
+      {
+        "id": "D",
+        "text": "bq cp [NAMA_INSTANCE_SQL] [BACKUP_TABLE]"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Selain pencadangan otomatis harian (automated backups), Cloud SQL memungkinkan Anda membuat cadangan kapan saja (on-demand backups) menggunakan perintah gcloud sql backups create --instance=[NAMA_INSTANCE_SQL]. Cadangan ini tidak dihapus secara otomatis oleh siklus retensi harian hingga Anda menghapusnya atau menghapus instance tersebut.\n\nBagian 5: Konfigurasi Akses dan Keamanan (Soal 86–100)",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_086",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Tim auditor eksternal meminta akses untuk melihat semua daftar dan konfigurasi struktur hierarki proyek yang ada di dalam organisasi Anda. Namun, berdasarkan kebijakan keamanan perusahaan, mereka hanya boleh menelusuri hierarki proyek dan folder, tanpa diizinkan melihat konfigurasi atau isi data di dalam layanan seperti Cloud Storage, Compute Engine, maupun BigQuery. Peran IAM mana yang paling tepat diberikan sesuai prinsip least privilege?",
+    "options": [
+      {
+        "id": "A",
+        "text": "roles/viewer (Basic Viewer)"
+      },
+      {
+        "id": "B",
+        "text": "roles/browser (Browser)"
+      },
+      {
+        "id": "C",
+        "text": "roles/owner (Basic Owner)"
+      },
+      {
+        "id": "D",
+        "text": "roles/iam.securityReviewer (Security Reviewer)"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Peran Browser (roles/browser) hanya memberikan izin untuk menelusuri hierarki resource di dalam sebuah proyek/organisasi (seperti melihat daftar proyek dan folder), sedangkan peran Viewer (roles/viewer) memberikan akses baca ke hampir seluruh isi data dan konfigurasi layanan di dalam proyek.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_087",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Aplikasi yang berjalan di atas sebuah instance Compute Engine perlu membaca pesan dari topik Cloud Pub/Sub dan menulis hasil olahannya ke dalam tabel BigQuery. Bagaimana cara paling aman dan sesuai best practice Google Cloud untuk mengautentikasi aplikasi tersebut ke kedua layanan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Membuat Service Account khusus (user-managed service account), memberikan peran Pub/Sub Subscriber dan BigQuery Data Editor kepada Service Account tersebut, lalu melampirkannya ke instance VM tersebut."
+      },
+      {
+        "id": "B",
+        "text": "Membuat kunci JSON dari akun pemilik proyek (Project Owner), lalu menyimpannya di dalam repositori Git bersama kode aplikasi."
+      },
+      {
+        "id": "C",
+        "text": "Menggunakan Compute Engine Default Service Account dengan akses penuh (Allow full access to all Cloud APIs)."
+      },
+      {
+        "id": "D",
+        "text": "Memasukkan nama pengguna dan kata sandi akun Gmail developer ke dalam variabel lingkungan VM."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Praktik terbaik keamanan di Google Cloud adalah tidak menggunakan Default Service Account (yang biasanya memiliki peran Editor yang terlalu luas) dan tidak menanamkan file kunci JSON statis. Sebaliknya, buatlah user-managed service account khusus per aplikasi, berikan hanya peran IAM minimum yang dibutuhkan (least privilege), dan lampirkan ke VM agar aplikasi mendapatkan kredensial berumur pendek (short-lived token) secara otomatis melalui Metadata Server.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_088",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Anda memiliki sebuah Pod yang berjalan di dalam klaster Google Kubernetes Engine (GKE) yang perlu mengakses sebuah bucket Cloud Storage privat. Anda ingin menghindari pembuatan dan pengelolaan file kunci JSON Service Account di dalam Kubernetes Secret, dan juga tidak ingin memberikan izin akses bucket tersebut ke seluruh Pod lain yang berada di worker node yang sama. Fitur mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Workload Identity Federation for GKE (Workload Identity)"
+      },
+      {
+        "id": "B",
+        "text": "Node Pool Access Scopes"
+      },
+      {
+        "id": "C",
+        "text": "Basic Authentication di Kubernetes API"
+      },
+      {
+        "id": "D",
+        "text": "Membuat bucket Cloud Storage menjadi publik (allUsers)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Workload Identity Federation for GKE adalah cara yang direkomendasikan untuk mengakses layanan Google Cloud dari aplikasi di dalam GKE. Fitur ini memungkinkan Anda mengikat Kubernetes Service Account (KSA) secara langsung untuk bertindak sebagai IAM Service Account (GSA), sehingga izin diberikan secara spesifik pada tingkat Pod tanpa perlu mengelola kunci JSON dan tanpa mengekspos izin ke seluruh Node.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_089",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Tim operasi malam (night shift operator) membutuhkan kemampuan untuk menyalakan (compute.instances.start), menghentikan (compute.instances.stop), dan melihat status (compute.instances.get, compute.instances.list) dari instance Compute Engine, tetapi mereka tidak boleh diizinkan untuk membuat VM baru atau menghapus VM yang sudah ada. Tidak ada Predefined Role bawaan yang hanya memiliki empat izin persis tersebut. Apa yang harus Anda lakukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Membuat Custom IAM Role pada tingkat proyek atau organisasi yang hanya berisi keempat izin (permissions) tersebut, lalu memberikannya kepada grup Google milik tim operasi malam."
+      },
+      {
+        "id": "B",
+        "text": "Memberikan peran Compute Instance Admin (v1) dan meminta mereka berjanji secara tertulis untuk tidak menghapus VM."
+      },
+      {
+        "id": "C",
+        "text": "Memberikan peran Compute Viewer karena peran tersebut sudah bisa menyalakan dan mematikan VM."
+      },
+      {
+        "id": "D",
+        "text": "Membagikan kata sandi root Linux kepada mereka."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Jika tidak ada Predefined Role yang sesuai dengan prinsip least privilege untuk tugas spesifik, Anda dapat membuat Custom Role dengan menggabungkan satu atau lebih izin (permissions) tingkat API yang spesifik sesuai kebutuhan pekerjaan pengguna.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_090",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Lima orang developer baru baru saja bergabung ke dalam tim Backend Engineering, dan dua orang developer lama pindah ke divisi Data Science. Anda ingin mengelola pemberian akses IAM di seluruh proyek Google Cloud dengan cara yang mudah diaudit dan skalabel tanpa harus mengedit kebijakan IAM di setiap proyek satu per satu setiap kali ada perubahan anggota tim. Praktik terbaik mana yang harus Anda terapkan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Membuat Google Groups di Cloud Identity / Google Workspace (misalnya gcp-backend-devs@company.com), memberikan peran IAM kepada Google Group tersebut, dan mengelola keanggotaan pengguna di dalam Google Group."
+      },
+      {
+        "id": "B",
+        "text": "Menambahkan email pribadi masing-masing developer secara langsung ke setiap kebijakan IAM proyek."
+      },
+      {
+        "id": "C",
+        "text": "Membuat satu akun email bersama (shared-dev@company.com) dan membagikan kata sandinya ke seluruh developer."
+      },
+      {
+        "id": "D",
+        "text": "Memberikan peran Owner kepada semua karyawan di tingkat Organisasi."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Google merekomendasikan pengelolaan akses IAM berbasis grup (Google Groups). Dengan memberikan peran IAM kepada Google Group dan bukan ke akun individu, penambahan atau pencabutan akses saat karyawan bergabung, berpindah divisi, atau keluar perusahaan cukup dilakukan dengan memperbarui anggota grup di Cloud Identity/Workspace.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_091",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Seorang developer di mesin laptop lokalnya perlu menguji kode aplikasi yang membutuhkan izin dari sebuah Service Account bernama app-tester@my-project.iam.gserviceaccount.com. Kebijakan keamanan perusahaan melarang keras pembuatan dan pengunduhan file kunci privat Service Account (JSON key file) karena risiko kebocoran kredensial. Bagaimana cara developer tersebut menjalankan perintah gcloud atau menguji akses menggunakan identitas Service Account tersebut dengan aman?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menggunakan fitur Service Account Impersonation dengan memberikan peran Service Account Token Creator (roles/iam.serviceAccountTokenCreator) kepada akun pengguna developer terhadap Service Account tersebut, lalu menggunakan flag --impersonate-service-account."
+      },
+      {
+        "id": "B",
+        "text": "Menonaktifkan kebijakan organisasi secara diam-diam di tengah malam untuk mengunduh kunci JSON."
+      },
+      {
+        "id": "C",
+        "text": "Mengubah email akun Google pribadi developer menjadi sama dengan email Service Account."
+      },
+      {
+        "id": "D",
+        "text": "Mematikan fitur autentikasi IAM di proyek tersebut."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Service Account Impersonation memungkinkan pengguna terautentikasi yang memiliki peran roles/iam.serviceAccountTokenCreator pada sebuah Service Account untuk meminta kredensial sementara berumur pendek (short-lived credentials) atas nama Service Account tersebut (misalnya dengan flag --impersonate-service-account), tanpa pernah perlu membuat atau mengunduh kunci privat JSON.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_092",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Tim keamanan ingin mengetahui secara pasti siapa yang menghapus sebuah bucket Cloud Storage produksi kemarin sore, dari alamat IP mana permintaan tersebut berasal, dan kapan tepatnya tindakan itu terjadi. Jenis log audit mana di Cloud Audit Logs yang mencatat informasi ini dan apakah log tersebut aktif secara default?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Admin Activity audit logs, yang selalu aktif secara default dan tidak dapat dinonaktifkan."
+      },
+      {
+        "id": "B",
+        "text": "Data Access audit logs, yang harus diaktifkan secara manual terlebih dahulu."
+      },
+      {
+        "id": "C",
+        "text": "VPC Flow Logs, yang aktif secara default di semua subnet."
+      },
+      {
+        "id": "D",
+        "text": "System Event audit logs, yang hanya mencatat tindakan internal mesin Google."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Admin Activity audit logs mencatat panggilan API atau tindakan administratif yang memodifikasi konfigurasi atau metadata dari resource (seperti membuat atau menghapus VM, menghapus bucket Cloud Storage, atau mengubah kebijakan IAM). Log ini selalu aktif secara default, tidak dapat dimatikan, dan gratis. (Data Access audit logs mencatat pembacaan/penulisan isi data di dalam resource dan dinonaktifkan secara default kecuali untuk BigQuery).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_093",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Tim keamanan ingin menerima notifikasi otomatis di kanal Slack mereka setiap kali seseorang membuat, memodifikasi, atau menghapus aturan firewall VPC di dalam proyek produksi. Pendekatan arsitektur mana yang paling tepat untuk memenuhi kebutuhan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Membuat Log Router sink yang memfilter Admin Activity audit logs untuk metode aturan firewall (compute.firewalls.*), mengarahkannya ke topik Cloud Pub/Sub, dan memicu Cloud Run functions untuk mengirim pesan ke webhook Slack."
+      },
+      {
+        "id": "B",
+        "text": "Mengekspor tagihan bulanan ke BigQuery dan memeriksanya setiap akhir bulan."
+      },
+      {
+        "id": "C",
+        "text": "Menginstal Ops Agent di semua instance VM."
+      },
+      {
+        "id": "D",
+        "text": "Mengaktifkan Cloud CDN pada Load Balancer."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Setiap pembuatan, perubahan, atau penghapusan aturan firewall tercatat secara instan di Admin Activity audit logs. Dengan membuat Log Sink menggunakan filter log yang sesuai dan mengarahkannya ke topik Cloud Pub/Sub, Anda dapat memicu Cloud Run functions secara event-driven untuk meneruskan peringatan ke sistem obrolan eksternal seperti Slack.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_094",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Anda memiliki puluhan instance Compute Engine yang berada di subnet privat tanpa alamat IP eksternal. Administrator sistem dari kantor pusat perlu melakukan koneksi SSH (port TCP 22) atau RDP (port TCP 3389) ke VM-VM tersebut untuk pemeliharaan rutin. Anda tidak ingin membuat dan memelihara bastion host (jump host) sendiri dan tidak ingin membuka port 22/3389 ke seluruh internet. Layanan keamanan Google Cloud mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Identity-Aware Proxy (IAP) TCP Forwarding (dengan mengizinkan trafik firewall ingress dari rentang IP 35.235.240.0/20)."
+      },
+      {
+        "id": "B",
+        "text": "Cloud NAT."
+      },
+      {
+        "id": "C",
+        "text": "Private Google Access."
+      },
+      {
+        "id": "D",
+        "text": "Cloud DNS Private Zone."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Identity-Aware Proxy (IAP) untuk TCP Forwarding memungkinkan Anda mengontrol akses administratif (SSH dan RDP) ke instance VM yang tidak memiliki alamat IP publik. Koneksi dienkripsi dan diautentikasi menggunakan identitas IAM pengguna, dan Anda hanya perlu membuka aturan firewall ingress untuk port 22/3389 dari rentang IP proxy IAP milik Google (35.235.240.0/20).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_095",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Sebuah mitra bisnis eksternal perlu mengunggah satu file laporan berukuran 10 MB ke dalam bucket Cloud Storage privat milik perusahaan Anda. Mitra tersebut tidak memiliki akun Google atau akun Google Workspace, dan Anda hanya ingin memberikan mereka akses unggah (write) ke objek spesifik tersebut selama 15 menit saja. Fitur Cloud Storage mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Membuat Signed URL menggunakan metode HTTP PUT dengan masa berlaku (expiration) 15 menit dan membagikan URL tersebut kepada mitra."
+      },
+      {
+        "id": "B",
+        "text": "Mengubah izin bucket dengan menambahkan prinsipal allUsers sebagai Storage Object Admin selama 15 menit."
+      },
+      {
+        "id": "C",
+        "text": "Membuat proyek Google Cloud baru khusus untuk mitra tersebut."
+      },
+      {
+        "id": "D",
+        "text": "Mengaktifkan fitur Object Versioning."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Signed URLs memberikan akses terbatas waktu (time-limited access) untuk melakukan tindakan spesifik (seperti membaca/GET atau mengunggah/PUT sebuah objek) kepada siapa saja yang memegang URL tersebut, terlepas dari apakah mereka memiliki akun Google atau tidak.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_096",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Anda sedang mengamankan sebuah bucket Cloud Storage yang berisi millones file statis aplikasi web. Sebelumnya, bucket ini menggunakan kontrol akses tingkat objek (Access Control Lists / ACLs) yang rumit sehingga beberapa file memiliki izin yang berbeda-beda dan sulit diaudit. Anda ingin menonaktifkan semua ACL tingkat objek secara permanen dan memastikan semua izin akses hanya dikelola secara terpusat melalui kebijakan IAM tingkat bucket. Pengaturan apa yang harus Anda aktifkan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Uniform bucket-level access"
+      },
+      {
+        "id": "B",
+        "text": "Fine-grained access control"
+      },
+      {
+        "id": "C",
+        "text": "Customer-supplied encryption keys (CSEK)"
+      },
+      {
+        "id": "D",
+        "text": "Requester Pays"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Mengaktifkan Uniform bucket-level access pada sebuah bucket Cloud Storage akan menonaktifkan evaluasi Access Control Lists (ACL) pada tingkat objek individual dan memastikan bahwa akses ke seluruh objek di dalam bucket tersebut diatur secara seragam dan eksklusif melalui izin IAM tingkat bucket (dan mendukung IAM Conditions).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_097",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Administrator Linux di perusahaan Anda mengelola ratusan instance Compute Engine. Saat ini, ketika seorang administrator ingin masuk ke dalam VM melalui SSH, Anda harus mengelola kunci publik SSH secara manual di metadata proyek atau metadata instance. Anda ingin menyederhanakan proses ini agar akun pengguna Linux di dalam VM langsung terhubung dengan identitas Google Cloud / Cloud Identity mereka, mendukung Two-Factor Authentication (2FA), dan akses sudo diatur melalui peran IAM (roles/compute.osAdminLogin vs roles/compute.osLogin). Fitur apa yang harus Anda aktifkan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "OS Login (enable-oslogin=TRUE pada metadata proyek atau instance)."
+      },
+      {
+        "id": "B",
+        "text": "Shielded VM dengan vTPM."
+      },
+      {
+        "id": "C",
+        "text": "Cloud Router dengan BGP."
+      },
+      {
+        "id": "D",
+        "text": "Startup script yang menjalankan chmod 777 /."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Fitur OS Login mengaitkan akun pengguna Linux pada VM langsung ke identitas Google pengguna melalui IAM. Dengan mengaktifkan metadata enable-oslogin=TRUE, Anda tidak perlu lagi mengelola kunci SSH di metadata secara manual; akses SSH otomatis dicabut saat akun IAM karyawan dinonaktifkan, dan hak akses sudo dikendalikan sepenuhnya melalui peran IAM (Compute OS Admin Login vs Compute OS Login).",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_098",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Aplikasi microservice Anda membutuhkan akses ke kunci API pembayaran pihak ketiga (seperti Stripe atau Midtrans), kredensial koneksi database, dan sertifikat TLS. Tim keamanan mewajibkan agar kredensial sensitif ini disimpan di layanan terpusat yang mendukung pembuatan versi (versioning), rotasi otomatis, kontrol akses IAM per rahasia, serta pencatatan audit log setiap kali rahasia diakses. Layanan mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Secret Manager"
+      },
+      {
+        "id": "B",
+        "text": "Cloud Storage Standard"
+      },
+      {
+        "id": "C",
+        "text": "Menyimpannya dalam bentuk teks biasa di dalam kode sumber di Cloud Source Repositories"
+      },
+      {
+        "id": "D",
+        "text": "Menuliskannya di dalam deskripsi aturan firewall VPC"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Secret Manager adalah layanan penyimpanan terkelola dan aman di Google Cloud yang dirancang khusus untuk menyimpan kunci API, kata sandi, sertifikat, dan data sensitif lainnya, lengkap dengan fitur manajemen versi, rotasi rahasia otomatis, enkripsi, dan pencatatan Cloud Audit Logs.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_099",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Secara default, Google Cloud mengenkripsi semua data yang disimpan (data at rest) di Cloud Storage, Persistent Disk, dan BigQuery menggunakan kunci enkripsi yang dikelola sepenuhnya oleh Google (Google-managed encryption keys / GMEK). Namun, regulasi industri klien Anda mewajibkan agar perusahaan Anda sendiri yang memegang kendali atas pembuatan, jadwal rotasi, dan pencabutan kunci enkripsi kriptografi tersebut di dalam layanan manajemen kunci terpusat di Google Cloud. Pendekatan mana yang harus Anda gunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menggunakan Customer-Managed Encryption Keys (CMEK) yang dibuat dan dikelola di dalam Cloud Key Management Service (Cloud KMS)."
+      },
+      {
+        "id": "B",
+        "text": "Menonaktifkan enkripsi data at rest pada bucket dan disk."
+      },
+      {
+        "id": "C",
+        "text": "Mengaktifkan Cloud CDN untuk mengenkripsi disk."
+      },
+      {
+        "id": "D",
+        "text": "Menggunakan Signed URLs pada Persistent Disk."
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Customer-Managed Encryption Keys (CMEK) memungkinkan Anda menggunakan kunci kriptografi yang Anda buat, rotasi, dan kelola sendiri melalui layanan Cloud Key Management Service (Cloud KMS) untuk melindungi data at rest di berbagai layanan Google Cloud seperti Cloud Storage, BigQuery, Compute Engine Persistent Disk, dan Cloud SQL.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  },
+  {
+    "id": "gcp_ace_id_100",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Aplikasi web publik Anda yang berada di belakang Global External Application Load Balancer mengalami serangan Distributed Denial of Service (DDoS) serta percobaan eksploitasi SQL Injection (SQLi) dan Cross-Site Scripting (XSS) dari sejumlah alamat IP di negara tertentu. Layanan keamanan Google Cloud mana yang harus Anda aktifkan dan pasangkan pada backend service Load Balancer tersebut untuk memblokir serangan berdasarkan aturan OWASP Top 10 dan lokasi geografis IP?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Google Cloud Armor"
+      },
+      {
+        "id": "B",
+        "text": "Identity-Aware Proxy (IAP)"
+      },
+      {
+        "id": "C",
+        "text": "Cloud NAT"
+      },
+      {
+        "id": "D",
+        "text": "VPC Network Peering"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Google Cloud Armor adalah layanan keamanan jaringan tepi (edge network security) yang menyediakan perlindungan terhadap serangan DDoS dan berfungsi sebagai Web Application Firewall (WAF). Cloud Armor bekerja bersama Application Load Balancer untuk memfilter trafik masuk menggunakan aturan yang telah dikonfigurasi sebelumnya (preconfigured WAF rules untuk memitigasi OWASP Top 10 seperti SQLi dan XSS) serta aturan pembatasan berbasis alamat IP atau geolokasi.",
+    "version": 1,
+    "sourceRef": "user-provided-practice-bank"
+  }
+]

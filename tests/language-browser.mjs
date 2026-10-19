@@ -118,7 +118,7 @@ try {
   await page.locator(".choice input").first().check();
   await page.getByRole("button", { name: "Flag for review" }).click();
   await expect(page.locator(".save-state")).toHaveText(
-    "Progress saved on this device",
+    "Saved locally",
   );
   const before = await snapshot();
   await page.getByLabel("Display language", { exact: true }).selectOption("id");

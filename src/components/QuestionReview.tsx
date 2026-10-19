@@ -3,6 +3,7 @@ import type { Question } from "../types";
 import { useState } from "react";
 import { loadBank } from "../lib/banks";
 import { api } from "../lib/api";
+import { CERTIFICATIONS } from "../lib/catalog";
 export default function QuestionReview({
   question,
   selected,
@@ -19,9 +20,11 @@ export default function QuestionReview({
     setNotice("");
     try {
       const paired =
-        question.id.includes("-en-") && question.version === 1
+        question.id.includes("-en-") && !question.updatedAt
           ? (await loadBank(question.examType, "id")).find(
-              (q) => q.id === question.id.replace("-en-", "-id-"),
+              (q) =>
+                q.id === question.id.replace("-en-", "-id-") &&
+                q.version === question.version,
             )
           : undefined;
       if (paired) setTranslation(paired.explanation);
@@ -65,6 +68,9 @@ export default function QuestionReview({
       <ul>
         {question.options.map((option) => (
           <li key={option.id}>
+            <p className="review-option" lang={question.lang}>
+              <b>{option.id}.</b> {option.text}
+            </p>
             <strong>
               {option.id}.{" "}
               {question.correctAnswers.includes(option.id)
@@ -72,28 +78,33 @@ export default function QuestionReview({
                 : t("Distraktor")}
               {selected.includes(option.id) ? t(" · Pilihan Anda") : ""}
             </strong>
-            <p
-              lang={
-                question.optionExplanations?.[option.id] ||
-                question.correctAnswers.includes(option.id)
-                  ? question.lang
-                  : language
-              }
-            >
-              {question.optionExplanations?.[option.id] ||
-                (question.correctAnswers.includes(option.id)
-                  ? question.explanation
-                  : t(
-                      "Bandingkan opsi ini dengan persyaratan pada pertanyaan dan pembahasan di atas.",
-                    ))}
-            </p>
+            <details>
+              <summary>{t("Alasan opsi ini")}</summary>
+              <p
+                lang={
+                  question.optionExplanations?.[option.id] ||
+                  question.correctAnswers.includes(option.id)
+                    ? question.lang
+                    : language
+                }
+              >
+                {question.optionExplanations?.[option.id] ||
+                  (question.correctAnswers.includes(option.id)
+                    ? question.explanation
+                    : t(
+                        "Bandingkan opsi ini dengan persyaratan pada pertanyaan dan pembahasan di atas.",
+                      ))}
+              </p>
+            </details>
           </li>
         ))}
       </ul>
       {question.sourceUrl && (
         <a href={question.sourceUrl} target="_blank" rel="noreferrer">
           {" "}
-          {t("Dokumentasi AWS ↗")}{" "}
+          {t("Dokumentasi {provider} ↗", {
+            provider: CERTIFICATIONS[question.examType].provider,
+          })}{" "}
         </a>
       )}
       {!question.verifiedAt && (

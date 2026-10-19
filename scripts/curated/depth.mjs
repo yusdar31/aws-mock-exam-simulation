@@ -1,0 +1,313 @@
+// Original bilingual teaching cases. References checked 2026-10-19; these are
+// practice scenarios, not official exam items or a claim of human certification.
+const cases = [
+  [
+    "saa",
+    "Secure Architectures",
+    "Sebuah portal menyimpan gambar di bucket S3 biasa, bukan website endpoint. Gambar harus diakses melalui satu distribusi CloudFront, akses publik bucket tetap diblokir, dan URL S3 langsung tidak boleh menjadi jalur alternatif. Konfigurasi mana yang memenuhi ketiganya?",
+    "A portal stores images in a regular S3 bucket, not a website endpoint. Images must be accessed through one CloudFront distribution while public bucket access remains blocked and direct S3 URLs cannot bypass it. Which configuration meets all three requirements?",
+    [
+      "OAC dengan bucket policy yang membatasi akses ke distribusi tersebut",
+      "Bucket publik dengan URL gambar disembunyikan",
+      "S3 website endpoint dengan OAC",
+      "Signed URL CloudFront saja, bucket tetap publik",
+    ],
+    [
+      "OAC with a bucket policy restricted to that distribution",
+      "Public bucket with hidden image URLs",
+      "S3 website endpoint with OAC",
+      "CloudFront signed URLs alone with a public bucket",
+    ],
+    "OAC mengautentikasi permintaan origin; bucket policy membatasi distribusi. Block Public Access tetap aktif.",
+    "OAC authenticates origin requests; the bucket policy restricts the distribution. Block Public Access stays enabled.",
+    [
+      "Memenuhi pembatasan origin dan akses bucket.",
+      "Menyembunyikan URL bukan kontrol akses.",
+      "OAC tidak mendukung S3 website endpoint.",
+      "Bucket publik masih dapat melewati CloudFront.",
+    ],
+    [
+      "Meets origin and bucket access restrictions.",
+      "Hidden URLs do not enforce authorization.",
+      "OAC does not support S3 website endpoints.",
+      "A public bucket still bypasses CloudFront.",
+    ],
+    "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html",
+  ],
+  [
+    "saa",
+    "Resilient Architectures",
+    "Aplikasi transaksi memakai satu RDS for MySQL DB instance. Tim membutuhkan failover otomatis saat Availability Zone gagal, tetap memakai engine yang sama, dan tidak membutuhkan read scaling. Perubahan konfigurasi instance mana yang paling langsung memenuhi kebutuhan ini?",
+    "A transactional application uses one RDS for MySQL DB instance. The team needs automatic failover after an Availability Zone failure, must retain the engine, and does not need read scaling. Which instance configuration change directly meets these requirements?",
+    [
+      "Ubah menjadi Multi-AZ DB instance deployment",
+      "Tambahkan read replica lalu lakukan promosi manual",
+      "Tingkatkan frekuensi snapshot saja",
+      "Perbesar instance dalam Availability Zone yang sama",
+    ],
+    [
+      "Convert to a Multi-AZ DB instance deployment",
+      "Add a read replica and promote it manually",
+      "Only increase snapshot frequency",
+      "Use a larger instance in the same Availability Zone",
+    ],
+    "Deployment DB instance Multi-AZ memakai standby sinkron di AZ berbeda untuk failover otomatis, bukan melayani query baca.",
+    "A Multi-AZ DB instance deployment uses a synchronous standby in another AZ for automatic failover, not read queries.",
+    [
+      "Menyediakan standby lintas AZ dan failover otomatis.",
+      "Promosi manual tidak memenuhi failover otomatis.",
+      "Pemulihan snapshot bukan failover langsung.",
+      "Ukuran lebih besar tidak melindungi kegagalan AZ.",
+    ],
+    [
+      "Provides cross-AZ standby and automatic failover.",
+      "Manual promotion fails the automation requirement.",
+      "Snapshot restoration is not immediate failover.",
+      "Larger capacity does not protect against AZ failure.",
+    ],
+    "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html",
+  ],
+  [
+    "saa",
+    "High-Performing Architectures",
+    "Toko online menyajikan gambar produk publik yang sama kepada semua pengguna. Nama file berubah saat gambar diperbarui, tetapi cookie sesi ikut masuk cache key CloudFront dan hit ratio rendah. Perbaikan mana yang mengurangi permintaan origin tanpa mencampur konten pribadi?",
+    "A store serves the same public product images to every user. Filenames change on updates, but session cookies are included in the CloudFront cache key and the hit ratio is low. Which change reduces origin requests without mixing private content?",
+    [
+      "Pisahkan behavior gambar, abaikan cookie yang tidak relevan, dan gunakan TTL sesuai umur aset",
+      "Masukkan semua cookie dan header ke cache key gambar",
+      "Nonaktifkan caching untuk seluruh gambar publik",
+      "Gunakan cache key yang sama juga untuk halaman akun pribadi",
+    ],
+    [
+      "Separate image behavior, omit irrelevant cookies, and set an appropriate asset TTL",
+      "Include every cookie and header in the image cache key",
+      "Disable caching for all public images",
+      "Also reuse the same cache key for private account pages",
+    ],
+    "Aset publik berversi dapat dibagikan antar pengguna melalui cache. Behavior konten pribadi tetap terpisah.",
+    "Versioned public assets can share cached copies across users. Private content retains a separate behavior.",
+    [
+      "Mengurangi variasi cache tanpa membagikan data pribadi.",
+      "Variasi yang tidak diperlukan menurunkan hit ratio.",
+      "Menambah permintaan origin untuk konten yang sama.",
+      "Berisiko membagikan konten akun antar pengguna.",
+    ],
+    [
+      "Reduces cache variation without sharing private data.",
+      "Unnecessary variation reduces cache hit ratio.",
+      "Increases origin requests for identical content.",
+      "Risks sharing account content between users.",
+    ],
+    "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html",
+  ],
+  [
+    "saa",
+    "Cost-Optimized Architectures",
+    "Log berukuran lebih dari 1 MB per objek disimpan di S3. Setelah umur 180 hari, akses sangat jarang dan pemulihan asinkron dapat diterima, tetapi objek wajib dipertahankan satu tahun. Tim ingin pengarsipan otomatis tepat berdasarkan umur objek. Solusi mana yang sesuai?",
+    "S3 log objects exceed 1 MB each. After 180 days they are rarely accessed and asynchronous retrieval is acceptable, but must be retained for one year. The team wants automatic archiving based precisely on object age. Which solution fits?",
+    [
+      "Aturan Lifecycle memindahkan ke Glacier Flexible Retrieval pada hari ke-180 tanpa menghapus objek",
+      "Aturan Lifecycle menghapus objek pada hari ke-180",
+      "Pindahkan manual setiap objek setelah ada keluhan biaya",
+      "Intelligent-Tiering tanpa aturan umur untuk menjamin transisi tepat hari ke-180",
+    ],
+    [
+      "Lifecycle transitions objects to Glacier Flexible Retrieval on day 180 without deleting them",
+      "Lifecycle deletes objects on day 180",
+      "Move each object manually after a cost complaint",
+      "Intelligent-Tiering without age rules to guarantee transition exactly on day 180",
+    ],
+    "Lifecycle menerapkan transisi berbasis umur. Transisi mengubah kelas penyimpanan tanpa mengganti kewajiban retensi.",
+    "Lifecycle applies age-based transitions. A transition changes storage class without replacing retention obligations.",
+    [
+      "Mengarsip berdasarkan umur sambil mempertahankan objek.",
+      "Melanggar retensi satu tahun.",
+      "Tidak otomatis atau tepat waktu.",
+      "Tier akses tidak menjamin tanggal umur tersebut.",
+    ],
+    [
+      "Archives by age while retaining objects.",
+      "Violates the one-year retention requirement.",
+      "Neither automatic nor timely.",
+      "Access tiers do not guarantee that age-based date.",
+    ],
+    "https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html",
+  ],
+  [
+    "ccp",
+    "Cloud Concepts",
+    "Permintaan aplikasi pendaftaran naik tajam selama promosi lalu kembali rendah. Tim menambah instance otomatis ketika sibuk dan menguranginya setelah promosi agar tidak membayar kapasitas menganggur. Konsep cloud mana yang paling tepat menggambarkan kedua arah perubahan ini?",
+    "An enrollment application experiences a promotional demand spike and then returns to low demand. The team automatically adds instances during the spike and removes them afterward to avoid idle capacity costs. Which cloud concept best describes both directions?",
+    [
+      "Elastisitas",
+      "Pembelian kapasitas tetap sepanjang tahun",
+      "Replikasi data saja",
+      "Penempatan seluruh server pada satu lokasi",
+    ],
+    [
+      "Elasticity",
+      "Purchasing fixed capacity for the year",
+      "Data replication alone",
+      "Placing all servers in one location",
+    ],
+    "Elastisitas menyesuaikan kapasitas dengan perubahan kebutuhan; penambahan dan pengurangan sama-sama penting.",
+    "Elasticity adjusts capacity to changing demand; scaling out and scaling in both matter.",
+    [
+      "Cocok dengan kapasitas naik dan turun.",
+      "Kapasitas tetap mempertahankan beban menganggur.",
+      "Replikasi tidak otomatis menyesuaikan komputasi.",
+      "Lokasi tunggal bukan penyesuaian permintaan.",
+    ],
+    [
+      "Matches increasing and decreasing capacity.",
+      "Fixed capacity retains idle resources.",
+      "Replication alone does not resize compute.",
+      "A single location does not adapt demand.",
+    ],
+    "https://docs.aws.amazon.com/wellarchitected/latest/framework/perf_select_compute_elasticity.html",
+  ],
+  [
+    "ccp",
+    "Security & Compliance",
+    "Tim menjalankan Linux sendiri pada Amazon EC2 dan menemukan kerentanan paket sistem operasi. Server fisik dikelola AWS, tetapi aplikasi dan guest OS dikonfigurasi tim. Dalam model tanggung jawab bersama, siapa yang harus memastikan patch guest OS diterapkan?",
+    "A team runs its own Linux installation on Amazon EC2 and discovers an operating-system package vulnerability. AWS operates the physical server, while the team configures the application and guest OS. Under shared responsibility, who must ensure guest OS patches are applied?",
+    [
+      "Pelanggan yang mengelola guest OS",
+      "AWS sebagai pemilik server fisik untuk semua lapisan",
+      "Pengguna akhir aplikasi",
+      "Penyedia jaringan internet kantor",
+    ],
+    [
+      "The customer managing the guest OS",
+      "AWS as physical-server operator for every layer",
+      "The application end users",
+      "The office internet provider",
+    ],
+    "Pada EC2, pelanggan mengelola guest OS dan patch-nya; AWS mengelola infrastruktur yang mendasari layanan.",
+    "For EC2, the customer manages guest OS patches; AWS manages the underlying service infrastructure.",
+    [
+      "Sesuai batas tanggung jawab EC2.",
+      "Kepemilikan hardware tidak mencakup guest OS pelanggan.",
+      "Pengguna aplikasi tidak mengelola instance.",
+      "ISP tidak mengelola guest OS EC2.",
+    ],
+    [
+      "Matches the EC2 responsibility boundary.",
+      "Hardware operation does not include customer guest OS.",
+      "End users do not manage the instance.",
+      "The ISP does not manage EC2 guest OS.",
+    ],
+    "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security.html",
+  ],
+  [
+    "ccp",
+    "Technology & Services",
+    "Sebuah security group berubah saat insiden. Investigator perlu mengetahui identitas pemanggil, waktu, dan parameter operasi API, bukan hanya grafik CPU atau rekomendasi konfigurasi. Sumber catatan AWS mana yang paling sesuai untuk menelusuri tindakan tersebut?",
+    "A security group changes during an incident. Investigators need the caller identity, timestamp, and API operation parameters, rather than CPU charts or configuration recommendations. Which AWS record source best supports this investigation?",
+    [
+      "Event AWS CloudTrail",
+      "Metrik CPU CloudWatch saja",
+      "Rekomendasi Trusted Advisor saja",
+      "Grafik perkiraan biaya saja",
+    ],
+    [
+      "AWS CloudTrail events",
+      "Only CloudWatch CPU metrics",
+      "Only Trusted Advisor recommendations",
+      "Only a cost forecast chart",
+    ],
+    "CloudTrail mencatat aktivitas API dan identitas terkait. Catatan ini menjawab siapa melakukan tindakan apa dan kapan.",
+    "CloudTrail records API activity and associated identities, helping establish who performed an action and when.",
+    [
+      "Memuat konteks panggilan API yang dicari.",
+      "Metrik CPU tidak mengidentifikasi pelaku API.",
+      "Rekomendasi bukan jejak tindakan API.",
+      "Perkiraan biaya bukan rekaman keamanan.",
+    ],
+    [
+      "Contains the required API call context.",
+      "CPU metrics do not identify API callers.",
+      "Recommendations are not an API action trail.",
+      "Cost forecasts are not security action records.",
+    ],
+    "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-user-identity.html",
+  ],
+  [
+    "ccp",
+    "Billing & Pricing",
+    "Tim membutuhkan EC2 selama dua hari untuk migrasi satu kali. Pekerjaan tidak dirancang untuk interupsi dan tidak ada kebutuhan kapasitas setelah migrasi. Model pembelian mana yang menghindari komitmen jangka panjang sekaligus tidak memakai kapasitas Spot yang dapat diinterupsi?",
+    "A team needs EC2 for a one-time two-day migration. The job is not designed for interruption and has no capacity requirement afterward. Which purchasing model avoids a long-term commitment while not using interruptible Spot capacity?",
+    [
+      "On-Demand Instances",
+      "Spot Instances",
+      "Reserved Instances satu tahun",
+      "Savings Plans tiga tahun",
+    ],
+    [
+      "On-Demand Instances",
+      "Spot Instances",
+      "One-year Reserved Instances",
+      "Three-year Savings Plans",
+    ],
+    "On-Demand tidak membutuhkan komitmen jangka panjang. Ini tidak berarti instance kebal terhadap kegagalan infrastruktur.",
+    "On-Demand requires no long-term commitment. This does not make an instance immune to infrastructure failure.",
+    [
+      "Cocok untuk kebutuhan singkat tanpa komitmen.",
+      "Model interupsi tidak sesuai desain pekerjaan.",
+      "Memerlukan komitmen melebihi kebutuhan dua hari.",
+      "Komitmen tiga tahun tidak sesuai kebutuhan.",
+    ],
+    [
+      "Fits a short requirement without commitment.",
+      "Its interruption model does not fit the job.",
+      "Requires commitment beyond the two-day need.",
+      "A three-year commitment does not fit.",
+    ],
+    "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html",
+  ],
+];
+export function deepen(questions, type, lang) {
+  const used = new Set();
+  return questions.map((q) => {
+    const entry = cases.find(
+      (v) => v[0] === type && v[1] === q.domain && !used.has(v),
+    );
+    if (!entry) return q;
+    used.add(entry);
+    const [
+      ,
+      ,
+      id,
+      en,
+      optionsId,
+      optionsEn,
+      explanationId,
+      explanationEn,
+      notesId,
+      notesEn,
+      sourceUrl,
+    ] = entry;
+    const opts = lang === "id" ? optionsId : optionsEn,
+      notes = lang === "id" ? notesId : notesEn,
+      offset = Number(q.id.split("-").at(-1)) % 4;
+    const options = ["A", "B", "C", "D"].map((id, i) => ({
+      id,
+      text: opts[(i + offset) % 4],
+    }));
+    return {
+      ...q,
+      type: "single",
+      prompt: lang === "id" ? id : en,
+      options,
+      correctAnswers: [options[(4 - offset) % 4].id],
+      explanation: lang === "id" ? explanationId : explanationEn,
+      optionExplanations: Object.fromEntries(
+        options.map((o, i) => [o.id, notes[(i + offset) % 4]]),
+      ),
+      sourceUrl,
+      verifiedAt: "2026-10-19",
+      version: 3,
+      difficulty: type === "saa" ? "advanced" : "intermediate",
+    };
+  });
+}

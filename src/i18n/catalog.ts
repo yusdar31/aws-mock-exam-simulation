@@ -1,7 +1,9 @@
 import type { Language } from "../types";
+import { studyMessages } from "./study";
 
 export const LANGUAGE_STORAGE_KEY = "aws-exam-ui-language";
 export const messages: Record<string, string> = {
+  ...studyMessages,
   "Bahasa tampilan": "Display language",
   "Bahasa tampilan hanya mengubah menu dan petunjuk. Bahasa soal dipilih secara terpisah.":
     "Display language changes menus and instructions. Question language is selected separately.",

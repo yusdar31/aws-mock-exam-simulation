@@ -2,12 +2,23 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import ts from "typescript";
-const js = ts.transpileModule(fs.readFileSync("src/i18n/catalog.ts", "utf8"), {
-  compilerOptions: {
-    module: ts.ModuleKind.ESNext,
-    target: ts.ScriptTarget.ES2023,
+const studyJs = ts.transpileModule(
+  fs.readFileSync("src/i18n/study.ts", "utf8"),
+  { compilerOptions: { module: ts.ModuleKind.ESNext } },
+).outputText;
+const studyUrl =
+  "data:text/javascript;base64," + Buffer.from(studyJs).toString("base64");
+const js = ts.transpileModule(
+  fs
+    .readFileSync("src/i18n/catalog.ts", "utf8")
+    .replace('"./study"', JSON.stringify(studyUrl)),
+  {
+    compilerOptions: {
+      module: ts.ModuleKind.ESNext,
+      target: ts.ScriptTarget.ES2023,
+    },
   },
-}).outputText;
+).outputText;
 const { translate, readLanguage, LANGUAGE_STORAGE_KEY } = await import(
   "data:text/javascript;base64," + Buffer.from(js).toString("base64")
 );

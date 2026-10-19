@@ -52,10 +52,42 @@ async function run<T>(
     transaction.onabort = transaction.onerror;
   });
 }
-export const saveSession = (session: Session) =>
-  run("sessions", "readwrite", (store) =>
-    store.put({ ...session, id: session.userId, attemptId: session.id }),
-  );
+export async function saveSession(session: Session, replaceId?: string) {
+  const db = await open();
+  return new Promise<void>((resolve, reject) => {
+    const transaction = db.transaction("sessions", "readwrite"),
+      store = transaction.objectStore("sessions");
+    let conflict = false;
+    const request = store.get(session.userId);
+    request.onsuccess = () => {
+      const previous = request.result;
+      if (
+        previous &&
+        previous.attemptId !== session.id &&
+        previous.attemptId !== replaceId
+      ) {
+        conflict = true;
+        transaction.abort();
+        return;
+      }
+      if (
+        previous?.attemptId === session.id &&
+        previous.savedAt > session.savedAt
+      )
+        return;
+      store.put({ ...session, id: session.userId, attemptId: session.id });
+    };
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = transaction.onabort = () =>
+      reject(
+        new Error(
+          conflict
+            ? "Sesi berubah di tab lain. Muat ulang untuk melanjutkan sesi terbaru."
+            : "Progres belum tersimpan. Periksa ruang penyimpanan browser.",
+        ),
+      );
+  });
+}
 export async function getSession(userId: string): Promise<Session | null> {
   const value = await run<(Session & { attemptId: string }) | undefined>(
     "sessions",
@@ -64,8 +96,21 @@ export async function getSession(userId: string): Promise<Session | null> {
   );
   return value ? { ...value, id: value.attemptId } : null;
 }
-export const removeSession = (userId: string) =>
-  run("sessions", "readwrite", (store) => store.delete(userId));
+export async function removeSession(userId: string, attemptId?: string) {
+  const db = await open();
+  return new Promise<void>((resolve, reject) => {
+    const transaction = db.transaction("sessions", "readwrite"),
+      store = transaction.objectStore("sessions"),
+      request = store.get(userId);
+    request.onsuccess = () => {
+      if (!attemptId || request.result?.attemptId === attemptId)
+        store.delete(userId);
+    };
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = transaction.onabort = () =>
+      reject(new Error("Sesi belum dapat dihapus."));
+  });
+}
 export const saveAttempt = (attempt: Attempt) =>
   run("attempts", "readwrite", (store) =>
     store.put({ ...attempt, pending: Number(!attempt.synced) }),

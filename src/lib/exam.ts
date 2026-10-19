@@ -1,21 +1,70 @@
 import type { Attempt, Config, ExamType, Question, Session } from "../types";
+import catalog from "../data/certifications.json" with { type: "json" };
 
 export const BLUEPRINT: Record<ExamType, Record<string, number>> = {
-  ccp: {
-    "Cloud Concepts": 24,
-    "Security & Compliance": 30,
-    "Technology & Services": 34,
-    "Billing & Pricing": 12,
-  },
-  saa: {
-    "Secure Architectures": 30,
-    "Resilient Architectures": 26,
-    "High-Performing Architectures": 24,
-    "Cost-Optimized Architectures": 20,
-  },
+  ccp: catalog.ccp.blueprint,
+  saa: catalog.saa.blueprint,
+  "gcp-ace": catalog["gcp-ace"].blueprint,
 };
 export const PRACTICE_TARGET = 80;
-export const EXAM_MINUTES = { ccp: 90, saa: 130 };
+export const EXAM_MINUTES = Object.fromEntries(
+  Object.entries(catalog).map(([key, value]) => [key, value.minutes]),
+) as Record<ExamType, number>;
+export const EXAM_COUNTS = Object.fromEntries(
+  Object.entries(catalog).map(([key, value]) => [key, value.questions]),
+) as Record<ExamType, number>;
+export function simulationReady(q: Question) {
+  return Boolean(
+    q.verifiedAt &&
+    q.sourceUrl &&
+    q.optionExplanations &&
+    q.options.every((o) => q.optionExplanations?.[o.id]?.trim()),
+  );
+}
+export function isQuestion(value: unknown): value is Question {
+  if (!value || typeof value !== "object") return false;
+  const q = value as Question;
+  return (
+    typeof q.id === "string" &&
+    q.id.length > 0 &&
+    q.id.length <= 200 &&
+    Object.hasOwn(catalog, q.examType) &&
+    ["id", "en"].includes(q.lang) &&
+    typeof q.domain === "string" &&
+    typeof q.prompt === "string" &&
+    q.prompt.length <= 6000 &&
+    typeof q.explanation === "string" &&
+    q.explanation.length <= 12000 &&
+    ["single", "multiple"].includes(q.type) &&
+    Number.isInteger(q.version) &&
+    q.version > 0 &&
+    Array.isArray(q.options) &&
+    q.options.length >= 4 &&
+    q.options.length <= 6 &&
+    q.options.every(
+      (o) =>
+        o &&
+        typeof o.id === "string" &&
+        typeof o.text === "string" &&
+        o.text.length <= 3000,
+    ) &&
+    new Set(q.options.map((o) => o.id)).size === q.options.length &&
+    Array.isArray(q.correctAnswers) &&
+    q.correctAnswers.length > 0 &&
+    q.correctAnswers.every((a) => q.options.some((o) => o.id === a)) &&
+    (q.type !== "single" || q.correctAnswers.length === 1) &&
+    (!q.optionExplanations ||
+      (typeof q.optionExplanations === "object" &&
+        Object.values(q.optionExplanations).every(
+          (v) => typeof v === "string",
+        ))) &&
+    (!q.sourceUrl ||
+      (typeof q.sourceUrl === "string" &&
+        /^https:\/\/(docs\.aws\.amazon\.com|aws\.amazon\.com|cloud\.google\.com|docs\.cloud\.google\.com)\//.test(
+          q.sourceUrl,
+        )))
+  );
+}
 export function isSession(value: unknown): value is Session {
   if (!value || typeof value !== "object") return false;
   const s = value as Partial<Session>,
@@ -24,7 +73,7 @@ export function isSession(value: unknown): value is Session {
     typeof s.id !== "string" ||
     typeof s.userId !== "string" ||
     !config ||
-    !["ccp", "saa"].includes(config.examType) ||
+    !["ccp", "saa", "gcp-ace"].includes(config.examType) ||
     !["id", "en"].includes(config.lang) ||
     !["practice", "simulation"].includes(config.mode)
   )
@@ -42,23 +91,7 @@ export function isSession(value: unknown): value is Session {
     !Array.isArray(s.questions) ||
     !s.questions.length ||
     s.questions.length > 200 ||
-    !s.questions.every(
-      (q) =>
-        q &&
-        typeof q.id === "string" &&
-        typeof q.prompt === "string" &&
-        Array.isArray(q.options) &&
-        q.options.length >= 4 &&
-        q.options.every(
-          (o) => o && typeof o.id === "string" && typeof o.text === "string",
-        ) &&
-        ["single", "multiple"].includes(q.type) &&
-        Number.isInteger(q.version) &&
-        q.version > 0 &&
-        Array.isArray(q.correctAnswers) &&
-        q.correctAnswers.length > 0 &&
-        q.correctAnswers.every((a) => q.options.some((o) => o.id === a)),
-    )
+    !s.questions.every(isQuestion)
   )
     return false;
   if (
@@ -86,6 +119,35 @@ export function isSession(value: unknown): value is Session {
     !s.flags.every((v) => typeof v === "string") ||
     !s.questionTimes ||
     typeof s.questionTimes !== "object"
+  )
+    return false;
+  const ids = new Set(s.questions.map((q) => q.id));
+  if (
+    ids.size !== s.questions.length ||
+    Object.entries(s.questionTimes).some(
+      ([id, n]) => !ids.has(id) || !Number.isFinite(n) || n < 0,
+    )
+  )
+    return false;
+  if (
+    s.confidence &&
+    (typeof s.confidence !== "object" ||
+      Object.entries(s.confidence).some(
+        ([id, v]) => !ids.has(id) || !["sure", "unsure"].includes(v),
+      ))
+  )
+    return false;
+  if (
+    Object.entries(s.answers).some(
+      ([id, answers]) =>
+        !ids.has(id) ||
+        answers.some(
+          (a) =>
+            !s
+              .questions!.find((q) => q.id === id)!
+              .options.some((o) => o.id === a),
+        ),
+    )
   )
     return false;
   return ["active", "paused"].includes(s.state || "");
@@ -117,7 +179,7 @@ export function shuffle<T>(input: T[], random = Math.random): T[] {
   }
   return copy;
 }
-export function quotas(type: ExamType, count = 65) {
+export function quotas(type: ExamType, count = EXAM_COUNTS[type]) {
   const raw = Object.entries(BLUEPRINT[type]).map(([domain, weight]) => ({
     domain,
     exact: (weight * count) / 100,
@@ -145,23 +207,30 @@ export function selectQuestions(
     const selected: Question[] = [];
     for (const [domain, count] of Object.entries(quotas(config.examType))) {
       const group = source.filter(
-        (q) =>
-          q.domain === domain &&
-          q.verifiedAt &&
-          q.optionExplanations &&
-          q.sourceUrl,
+        (q) => q.domain === domain && simulationReady(q),
       );
       if (group.length < count)
         throw new Error(
           `Simulasi membutuhkan ${count} soal ${domain}; tersedia ${group.length}. Pilih latihan atau tambahkan bank soal.`,
         );
-      selected.push(...shuffle(group).slice(0, count));
+      selected.push(
+        ...[
+          ...shuffle(group.filter((q) => !recent.includes(q.id))),
+          ...shuffle(group.filter((q) => recent.includes(q.id))),
+        ].slice(0, count),
+      );
     }
     return shuffle(selected);
   }
   if (!Number.isInteger(config.limit) || config.limit < 1 || config.limit > 200)
     throw new Error("Jumlah soal harus 1–200.");
-  const filtered = source.filter((q) => config.domains.includes(q.domain));
+  const filtered = source.filter(
+    (q) =>
+      config.domains.includes(q.domain) &&
+      (config.content !== "new" || !recent.includes(q.id)) &&
+      (config.content !== "reviewed" || simulationReady(q)) &&
+      (config.content !== "archive" || !simulationReady(q)),
+  );
   if (!filtered.length)
     throw new Error(
       "Tidak ada soal untuk pilihan ini. Pilih minimal satu domain yang tersedia.",
@@ -260,6 +329,11 @@ export function dueQuestions(
     .filter(
       (entry) =>
         !entry.correct ||
+        attempts.some(
+          (a) =>
+            a.session?.confidence?.[entry.question.id] === "unsure" &&
+            a.submittedAt === entry.at,
+        ) ||
         now >=
           entry.at +
             [1, 3, 7, 14, 30][Math.min(Math.max(0, entry.streak - 1), 4)] *

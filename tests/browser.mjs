@@ -213,6 +213,8 @@ try {
     "Certification-filtered history reopens saved question versions",
   );
   await page.getByRole("link", { name: "Riwayat", exact: true }).click();
+  await page.getByLabel("Sertifikasi", { exact: true }).selectOption("ccp");
+  await page.getByLabel("Bahasa", { exact: true }).selectOption("id");
   await page.getByRole("button", { name: /Catatan soal salah/ }).click();
   await expect(
     page.getByRole("heading", { name: "Catatan soal yang perlu diperkuat" }),
@@ -240,6 +242,7 @@ try {
   await page.getByRole("button", { name: /Navigator/ }).click();
   await page.getByRole("button", { name: "Review semua soal" }).click();
   await page.getByRole("button", { name: "Submit ujian" }).click();
+  await page.locator(".review-explanation summary").first().click();
   await page
     .getByRole("button", { name: "Tampilkan Bahasa Indonesia" })
     .first()

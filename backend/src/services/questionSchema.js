@@ -1,19 +1,12 @@
-export const domains = {
-  ccp: [
-    "Cloud Concepts",
-    "Security & Compliance",
-    "Technology & Services",
-    "Billing & Pricing",
-  ],
-  saa: [
-    "Secure Architectures",
-    "Resilient Architectures",
-    "High-Performing Architectures",
-    "Cost-Optimized Architectures",
-  ],
-};
+import catalog from "../../../src/data/certifications.json" with { type: "json" };
+export const domains = Object.fromEntries(
+  Object.entries(catalog).map(([key, value]) => [
+    key,
+    Object.keys(value.blueprint),
+  ]),
+);
 export function normalizeQuestion(input = {}) {
-  const examType = input.examType === "ccp" ? "ccp" : "saa";
+  const examType = input.examType || "saa";
   const domain = String(input.domain || "Unclassified")
     .replace(/^Design /, "")
     .replace("Cloud Technology and Services", "Technology & Services")
@@ -63,7 +56,17 @@ export function questionIssues(q) {
     q.options.some((o) => o.text.length > 3000)
   )
     issues.push("text_too_long");
-  if (!domains[q.examType]?.includes(q.domain)) issues.push("invalid_domain");
+  if (!Object.hasOwn(domains, q.examType)) issues.push("invalid_exam_type");
+  if (
+    !Object.hasOwn(domains, q.examType) ||
+    !domains[q.examType].includes(q.domain)
+  )
+    issues.push("invalid_domain");
+  if (
+    Object.hasOwn(catalog, q.examType) &&
+    !catalog[q.examType].languages.includes(q.lang)
+  )
+    issues.push("unavailable_language");
   if (q.options.length < 4 || q.options.some((o) => !o.text))
     issues.push("incomplete_options");
   const ids = q.options.map((o) => o.id);
@@ -85,9 +88,17 @@ export function questionIssues(q) {
   if (!q.explanation) issues.push("missing_explanation");
   if (
     !q.sourceUrl ||
-    !/^https:\/\/(docs\.aws\.amazon\.com|aws\.amazon\.com)\//.test(q.sourceUrl)
+    !(
+      q.examType === "gcp-ace"
+        ? /^https:\/\/(cloud\.google\.com|docs\.cloud\.google\.com)\//
+        : /^https:\/\/(docs\.aws\.amazon\.com|aws\.amazon\.com)\//
+    ).test(q.sourceUrl)
   )
-    issues.push("missing_aws_reference");
+    issues.push(
+      q.examType === "gcp-ace"
+        ? "missing_google_reference"
+        : "missing_aws_reference",
+    );
   if (
     !/^\d{4}-\d{2}-\d{2}$/.test(q.verifiedAt) ||
     !Number.isFinite(Date.parse(q.verifiedAt)) ||

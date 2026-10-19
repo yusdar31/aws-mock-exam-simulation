@@ -1,0 +1,20 @@
+{
+  "ccp": {
+    "name": "Cloud Practitioner", "code": "CLF-C02", "provider": "AWS", "level": "FOUNDATIONAL",
+    "description": "Konsep cloud, keamanan, layanan, dan biaya.", "languages": ["id", "en"], "minutes": 90, "questions": 65,
+    "guide": "https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html",
+    "blueprint": {"Cloud Concepts": 24, "Security & Compliance": 30, "Technology & Services": 34, "Billing & Pricing": 12}
+  },
+  "saa": {
+    "name": "Solutions Architect", "code": "SAA-C03", "provider": "AWS", "level": "ASSOCIATE",
+    "description": "Desain arsitektur aman, tangguh, cepat, dan efisien.", "languages": ["id", "en"], "minutes": 130, "questions": 65,
+    "guide": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html",
+    "blueprint": {"Secure Architectures": 30, "Resilient Architectures": 26, "High-Performing Architectures": 24, "Cost-Optimized Architectures": 20}
+  },
+  "gcp-ace": {
+    "name": "Associate Cloud Engineer (ACE)", "code": "Google Cloud ACE", "provider": "Google Cloud", "level": "ASSOCIATE",
+    "description": "Konfigurasi, implementasi, operasi, dan keamanan Google Cloud.", "languages": ["id"], "minutes": 120, "questions": 50,
+    "guide": "https://cloud.google.com/learn/certification/guides/cloud-engineer",
+    "blueprint": {"Pengaturan Lingkungan Solusi Cloud": 20, "Perencanaan dan Konfigurasi Solusi Cloud": 17.5, "Penerapan dan Implementasi Solusi Cloud": 25, "Memastikan Operasi Solusi Cloud yang Berhasil": 20, "Konfigurasi Akses dan Keamanan": 17.5}
+  }
+}

@@ -42,7 +42,7 @@ try {
   const updated = {
     ...original,
     prompt: "Soal terbaru dari bank pusat",
-    version: 2,
+    version: original.version + 1,
   };
   await context.route("**/*", (route) => {
     const url = new URL(route.request().url());

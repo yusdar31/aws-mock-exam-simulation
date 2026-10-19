@@ -1,21 +1,29 @@
 ﻿# AWS Exam Studio
 
-Latihan AWS CLF-C02 dan SAA-C03 berbasis React, TypeScript, Vite, Supabase Auth, serta Express/SQLite untuk bank soal.
+Latihan AWS CLF-C02, SAA-C03, dan Google Cloud ACE berbasis React, TypeScript, Vite, Supabase Auth, serta Express/SQLite untuk bank soal. ACE saat ini menyediakan latihan Indonesia; English dan simulasi menunggu review materi.
 
-Website: https://aws-mock-exam-simulation.vercel.app. Status aktivasi backend/cloud dan bukti smoke test tersedia di [laporan deployment](docs/DEPLOYMENT-2026-10-13.md).
+Perbaikan sesi, penggunaan mobile, bank soal, rencana belajar, catatan, laporan peserta dan ekspor lengkap dijelaskan di [laporan perbaikan 18 Oktober 2026](docs/IMPROVEMENTS-2026-10-18.md).
+
+Website: https://aws-mock-exam-simulation.vercel.app. Revisi desain minimalis dan navigator soal tersedia di [laporan desain terbaru](docs/MINIMAL-DESIGN-2026-10-18.md). Status bank publik dan batas ketersediaan backend/cloud dijelaskan di [laporan deployment layanan](docs/DEPLOYMENT-2026-10-18.md).
 
 ## Fitur
 
+Ujian bersama untuk kelas AWS re/Start tersedia pada `/#live`: nama + kode sesi, paket soal/opsi sama, deadline server bersama, jawaban mandiri, panel instruktur dan rekap CSV. Memerlukan satu kali migrasi Supabase; lihat [panduan kelas](docs/CLASSROOM-2026-10-18.md).
+
+Pembaruan 19 Oktober: tab host/presentasi, peringkat mobile, QR/template, kesiapan dan pemulihan peserta, pindah host, pembahasan sinkron, analisis kelas, serta laporan soal persisten. Gunakan migrasi mandiri `supabase/migrations/20261019_classroom_upgrade.sql` untuk instalasi baru maupun pembaruan; sesi dan jawaban lama dipertahankan. Lihat [catatan perbaikan dan pengujian](docs/FIXES-2026-10-19.md).
+
 - Latihan dengan pembahasan setelah menjawab, jeda/resume, serta durasi opsional.
 - Bahasa tampilan Indonesia/English tersedia pada halaman masuk, header, dan ujian. Pilihan diingat per browser dan terpisah dari bahasa soal; mengganti tampilan tidak mengganti soal atau mereset sesi.
-- Simulasi 65 soal: CCP 90 menit, SAA 130 menit; sampling mengikuti kuota domain blueprint, tanpa mengulang ID soal.
+- Simulasi AWS 65 soal: CCP 90 menit, SAA 130 menit; kuota mengikuti blueprint dan mendahulukan soal yang tidak muncul pada tiga percobaan terbaru. Tersedia 138 skenario CCP dan 140 SAA per bahasa untuk simulasi.
 - Bank Indonesia/English dimuat per pilihan. Materi arsip tersedia untuk latihan; simulasi memilih soal dengan sumber, tanggal review dan alasan opsi.
 - Timer absolut, penyimpanan IndexedDB, submit/expiry satu kali, snapshot versi soal dan waktu per soal.
 - Riwayat terpisah per sertifikasi/bahasa/mode, catatan jawaban salah, pengulangan terjadwal, dan latihan domain lemah.
 - Akurasi latihan dengan target internal 80%. Tidak dikonversi menjadi scaled score atau kelulusan resmi AWS.
 - Admin dengan autentikasi server, review editorial, version check, pencarian/pagination, audit log, impor, draft AI opt-in, serta antrean perubahan lokal ketika offline.
 - Coach: kode undangan kelas, penugasan simulasi, rekap domain, peserta yang perlu pendampingan. Memerlukan migrasi Supabase.
-- Review hasil per filter/halaman, penjelasan Bahasa Indonesia pada soal English, ekspor PDF atau print-to-PDF, keyboard navigation dan layout mobile.
+- Review menampilkan teks opsi lengkap dengan filter domain, pencarian, soal ragu/lambat; PDF dapat memuat seluruh percobaan atau seluruh soal salah di luar halaman review aktif.
+- Rencana belajar, target mingguan, cakupan soal unik, bookmark, catatan pribadi, keyakinan jawaban, mode gelap dan ukuran teks. Catatan dan pengaturan tersimpan lokal per pengguna; tersedia cadangan JSON dan transfer progres tamu.
+- Perlindungan sesi saat Back dan antar-tab, konfirmasi penggantian, validasi jumlah soal sebelum mulai, serta bilah mulai mobile.
 - Instrumentasi LCP/INP/CLS menggunakan web-vitals; endpoint telemetry opsional.
 
 ## Menjalankan lokal
@@ -86,6 +94,8 @@ GEMINI_API_KEY dan GEMINI_MODEL harus diisi untuk generator. Scheduler hanya ber
 ## Deployment dan backup
 
 Frontend Vercel memakai npm run build dan direktori dist. Backend adalah service terpisah; api/health.js tidak menyediakan endpoint administrasi. Docker frontend menerima build args VITE_SUPABASE_URL, VITE_SUPABASE_ANON_KEY, VITE_API_URL dan VITE_METRICS_URL; Nginx mengaktifkan gzip dan cache aset hashed.
+
+Gateway Vercel `api/questions/[...path].js` menyediakan GET bank rilis ketika backend belum terhubung. Laporan peserta menggunakan `report_rpc` di Supabase melalui `server/reportGateway.js`, dengan `VITE_SUPABASE_URL` dan `VITE_SUPABASE_ANON_KEY` pada environment server serta migrasi 20261019. Status laporan hanya dapat dibaca dengan tanda terima rahasia; antrean dan pembaruan pengelola memerlukan pengguna Supabase berperan admin melalui app_metadata tepercaya atau tabel app_roles yang dilindungi. Laporan yang gagal dikirim tetap lokal dan dapat dicoba ulang tanpa duplikasi. Pengelolaan bank editorial lainnya tetap menggunakan backend persisten melalui `QUESTION_API_ORIGIN`.
 
 Backend perlu filesystem persisten pada DATA_DIR. SQLite di disk sementara hosting dapat hilang saat redeploy; render.yaml tetap tidak membuat disk berbayar secara otomatis. Untuk data lama di DATA_DIR baru, salin questions.json ke lokasi tersebut sebelum startup pertama.
 

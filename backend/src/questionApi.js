@@ -20,6 +20,35 @@ import { createDraftQuestionsFromParsedEntries } from "./services/questionNormal
 import { requireUser, requireAdmin, rateLimit } from "./access.js";
 export function createQuestionRouter(resolver) {
   const router = express.Router();
+  router.post("/reports", rateLimit(10), (request, response) => {
+    const r = request.body || {};
+    if (
+      typeof r.id !== "string" ||
+      !/^[\da-f-]{36}$/i.test(r.id) ||
+      typeof r.questionId !== "string" ||
+      r.questionId.length > 200 ||
+      !Number.isInteger(r.version) ||
+      r.version < 1 ||
+      !["answer", "language", "explanation", "outdated"].includes(r.reason) ||
+      typeof r.detail !== "string" ||
+      r.detail.trim().length < 10 ||
+      r.detail.length > 2000
+    )
+      return response.status(400).json({ error: "Laporan tidak valid." });
+    database
+      .prepare(
+        "INSERT OR IGNORE INTO question_reports(id,question_id,version,reason,detail,created_at) VALUES(?,?,?,?,?,?)",
+      )
+      .run(
+        r.id,
+        r.questionId,
+        r.version,
+        r.reason,
+        r.detail.trim(),
+        new Date().toISOString(),
+      );
+    return response.status(201).json({ id: r.id, received: true });
+  });
   const paging = (query) => ({
     page: Math.max(1, parseInt(query.page) || 1),
     limit: Math.min(200, Math.max(1, parseInt(query.limit) || 50)),
@@ -59,6 +88,25 @@ export function createQuestionRouter(resolver) {
     },
   );
   router.use(rateLimit(120), requireUser(resolver), requireAdmin, rateLimit());
+  router.get("/reports", (_request, response) =>
+    response.json({
+      items: database
+        .prepare(
+          "SELECT * FROM question_reports ORDER BY created_at DESC LIMIT 100",
+        )
+        .all(),
+    }),
+  );
+  router.patch("/reports/:id", (request, response) => {
+    if (!["open", "resolved"].includes(request.body?.status))
+      return response.status(400).json({ error: "Status tidak valid." });
+    const result = database
+      .prepare("UPDATE question_reports SET status=? WHERE id=?")
+      .run(request.body.status, request.params.id);
+    return result.changes
+      ? response.json({ saved: true })
+      : response.status(404).json({ error: "Laporan tidak ditemukan." });
+  });
   router.get("/", (request, response) =>
     response.json(
       listQuestions({

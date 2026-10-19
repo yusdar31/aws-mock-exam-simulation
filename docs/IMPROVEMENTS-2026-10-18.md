@@ -1,0 +1,45 @@
+**Perbaikan menyeluruh penggunaan Exam Studio — 18 Oktober 2026**
+
+Implementasi menindaklanjuti [review penggunaan](REVIEW-UX-2026-10-18.md). Perubahan GCP yang sudah ada pada working tree dipertahankan. Berkas sumber arsip dipertahankan; tidak ada akun atau riwayat cloud produksi yang dibuat selama pengujian.
+
+| Temuan | Implementasi |
+| --- | --- |
+| Sesi tertimpa setelah Back | Perpindahan route menyimpan snapshot dan menampilkan lanjutkan. Memulai pengganti membaca sesi terbaru dari IndexedDB dan meminta konfirmasi. Web Locks mencegah dua tab mengerjakan sesi pengguna yang sama; transaksi penyimpanan menolak ID percobaan berbeda dan snapshot lebih lama. Resume menunggu penyimpanan berhasil. |
+| Bahasa soal salah | Loader GCP English palsu dihapus. Pilihan English dinonaktifkan dan diberi keterangan belum tersedia. Arsip English yang belum ditinjau dikeluarkan dari bank aktif; source arsip dan snapshot riwayat tetap ada. Bank English aktif memakai skenario bilingual yang memiliki referensi. |
+| Sertifikasi tidak konsisten | Katalog bersama `src/data/certifications.json` memasok nama, provider, bahasa, blueprint, durasi, dan jumlah simulasi. Digunakan frontend, backend editorial, hasil, timer, admin, dan coach. Schema GCP tidak lagi berubah menjadi SAA dan menerima sumber Google Cloud. |
+| Jumlah GCP salah | Kuota memakai pembulatan bobot yang berjumlah sesuai ukuran sesi. Ukuran latihan simulasi GCP adalah 50, dengan durasi 120 menit. Metadata kesiapan masih menjadi syarat; bank GCP pengguna yang belum ditinjau tidak diberi status terverifikasi secara otomatis. |
+| Mulai latihan mobile terlalu jauh | Tombol mulai dan ringkasan tersedia di bilah bawah pada layar hingga 900 px. Pilihan sertifikasi diringkas dan cakupan domain dapat dibuka sesuai kebutuhan. Area konten ujian kini bergulir di antara header/footer sehingga kontrol tidak tertutup keduanya. |
+| Review opsi tidak lengkap | Setiap opsi menampilkan teks lengkap, status kunci dan pilihan pengguna. Alasan dapat dibuka; alasan distraktor dilipat agar review lebih ringkas. Tersedia filter domain, pencarian, soal ragu, dan soal lebih dari 90 detik. |
+| Bank simulasi sempit | CCP bertambah dari 70 menjadi 138 skenario dengan metadata simulasi per bahasa; SAA dari 70 menjadi 140. Skenario tambahan memiliki penjelasan fungsi alternatif dan sumber layanan. Sampling simulasi mendahulukan soal yang tidak muncul dalam tiga percobaan terbaru. Tes membuktikan dua simulasi AWS berturut-turut dapat memilih 65 soal tanpa overlap pada bank baru. |
+| API pusat 404 | Ditambahkan gateway Vercel `/api/questions/[...path]`. GET approved menyediakan bank rilis yang terversi ketika backend editorial belum dikonfigurasi, dan menyatakan `source: release`. Bila `QUESTION_API_ORIGIN` tersedia, gateway meneruskan permintaan ke backend persisten. Fallback tidak mengaku sebagai layanan editorial aktif. |
+| Preferensi dan riwayat ter-reset | Konfigurasi sertifikasi, bahasa soal, mode, jumlah, durasi, domain dan jenis materi disimpan. Riwayat dimulai dari konteks sertifikasi/bahasa terakhir, menampilkan jumlah seluruh hasil dan reset filter. Tautan hasil tamu dapat dibuka kembali setelah masuk tamu. |
+| Validasi terlambat | Input pecahan, kapasitas tidak cukup, cakupan kosong, pemuatan dan penyimpanan menjelaskan mengapa tombol belum aktif. Tersedia preset 10/20/semua hingga 200 soal, serta jenis materi baru, berreferensi dan arsip. |
+| Pengguna baru harus melewati login | Aksi coba 10 soal tanpa akun dipindahkan ke pengantar. Lobby menawarkan diagnostik singkat atau simulasi, dengan penjelasan jalur CCP/SAA/ACE. |
+| Hasil tidak memberi tindakan berikutnya | Hasil menyediakan latihan soal salah, domain terlemah, dan penggunaan ulang konfigurasi. Filter salah pada hasil sempurna menampilkan pesan yang sesuai. Cakupan soal unik dan jumlah bukti latihan terlihat di lobby/rencana belajar. |
+| Orientasi dan aksesibilitas | Judul dokumen mengikuti layar dan sertifikasi. Fokus diarahkan ke heading yang terlihat setelah lazy loading. Timer memiliki role dan pengumuman ambang lima/satu menit. Status simpan dipersingkat dengan detail pada title. Ukuran teks, bacaan lebar dan mode gelap disimpan per pengguna lokal. |
+| Ekspor terbatas satu halaman | PDF berbasis teks dipaginasi tanpa canvas seluruh halaman. Pilihan ekspor: ringkasan, seluruh soal salah, atau seluruh percobaan. Tes memeriksa soal ke-12 ada dalam PDF ketika layar hanya menampilkan sepuluh soal. Cadangan JSON mencakup hasil dan catatan, dengan validasi sebelum impor, penggabungan tanpa duplikasi, dan penyalinan progres tamu ke akun melalui tindakan pengguna. |
+| Alat belajar tambahan | Bookmark permanen, catatan pribadi, keyakinan opsional, target mingguan, domain fokus, materi jatuh tempo, pencarian catatan dan laporan masalah soal. Laporan disimpan sebelum dikirim; kegagalan tetap berstatus pending dan bisa dicoba ulang/diekspor. Backend SQLite menyediakan penerimaan idempoten dan antrean review admin. |
+
+**Ketersediaan konten dan layanan**
+
+GCP tetap menyediakan 100 soal latihan Indonesia yang sudah ada. English dan simulasi GCP belum dibuka karena bank ini belum memiliki review sumber dan alasan tiap opsi yang memenuhi syarat. UI menjelaskan keterbatasan sebelum pengguna memulai. Rekomendasi internal dan jumlah soal yang pernah dikerjakan tidak ditampilkan sebagai prediksi kelulusan resmi.
+
+Bank aktif baru: CCP Indonesia 295 soal (138 skenario berreferensi dan 157 arsip Indonesia), CCP English 138, SAA Indonesia 140, SAA English 140, serta GCP Indonesia 100 soal latihan. ID skenario lama dipertahankan, versi skenario yang diperbarui menjadi 2, dan versi soal pada hasil lama tetap berupa snapshot. Bank pusat tidak boleh menimpa versi bawaan yang lebih baru dengan versi yang lebih lama.
+
+Gateway bank rilis menyelesaikan route publik yang sebelumnya tidak tersedia setelah kode ini dideploy. Edit admin dan laporan yang diterima server tetap memerlukan backend persisten, bukan filesystem sementara Vercel. Atur `QUESTION_API_ORIGIN=https://origin-backend` sebagai environment server Vercel, atau gunakan `VITE_API_URL` untuk mengakses backend langsung. Jangan mengatur keduanya ke layanan yang saling memproksi karena dapat membuat loop. Route laporan menerima laporan hanya bila backend menerimanya; UI tidak memberi status terkirim ketika layanan belum terhubung.
+
+Backend perlu filesystem persisten untuk `DATA_DIR`, migrasi Supabase yang sudah disediakan, dan konfigurasi autentikasi/peran yang benar. `render.yaml` kini memakai root repo dan menjalankan paket backend agar katalog bersama tersedia. Konfigurasi ini tidak membuat disk berbayar atau resource hosting baru.
+
+Catatan, bookmark, rencana dan pengaturan baca disimpan per pengguna dalam browser; fitur tersebut tidak mengaku tersinkron ke cloud. Cadangan dan transfer tamu disediakan untuk pemindahan. Laporan yang baru diterima server belum berarti persoalan kontennya sudah diselesaikan editor.
+
+**Validasi**
+
+Hasil akhir lokal: lint dan build lulus; 34 tes unit/API/RLS serta 32 skenario browser lulus. Tujuh pemindaian axe tidak menemukan pelanggaran terkonfirmasi; dua kondisi terang masih menghasilkan pemeriksaan kontras yang tidak dapat diputuskan otomatis. Tidak ada error JavaScript pada skenario penggunaan baru. Perubahan kemudian dipublikasikan setelah persetujuan pengguna; [laporan deployment](DEPLOYMENT-2026-10-18.md) mencatat build READY dan 13 kelompok pemeriksaan produksi yang lulus.
+
+Jalankan `npm run lint`, `npm run build`, `npm test`, dan `npm run test:browser`. Browser suite kini mencakup `tests/usability-browser.mjs` di samping empat skrip sebelumnya. Bukti lokal di `artifacts/usability/` meliputi log lint/build/unit/browser, `results.json`, screenshot mode gelap, cadangan JSON, dan PDF ekspor lengkap. Direktori artefak diabaikan Git.
+
+Unit/API/RLS mencakup kuota GCP, pemilihan soal tanpa overlap, filter materi, schema provider, pagination gateway, serta izin dan idempotensi laporan peserta. Browser memeriksa Back, penolakan penggantian sesi, perlindungan tab kedua, persistensi catatan, retry laporan, preferensi, impor invalid, PDF lintas halaman review, dan viewport 320/360/390/768/1366 px. Pemindaian axe mencakup tujuh kondisi layar terang/gelap; ini tidak menggantikan uji pembaca layar manusia.
+
+Bundle PDF utama berubah dari sekitar 936 KB / 266 KB gzip menjadi sekitar 399 KB / 130 KB gzip dan tetap dimuat saat ekspor. Modul opsional jsPDF dapat menghasilkan chunk tambahan; fitur PDF teks ini tidak memanggil renderer HTML/canvas. Peningkatan performa pengguna nyata tetap perlu diukur dengan telemetry yang sudah tersedia.
+
+Referensi konfigurasi: [panduan CCP](https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html), [panduan SAA](https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html), [format ACE](https://cloud.google.com/learn/certification/cloud-engineer), dan [blueprint ACE](https://cloud.google.com/learn/certification/guides/cloud-engineer). Referensi layanan tiap skenario dicantumkan pada data soal.
