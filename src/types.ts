@@ -11,6 +11,7 @@ export type Phase =
   | "admin"
   | "coach"
   | "live"
+  | "banks"
   | "study";
 // Study tools have a separate route from the active exam.
 export type Question = {

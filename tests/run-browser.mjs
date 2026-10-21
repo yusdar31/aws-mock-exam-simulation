@@ -3,6 +3,7 @@ for (const file of [
   "browser.mjs",
   "admin-browser.mjs",
   "bank-browser.mjs",
+  "question-banks-browser.mjs",
   "language-browser.mjs",
   "usability-browser.mjs",
   "studio-browser.mjs",

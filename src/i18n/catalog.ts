@@ -4,6 +4,53 @@ import { studyMessages } from "./study";
 export const LANGUAGE_STORAGE_KEY = "aws-exam-ui-language";
 export const messages: Record<string, string> = {
   ...studyMessages,
+  "Bank soal": "Question banks",
+  "Jelajahi bank soal": "Browse question banks",
+  "Bahasa Inggris": "English",
+  "Bank tidak ditemukan": "Bank not found",
+  "Cakupan soal siap simulasi belum mencukupi.":
+    "There are not enough simulation-ready questions across all domains.",
+  "Cari bank soal": "Search question banks",
+  "Coba kata kunci lain atau hapus filter.":
+    "Try another search or clear the filters.",
+  "Dilengkapi referensi & pembahasan opsi":
+    "With references and option explanations",
+  "Domain materi": "Content domains",
+  "Filter bank soal": "Question bank filters",
+  "Filter daftar soal": "Question list filters",
+  "Hapus filter": "Clear filters",
+  "Kata kunci atau ID soal": "Keyword or question ID",
+  "Kembali ke daftar bank": "Back to question banks",
+  "Lihat daftar soal": "View questions",
+  "Lihat jawaban & pembahasan": "View answers and explanations",
+  "Muat ulang bank": "Reload banks",
+  "Nama sertifikasi, kode, atau domain": "Certification name, code, or domain",
+  "Penyedia sertifikasi": "Certification provider",
+  "Pilih bank dari daftar yang tersedia.":
+    "Choose a bank from the available list.",
+  "Satu jawaban": "Single answer",
+  "Beberapa jawaban": "Multiple answers",
+  "Konfigurasi, implementasi, operasi, dan keamanan Google Cloud.":
+    "Google Cloud environment setup, deployment, operations, and security.",
+  "Semua bahasa": "All languages",
+  "Semua domain": "All domains",
+  "Semua penyedia": "All providers",
+  "Siapkan latihan": "Set up practice",
+  "Siapkan simulasi": "Set up simulation",
+  "Soal tersedia": "Available questions",
+  "Tampilkan soal berikutnya": "Show more questions",
+  "Telusuri soal dan cakupan materi sebelum menyiapkan sesi.":
+    "Explore the questions and topic coverage before setting up a session.",
+  "Temukan bank soal, lihat cakupan materi, lalu pilih latihan Anda.":
+    "Find a question bank, explore its coverage, and choose your practice.",
+  "Tidak ada bank yang cocok": "No matching banks",
+  "Tidak ada soal yang cocok. Coba kata kunci atau domain lain.":
+    "No matching questions. Try another keyword or domain.",
+  "{count} bank ditampilkan": "{count} banks shown",
+  "{count} soal": "{count} questions",
+  "{shown} dari {total} soal ditampilkan":
+    "Showing {shown} of {total} questions",
+  "Bank soal tersedia.": "The question bank is available.",
   "Bahasa tampilan": "Display language",
   "Bahasa tampilan hanya mengubah menu dan petunjuk. Bahasa soal dipilih secara terpisah.":
     "Display language changes menus and instructions. Question language is selected separately.",

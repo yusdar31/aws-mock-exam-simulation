@@ -18,6 +18,7 @@ import {
   isSession,
 } from "./lib/exam";
 import { loadBank } from "./lib/banks";
+import { loadAvailableBank } from "./lib/availableBank";
 import { CERTIFICATIONS, availableLanguage } from "./lib/catalog";
 import { readConfig, writeConfig } from "./lib/preferences";
 import { LearningProvider } from "./learning/LearningProvider";
@@ -26,7 +27,6 @@ import {
   clearCloudSession,
   cloudSession,
   identity,
-  loadApproved,
   loadHistory,
   syncAttempt,
   syncPending,
@@ -49,6 +49,7 @@ const Result = lazy(() => import("./screens/Result"));
 const History = lazy(() => import("./screens/History"));
 const Admin = lazy(() => import("./screens/Admin"));
 const Study = lazy(() => import("./screens/Study"));
+const QuestionBanks = lazy(() => import("./screens/QuestionBanks"));
 const Coach = lazy(() => import("./screens/Coach"));
 const LiveClass = lazy(() => import("./screens/LiveClass"));
 const allowed: Phase[] = [
@@ -62,6 +63,7 @@ const allowed: Phase[] = [
   "coach",
   "live",
   "study",
+  "banks",
 ];
 function route(): Phase {
   const part = location.hash.slice(1).split("/")[0] as Phase;
@@ -149,8 +151,12 @@ export default function App() {
       admin: "Admin",
       coach: "Ruang kelas",
       live: "Ujian bersama",
+      banks: "Bank soal",
     };
-    document.title = `${t(titles[phase])} \u00b7 ${CERTIFICATIONS[config.examType].code} \u00b7 Exam Studio`;
+    document.title =
+      phase === "banks"
+        ? `${t(titles[phase])} · Exam Studio`
+        : `${t(titles[phase])} \u00b7 ${CERTIFICATIONS[config.examType].code} \u00b7 Exam Studio`;
   }, [phase, config.examType, t]);
   useEffect(() => {
     const focus = () => {
@@ -225,9 +231,12 @@ export default function App() {
           } else navigate("history");
         } else
           navigate(
-            ["history", "admin", "coach", "study", "live"].includes(requested)
+            ["history", "admin", "coach", "study", "live", "banks"].includes(
+              requested,
+            )
               ? requested
               : "lobby",
+            requested === "banks" ? requestedId : undefined,
           );
         void syncPending(value.id);
       } catch (error) {
@@ -329,45 +338,15 @@ export default function App() {
       setLoading(true);
       setBankNotice("");
       try {
-        const builtin = await loadBank(config.examType, config.lang);
-        let remote: Question[] = [];
-        let excludedIds: string[] = [];
-        if (user)
-          try {
-            const payload = await loadApproved(config.examType, config.lang);
-            remote = payload.items;
-            excludedIds = payload.excludedIds;
-            if (!payload.offline && payload.source === "release" && !cancelled)
-              setBankNotice("Bank rilis siap digunakan.");
-            if (payload.offline && !cancelled)
-              setBankNotice(
-                "Bank pusat belum tersedia. Menggunakan bank terakhir yang tersimpan di perangkat.",
-              );
-          } catch {
-            if (!cancelled)
-              setBankNotice(
-                "Menggunakan bank bawaan. Bank pusat belum tersedia.",
-              );
-          }
-        const byId = new Map(
-          builtin
-            .filter((q) => !excludedIds.includes(q.id))
-            .map((q) => [q.id, q]),
+        const bank = await loadAvailableBank(
+          config.examType,
+          config.lang,
+          !!user,
         );
-        for (const question of remote) {
-          const previous = byId.get(question.id);
-          if (!previous || question.version >= previous.version)
-            byId.set(question.id, question);
+        if (!cancelled) {
+          setPool(bank.questions);
+          setBankNotice(bank.notice);
         }
-        if (!cancelled)
-          setPool([
-            ...new Map(
-              [...byId.values()].map((q) => [
-                `${q.examType}:${q.lang}:${q.prompt.toLowerCase().replace(/\s+/g, " ").trim()}`,
-                q,
-              ]),
-            ).values(),
-          ]);
       } catch {
         if (!cancelled) {
           setPool([]);
@@ -699,9 +678,10 @@ export default function App() {
         navigate("result", found.id);
       } else
         navigate(
-          !quick && ["history", "study"].includes(requested)
+          !quick && ["history", "study", "banks"].includes(requested)
             ? requested
             : "lobby",
+          !quick && requested === "banks" ? requestedId : undefined,
         );
     } catch (error) {
       setNotice(
@@ -807,6 +787,12 @@ export default function App() {
                 {t("Ruang belajar")}{" "}
               </a>
               <a
+                href="#banks"
+                aria-current={phase === "banks" ? "page" : undefined}
+              >
+                {t("Bank soal")}
+              </a>
+              <a
                 href="#history"
                 aria-current={phase === "history" ? "page" : undefined}
               >
@@ -905,6 +891,10 @@ export default function App() {
               <Auth
                 onGuest={() => void guest()}
                 onQuick={() => void guest(true)}
+                onBanks={() => {
+                  if (route() !== "banks") location.hash = "banks";
+                  void guest();
+                }}
               />
             ) : active ? (
               <Exam
@@ -986,6 +976,24 @@ export default function App() {
                 onLoadMore={async () => {
                   historyPage.current++;
                   setAttempts(await loadHistory(user.id, historyPage.current));
+                }}
+              />
+            ) : phase === "banks" ? (
+              <QuestionBanks
+                onChoose={(examType, lang, mode, count) => {
+                  setLoading(true);
+                  setConfig({
+                    ...config,
+                    examType,
+                    lang,
+                    mode,
+                    limit: Math.min(10, count),
+                    duration: 0,
+                    content: "all",
+                    domains: Object.keys(CERTIFICATIONS[examType].blueprint),
+                  });
+                  setBankRevision((n) => n + 1);
+                  navigate("lobby");
                 }}
               />
             ) : phase === "study" ? (

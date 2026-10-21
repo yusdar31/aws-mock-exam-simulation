@@ -5,9 +5,11 @@ import StudioIcon from "../components/StudioIcon";
 export default function Auth({
   onGuest,
   onQuick,
+  onBanks,
 }: {
   onGuest: () => void;
   onQuick: () => void;
+  onBanks: () => void;
 }) {
   const { t } = useLanguage();
   const [mode, setMode] = useState<"login" | "register" | "reset">("login");
@@ -105,6 +107,7 @@ export default function Auth({
         <a className="button auth-class-entry" href="#live">
           {t("Gabung ujian kelas")}
         </a>
+        <button onClick={onBanks}>{t("Jelajahi bank soal")}</button>
         <button
           className="text-button"
           onClick={() => {
