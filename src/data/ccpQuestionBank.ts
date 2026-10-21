@@ -2702,6 +2702,3006 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "lang": "id"
   },
   {
+    "id": "ccp_scenario_0001",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah perusahaan retail ingin beralih dari pusat data on-premise ke AWS. Manajemen ingin mengurangi risiko finansial akibat menebak kapasitas server yang dibutuhkan menjelang musim liburan, di mana perkiraan yang salah sering kali menyebabkan kelebihan server menganggur atau kekurangan kapasitas yang memicu crash aplikasi. Manfaat komputasi cloud manakah yang secara langsung mengatasi tantangan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Berhenti menebak kapasitas kebutuhan (Stop guessing capacity)"
+      },
+      {
+        "id": "B",
+        "text": "Meningkatkan belanja modal di awal (Increase capital expenditure)"
+      },
+      {
+        "id": "C",
+        "text": "Mengunci arsitektur pada satu penyedia perangkat keras"
+      },
+      {
+        "id": "D",
+        "text": "Menghilangkan kebutuhan konfigurasi jaringan virtual"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Manfaat 'Stop guessing capacity' pada AWS Cloud memungkinkan bisnis menyesuaikan kapasitas komputasi secara elastis mengikuti fluktuasi permintaan nyata, sehingga tidak perlu lagi berspekulasi mengenai kapasitas maksimum di muka.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0002",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah institusi pemerintah sedang mengevaluasi arsitektur cloud untuk mematuhi regulasi kedaulatan data nasional yang mewajibkan seluruh data warga disimpan secara eksklusif pada infrastruktur komputasi privat di dalam batas negara tanpa koneksi publik langsung. Model penerapan cloud (cloud deployment model) manakah yang paling sesuai untuk kebutuhan tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Public Cloud"
+      },
+      {
+        "id": "B",
+        "text": "Private Cloud (On-premises / Dedicated Private Infrastructure)"
+      },
+      {
+        "id": "C",
+        "text": "Multi-Tenant Public Cloud"
+      },
+      {
+        "id": "D",
+        "text": "Community Cloud Terbuka"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Private Cloud mengalokasikan sumber daya komputasi dan penyimpanan secara eksklusif untuk satu organisasi tunggal, menawarkan kendali privasi dan pematuhan kedaulatan data yang paling ketat.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0003",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah perusahaan logistik ingin memigrasikan aplikasi ERP mereka ke AWS dengan pendekatan 'Rehost' (Lift-and-Shift). Mereka ingin mempertahankan sistem operasi, konfigurasi dependensi, dan arsitektur perangkat lunak yang ada tanpa mengubah kode program sama sekali. Model layanan cloud manakah yang digunakan saat menyewa mesin virtual Amazon EC2 pada skenario ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Software as a Service (SaaS)"
+      },
+      {
+        "id": "B",
+        "text": "Platform as a Service (PaaS)"
+      },
+      {
+        "id": "C",
+        "text": "Infrastructure as a Service (IaaS)"
+      },
+      {
+        "id": "D",
+        "text": "Function as a Service (FaaS)"
+      }
+    ],
+    "correctAnswers": [
+      "C"
+    ],
+    "explanation": "Amazon EC2 adalah layanan Infrastructure as a Service (IaaS) di mana AWS menyediakan perangkat keras virtualisasi, dan pelanggan memiliki kendali penuh atas sistem operasi, runtime, dan aplikasi.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0004",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah tim pengembang menggunakan Amazon RDS for PostgreSQL untuk mengelola database relasional mereka. Tim tidak perlu mengelola perangkat keras server, instalasi sistem operasi, atau patching mesin database, namun tetap memiliki kendali penuh atas konfigurasi skema tabel dan query data aplikasi. Model layanan cloud manakah ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Infrastructure as a Service (IaaS)"
+      },
+      {
+        "id": "B",
+        "text": "Platform as a Service (PaaS)"
+      },
+      {
+        "id": "C",
+        "text": "Software as a Service (SaaS)"
+      },
+      {
+        "id": "D",
+        "text": "Bare Metal as a Service"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Layanan terkelola seperti Amazon RDS dikategorikan sebagai Platform as a Service (PaaS), di mana penyedia cloud mengelola lapisan OS dan platform database, sementara pengguna mengelola data dan skema aplikasi.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0005",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah organisasi ingin menyelaraskan transformasi cloud mereka dengan kerangka kerja AWS Cloud Adoption Framework (AWS CAF). Manajemen ingin memastikan bahwa peran kepemimpinan, strategi pengembangan keterampilan karyawan, dan kesiapan perubahan budaya organisasi dikelola dengan baik. Perspektif (Perspective) AWS CAF manakah yang berfokus pada area ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Perspektif Platform (Platform Perspective)"
+      },
+      {
+        "id": "B",
+        "text": "Perspektif Sumber Daya Manusia (People Perspective)"
+      },
+      {
+        "id": "C",
+        "text": "Perspektif Operasi (Operations Perspective)"
+      },
+      {
+        "id": "D",
+        "text": "Perspektif Keamanan (Security Perspective)"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Perspektif People (Sumber Daya Manusia) dalam AWS CAF berfokus pada kesiapan talenta, manajemen perubahan organisasi, kepemimpinan budaya, dan peningkatan keterampilan cloud tim.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0006",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Dalam tinjauan AWS Well-Architected Framework, sebuah perusahaan manufaktur merancang arsitektur mereka agar dapat mengotomatiskan operasi, memperbarui prosedur melalui kode, dan mengantisipasi potensi kegagalan operasional secara teratur melalui simulasi 'Game Day'. Pilar Well-Architected Framework manakah yang paling didukung oleh inisiatif ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Keunggulan Operasional (Operational Excellence)"
+      },
+      {
+        "id": "B",
+        "text": "Optimalisasi Biaya (Cost Optimization)"
+      },
+      {
+        "id": "C",
+        "text": "Efisiensi Kinerja (Performance Efficiency)"
+      },
+      {
+        "id": "D",
+        "text": "Keberlanjutan (Sustainability)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Pilar Operational Excellence berfokus pada pelaksanaan dan pemantauan sistem untuk memberikan nilai bisnis serta terus meningkatkan proses dan prosedur pendukung (termasuk otomasi operasi dan Game Day).",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0007",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah platform e-commerce ingin mengurangi jejak karbon dan dampak lingkungan dari beban kerja komputasi mereka di cloud. Mereka mengoptimalkan utilisasi kapasitas instance, memilih prosesor AWS Graviton berbasis ARM yang hemat energi, dan menghapus data usang yang tidak terpakai. Pilar AWS Well-Architected Framework manakah yang tercermin?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Keberlanjutan (Sustainability)"
+      },
+      {
+        "id": "B",
+        "text": "Keandalan (Reliability)"
+      },
+      {
+        "id": "C",
+        "text": "Keamanan (Security)"
+      },
+      {
+        "id": "D",
+        "text": "Efisiensi Kinerja (Performance Efficiency)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Pilar Sustainability (Keberlanjutan) berfokus pada meminimalkan dampak lingkungan dari menjalankan beban kerja cloud, mengurangi konsumsi energi, dan memaksimalkan efisiensi sumber daya fisik.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0008",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah aplikasi analitik data di Amazon EC2 membutuhkan waktu pemulihan maksimal 15 menit jika terjadi bencana (Recovery Time Objective / RTO = 15 menit) dan toleransi kehilangan data maksimal 5 menit (Recovery Point Objective / RPO = 5 menit). Strategi arsitektur pemulihan bencana (Disaster Recovery) manakah yang menyediakan RTO dan RPO paling ketat mendekati nol?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Backup and Restore"
+      },
+      {
+        "id": "B",
+        "text": "Pilot Light"
+      },
+      {
+        "id": "C",
+        "text": "Warm Standby"
+      },
+      {
+        "id": "D",
+        "text": "Multi-Region Active-Active"
+      }
+    ],
+    "correctAnswers": [
+      "D"
+    ],
+    "explanation": "Strategi Multi-Region Active-Active menjalankan beban kerja secara penuh di beberapa Region secara simultan, memberikan nilai RTO dan RPO mendekati nol (real-time failover) meskipun membutuhkan biaya paling tinggi.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0009",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah perusahaan memiliki aplikasi monolitik lama yang sudah usang dan bernilai bisnis rendah. Manajemen memutuskan untuk menonaktifkan aplikasi tersebut sepenuhnya dari pusat data tanpa memindahkannya ke cloud. Strategi migrasi 6 R's (Migration Strategies) manakah yang diterapkan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rehost"
+      },
+      {
+        "id": "B",
+        "text": "Replatform"
+      },
+      {
+        "id": "C",
+        "text": "Retire (Memensiunkan)"
+      },
+      {
+        "id": "D",
+        "text": "Retain"
+      }
+    ],
+    "correctAnswers": [
+      "C"
+    ],
+    "explanation": "Strategi 'Retire' dalam 6 R's migrasi cloud adalah mengidentifikasi dan mematikan atau memensiunkan aplikasi atau aset yang sudah tidak lagi diperlukan oleh organisasi.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0010",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah startup fintech ingin merancang ulang sistem transaksinya agar menjadi arsitektur cloud-native modern berbasis kontainer mikro dan serverless, guna memaksimalkan skalabilitas dan efisiensi biaya jangka panjang. Strategi migrasi 6 R's manakah yang paling tepat menggambarkan transformasi ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Refactor / Rearchitect"
+      },
+      {
+        "id": "B",
+        "text": "Rehost"
+      },
+      {
+        "id": "C",
+        "text": "Repurchase"
+      },
+      {
+        "id": "D",
+        "text": "Retain"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Strategi 'Refactor' atau 'Rearchitect' melibatkan penulisan ulang dan perancangan ulang arsitektur aplikasi secara fundamental untuk memanfaatkan fitur-fitur cloud-native seperti serverless dan microservices.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0011",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah perusahaan media berita online ingin menyebarkan aplikasi mereka agar pembaca di Tokyo, London, dan New York dapat mengakses konten dalam hitungan milidetik. Dengan AWS, mereka dapat meluncurkan infrastruktur di seluruh dunia dalam hitungan menit. Manfaat utama komputasi cloud manakah ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mendunia dalam hitungan menit (Go global in minutes)"
+      },
+      {
+        "id": "B",
+        "text": "Penyimpanan berkapasitas tanpa batas otomatis"
+      },
+      {
+        "id": "C",
+        "text": "Menghilangkan seluruh kebutuhan sertifikasi keamanan"
+      },
+      {
+        "id": "D",
+        "text": "Menjamin 100% biaya komputasi gratis"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "'Go global in minutes' adalah salah satu dari 6 keuntungan cloud computing, memungkinkan penyebaran aplikasi ke berbagai lokasi geografis di seluruh dunia secara cepat melalui jaringan global AWS.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0012",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah rumah sakit mengoperasikan sistem pemindaian radiologi lokal yang membutuhkan latensi perangkat keras satu digit milidetik ke mesin MRI fisik di lokasi, tetapi ingin menyimpan salinan arsip jangka panjang di cloud. Model penerapan (deployment model) cloud manakah yang mengkombinasikan lingkungan lokal dan cloud ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Hybrid Cloud Deployment"
+      },
+      {
+        "id": "B",
+        "text": "All-in Cloud Deployment"
+      },
+      {
+        "id": "C",
+        "text": "Isolated Multi-Tenant Cloud"
+      },
+      {
+        "id": "D",
+        "text": "Public Cloud Murni"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Hybrid deployment menggabungkan infrastruktur lokal on-premise dengan sumber daya cloud publik, memungkinkan beban kerja sensitif latensi tetap lokal sementara pencadangan jangka panjang menggunakan cloud.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0013",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah perusahaan menggunakan fungsi AWS Lambda (Serverless) untuk memproses pesanan pelanggan. Berdasarkan AWS Shared Responsibility Model, manakah dari aspek keamanan berikut yang sepenuhnya dikelola oleh AWS pada arsitektur serverless ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Keamanan dan manajemen patch pada sistem operasi, runtime bahasa, dan server fisik eksekusi"
+      },
+      {
+        "id": "B",
+        "text": "Logika kode program aplikasi dan dependensi pustaka yang diunggah pengembang"
+      },
+      {
+        "id": "C",
+        "text": "Konfigurasi kebijakan izin IAM Execution Role untuk fungsi Lambda"
+      },
+      {
+        "id": "D",
+        "text": "Pengaturan enkripsi data pelanggan di dalam tabel basis data"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Pada model komputasi serverless (AWS Lambda), AWS mengelola seluruh lapisan infrastruktur yang mendasari, termasuk server fisik, sistem operasi host, lapisan virtualisasi, dan runtime lingkungan eksekusi.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0014",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Seorang insinyur keamanan ingin memastikan bahwa seluruh panggilan API dan aktivitas login akun AWS dianalisis secara cerdas untuk mendeteksi potensi kompromi kredensial atau penambangan cryptocurrency yang tidak sah menggunakan machine learning. Layanan keamanan AWS manakah yang harus diaktifkan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon GuardDuty"
+      },
+      {
+        "id": "B",
+        "text": "AWS Secrets Manager"
+      },
+      {
+        "id": "C",
+        "text": "AWS Certificate Manager"
+      },
+      {
+        "id": "D",
+        "text": "AWS Shield Standard"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon GuardDuty adalah layanan intelligent threat detection yang terus memantau aktivitas berbahaya dan perilaku anomali di akun AWS dengan menganalisis CloudTrail, VPC Flow Logs, dan DNS logs.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0015",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah aplikasi web publik sering menerima serangan penolakan layanan (DDoS) berskala besar pada lapisan aplikasi (Layer 7). Perusahaan ingin mendapatkan perlindungan DDoS tingkat lanjut, integrasi langsung dengan AWS WAF, dan akses 24/7 ke tim ahli AWS Shield Response Team (SRT). Layanan keamanan manakah yang menyediakan proteksi khusus ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Shield Advanced"
+      },
+      {
+        "id": "B",
+        "text": "AWS Shield Standard"
+      },
+      {
+        "id": "C",
+        "text": "Amazon Inspector"
+      },
+      {
+        "id": "D",
+        "text": "AWS KMS"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Shield Advanced menyediakan perlindungan DDoS tingkat lanjut (Layer 3, 4, dan 7), perlindungan finansial terhadap lonjakan biaya, dan akses langsung 24/7 ke Shield Response Team (SRT).",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0016",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah perusahaan retail ingin memindai image kontainer Docker di Amazon ECR dan armada instance Amazon EC2 secara otomatis untuk menemukan kerentanan perangkat lunak (CVE) yang belum di-patch serta paparan jaringan yang tidak diinginkan. Layanan manajemen kerentanan AWS manakah yang harus digunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon Inspector"
+      },
+      {
+        "id": "B",
+        "text": "Amazon Macie"
+      },
+      {
+        "id": "C",
+        "text": "AWS Trusted Advisor"
+      },
+      {
+        "id": "D",
+        "text": "AWS CloudTrail"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon Inspector adalah layanan manajemen kerentanan otomatis yang memindai beban kerja EC2, container image di ECR, dan fungsi Lambda untuk menemukan kerentanan perangkat lunak dan paparan jaringan.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0017",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Seorang insinyur keamanan perlu mengumpulkan dan menyatukan seluruh rekaman lalu lintas jaringan IP (IP network traffic) yang masuk dan keluar dari antarmuka jaringan (ENI) di dalam Amazon VPC untuk keperluan investigasi keamanan dan forensik jaringan. Fitur Amazon VPC manakah yang harus diaktifkan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "VPC Flow Logs"
+      },
+      {
+        "id": "B",
+        "text": "Route Tables"
+      },
+      {
+        "id": "C",
+        "text": "Internet Gateway"
+      },
+      {
+        "id": "D",
+        "text": "NAT Gateway"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "VPC Flow Logs memungkinkan penangkapan informasi mengenai lalu lintas IP yang masuk dan keluar dari antarmuka jaringan (ENI) di dalam VPC untuk observabilitas dan audit keamanan.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0018",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah organisasi enterprise ingin menyederhanakan akses login karyawan ke puluhan akun AWS dan aplikasi bisnis cloud menggunakan satu set kredensial tunggal yang terintegrasi dengan penyedia identitas korporat (Single Sign-On / SSO). Layanan manajemen identitas AWS manakah yang dirancang untuk kebutuhan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS IAM Identity Center (sebelumnya AWS Single Sign-On)"
+      },
+      {
+        "id": "B",
+        "text": "AWS Secrets Manager"
+      },
+      {
+        "id": "C",
+        "text": "AWS Key Management Service (AWS KMS)"
+      },
+      {
+        "id": "D",
+        "text": "Amazon Cognito Identity Pools"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS IAM Identity Center (sebelumnya AWS SSO) mempermudah pengelolaan akses portal terpusat (Single Sign-On) ke beberapa akun AWS dan aplikasi bisnis cloud secara aman.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0019",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Seorang insinyur cloud sedang mengevaluasi kepatuhan postur keamanan akun AWS terhadap standar tolok ukur Center for Internet Security (CIS AWS Foundations Benchmark). Layanan manajemen postur keamanan terpusat AWS manakah yang secara otomatis memeriksa akun terhadap standar tolok ukur ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Security Hub"
+      },
+      {
+        "id": "B",
+        "text": "AWS Artifact"
+      },
+      {
+        "id": "C",
+        "text": "AWS Shield"
+      },
+      {
+        "id": "D",
+        "text": "Amazon GuardDuty"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Security Hub menyediakan pemindaian postur keamanan otomatis terhadap standar kepatuhan industri, termasuk CIS AWS Foundations Benchmark dan PCI-DSS.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0020",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah aplikasi web memerlukan penyimpanan string konfigurasi (seperti URL endpoint database) dan parameter sensitif yang terenkripsi (seperti token lisensi) dengan biaya hemat dan integrasi hierarki path (seperti /prod/db/url). Fitur terkelola AWS Systems Manager manakah yang paling sesuai?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Systems Manager Parameter Store"
+      },
+      {
+        "id": "B",
+        "text": "AWS KMS Key Policies"
+      },
+      {
+        "id": "C",
+        "text": "Amazon S3 Glacier"
+      },
+      {
+        "id": "D",
+        "text": "AWS CloudFormation"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Systems Manager Parameter Store menyediakan penyimpanan terpusat yang aman untuk data konfigurasi dan rahasia (secrets) menggunakan hierarki path dan integrasi KMS.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0021",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah tim keamanan ingin menerapkan pembatasan hak akses maksimum pada pengguna IAM, di mana pengguna tidak boleh diberikan hak akses yang melebihi batas kebijakan tertentu meskipun admin lokal melampirkan policy AdministratorAccess. Fitur IAM tingkat lanjut manakah yang bertindak sebagai pembatas batas izin ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "IAM Permissions Boundary"
+      },
+      {
+        "id": "B",
+        "text": "Security Group Rules"
+      },
+      {
+        "id": "C",
+        "text": "Network ACL Rules"
+      },
+      {
+        "id": "D",
+        "text": "Route Table Entries"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "IAM Permissions Boundary adalah fitur tingkat lanjut yang menggunakan managed policy untuk menetapkan batas maksimum izin yang dapat dimiliki oleh sebuah identitas IAM (user atau role).",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0022",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah aplikasi perbankan membutuhkan modul perangkat keras kriptografi khusus yang berdedikasi (single-tenant hardware security module) yang memenuhi sertifikasi FIPS 140-2 Level 3 di mana pelanggan memegang kendali kepemilikan eksklusif atas kunci kriptografi tanpa campur tangan AWS. Layanan AWS manakah ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS CloudHSM"
+      },
+      {
+        "id": "B",
+        "text": "AWS Key Management Service (AWS KMS)"
+      },
+      {
+        "id": "C",
+        "text": "AWS Secrets Manager"
+      },
+      {
+        "id": "D",
+        "text": "AWS Certificate Manager"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS CloudHSM menyediakan modul perangkat keras keamanan (Hardware Security Module / HSM) khusus berdedikasi (single-tenant) bersertifikasi FIPS 140-2 Level 3 yang dikendalikan penuh oleh pelanggan.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0023",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah organisasi ingin menyederhanakan persiapan audit kepatuhan dengan mengumpulkan bukti penilaian konfigurasi operasional secara otomatis untuk memetakan kepatuhan terhadap kontrol kerangka kerja regulasi (seperti GDPR atau HIPAA). Layanan tata kelola kepatuhan AWS manakah yang dirancang untuk hal ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Audit Manager"
+      },
+      {
+        "id": "B",
+        "text": "AWS Artifact"
+      },
+      {
+        "id": "C",
+        "text": "AWS Trusted Advisor"
+      },
+      {
+        "id": "D",
+        "text": "Amazon CloudWatch"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Audit Manager membantu mengotomatiskan pengumpulan bukti secara berkelanjutan guna menyederhanakan penilaian kepatuhan terhadap standar regulasi industri.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0024",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah perusahaan mendeteksi adanya lonjakan aktivitas pemanggilan API yang tidak biasa pada akun AWS mereka. Fitur analisis anomali otomatis pada AWS CloudTrail manakah yang secara khusus mendeteksi lonjakan volume panggilan API atau kesalahan kode error yang tidak wajar dan memicu peringatan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS CloudTrail Insights"
+      },
+      {
+        "id": "B",
+        "text": "AWS CloudTrail Event History Dasar"
+      },
+      {
+        "id": "C",
+        "text": "Amazon CloudWatch Metrics"
+      },
+      {
+        "id": "D",
+        "text": "Amazon GuardDuty"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS CloudTrail Insights secara otomatis menganalisis event manajemen CloudTrail untuk mengidentifikasi dan memperingatkan adanya aktivitas API yang tidak biasa (seperti lonjakan panggilan atau lonjakan kode kesalahan).",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0025",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Seorang insinyur keamanan ingin memastikan bahwa seluruh volume Amazon EBS baru yang dibuat di akun AWS mereka selalu dienkripsi secara otomatis menggunakan AWS KMS tanpa bergantung pada apakah pengguna mencentang kotak enkripsi saat peluncuran. Fitur konfigurasi Amazon EC2 manakah yang harus diaktifkan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengaktifkan enkripsi default EBS (EBS encryption by default) di tingkat Region"
+      },
+      {
+        "id": "B",
+        "text": "Membuat aturan Network ACL baru di subnet publik"
+      },
+      {
+        "id": "C",
+        "text": "Melampirkan IAM Role pada setiap volume"
+      },
+      {
+        "id": "D",
+        "text": "Mengonfigurasi Security Group pada port 443"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Mengaktifkan fitur 'EBS encryption by default' pada tingkat Region di konsol Amazon EC2 memastikan bahwa setiap volume EBS baru yang dibuat di Region tersebut akan otomatis dienkripsi secara default.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0026",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah organisasi keuangan diwajibkan oleh regulator untuk mengelola sendiri siklus hidup, kebijakan akses (key policies), dan rotasi tahunan kunci enkripsi yang digunakan untuk mengenkripsi data di Amazon S3 dan Amazon EBS. Tipe kunci AWS KMS manakah yang memberikan kontrol penuh ini kepada pelanggan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Customer Managed Keys (CMK)"
+      },
+      {
+        "id": "B",
+        "text": "AWS Owned Keys"
+      },
+      {
+        "id": "C",
+        "text": "AWS Managed Keys"
+      },
+      {
+        "id": "D",
+        "text": "Ephemeral Public Keys"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Customer Managed Keys (CMK) di AWS KMS dibuat, dimiliki, dan dikelola sepenuhnya oleh pelanggan, memungkinkan kontrol granular atas key policy, rotasi otomatis/manual, dan audit penggunaan.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0027",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Setelah membuat akun AWS baru, seorang administrator keamanan meninjau daftar kredensial akun Root User. Menurut rekomendasi keamanan terbaik AWS (Security Best Practices), tindakan manakah yang harus diambil terkait Access Key ID dan Secret Access Key pada akun root?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menghapus access key root sepenuhnya dan tidak pernah membuatnya untuk tugas harian"
+      },
+      {
+        "id": "B",
+        "text": "Memperbarui access key root setiap 30 hari sekali"
+      },
+      {
+        "id": "C",
+        "text": "Membagikan access key root ke tim pengembang senior"
+      },
+      {
+        "id": "D",
+        "text": "Menyimpan access key root di dalam file publik S3"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Praktik terbaik AWS mewajibkan untuk menghapus access keys pada akun Root User dan menghindari pembuatannya, karena akun root memiliki hak akses tak terbatas yang sangat berbahaya jika bocor.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0028",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah perusahaan memiliki 50 orang analis data yang membutuhkan izin akses baca yang identik ke beberapa tabel di Amazon Redshift dan bucket Amazon S3. Menurut praktik terbaik pengelolaan IAM, bagaimana administrator seharusnya mengatur hak akses untuk para analis ini secara efisien?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Membuat IAM User Group, melampirkan kebijakan izin ke grup tersebut, dan memasukkan seluruh analis ke dalam grup"
+      },
+      {
+        "id": "B",
+        "text": "Melampirkan kebijakan izin satu per satu secara manual ke masing-masing 50 akun IAM User"
+      },
+      {
+        "id": "C",
+        "text": "Memberikan hak AdministratorAccess ke seluruh analis data"
+      },
+      {
+        "id": "D",
+        "text": "Membuat satu akun IAM User bersama dan membagikan password-nya ke 50 analis"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Praktik terbaik AWS menganjurkan pengelompokan pengguna yang memiliki fungsi kerja sama ke dalam IAM Group dan melampirkan policy ke grup tersebut guna mempermudah tata kelola perizinan.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0029",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Seorang administrator keamanan ingin mewajibkan seluruh pengguna IAM di akun AWS perusahaan memiliki kata sandi dengan panjang minimal 12 karakter, mengandung simbol khusus, dan kedaluwarsa secara otomatis setiap 90 hari. Fitur konfigurasi IAM manakah yang harus diatur?",
+    "options": [
+      {
+        "id": "A",
+        "text": "IAM Account Password Policy"
+      },
+      {
+        "id": "B",
+        "text": "Service Control Policy (SCP)"
+      },
+      {
+        "id": "C",
+        "text": "AWS Secrets Manager Policy"
+      },
+      {
+        "id": "D",
+        "text": "VPC Endpoint Policy"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "IAM Account Password Policy memungkinkan administrator menetapkan aturan kompleksitas kata sandi, batas kedaluwarsa, dan pencegahan penggunaan ulang kata sandi bagi seluruh pengguna IAM di akun.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0030",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah perusahaan enterprise membutuhkan firewall jaringan terkelola yang dapat memeriksa paket secara mendalam (deep packet inspection), memfilter nama domain (FQDN) lalu lintas keluar, dan mencegah intrusi jaringan (IPS) di seluruh Amazon VPC mereka. Layanan keamanan AWS manakah ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Network Firewall"
+      },
+      {
+        "id": "B",
+        "text": "AWS Shield Standard"
+      },
+      {
+        "id": "C",
+        "text": "Security Group"
+      },
+      {
+        "id": "D",
+        "text": "Network Access Control List"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Network Firewall adalah layanan firewall jaringan terkelola yang menyediakan inspeksi paket stateful mendalam, pencegahan intrusi (IPS/IDS), dan penyaringan URL/domain di tingkat perimeter VPC.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0031",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah tim keamanan siber ingin melakukan uji penetrasi (penetration testing) pada aplikasi web mereka yang berjalan di AWS. Manakah dari layanan komputasi berikut yang diizinkan oleh AWS untuk dilakukan uji penetrasi langsung oleh pelanggan tanpa perlu persetujuan awal (prior approval)?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Instance Amazon EC2, database Amazon RDS, dan fungsi AWS Lambda milik pelanggan sendiri"
+      },
+      {
+        "id": "B",
+        "text": "Infrastruktur server fisik pusat data milik AWS"
+      },
+      {
+        "id": "C",
+        "text": "Sistem operasi hypervisor dan DNS resolver bawaan Route 53"
+      },
+      {
+        "id": "D",
+        "text": "Seluruh akun AWS pelanggan lain di Availability Zone yang sama"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS mengizinkan pengujian penetrasi keamanan tanpa izin awal khusus untuk resource milik pelanggan sendiri pada layanan tertentu seperti Amazon EC2, Amazon RDS, Amazon Aurora, CloudFront, dan Lambda.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0032",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Dua Amazon VPC dalam satu Region dihubungkan menggunakan koneksi VPC Peering. Bagaimana sifat perutean lalu lintas jaringan antar VPC tersebut terkait konsep perutean transitif (transitive routing)?",
+    "options": [
+      {
+        "id": "A",
+        "text": "VPC Peering tidak mendukung perutean transitif (non-transitive); VPC A tidak bisa menjangkau VPC C melalui VPC B tanpa peering langsung"
+      },
+      {
+        "id": "B",
+        "text": "VPC Peering otomatis merutekan seluruh traffic transitif ke seluruh VPC di akun"
+      },
+      {
+        "id": "C",
+        "text": "VPC Peering mewajibkan alamat IP publik pada seluruh instance"
+      },
+      {
+        "id": "D",
+        "text": "VPC Peering hanya mengizinkan protokol ICMP (Ping)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "VPC Peering bersifat non-transitif. Jika VPC A terhubung ke VPC B, dan VPC B terhubung ke VPC C, maka VPC A tidak dapat berkomunikasi dengan VPC C melalui VPC B kecuali dibuat koneksi peering langsung antara A dan C (atau memakai AWS Transit Gateway).",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0033",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah aplikasi ingin memberikan hak unduh sementara kepada pengguna tertentu untuk mengunduh file laporan privat dari Amazon S3 selama 15 menit tanpa perlu mengubah bucket menjadi publik atau membuatkan akun IAM untuk pengguna tersebut. Mekanisme keamanan S3 manakah yang dirancang untuk kebutuhan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "S3 Pre-signed URLs"
+      },
+      {
+        "id": "B",
+        "text": "S3 Block Public Access"
+      },
+      {
+        "id": "C",
+        "text": "IAM User Access Keys"
+      },
+      {
+        "id": "D",
+        "text": "Bucket ACL Public Read"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "S3 Pre-signed URLs memungkinkan pemilik bucket memberikan akses sementara yang terbatas waktu (time-limited) kepada pengguna untuk mengunduh atau mengunggah objek spesifik tanpa memerlukan kredensial AWS.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0034",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Dalam strategi enkripsi data AWS KMS, konsep di mana sebuah data dienkripsi menggunakan data key (plaintext data key), dan kemudian data key tersebut dienkripsi menggunakan root key (KMS Key) dikenal dengan istilah apa?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Envelope Encryption (Enkripsi Amplop)"
+      },
+      {
+        "id": "B",
+        "text": "Symmetric Hashing"
+      },
+      {
+        "id": "C",
+        "text": "Public Key Infrastructure"
+      },
+      {
+        "id": "D",
+        "text": "Stateless Obfuscation"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Envelope Encryption adalah praktik mengenkripsi data plaintext dengan data key khusus, lalu mengenkripsi data key tersebut dengan kunci utama (KMS key) untuk memaksimalkan performa dan keamanan.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0035",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah aplikasi terhubung ke database Amazon RDS for MySQL. Manajemen ingin agar kata sandi database dirotasi secara otomatis setiap 30 hari sekali menggunakan fungsi AWS Lambda bawaan tanpa menimbulkan downtime aplikasi. Layanan keamanan AWS manakah yang menyediakan integrasi rotasi otomatis ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Secrets Manager"
+      },
+      {
+        "id": "B",
+        "text": "AWS Systems Manager Run Command"
+      },
+      {
+        "id": "C",
+        "text": "AWS KMS Key Policies"
+      },
+      {
+        "id": "D",
+        "text": "Amazon Cognito"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Secrets Manager memiliki fitur bawaan untuk secara otomatis merotasi rahasia kredensial basis data (seperti RDS MySQL, PostgreSQL) sesuai jadwal menggunakan fungsi Lambda pendamping.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0036",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah korporasi ingin membangun lingkungan multi-akun AWS yang terstandarisasi, aman, dan siap pakai (Landing Zone) dengan menerapkan guardrails otomatis dan konfigurasi tata kelola bawaan berbasis best practice AWS. Layanan otomatisasi tata kelola AWS manakah yang dirancang untuk membangun Landing Zone ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Control Tower"
+      },
+      {
+        "id": "B",
+        "text": "AWS Trusted Advisor"
+      },
+      {
+        "id": "C",
+        "text": "AWS CloudFormation StackSets Murni"
+      },
+      {
+        "id": "D",
+        "text": "Amazon GuardDuty"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Control Tower menyediakan cara termudah untuk menyiapkan dan mengatur lingkungan multi-akun AWS yang aman dan patuh aturan dengan membangun Landing Zone otomatis berdasarkan praktik terbaik.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0037",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Seorang auditor keamanan ingin mengunduh laporan berformat CSV yang merinci status seluruh pengguna IAM di akun AWS, termasuk apakah mereka mengaktifkan MFA, umur kata sandi terakhir, dan kapan access key terakhir digunakan. Fitur audit IAM manakah yang menghasilkan laporan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "IAM Credential Report"
+      },
+      {
+        "id": "B",
+        "text": "AWS CloudTrail Event History"
+      },
+      {
+        "id": "C",
+        "text": "Amazon Inspector Report"
+      },
+      {
+        "id": "D",
+        "text": "AWS Artifact Document"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "IAM Credential Report menghasilkan laporan status kredensial seluruh pengguna di akun AWS, merinci status kata sandi, MFA, access keys, dan sertifikat penandatanganan untuk audit kepatuhan.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0038",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Seorang insinyur cloud sedang mengonfigurasi layanan AWS Identity and Access Management (IAM) untuk pertama kalinya. Mengapa pengguna dan peran IAM yang dibuat dapat digunakan di seluruh Region AWS tanpa perlu berpindah konsol Region?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Karena AWS IAM adalah layanan berskala global (Global Service) yang tidak terikat pada satu Region spesifik"
+      },
+      {
+        "id": "B",
+        "text": "Karena IAM secara otomatis mereplikasi data ke satu Availability Zone saja"
+      },
+      {
+        "id": "C",
+        "text": "Karena IAM memerlukan koneksi Direct Connect"
+      },
+      {
+        "id": "D",
+        "text": "Karena IAM hanya berlaku untuk akun root"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS IAM adalah layanan global (Global Service). Pengguna, grup, peran, dan kebijakan IAM berlaku dan dikenali secara seragam di seluruh Region AWS di seluruh dunia.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0039",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah aplikasi internal enterprise memerlukan Certificate Authority (CA) privat untuk menerbitkan sertifikat TLS bagi microservices internal di dalam VPC perusahaan tanpa mempercayakan sertifikat ke otoritas publik. Layanan sertifikat AWS manakah yang menyediakan fungsi CA privat ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Private Certificate Authority (AWS Private CA)"
+      },
+      {
+        "id": "B",
+        "text": "AWS WAF"
+      },
+      {
+        "id": "C",
+        "text": "Amazon Route 53 Resolver"
+      },
+      {
+        "id": "D",
+        "text": "AWS Key Management Service"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Private Certificate Authority (AWS Private CA) memungkinkan organisasi membuat otoritas sertifikat privat sendiri untuk mengelola siklus hidup sertifikat internal aplikasi dengan keamanan tinggi.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0040",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Sebuah perusahaan ingin menyalin seluruh data file dari bucket Amazon S3 di Region Jakarta (ap-southeast-3) ke bucket Amazon S3 di Region Singapura (ap-southeast-1) secara otomatis untuk pemulihan bencana (DR) lintas kawasan geografis. Fitur Amazon S3 manakah yang harus dikonfigurasi?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Cross-Region Replication (CRR)"
+      },
+      {
+        "id": "B",
+        "text": "Same-Region Replication (SRR)"
+      },
+      {
+        "id": "C",
+        "text": "S3 Intelligent-Tiering"
+      },
+      {
+        "id": "D",
+        "text": "S3 Transfer Acceleration"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "S3 Cross-Region Replication (CRR) secara otomatis mereplikasi objek secara asinkron dari bucket sumber di satu Region ke bucket tujuan di Region AWS yang berbeda.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0041",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Untuk mencegah penghapusan permanen objek penting di Amazon S3 oleh karyawan yang berniat jahat atau akun yang terkompromi, perusahaan ingin mewajibkan autentikasi dua faktor fisik (MFA) setiap kali ada permintaan penghapusan versi objek. Fitur keamanan S3 manakah yang harus diaktifkan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "S3 MFA Delete"
+      },
+      {
+        "id": "B",
+        "text": "S3 Object Lock Legal Hold"
+      },
+      {
+        "id": "C",
+        "text": "S3 Lifecycle Expiration"
+      },
+      {
+        "id": "D",
+        "text": "S3 Event Notifications"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "S3 MFA Delete mewajibkan kode token MFA tambahan sebelum versi objek permanen dapat dihapus atau sebelum status Versioning bucket dapat diubah.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0042",
+    "domain": "Security & Compliance",
+    "type": "single",
+    "prompt": "Berdasarkan AWS Shared Responsibility Model pada layanan Amazon Simple Storage Service (Amazon S3), manakah dari tanggung jawab berikut yang berada di pihak AWS?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Pengelolaan redundansi perangkat keras penyimpanan fisik, replikasi data multi-fasilitas, dan keamanan fisik data center"
+      },
+      {
+        "id": "B",
+        "text": "Konfigurasi aturan Bucket Policy dan Access Control List (ACL)"
+      },
+      {
+        "id": "C",
+        "text": "Pengaturan fitur S3 Block Public Access di tingkat akun"
+      },
+      {
+        "id": "D",
+        "text": "Pemilihan kunci enkripsi client-side sebelum data diunggah"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS bertanggung jawab atas infrastruktur penyimpanan fisik, ketahanan hardware, redundansi lintas fasilitas data center, dan fasilitas fisik ('Security OF the Cloud'). Pelanggan mengelola policy akses, enkripsi, dan data.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0043",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah aplikasi web dirancang dengan arsitektur yang mampu memulihkan diri secara otomatis dari gangguan (self-healing), menguji prosedur kegagalan secara berkala, dan mendistribusikan beban kerja ke beberapa Availability Zone. Pilar AWS Well-Architected Framework manakah yang paling didukung oleh arsitektur ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Keandalan (Reliability)"
+      },
+      {
+        "id": "B",
+        "text": "Optimalisasi Biaya (Cost Optimization)"
+      },
+      {
+        "id": "C",
+        "text": "Keberlanjutan (Sustainability)"
+      },
+      {
+        "id": "D",
+        "text": "Efisiensi Kinerja (Performance Efficiency)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Pilar Reliability (Keandalan) mencakup kemampuan sistem untuk memulihkan diri dari gangguan infrastruktur, mengalokasikan sumber daya komputasi secara dinamis untuk memenuhi permintaan, dan memitigasi gangguan seperti salah konfigurasi jaringan.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0044",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Seorang eksekutif TI bertanya mengapa tarif per gigabyte penyimpanan Amazon S3 dan harga komputasi AWS terus mengalami penurunan harga secara berkala dari tahun ke tahun. Keuntungan komputasi cloud manakah yang menjelaskan fenomena penurunan harga ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Memperoleh keuntungan dari skala ekonomis masif (Benefit from massive economies of scale)"
+      },
+      {
+        "id": "B",
+        "text": "Meningkatkan belanja modal di awal (Capital expense)"
+      },
+      {
+        "id": "C",
+        "text": "Menghilangkan kebutuhan sistem operasi"
+      },
+      {
+        "id": "D",
+        "text": "Memaksa pelanggan menandatangani kontrak jangka panjang 10 tahun"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Dengan mengagregasikan ratusan ribu pelanggan di cloud, AWS mencapai skala ekonomis masif yang menurunkan biaya operasional, dan efisiensi biaya tersebut diteruskan ke pelanggan dalam bentuk pemotongan harga berkala.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0045",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah startup baru tidak memiliki modal besar untuk membeli perangkat keras server fisik atau menyewa ruang data center selama 3 tahun ke depan. Mereka memilih AWS karena hanya perlu membayar sesuai kapasitas server yang digunakan setiap jamnya (pay-as-you-go). Keuntungan komputasi cloud manakah yang paling langsung dirasakan startup ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mengubah belanja modal menjadi biaya variabel (Trade capital expense for variable expense)"
+      },
+      {
+        "id": "B",
+        "text": "Menghilangkan kebutuhan tim pengembangan software"
+      },
+      {
+        "id": "C",
+        "text": "Penyimpanan data lokal eksklusif tanpa internet"
+      },
+      {
+        "id": "D",
+        "text": "Menjamin waktu henti aplikasi nol persen secara otomatis"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "'Trade capital expense for variable expense' memungkinkan bisnis membayar hanya saat mereka mengonsumsi sumber daya komputasi, tanpa perlu mengalokasikan modal investasi besar di awal untuk server fisik.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0046",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah tim pengembang aplikasi mobile dapat meluncurkan lingkungan pengujian baru yang terdiri dari 5 server dan database hanya dalam waktu 5 menit melalui AWS CLI, mengevaluasi fitur baru, dan kemudian langsung mematikannya. Keuntungan komputasi cloud manakah ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Meningkatkan kecepatan dan kelincahan (Increase speed and agility)"
+      },
+      {
+        "id": "B",
+        "text": "Mempertahankan kapasitas server statis"
+      },
+      {
+        "id": "C",
+        "text": "Mewajibkan arsitektur monolitik tradisional"
+      },
+      {
+        "id": "D",
+        "text": "Meningkatkan siklus pengadaan perangkat keras hingga bulanan"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Keuntungan 'Increase speed and agility' mengurangi waktu yang dibutuhkan untuk menyediakan sumber daya bagi pengembang dari berminggu-minggu menjadi hanya hitungan menit.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0047",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah sistem pembayaran online menggunakan Auto Scaling Group untuk secara otomatis menambah instance EC2 saat volume transaksi memuncak pada pukul 12.00 WIB dan menguranginya kembali pada pukul 14.00 WIB. Karakteristik adaptasi beban kerja dinamis ini mengacu pada konsep apa?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Elastisitas (Elasticity)"
+      },
+      {
+        "id": "B",
+        "text": "Portabilitas (Portability)"
+      },
+      {
+        "id": "C",
+        "text": "Kapasitas Tetap (Fixed Provisioning)"
+      },
+      {
+        "id": "D",
+        "text": "Ketahanan Statis (Static Durability)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Elastisitas (Elasticity) adalah kemampuan sistem cloud untuk menambah atau mengurangi kapasitas secara otomatis mengikuti lonjakan dan penurunan beban kerja nyata.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0048",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Dalam kerangka kerja AWS Cloud Adoption Framework (AWS CAF), sebuah organisasi menyusun strategi pengelolaan portofolio proyek cloud, pengoptimalan biaya investasi teknologi (FinOps), dan kepatuhan terhadap regulasi eksternal. Perspektif AWS CAF manakah yang memayungi inisiatif-inisiatif ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Perspektif Tata Kelola (Governance Perspective)"
+      },
+      {
+        "id": "B",
+        "text": "Perspektif Platform (Platform Perspective)"
+      },
+      {
+        "id": "C",
+        "text": "Perspektif Sumber Daya Manusia (People Perspective)"
+      },
+      {
+        "id": "D",
+        "text": "Perspektif Operasi (Operations Perspective)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Perspektif Governance (Tata Kelola) dalam AWS CAF berfokus pada penyelarasan strategi cloud dengan tujuan bisnis, manajemen portofolio teknologi, tata kelola keuangan (FinOps), dan manajemen risiko kepatuhan.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0049",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah korporasi ingin merancang rencana penanganan insiden keamanan siber, mengelola kontrol akses identitas, dan memastikan data terenkripsi secara menyeluruh di AWS. Perspektif dalam AWS Cloud Adoption Framework (AWS CAF) manakah yang secara khusus memandu perancangan kapabilitas ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Perspektif Keamanan (Security Perspective)"
+      },
+      {
+        "id": "B",
+        "text": "Perspektif Bisnis (Business Perspective)"
+      },
+      {
+        "id": "C",
+        "text": "Perspektif Operasi (Operations Perspective)"
+      },
+      {
+        "id": "D",
+        "text": "Perspektif Platform (Platform Perspective)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Perspektif Security dalam AWS CAF membantu merancang postur pertahanan organisasi di cloud melalui kontrol identitas, deteksi dini ancaman, respons insiden, dan perlindungan data.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0050",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah tim rekayasa perangkat lunak mengadopsi prinsip desain Well-Architected di mana mereka selalu menerapkan perubahan kode dalam ukuran kecil dan sering yang mudah dibalikkan (small, reversible changes) serta melakukan analisis pasca-insiden tanpa saling menyalahkan (blameless post-mortem). Pilar manakah yang menaungi prinsip ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Keunggulan Operasional (Operational Excellence)"
+      },
+      {
+        "id": "B",
+        "text": "Keamanan (Security)"
+      },
+      {
+        "id": "C",
+        "text": "Optimalisasi Biaya (Cost Optimization)"
+      },
+      {
+        "id": "D",
+        "text": "Keberlanjutan (Sustainability)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Menerapkan perubahan kecil yang dapat dibalikkan dan belajar dari semua kegagalan operasional (blameless post-mortem) adalah prinsip desain utama dari pilar Operational Excellence.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0051",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah perusahaan memutuskan untuk menghentikan pemeliharaan server email internal dan beralih menggunakan solusi perangkat lunak berbasis cloud (seperti layanan SaaS pihak ketiga). Dalam kerangka strategi migrasi 6 R's (Migration Strategies), pendekatan penggantian aplikasi ini dikenal dengan istilah apa?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Repurchase (Drop-and-Shop / Beralih ke SaaS)"
+      },
+      {
+        "id": "B",
+        "text": "Rehost (Lift-and-Shift)"
+      },
+      {
+        "id": "C",
+        "text": "Replatform (Lift-Tinker-and-Shift)"
+      },
+      {
+        "id": "D",
+        "text": "Retain (Mempertahankan)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Strategi 'Repurchase' (sering disebut drop-and-shop) adalah keputusan untuk mengganti aplikasi lama yang dikelola sendiri dengan produk perangkat lunak sebagai layanan (SaaS) yang sudah siap pakai.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0052",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Dalam kerangka kerja AWS Cloud Adoption Framework (AWS CAF), para eksekutif perusahaan sedang menyusun rencana kasus bisnis (business case), analisis laba atas investasi (Return on Investment / ROI), dan penyelarasan strategi digital dengan tujuan komersial perusahaan. Perspektif AWS CAF manakah yang memandu inisiatif ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Perspektif Bisnis (Business Perspective)"
+      },
+      {
+        "id": "B",
+        "text": "Perspektif Platform (Platform Perspective)"
+      },
+      {
+        "id": "C",
+        "text": "Perspektif Keamanan (Security Perspective)"
+      },
+      {
+        "id": "D",
+        "text": "Perspektif Operasi (Operations Perspective)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Perspektif Business (Bisnis) dalam AWS CAF memastikan bahwa investasi teknologi cloud selaras dengan hasil bisnis strategis, model bisnis baru, dan pemulihan nilai investasi komersial (ROI).",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0053",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah tim arsitek cloud secara rutin meninjau metrik latensi aplikasi dan bereksperimen dengan berbagai tipe instance komputasi terbaru (seperti instance berbasis prosesor AWS Graviton) untuk memastikan sistem memberikan performa tertinggi pada sumber daya yang dialokasikan. Pilar AWS Well-Architected Framework manakah yang tercermin?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Efisiensi Kinerja (Performance Efficiency)"
+      },
+      {
+        "id": "B",
+        "text": "Keberlanjutan (Sustainability)"
+      },
+      {
+        "id": "C",
+        "text": "Keamanan (Security)"
+      },
+      {
+        "id": "D",
+        "text": "Keandalan (Reliability)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Pilar Performance Efficiency (Efisiensi Kinerja) berfokus pada kemampuan menggunakan sumber daya komputasi secara efisien untuk memenuhi persyaratan sistem dan mempertahankan efisiensi tersebut seiring kemajuan teknologi.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0054",
+    "domain": "Cloud Concepts",
+    "type": "single",
+    "prompt": "Sebuah sistem perdagangan saham dirancang agar tidak mengalami gangguan layanan sama sekali jika terjadi kerusakan perangkat keras pada salah satu server (Zero Downtime). Desain ini mencakup komponen cadangan aktif ganda di setiap lapisan arsitektur. Karakteristik arsitektur cloud manakah yang paling tepat menggambarkan kemampuan toleransi kerusakan total ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Toleransi Kesalahan (Fault Tolerance)"
+      },
+      {
+        "id": "B",
+        "text": "Elastisitas Biaya (Cost Elasticity)"
+      },
+      {
+        "id": "C",
+        "text": "Portabilitas Vendor (Vendor Portability)"
+      },
+      {
+        "id": "D",
+        "text": "Skalabilitas Vertikal (Vertical Scalability)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Fault Tolerance (Toleransi Kesalahan) adalah kemampuan sistem untuk tetap beroperasi normal tanpa adanya penurunan performa atau downtime sama sekali ketika salah satu komponen mengalami kegagalan.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0055",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah situs web global menggunakan Amazon CloudFront untuk mempercepat akses pengguna di seluruh dunia. Ketika konten yang diminta tidak ditemukan pada titik Edge Location lokal pengguna, CloudFront secara otomatis mencari konten tersebut pada cache tingkat regional yang lebih besar sebelum menghubungi server asal (origin). Komponen infrastruktur global AWS manakah ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Regional Edge Cache"
+      },
+      {
+        "id": "B",
+        "text": "AWS Local Zone"
+      },
+      {
+        "id": "C",
+        "text": "AWS Outpost"
+      },
+      {
+        "id": "D",
+        "text": "AWS Direct Connect Location"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Regional Edge Caches adalah komponen infrastruktur CloudFront yang terletak di antara Edge Locations dan server asal Anda, memiliki cache lebih besar untuk mempertahankan konten lebih lama dan mengurangi beban server asal.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0056",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah pabrik manufaktur otomotif memerlukan pemrosesan data sensor dengan latensi sangat rendah di lantai pabrik fisik lokal mereka, namun ingin mengoperasikannya menggunakan API, konsol, dan layanan AWS yang persis sama dengan di cloud. Layanan infrastruktur hybrid AWS manakah yang menyediakan rak server fisik perangkat keras AWS di fasilitas lokal pelanggan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Outposts"
+      },
+      {
+        "id": "B",
+        "text": "AWS Snowball Edge"
+      },
+      {
+        "id": "C",
+        "text": "AWS Storage Gateway"
+      },
+      {
+        "id": "D",
+        "text": "Amazon CloudFront"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Outposts membawa infrastruktur, layanan, API, dan perkakas AWS asli langsung ke fasilitas pusat data fisik on-premise atau ruang kantor pelanggan untuk pengalaman hybrid yang benar-benar konsisten.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0057",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah pengembang aplikasi game seluler augmented reality (AR) ingin menghadirkan latensi ultra-rendah (di bawah 10 milidetik) langsung ke perangkat seluler pengguna smartphone dengan menempatkan beban kerja komputasi di dalam jaringan nirkabel 5G operator telekomunikasi. Layanan infrastruktur AWS manakah yang dirancang untuk skenario 5G edge ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Wavelength"
+      },
+      {
+        "id": "B",
+        "text": "AWS Outposts"
+      },
+      {
+        "id": "C",
+        "text": "AWS Direct Connect"
+      },
+      {
+        "id": "D",
+        "text": "Amazon Route 53"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Wavelength menanamkan layanan komputasi dan penyimpanan AWS di dalam jaringan 5G penyedia telekomunikasi untuk menghadirkan latensi ultra-rendah bagi perangkat seluler cerdas.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0058",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah studio produksi film di Los Angeles perlu menjalankan rendering video real-time yang membutuhkan latensi satu digit milidetik ke workstation pengguna lokal, namun AWS Region terdekat berjarak ratusan kilometer. Komponen infrastruktur AWS manakah yang menempatkan komputasi dan penyimpanan AWS dekat dengan pusat populasi kota besar tertentu?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Local Zones"
+      },
+      {
+        "id": "B",
+        "text": "AWS Snowcone"
+      },
+      {
+        "id": "C",
+        "text": "Edge Locations Dasar"
+      },
+      {
+        "id": "D",
+        "text": "AWS Transit Gateway"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Local Zones memperluas infrastruktur AWS dengan menempatkan layanan komputasi, penyimpanan, dan basis data di dekat kota-kota besar metropolitan dan pusat industri untuk aplikasi sensitif latensi.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0059",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah aplikasi pemrosesan video batch membutuhkan instance Amazon EC2 yang memiliki rasio prosesor komputasi tinggi (CPU) terhadap memori, guna mempercepat encoding video. Keluarga instance Amazon EC2 manakah yang paling sesuai untuk beban kerja compute-intensive ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Compute Optimized (Keluarga C, seperti c6g atau c7i)"
+      },
+      {
+        "id": "B",
+        "text": "Memory Optimized (Keluarga R)"
+      },
+      {
+        "id": "C",
+        "text": "Storage Optimized (Keluarga I)"
+      },
+      {
+        "id": "D",
+        "text": "Accelerated Computing (Keluarga G)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Instance keluarga Compute Optimized (seri C) dioptimalkan khusus untuk beban kerja yang membutuhkan daya komputasi CPU tinggi dengan rasio prosesor terhadap memori yang hemat, seperti batch processing dan video encoding.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0060",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Seorang insinyur cloud ingin mengotomatiskan instalasi server web Apache dan mendownload paket aplikasi secara otomatis saat pertama kali instance Amazon EC2 baru diluncurkan (bootstrapping). Di manakah skrip bash shell instalasi tersebut harus dimasukkan saat meluncurkan instance?",
+    "options": [
+      {
+        "id": "A",
+        "text": "EC2 User Data"
+      },
+      {
+        "id": "B",
+        "text": "EC2 Instance Metadata (IMDS)"
+      },
+      {
+        "id": "C",
+        "text": "Security Group Rules"
+      },
+      {
+        "id": "D",
+        "text": "Route Table Attributes"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Bidang EC2 User Data memungkinkan pengguna memasukkan skrip konfigurasi (bootstrapping) yang akan dieksekusi secara otomatis dengan hak akses root saat instance EC2 pertama kali dinyalakan.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0061",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah perusahaan telah mengonfigurasi instance Amazon EC2 dengan sistem operasi yang telah diperkeras (hardened OS), dependensi perangkat lunak khusus, dan file konfigurasi standar perusahaan. Mereka ingin menyimpan template konfigurasi instance tersebut agar dapat meluncurkan puluhan instance identik di masa depan. Komponen AWS manakah yang harus dibuat?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon Machine Image (AMI)"
+      },
+      {
+        "id": "B",
+        "text": "Volume Amazon EBS Kosong"
+      },
+      {
+        "id": "C",
+        "text": "IAM Instance Profile"
+      },
+      {
+        "id": "D",
+        "text": "Security Group Template"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon Machine Image (AMI) menyediakan informasi yang diperlukan untuk meluncurkan instance, mencakup template sistem operasi, server aplikasi, dependensi, dan izin peluncuran.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0062",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah tim pengembang ingin menyebarkan aplikasi kontainer mikro menggunakan Amazon Elastic Container Service (Amazon ECS). Tim menginginkan model tanpa server (serverless) di mana mereka tidak perlu mengelola, memprovisikan, mengonfigurasi, atau memelihara instance server host EC2 sama sekali. Mesin komputasi kontainer manakah yang harus dipilih?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Fargate"
+      },
+      {
+        "id": "B",
+        "text": "Amazon EC2 Launch Type Murni"
+      },
+      {
+        "id": "C",
+        "text": "Amazon Lightsail"
+      },
+      {
+        "id": "D",
+        "text": "AWS Elastic Beanstalk"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Fargate adalah mesin komputasi tanpa server (serverless compute engine) untuk kontainer yang bekerja bersama Amazon ECS dan EKS, menghilangkan kebutuhan mengelola server virtual host EC2.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0063",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah perusahaan memiliki aplikasi enterprise yang sudah terbiasa berjalan di atas klaster Kubernetes open-source. Mereka ingin memindahkan beban kerja tersebut ke AWS tanpa mengubah manifest file deployment Kubernetes mereka, dan ingin agar control plane Kubernetes dikelola secara otomatis oleh AWS. Layanan terkelola AWS manakah yang dirancang untuk hal ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon Elastic Kubernetes Service (Amazon EKS)"
+      },
+      {
+        "id": "B",
+        "text": "Amazon Elastic Container Registry (Amazon ECR)"
+      },
+      {
+        "id": "C",
+        "text": "Amazon ECS"
+      },
+      {
+        "id": "D",
+        "text": "AWS App Runner"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon EKS adalah layanan Kubernetes terkelola yang mempermudah pengoperasian Kubernetes di AWS tanpa perlu menginstal dan mengoperasikan control plane atau worker node sendiri.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0064",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Seorang pengembang aplikasi web PHP pemula ingin segera meluncurkan aplikasinya ke internet hanya dengan mengunggah paket kode sumber (source code zip). Layanan platform terkelola (PaaS) AWS secara otomatis menangani penyediaan instance EC2, penyeimbang beban (load balancer), penskalaan otomatis, dan konfigurasi database. Layanan AWS manakah ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Elastic Beanstalk"
+      },
+      {
+        "id": "B",
+        "text": "AWS CloudFormation"
+      },
+      {
+        "id": "C",
+        "text": "AWS Lambda"
+      },
+      {
+        "id": "D",
+        "text": "Amazon EC2 Manual"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Elastic Beanstalk adalah layanan Platform as a Service (PaaS) yang mempermudah penyebaran dan penskalaan aplikasi web dengan menangani otomatisasi provisioning, load balancing, auto-scaling, dan health monitoring.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0065",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah sistem analitik keuangan frekuensi tinggi (High-Frequency Trading) membutuhkan penyimpanan objek Amazon S3 berkinerja paling tinggi dengan latensi konsisten satu digit milidetik untuk memproses ratusan ribu transaksi per detik di dalam satu Availability Zone tertentu. Kelas penyimpanan Amazon S3 berkinerja tinggi manakah yang dirancang untuk skenario ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon S3 Express One Zone"
+      },
+      {
+        "id": "B",
+        "text": "Amazon S3 Standard"
+      },
+      {
+        "id": "C",
+        "text": "Amazon S3 Glacier Instant Retrieval"
+      },
+      {
+        "id": "D",
+        "text": "Amazon S3 Intelligent-Tiering"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon S3 Express One Zone adalah kelas penyimpanan S3 berkinerja tertinggi yang dirancang untuk memberikan latensi data satu digit milidetik yang konsisten hingga 10x lebih cepat dari S3 Standard untuk beban kerja yang sangat intensif.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0066",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah perusahaan memiliki jutaan file log transaksi di Amazon S3 yang harus dipertahankan selama 5 tahun. Log tersebut hampir tidak pernah diakses kembali setelah 60 hari pertama, namun jika diperlukan untuk audit hukum, waktu pengambilan data dalam rentang 3 hingga 5 jam dapat diterima demi menghemat biaya penyimpanan. Aturan transisi Lifecycle S3 manakah yang paling sesuai?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mentransisikan objek ke Amazon S3 Glacier Flexible Retrieval setelah 60 hari"
+      },
+      {
+        "id": "B",
+        "text": "Menghapus objek secara permanen setelah 60 hari"
+      },
+      {
+        "id": "C",
+        "text": "Mentransisikan objek ke S3 Standard-IA setelah 1 tahun"
+      },
+      {
+        "id": "D",
+        "text": "Memindahkan objek ke volume Amazon EBS"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Mentransisikan objek ke S3 Glacier Flexible Retrieval setelah 60 hari secara dramatis menghemat biaya penyimpanan untuk data arsip yang jarang diakses dengan waktu pemulihan standar antara 3-5 jam.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0067",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah kantor pusat di Jakarta perlu mengunggah file media berukuran puluhan gigabyte secara rutin ke bucket Amazon S3 yang berada di Region Virginia Utara (us-east-1). Untuk mempercepat kecepatan unggah file melintasi benua dengan memanfaatkan jaringan Edge Locations AWS dan rute backbone yang dioptimalkan, fitur Amazon S3 manakah yang harus diaktifkan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon S3 Transfer Acceleration"
+      },
+      {
+        "id": "B",
+        "text": "S3 Cross-Region Replication"
+      },
+      {
+        "id": "C",
+        "text": "S3 Multipart Upload Murni"
+      },
+      {
+        "id": "D",
+        "text": "AWS Direct Connect"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon S3 Transfer Acceleration memanfaatkan jaringan Edge Locations global milik Amazon CloudFront untuk merutekan lalu lintas data ke bucket Amazon S3 melalui jaringan backbone privat AWS yang dioptimasi.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0068",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah aplikasi basis data mission-critical yang berjalan pada Amazon EC2 membutuhkan penyimpanan volume Amazon EBS yang mampu menghasilkan performa ekstrem hingga 256.000 IOPS dan throughput 4.000 MB/s dengan latensi sub-milidetik. Tipe volume penyimpanan Amazon EBS manakah yang dirancang untuk kebutuhan ekstrem ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "io2 Block Express (Provisioned IOPS SSD)"
+      },
+      {
+        "id": "B",
+        "text": "General Purpose SSD (gp3)"
+      },
+      {
+        "id": "C",
+        "text": "Throughput Optimized HDD (st1)"
+      },
+      {
+        "id": "D",
+        "text": "Cold HDD (sc1)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Volume Amazon EBS io2 Block Express adalah arsitektur penyimpanan blok generasi tertinggi yang menawarkan performa IOPS tertinggi (hingga 256.000 IOPS) dan keandalan 99,999% untuk database mission-critical.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0069",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Seorang System Administrator ingin membuat salinan cadangan point-in-time dari volume Amazon EBS. Salinan cadangan ini disimpan secara inkremental di Amazon S3 dan dapat digunakan untuk membuat volume baru kapan saja. Fitur Amazon EBS manakah yang menyediakan kemampuan pencadangan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "EBS Snapshots"
+      },
+      {
+        "id": "B",
+        "text": "EBS Volume Cloning"
+      },
+      {
+        "id": "C",
+        "text": "EBS Multi-Attach"
+      },
+      {
+        "id": "D",
+        "text": "EBS Elastic Volumes"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "EBS Snapshots adalah cadangan point-in-time inkremental dari volume EBS Anda yang disimpan secara redundan di Amazon S3 untuk perlindungan data dan pemulihan bencana.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0070",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah korporasi memiliki aplikasi berbasis Microsoft Windows Server yang membutuhkan sistem file bersama (shared file system) yang mendukung protokol Server Message Block (SMB), integrasi penuh dengan Microsoft Active Directory, dan fitur Windows NTFS. Layanan penyimpanan terkelola AWS manakah yang harus dipilih?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon FSx for Windows File Server"
+      },
+      {
+        "id": "B",
+        "text": "Amazon Elastic File System (Amazon EFS)"
+      },
+      {
+        "id": "C",
+        "text": "Amazon S3 File Gateway"
+      },
+      {
+        "id": "D",
+        "text": "Amazon EBS Multi-Attach"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon FSx for Windows File Server menyediakan sistem file berbasis Microsoft Windows Server yang terkelola penuh dengan dukungan protokol SMB dan integrasi Active Directory.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0071",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah lab riset kecerdasan buatan (AI) menjalankan pelatihan model machine learning berskala besar yang membutuhkan sistem file terdistribusi paralel dengan throughput ratusan gigabyte per detik dan latensi sub-milidetik yang terhubung langsung dengan bucket Amazon S3. Layanan penyimpanan terkelola AWS manakah yang dirancang untuk HPC dan ML ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon FSx for Lustre"
+      },
+      {
+        "id": "B",
+        "text": "Amazon EFS Standard"
+      },
+      {
+        "id": "C",
+        "text": "AWS Storage Gateway"
+      },
+      {
+        "id": "D",
+        "text": "Amazon S3 Glacier"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon FSx for Lustre dioptimalkan khusus untuk beban kerja komputasi cepat seperti High Performance Computing (HPC), machine learning, dan pemrosesan media video yang membutuhkan throughput masif.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0072",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah aplikasi perbankan digital global membutuhkan basis data relasional yang dapat melayani pembacaan data lokal yang sangat cepat bagi pengguna di beberapa Region AWS di seluruh dunia, dengan latensi replikasi antar-Region kurang dari 1 detik dan kemampuan pemulihan bencana lintas Region secara cepat. Fitur basis data Amazon Aurora manakah yang dirancang untuk kebutuhan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon Aurora Global Database"
+      },
+      {
+        "id": "B",
+        "text": "Amazon RDS Multi-AZ Deployment Dasar"
+      },
+      {
+        "id": "C",
+        "text": "Amazon DynamoDB Single Region"
+      },
+      {
+        "id": "D",
+        "text": "AWS Database Migration Service"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon Aurora Global Database memungkinkan satu database Aurora mencakup beberapa Region AWS di seluruh dunia, menyediakan pembacaan lokal cepat dengan latensi replikasi sub-detik dan pemulihan bencana (DR) yang mulus.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0073",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah aplikasi e-commerce sering mengalami fluktuasi beban transaksi database yang tidak dapat diprediksi (dari beberapa ratus query per detik melonjak menjadi puluhan ribu). Pengembang ingin menggunakan basis data relasional Amazon Aurora yang kapasitas komputasinya dapat otomatis naik dan turun dalam pecahan detik mengikuti permintaan tanpa gangguan koneksi. Konfigurasi Amazon Aurora manakah ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon Aurora Serverless v2"
+      },
+      {
+        "id": "B",
+        "text": "Amazon Aurora Provisioned Static"
+      },
+      {
+        "id": "C",
+        "text": "Amazon RDS Multi-AZ Standby"
+      },
+      {
+        "id": "D",
+        "text": "Amazon DocumentDB"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon Aurora Serverless v2 secara instan dan otomatis menskalakan kapasitas database dalam peningkatan yang sangat halus (Aurora Capacity Units / ACU) dalam hitungan detik untuk menangani lonjakan beban kerja yang dinamis.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0074",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah aplikasi web menyimpan data token sesi sementara pada tabel Amazon DynamoDB. Token sesi tersebut tidak lagi berguna dan harus dihapus setelah melewati masa kedaluwarsa 24 jam. Fitur bawaan Amazon DynamoDB manakah yang secara otomatis menghapus item yang kedaluwarsa berdasarkan stempel waktu tanpa menimbulkan biaya penulisan tambahan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "DynamoDB Time to Live (TTL)"
+      },
+      {
+        "id": "B",
+        "text": "DynamoDB Streams"
+      },
+      {
+        "id": "C",
+        "text": "DynamoDB Global Tables"
+      },
+      {
+        "id": "D",
+        "text": "DynamoDB Accelerator (DAX)"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Fitur Time to Live (TTL) pada Amazon DynamoDB mendefinisikan stempel waktu kedaluwarsa per item, dan secara otomatis menghapus item yang kedaluwarsa dari tabel di latar belakang tanpa mengonsumsi throughput kapasitas tulis.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0075",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah tim analitik data ingin menjalankan kueri data warehouse analitis berskala besar (OLAP) menggunakan Amazon Redshift tanpa perlu memprovisikan, mengonfigurasi, atau mengelola kapasitas klaster data warehouse secara manual, dan hanya ingin membayar saat kueri analitik sedang aktif berjalan. Opsi deployment Amazon Redshift manakah yang harus dipilih?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon Redshift Serverless"
+      },
+      {
+        "id": "B",
+        "text": "Amazon Redshift Provisioned Cluster (dc2.large)"
+      },
+      {
+        "id": "C",
+        "text": "Amazon RDS for MySQL"
+      },
+      {
+        "id": "D",
+        "text": "Amazon CloudWatch Logs"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon Redshift Serverless mempermudah pelaksanaan analitik SQL kinerja tinggi tanpa perlu mengelola klaster data warehouse fisik, secara otomatis menyesuaikan kapasitas dan berhenti saat tidak ada beban kerja aktif.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0076",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah perusahaan memiliki aplikasi web yang disebarkan pada dua AWS Region: Region Singapura dan Region Frankfurt. Perusahaan ingin agar pengguna internet secara otomatis dirutekan ke Region AWS yang memberikan latensi jaringan terendah (waktu round-trip tercepat) dari lokasi jaringan pengguna. Kebijakan perutean Amazon Route 53 manakah yang harus dikonfigurasi?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Latency-based Routing Policy"
+      },
+      {
+        "id": "B",
+        "text": "Weighted Routing Policy"
+      },
+      {
+        "id": "C",
+        "text": "Failover Routing Policy"
+      },
+      {
+        "id": "D",
+        "text": "Simple Routing Policy"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Latency-based Routing Policy pada Amazon Route 53 merutekan permintaan pengguna ke AWS Region yang menyediakan latensi jaringan terendah bagi pengguna tersebut berdasarkan pengukuran latensi global AWS.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0077",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah situs e-commerce multinasional ingin merutekan pembeli yang berasal dari Prancis ke server web berbahasa Prancis, dan pembeli dari Jepang ke server web berbahasa Jepang berdasarkan lokasi geografis asal alamat IP pengunjung. Kebijakan perutean Amazon Route 53 manakah yang dirancang khusus untuk pemetaan berbasis wilayah/negara ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Geolocation Routing Policy"
+      },
+      {
+        "id": "B",
+        "text": "Latency-based Routing Policy"
+      },
+      {
+        "id": "C",
+        "text": "Weighted Routing Policy"
+      },
+      {
+        "id": "D",
+        "text": "Multivalue Answer Routing Policy"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Geolocation Routing Policy memungkinkan perutean lalu lintas pengguna berdasarkan lokasi geografis asal pemohon (benua, negara, atau negara bagian) untuk penyesuaian konten lokal dan kepatuhan hukum.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0078",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah perusahaan enterprise memiliki 50 Amazon VPC dan beberapa jaringan kantor lokal on-premise. Menghubungkan setiap VPC satu per satu menggunakan VPC Peering (full mesh) menjadi sangat rumit untuk dikelola. Layanan gateway jaringan AWS manakah yang bertindak sebagai hub terpusat (hub-and-spoke) untuk menyederhanakan interkoneksi ratusan VPC dan jaringan on-premise ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Transit Gateway"
+      },
+      {
+        "id": "B",
+        "text": "Internet Gateway"
+      },
+      {
+        "id": "C",
+        "text": "NAT Gateway"
+      },
+      {
+        "id": "D",
+        "text": "Egress-Only Internet Gateway"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Transit Gateway bertindak sebagai cloud router terpusat dalam topologi hub-and-spoke, menghubungkan ribuan VPC, akun AWS, dan jaringan lokal on-premise melalui satu gateway tunggal.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0079",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah institusi perbankan membutuhkan koneksi jaringan pribadi khusus (dedicated private network connection) berkapasitas 10 Gbps antara pusat data on-premise mereka dan AWS yang sepenuhnya melewati jalur internet publik untuk menjamin bandwidth stabil, keamanan fisik, dan latensi konsisten. Layanan jaringan AWS manakah yang harus dipilih?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Direct Connect"
+      },
+      {
+        "id": "B",
+        "text": "AWS Site-to-Site VPN"
+      },
+      {
+        "id": "C",
+        "text": "Internet Gateway"
+      },
+      {
+        "id": "D",
+        "text": "Amazon CloudFront"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Direct Connect menyediakan jalur koneksi serat optik fisik privat khusus dari fasilitas lokal Anda langsung ke AWS, memotong jaringan internet publik untuk keandalan throughput dan konsistensi latensi.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0080",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah kantor cabang perusahaan membutuhkan koneksi terenkripsi IPsec yang aman dan cepat disiapkan ke Amazon VPC mereka melalui jaringan internet publik standar dengan biaya terjangkau. Layanan konektivitas jaringan AWS manakah yang paling tepat?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Site-to-Site VPN"
+      },
+      {
+        "id": "B",
+        "text": "AWS Direct Connect"
+      },
+      {
+        "id": "C",
+        "text": "VPC Peering"
+      },
+      {
+        "id": "D",
+        "text": "AWS Global Accelerator"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Site-to-Site VPN membuat terowongan jaringan terenkripsi IPsec yang aman antara jaringan kantor lokal on-premise dan Amazon VPC Anda melalui internet publik.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0081",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Instance Amazon EC2 di dalam Private Subnet perlu mengunduh patch pembaruan perangkat lunak dari internet publik, namun kebijakan keamanan melarang server tersebut menerima koneksi lalu lintas masuk (inbound) yang diinisiasi dari internet luar. Komponen terkelola VPC manakah yang harus ditempatkan di Public Subnet untuk memfasilitasi kebutuhan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "NAT Gateway"
+      },
+      {
+        "id": "B",
+        "text": "Internet Gateway Murni"
+      },
+      {
+        "id": "C",
+        "text": "Virtual Private Gateway"
+      },
+      {
+        "id": "D",
+        "text": "Customer Gateway"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "NAT Gateway (Network Address Translation) memungkinkan instance di private subnet mengirim lalu lintas keluar ke internet (misal untuk software updates) sembari secara ketat memblokir koneksi masuk yang diinisiasi dari internet.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0082",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah tim DevOps ingin memantau ketersediaan aplikasi web mereka secara proaktif 24/7 dengan menjalankan skrip pengujian otomatis (canaries) yang secara berkala mensimulasikan klik navigasi pengguna nyata di browser dan memicu alarm jika halaman gagal dimuat. Fitur pemantauan Amazon CloudWatch manakah yang menyediakan fungsi ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon CloudWatch Synthetics (Canaries)"
+      },
+      {
+        "id": "B",
+        "text": "Amazon CloudWatch Logs Insights"
+      },
+      {
+        "id": "C",
+        "text": "CloudWatch Container Insights"
+      },
+      {
+        "id": "D",
+        "text": "AWS CloudTrail Insights"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "CloudWatch Synthetics memungkinkan pembuatan 'canaries' (skrip otomatis yang berjalan sesuai jadwal) untuk memantau endpoint dan alur kerja aplikasi web Anda dengan mensimulasikan tindakan pengguna nyata.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0083",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah alur kerja pemrosesan aplikasi pesanan terdiri dari beberapa fungsi AWS Lambda, tugas kontainer Amazon ECS, dan persetujuan manual yang harus dijalankan secara berurutan dengan logika percabangan kondisi dan penanganan kesalahan (error handling). Layanan orkestrasi visual tanpa server AWS manakah yang dirancang untuk kebutuhan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Step Functions"
+      },
+      {
+        "id": "B",
+        "text": "Amazon Simple Queue Service (Amazon SQS)"
+      },
+      {
+        "id": "C",
+        "text": "AWS CodePipeline"
+      },
+      {
+        "id": "D",
+        "text": "Amazon EventBridge"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Step Functions adalah layanan orkestrasi alur kerja visual tanpa server yang mempermudah koordinasi microservices, fungsi Lambda, dan komponen terdistribusi menjadi alur kerja yang terstruktur.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0084",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah tim pengembang ingin menghubungkan aliran event dari antrean Amazon SQS langsung ke fungsi AWS Lambda dengan menyertakan filter data otomatis tanpa perlu menulis kode integrasi atau polling manual. Fitur perutean point-to-point Amazon EventBridge manakah yang menyediakan integrasi langsung ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon EventBridge Pipes"
+      },
+      {
+        "id": "B",
+        "text": "Amazon EventBridge Schema Registry"
+      },
+      {
+        "id": "C",
+        "text": "Amazon SNS Fanout"
+      },
+      {
+        "id": "D",
+        "text": "AWS Step Functions Express"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon EventBridge Pipes menyediakan integrasi point-to-point yang sederhana, konsisten, dan hemat biaya antara produsen event (seperti SQS atau Kinesis) dan konsumen target dengan kemampuan filtering dan enrichment bawaan.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0085",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah perusahaan memiliki ratusan server fisik dan mesin virtual VMware di pusat data on-premise yang ingin dimigrasikan ke Amazon EC2 dengan replikasi tingkat blok berkelanjutan (continuous block-level replication) untuk meminimalkan waktu henti (cutover downtime). Layanan migrasi otomatis AWS manakah yang dirancang untuk tujuan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Application Migration Service (AWS MGN)"
+      },
+      {
+        "id": "B",
+        "text": "AWS Database Migration Service (AWS DMS)"
+      },
+      {
+        "id": "C",
+        "text": "AWS Snowball Edge Storage Optimized"
+      },
+      {
+        "id": "D",
+        "text": "AWS DataSync"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Application Migration Service (AWS MGN) adalah layanan migrasi utama yang direkomendasikan AWS untuk memindahkan aplikasi berbasis server fisik, virtual, atau cloud ke AWS dengan replikasi blok non-disruptif.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0086",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah tim penyimpanan data perlu memindahkan puluhan terabyte file data dari sistem Network Attached Storage (NAS) lokal ke Amazon S3 dan Amazon EFS secara otomatis dan terjadwal, dengan akselerasi transfer data hingga 10 kali lipat dibanding perkakas open-source. Layanan transfer data online terkelola AWS manakah ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS DataSync"
+      },
+      {
+        "id": "B",
+        "text": "AWS Snowball Edge"
+      },
+      {
+        "id": "C",
+        "text": "AWS Storage Gateway"
+      },
+      {
+        "id": "D",
+        "text": "Amazon Kinesis Data Firehose"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS DataSync adalah layanan transfer data online terkelola yang mengotomatiskan dan mempercepat pemindahan data dalam volume besar antara penyimpanan on-premise dan AWS (S3, EFS, FSx) melalui protokol yang dioptimalkan.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0087",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah institusi bisnis memiliki mitra eksternal yang secara rutin mengirimkan laporan transaksi melalui protokol SFTP (Secure File Transfer Protocol). Perusahaan ingin menerima file-file SFTP tersebut secara langsung dan mulus ke dalam bucket Amazon S3 tanpa perlu mengelola server SFTP Linux sendiri. Layanan AWS manakah yang harus digunakan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Transfer Family"
+      },
+      {
+        "id": "B",
+        "text": "AWS Storage Gateway"
+      },
+      {
+        "id": "C",
+        "text": "AWS DataSync"
+      },
+      {
+        "id": "D",
+        "text": "Amazon S3 Transfer Acceleration"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Transfer Family menyediakan transfer file terkelola penuh secara langsung ke Amazon S3 atau Amazon EFS menggunakan protokol standar industri seperti SFTP, FTPS, dan FTP.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0088",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah tim peneliti lapangan membutuhkan perangkat komputasi tepi (edge computing) portabel yang sangat ringan (sekitar 2 kg), tangguh, bertenaga baterai, dan tahan benturan untuk mengumpulkan data sensor di hutan belantara dan mengirimkannya kembali ke AWS. Perangkat keluarga AWS Snow Family manakah yang dirancang untuk skenario portabel ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Snowcone"
+      },
+      {
+        "id": "B",
+        "text": "AWS Snowball Edge"
+      },
+      {
+        "id": "C",
+        "text": "AWS Snowmobile"
+      },
+      {
+        "id": "D",
+        "text": "AWS Outposts Rack"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Snowcone adalah perangkat paling kecil dan portabel dari AWS Snow Family (berbobot hanya 2,1 kg), dirancang untuk edge computing dan transfer data di lingkungan terpencil yang keras dan terbatas ruang.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0089",
+    "domain": "Billing & Pricing",
+    "type": "single",
+    "prompt": "Seorang pengguna baru membuka akun AWS dan ingin mengetahui layanan apa saja yang termasuk dalam penawaran AWS Free Tier. Manakah dari pernyataan berikut yang paling tepat menjelaskan tiga kategori penawaran pada AWS Free Tier?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Selalu Gratis (Always Free), 12 Bulan Gratis (12 Months Free), dan Uji Coba Jangka Pendek (Short-term Trials)"
+      },
+      {
+        "id": "B",
+        "text": "Diskon Korporat, Diskon Akademik, dan Lisensi Terbuka"
+      },
+      {
+        "id": "C",
+        "text": "Gratis untuk komputasi, berbayar untuk penyimpanan"
+      },
+      {
+        "id": "D",
+        "text": "Gratis pada hari libur dan akhir pekan saja"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Free Tier terbagi menjadi tiga jenis penawaran: Always Free (bebas biaya selamanya dalam kuota tertentu), 12 Months Free (gratis selama 12 bulan pertama pendaftaran), dan Trials (uji coba jangka pendek sejak aktivasi layanan).",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0090",
+    "domain": "Billing & Pricing",
+    "type": "single",
+    "prompt": "Seorang Cloud Financial Analyst ingin mendeteksi lonjakan pengeluaran biaya yang tidak wajar atau anomali biaya yang terjadi secara tiba-tiba pada akun AWS (misalnya akibat skrip pengembang yang tidak sengaja meluncurkan resource mahal) menggunakan teknologi machine learning. Fitur AWS Cost Management manakah yang menyediakan fungsi ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Cost Anomaly Detection"
+      },
+      {
+        "id": "B",
+        "text": "AWS Pricing Calculator"
+      },
+      {
+        "id": "C",
+        "text": "AWS Trusted Advisor Dasar"
+      },
+      {
+        "id": "D",
+        "text": "AWS Billing Conductor"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Cost Anomaly Detection memanfaatkan machine learning canggih untuk terus memantau pola pengeluaran biaya AWS dan mendeteksi anomali lonjakan biaya tak terduga serta mengidentifikasi akar penyebabnya.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0091",
+    "domain": "Billing & Pricing",
+    "type": "single",
+    "prompt": "Sebuah perusahaan enterprise membutuhkan laporan rincian data mentah komprehensif mengenai seluruh penggunaan sumber daya AWS mereka hingga ke tingkat detik dan dimensi metadata tag per jam, untuk kemudian dimuat ke dalam data lake analitik internal. Laporan biaya AWS manakah yang menyediakan kumpulan data paling granular ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Cost and Usage Report (CUR)"
+      },
+      {
+        "id": "B",
+        "text": "Ringkasan Tagihan Sederhana di Billing Dashboard"
+      },
+      {
+        "id": "C",
+        "text": "Laporan AWS Budgets bulanan"
+      },
+      {
+        "id": "D",
+        "text": "Grafik AWS Cost Explorer ringkas"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Cost and Usage Report (CUR) adalah kumpulan data biaya dan penggunaan paling komprehensif di AWS, menyediakan rincian baris data granular per jam/detik untuk analisis mendalam.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0092",
+    "domain": "Billing & Pricing",
+    "type": "single",
+    "prompt": "Sebuah organisasi ingin membeli lisensi perangkat lunak firewall pihak ketiga (seperti Palo Alto Networks atau Fortinet) yang siap diluncurkan sebagai Amazon Machine Image (AMI) pada Amazon EC2, serta ingin pembayarannya disatukan ke dalam faktur tagihan bulanan AWS resmi perusahaan. Katalog digital AWS manakah yang menyediakan layanan ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Marketplace"
+      },
+      {
+        "id": "B",
+        "text": "AWS Artifact"
+      },
+      {
+        "id": "C",
+        "text": "Amazon AppFlow"
+      },
+      {
+        "id": "D",
+        "text": "AWS Systems Manager"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Marketplace adalah katalog digital terkurasi yang memungkinkan pelanggan menemukan, membeli, menyebarkan, dan mengelola perangkat lunak dan layanan pihak ketiga dengan tagihan terintegrasi pada faktur AWS.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0093",
+    "domain": "Billing & Pricing",
+    "type": "single",
+    "prompt": "Sebuah perusahaan menengah membutuhkan dukungan teknis responsif 24/7 dengan waktu respons di bawah 30 menit untuk kasus sistem bisnis kritis (business-critical), panduan arsitektur proaktif, dan akses ke tim Technical Account Manager (TAM) bersama, namun dengan biaya yang lebih terjangkau dibandingkan Enterprise Support Plan penuh. Paket dukungan AWS manakah yang dirancang untuk level ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Enterprise On-Ramp Support Plan"
+      },
+      {
+        "id": "B",
+        "text": "AWS Business Support Plan"
+      },
+      {
+        "id": "C",
+        "text": "AWS Developer Support Plan"
+      },
+      {
+        "id": "D",
+        "text": "AWS Basic Support Plan"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Enterprise On-Ramp Support Plan berada di antara paket Business dan Enterprise, menawarkan waktu respons 30 menit untuk kasus bisnis kritis dan akses ke tim kumpulan Technical Account Manager (pool of TAMs).",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0094",
+    "domain": "Billing & Pricing",
+    "type": "single",
+    "prompt": "Seorang pengembang independen sedang membangun aplikasi prototipe di AWS dan membutuhkan paket dukungan berbayar tingkat paling dasar yang memberikan panduan arsitektur umum dan akses email ke Cloud Support Associates selama jam kerja bisnis lokal dengan waktu respons kasus di bawah 24 jam. Paket AWS Support manakah yang sesuai?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Developer Support Plan"
+      },
+      {
+        "id": "B",
+        "text": "AWS Business Support Plan"
+      },
+      {
+        "id": "C",
+        "text": "AWS Basic Support Plan"
+      },
+      {
+        "id": "D",
+        "text": "AWS Enterprise Support Plan"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Paket AWS Developer Support adalah paket dukungan berbayar paling terjangkau yang dirancang untuk pengembang yang sedang bereksperimen, menyediakan akses email ke teknisi AWS selama jam kerja bisnis.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0095",
+    "domain": "Billing & Pricing",
+    "type": "single",
+    "prompt": "Seorang Cloud Engineer ingin membuka seluruh pemeriksaan rekomendasi (full set of checks) pada konsol AWS Trusted Advisor, termasuk pemeriksaan keamanan mendalam, kuota layanan, toleransi kesalahan, dan optimasi biaya penuh (bukan hanya 7 pemeriksaan dasar). Tingkat paket AWS Support terendah manakah yang membuka seluruh pemeriksaan Trusted Advisor ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Business Support Plan"
+      },
+      {
+        "id": "B",
+        "text": "AWS Developer Support Plan"
+      },
+      {
+        "id": "C",
+        "text": "AWS Basic Support Plan"
+      },
+      {
+        "id": "D",
+        "text": "AWS Free Support Plan"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Paket AWS Business Support (dan tingkat di atasnya: Enterprise On-Ramp serta Enterprise) menyediakan akses penuh ke seluruh pemeriksaan dan rekomendasi pada AWS Trusted Advisor.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0096",
+    "domain": "Billing & Pricing",
+    "type": "single",
+    "prompt": "Sebuah perusahaan memiliki lisensi perangkat lunak server Microsoft Windows dan Oracle bawaan (Bring Your Own License / BYOL) yang terikat secara hukum pada nomor soket atau inti fisik server (per-socket / per-core). Opsi tenancy Amazon EC2 manakah yang memberikan server fisik terisolasi dengan visibilitas penuh atas soket dan inti fisik server untuk mematuhi lisensi tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon EC2 Dedicated Hosts"
+      },
+      {
+        "id": "B",
+        "text": "Amazon EC2 Dedicated Instances"
+      },
+      {
+        "id": "C",
+        "text": "Amazon EC2 Shared Default Tenancy"
+      },
+      {
+        "id": "D",
+        "text": "Amazon EC2 Spot Instances"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon EC2 Dedicated Hosts menyediakan server fisik yang didedikasikan penuh untuk penggunaan Anda, memberi visibilitas dan kendali atas penempatan soket dan inti fisik server untuk memenuhi persyaratan lisensi perangkat lunak per-socket/per-core (BYOL).",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0097",
+    "domain": "Billing & Pricing",
+    "type": "single",
+    "prompt": "Sebuah organisasi ingin berkomitmen menggunakan Amazon EC2 selama 3 tahun untuk mendapatkan diskon biaya yang besar, namun tim arsitek memperkirakan bahwa mereka mungkin perlu mengubah keluarga instance (misalnya dari m5 ke c6g), sistem operasi, atau jenis tenancy di tengah jalan. Tipe Reserved Instance manakah yang memberikan fleksibilitas untuk mengubah atribut-atribut tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Convertible Reserved Instances"
+      },
+      {
+        "id": "B",
+        "text": "Standard Reserved Instances"
+      },
+      {
+        "id": "C",
+        "text": "Scheduled Reserved Instances"
+      },
+      {
+        "id": "D",
+        "text": "On-Demand Instances"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Convertible Reserved Instances menawarkan diskon signifikan (hingga 54%) dengan fleksibilitas unik untuk mengubah keluarga instance EC2, sistem operasi, ukuran, dan tenancy selama masa komitmen.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0098",
+    "domain": "Billing & Pricing",
+    "type": "single",
+    "prompt": "Sebuah grup korporasi mengaktifkan Consolidated Billing di AWS Organizations. Salah satu akun anggota membeli Savings Plans atau Reserved Instances (RI), namun kapasitas komputasinya tidak habis terpakai oleh akun tersebut pada jam tertentu. Apa yang terjadi pada kelebihan kapasitas diskon Savings Plans/RI tersebut di dalam organisasi?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Diskon Savings Plans/RI dapat otomatis dibagikan dan diterapkan ke penggunaan akun anggota lain di dalam keluarga Consolidated Billing yang memenuhi syarat"
+      },
+      {
+        "id": "B",
+        "text": "Diskon hangus dan tidak dapat dimanfaatkan akun lain sama sekali"
+      },
+      {
+        "id": "C",
+        "text": "Akun anggota tersebut otomatis dikenakan denda penalti biaya"
+      },
+      {
+        "id": "D",
+        "text": "AWS secara otomatis membatalkan komitmen kontrak"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Di bawah Consolidated Billing pada AWS Organizations, manfaat harga diskon dari Reserved Instances dan Savings Plans secara otomatis dapat dibagikan di antara seluruh akun anggota di dalam organisasi untuk memaksimalkan penghematan biaya.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0099",
+    "domain": "Billing & Pricing",
+    "type": "single",
+    "prompt": "Saat meninjau tagihan biaya di AWS Cost Explorer, seorang administrator melihat adanya tag dengan awalan 'aws:' (seperti 'aws:createdBy'). Manakah pernyataan yang paling tepat membedakan antara AWS-Generated Tags dan User-Defined Cost Allocation Tags?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS-Generated Tags diawali dengan awalan 'aws:' dan dibuat otomatis oleh AWS untuk melacak identitas pembuat resource, sedangkan User-Defined Tags dibuat secara manual oleh pengguna dengan awalan 'user:'"
+      },
+      {
+        "id": "B",
+        "text": "AWS-Generated Tags berbayar, sedangkan User-Defined Tags gratis"
+      },
+      {
+        "id": "C",
+        "text": "User-Defined Tags tidak dapat diaktifkan di Billing Console"
+      },
+      {
+        "id": "D",
+        "text": "AWS-Generated Tags hanya dapat digunakan pada database Amazon RDS"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS-Generated Tags (seperti 'aws:createdBy') didefinisikan dan diterapkan otomatis oleh AWS serta diawali dengan awalan 'aws:', sedangkan User-Defined Tags dibuat secara kustom oleh pengguna dan diawali dengan awalan 'user:' saat diaktifkan untuk alokasi biaya.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_scenario_0100",
+    "domain": "Billing & Pricing",
+    "type": "single",
+    "prompt": "Sebuah korporasi besar berlangganan paket AWS Enterprise Support. Mereka memiliki pertanyaan mendalam mengenai struktur faktur pembayaran bulanan, rincian biaya lintas anak perusahaan, dan alokasi kredit tagihan. Tim ahli non-teknis AWS manakah yang didedikasikan untuk menangani pertanyaan penagihan dan administrasi akun tingkat enterprise ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Support Concierge Team"
+      },
+      {
+        "id": "B",
+        "text": "AWS Abuse Team"
+      },
+      {
+        "id": "C",
+        "text": "AWS Solutions Architects Associate"
+      },
+      {
+        "id": "D",
+        "text": "Technical Account Manager (TAM) Spesialis Jaringan"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "AWS Support Concierge adalah tim spesialis operasional dan penagihan senior yang didedikasikan secara eksklusif untuk pelanggan Enterprise Support guna menjawab pertanyaan seputar tagihan, faktur, alokasi biaya, dan manajemen akun.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
     "id": "ccp_kahoot_0091",
     "domain": "Technology & Services",
     "type": "single",
