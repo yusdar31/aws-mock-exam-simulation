@@ -11,7 +11,7 @@ export default function QuestionReview({
   question: Question;
   selected: string[];
 }) {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const [translation, setTranslation] = useState(""),
     [busy, setBusy] = useState(false),
     [notice, setNotice] = useState("");
@@ -65,39 +65,35 @@ export default function QuestionReview({
           </button>
         ))}
       {notice && <p role="status">{t(notice)}</p>}
-      <ul>
-        {question.options.map((option) => (
-          <li key={option.id}>
-            <p className="review-option" lang={question.lang}>
-              <b>{option.id}.</b> {option.text}
-            </p>
-            <strong>
-              {option.id}.{" "}
-              {question.correctAnswers.includes(option.id)
-                ? t("Jawaban benar")
-                : t("Distraktor")}
-              {selected.includes(option.id) ? t(" · Pilihan Anda") : ""}
-            </strong>
-            <details>
-              <summary>{t("Alasan opsi ini")}</summary>
-              <p
-                lang={
-                  question.optionExplanations?.[option.id] ||
-                  question.correctAnswers.includes(option.id)
-                    ? question.lang
-                    : language
-                }
-              >
-                {question.optionExplanations?.[option.id] ||
-                  (question.correctAnswers.includes(option.id)
-                    ? question.explanation
-                    : t(
-                        "Bandingkan opsi ini dengan persyaratan pada pertanyaan dan pembahasan di atas.",
-                      ))}
-              </p>
-            </details>
-          </li>
-        ))}
+      <ul className="review-options" role="list">
+        {question.options.map((option) => {
+          const correct = question.correctAnswers.includes(option.id);
+          const chosen = selected.includes(option.id);
+          const reason = question.optionExplanations?.[option.id]?.trim();
+          return (
+            <li
+              key={option.id}
+              className={`review-choice${correct ? " is-correct" : ""}`}
+            >
+              <div className="review-choice-heading">
+                <p className="review-option" lang={question.lang}>
+                  <b>{option.id}.</b> {option.text}
+                </p>
+                {(correct || chosen) && (
+                  <span className="review-choice-status">
+                    {correct && <strong>{t("Jawaban benar")}</strong>}
+                    {chosen && <span>{t("Pilihan Anda")}</span>}
+                  </span>
+                )}
+              </div>
+              {reason && reason !== question.explanation.trim() && (
+                <p className="review-choice-reason" lang={question.lang}>
+                  {reason}
+                </p>
+              )}
+            </li>
+          );
+        })}
       </ul>
       {question.sourceUrl && (
         <a href={question.sourceUrl} target="_blank" rel="noreferrer">
@@ -107,11 +103,13 @@ export default function QuestionReview({
           })}{" "}
         </a>
       )}
-      {!question.verifiedAt && (
+      {question.options.some(
+        (option) => !question.optionExplanations?.[option.id]?.trim(),
+      ) && (
         <small>
           {" "}
           {t(
-            "Soal arsip: sumber dan pembahasan per opsi masih perlu review editorial.",
+            "Pembahasan rinci setiap opsi belum tersedia untuk soal ini.",
           )}{" "}
         </small>
       )}

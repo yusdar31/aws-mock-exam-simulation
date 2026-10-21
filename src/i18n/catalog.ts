@@ -308,6 +308,9 @@ export const messages: Record<string, string> = {
   "Menyiapkan terjemahan…": "Preparing translation…",
   "Tampilkan Bahasa Indonesia": "Show Indonesian explanation",
   "Jawaban benar": "Correct answer",
+  "Pilihan Anda": "Your choice",
+  "Pembahasan rinci setiap opsi belum tersedia untuk soal ini.":
+    "Detailed explanations for each option are not yet available for this question.",
   Distraktor: "Distractor",
   " · Pilihan Anda": " · Your choice",
   "Bandingkan opsi ini dengan persyaratan pada pertanyaan dan pembahasan di atas.":

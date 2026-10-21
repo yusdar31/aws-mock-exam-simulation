@@ -124,6 +124,25 @@ try {
   await page.locator('.app-header a[href="#banks"]').click();
   await page.locator('h2 a[href="#banks/gcp-ace-id"]').click();
   await expect(page.locator(".bank-domains li")).toHaveCount(4);
+  const archived = bank.find((q) => !q.optionExplanations);
+  assert.ok(archived);
+  await page.getByLabel("Cari soal", { exact: true }).fill(archived.id);
+  await page.locator(".bank-question summary").first().click();
+  const review = page.locator(".bank-question .rationale").first();
+  await expect(review.locator(".review-choice")).toHaveCount(
+    archived.options.length,
+  );
+  await expect(review.locator("details")).toHaveCount(0);
+  await expect(review.locator(".review-choice-reason")).toHaveCount(0);
+  await expect(review).not.toContainText("Bandingkan opsi ini");
+  await expect(review).toContainText(
+    "Pembahasan rinci setiap opsi belum tersedia",
+  );
+  await page.getByLabel("Bahasa tampilan").selectOption("en");
+  await expect(review).toContainText("Correct answer");
+  await expect(review).not.toContainText("Distractor");
+  await expect(review).toContainText("Detailed explanations for each option");
+  await page.getByLabel("Display language").selectOption("id");
   await page
     .getByLabel("Cari soal", { exact: true })
     .fill("ace-scenario-id-20261021-");
@@ -132,6 +151,18 @@ try {
   ).toBeVisible();
   await page.locator(".bank-question summary").first().click();
   await expect(page.locator(".bank-question .rationale").first()).toBeVisible();
+  await expect(review.locator(".review-choice")).toHaveCount(4);
+  await expect(review.locator(".review-choice-reason")).toHaveCount(3);
+  await expect(review.locator(".review-choice-status")).toHaveCount(1);
+  await page.setViewportSize({ width: 375, height: 812 });
+  assert.ok(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+    ),
+  );
+  await review.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `${out}/review-mobile.png`, fullPage: false });
+  await page.setViewportSize({ width: 1440, height: 1000 });
   await page.screenshot({ path: `${out}/new-scenarios.png`, fullPage: false });
   await page
     .getByRole("button", { name: "Siapkan simulasi", exact: true })

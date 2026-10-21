@@ -438,6 +438,41 @@
 .rationale li p {
   margin: 5px 0;
 }
+.rationale .review-options {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+}
+.rationale .review-choice {
+  margin: 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  overflow-wrap: anywhere;
+}
+.review-choice-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 24px;
+  flex-wrap: wrap;
+}
+.review-choice-heading .review-option {
+  flex: 1 1 280px;
+  margin: 0;
+}
+.review-choice-status {
+  display: flex;
+  gap: 4px 12px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+.review-choice-status strong {
+  color: var(--ink);
+}
+.rationale .review-choice-reason {
+  margin: 10px 0 0;
+  line-height: 1.65;
+}
 .rationale small {
   margin-top: 14px;
 }
