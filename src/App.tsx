@@ -16,6 +16,7 @@ import {
   remaining,
   selectQuestions,
   isSession,
+  canonicalDomain,
 } from "./lib/exam";
 import { loadBank } from "./lib/banks";
 import { loadAvailableBank } from "./lib/availableBank";
@@ -958,6 +959,13 @@ export default function App() {
                 onRepeat={() => {
                   setConfig({
                     ...result.session!.config,
+                    domains: [
+                      ...new Set(
+                        result.session!.config.domains.map((domain) =>
+                          canonicalDomain(result.examType, domain),
+                        ),
+                      ),
+                    ],
                     lang: availableLanguage(result.examType, result.lang),
                   });
                   navigate("lobby");

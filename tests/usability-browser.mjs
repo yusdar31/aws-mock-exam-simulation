@@ -143,7 +143,7 @@ try {
     .click();
   await expect(
     page.getByRole("button", { name: "Mulai simulasi", exact: true }),
-  ).toBeDisabled();
+  ).toBeEnabled();
   await expect(page.locator(".launch-panel dl")).toContainText("50");
   await page.getByRole("button", { name: "Latihan", exact: true }).click();
   await page.reload();

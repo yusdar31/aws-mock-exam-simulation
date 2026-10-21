@@ -1,5 +1,6 @@
 import { loadBank } from "./banks";
 import { loadApproved } from "./api";
+import { canonicalDomain } from "./exam";
 import type { ExamType, Language, Question } from "../types";
 
 // Use the same published additions, withdrawals and offline fallback everywhere.
@@ -43,5 +44,11 @@ export async function loadAvailableBank(
       ]),
     ).values(),
   ];
-  return { questions, notice };
+  return {
+    questions: questions.map((q) => {
+      const domain = canonicalDomain(q.examType, q.domain);
+      return domain === q.domain ? q : { ...q, domain };
+    }),
+    notice,
+  };
 }

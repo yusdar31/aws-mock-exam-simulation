@@ -4,6 +4,8 @@ import { studyMessages } from "./study";
 export const LANGUAGE_STORAGE_KEY = "aws-exam-ui-language";
 export const messages: Record<string, string> = {
   ...studyMessages,
+  "Perencanaan dan Implementasi Solusi Cloud":
+    "Planning and implementing a cloud solution",
   "Bank soal": "Question banks",
   "Jelajahi bank soal": "Browse question banks",
   "Bahasa Inggris": "English",

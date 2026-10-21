@@ -2,9 +2,10 @@ import ccpId from "../../src/data/banks/ccp-id.json" with { type: "json" };
 import ccpEn from "../../src/data/banks/ccp-en.json" with { type: "json" };
 import saaId from "../../src/data/banks/saa-id.json" with { type: "json" };
 import saaEn from "../../src/data/banks/saa-en.json" with { type: "json" };
+import aceId from "../../src/data/banks/gcp-ace-id.json" with { type: "json" };
 import catalog from "../../src/data/certifications.json" with { type: "json" };
 import {handleReports} from '../../server/reportGateway.js';
-const published = [...ccpId, ...ccpEn, ...saaId, ...saaEn].filter(
+const published = [...ccpId, ...ccpEn, ...saaId, ...saaEn, ...aceId].filter(
   (question) => question.status === "approved",
 );
 export default async function handler(request, response) {

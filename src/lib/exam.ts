@@ -7,6 +7,12 @@ export const BLUEPRINT: Record<ExamType, Record<string, number>> = {
   "gcp-ace": catalog["gcp-ace"].blueprint,
 };
 export const PRACTICE_TARGET = 80;
+export function canonicalDomain(type: ExamType, domain: string): string {
+  const aliases: Record<string, string> = catalog["gcp-ace"].domainAliases;
+  return type === "gcp-ace" && Object.hasOwn(aliases, domain)
+    ? aliases[domain]
+    : domain;
+}
 export const EXAM_MINUTES = Object.fromEntries(
   Object.entries(catalog).map(([key, value]) => [key, value.minutes]),
 ) as Record<ExamType, number>;
@@ -224,9 +230,12 @@ export function selectQuestions(
   }
   if (!Number.isInteger(config.limit) || config.limit < 1 || config.limit > 200)
     throw new Error("Jumlah soal harus 1–200.");
+  const requestedDomains = config.domains.map((domain) =>
+    canonicalDomain(config.examType, domain),
+  );
   const filtered = source.filter(
     (q) =>
-      config.domains.includes(q.domain) &&
+      requestedDomains.includes(canonicalDomain(q.examType, q.domain)) &&
       (config.content !== "new" || !recent.includes(q.id)) &&
       (config.content !== "reviewed" || simulationReady(q)) &&
       (config.content !== "archive" || !simulationReady(q)),

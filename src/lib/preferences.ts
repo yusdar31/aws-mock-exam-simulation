@@ -1,5 +1,6 @@
 import type { Config, ExamType, Language } from "../types";
 import { CERTIFICATIONS, availableLanguage } from "./catalog";
+import { canonicalDomain } from "./exam";
 const key = "exam-study-config-v1";
 export function readConfig(): Config {
   let value: Partial<Config> = {};
@@ -15,6 +16,15 @@ export function readConfig(): Config {
     ? value.examType!
     : "ccp";
   const domains = Object.keys(CERTIFICATIONS[examType].blueprint);
+  const requested = Array.isArray(value?.domains)
+    ? [
+        ...new Set(
+          value.domains.map((d) =>
+            typeof d === "string" ? canonicalDomain(examType, d) : "",
+          ),
+        ),
+      ]
+    : undefined;
   return {
     examType,
     lang: availableLanguage(
@@ -30,13 +40,16 @@ export function readConfig(): Config {
       ? value.duration || 0
       : 0,
     domains:
-      Array.isArray(value?.domains) &&
-      value.domains.every((d) => domains.includes(d))
-        ? value.domains
+      requested && requested.every((d) => domains.includes(d))
+        ? requested
         : domains,
-    content: ["all", "new", "reviewed", "archive"].includes(value?.content || "")
+    content: ["all", "new", "reviewed", "archive"].includes(
+      value?.content || "",
+    )
       ? value.content
-      : examType === "gcp-ace" ? "all" : "reviewed",
+      : examType === "gcp-ace"
+        ? "all"
+        : "reviewed",
   };
 }
 export function writeConfig(value: Config) {

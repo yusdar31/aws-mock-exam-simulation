@@ -7,7 +7,9 @@ import performance from "./curated/performance.mjs";
 import cost from "./curated/cost.mjs";
 import multiple from "./curated/multiple.mjs";
 import { expand, optionConcept } from "./curated/expansion.mjs";
-import { deepen } from './curated/depth.mjs';
+import { deepen } from "./curated/depth.mjs";
+import { buildAceScenarios } from "./curated/gcp-ace-scenarios.mjs";
+import certifications from "../src/data/certifications.json" with { type: "json" };
 
 const ccpScenariosId = fs.existsSync("scripts/curated/ccp-scenarios-id.json")
   ? JSON.parse(fs.readFileSync("scripts/curated/ccp-scenarios-id.json", "utf8"))
@@ -188,7 +190,7 @@ for (const type of ["ccp", "saa"])
           sourceRef: "original-practice-scenarios",
         };
       });
-    banks[`${type}-${lang}`] = [...old, ...deepen(fresh,type,lang)];
+    banks[`${type}-${lang}`] = [...old, ...deepen(fresh, type, lang)];
     fs.mkdirSync("src/data/banks", { recursive: true });
     fs.writeFileSync(
       `src/data/banks/${type}-${lang}.json`,
@@ -198,6 +200,27 @@ for (const type of ["ccp", "saa"])
       `${type}-${lang}: ${old.length} legacy + ${fresh.length} original`,
     );
   }
+const legacyAce = JSON.parse(
+  fs.readFileSync("scripts/curated/gcp-ace-legacy-id.json", "utf8"),
+);
+const aceAliases = certifications["gcp-ace"].domainAliases;
+const freshAce = buildAceScenarios();
+banks["gcp-ace-id"] = [
+  ...legacyAce.map((q) =>
+    aceAliases[q.domain]
+      ? { ...q, domain: aceAliases[q.domain], version: q.version + 1 }
+      : q,
+  ),
+  ...freshAce,
+];
+fs.writeFileSync(
+  "src/data/banks/gcp-ace-id.json",
+  JSON.stringify(banks["gcp-ace-id"]),
+);
+console.log(
+  `gcp-ace-id: ${legacyAce.length} legacy + ${freshAce.length} original`,
+);
+
 fs.writeFileSync(
   "src/data/banks/manifest.json",
   JSON.stringify(
