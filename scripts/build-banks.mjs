@@ -8,6 +8,10 @@ import cost from "./curated/cost.mjs";
 import multiple from "./curated/multiple.mjs";
 import { expand, optionConcept } from "./curated/expansion.mjs";
 import { deepen } from './curated/depth.mjs';
+
+const ccpScenariosId = fs.existsSync("scripts/curated/ccp-scenarios-id.json")
+  ? JSON.parse(fs.readFileSync("scripts/curated/ccp-scenarios-id.json", "utf8"))
+  : {};
 async function legacy(path, name) {
   const source = fs.readFileSync(path, "utf8"),
     output = ts.transpileModule(source, {
@@ -159,16 +163,22 @@ for (const type of ["ccp", "saa"])
                 explanation,
           ]),
         );
+        const qid = `curated-${type}-${lang}-${index + 1}`;
+        const scenario =
+          type === "ccp" && lang === "id" ? ccpScenariosId[qid] : null;
+        const prompt =
+          scenario?.prompt || (lang === "id" ? promptId : promptEn);
+        const finalExplanation = scenario?.explanation || explanation;
         return {
-          id: `curated-${type}-${lang}-${index + 1}`,
+          id: qid,
           examType: type,
           lang,
           domain,
           type: answers.length > 1 ? "multiple" : "single",
-          prompt: lang === "id" ? promptId : promptEn,
+          prompt,
           options,
           correctAnswers: answers,
-          explanation,
+          explanation: finalExplanation,
           optionExplanations,
           sourceUrl: metadata?.sourceUrl || refs[ref || "cloud"],
           verifiedAt: notes ? "2026-10-18" : "2026-10-13",

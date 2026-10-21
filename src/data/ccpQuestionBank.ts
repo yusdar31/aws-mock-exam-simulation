@@ -5,29 +5,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0001",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Perbedaan utama antara perintah 'aws s3' dan 'aws s3api' pada AWS CLI adalah?",
+    "prompt": "Seorang Cloud Administrator sedang menulis skrip otomatisasi di terminal Linux menggunakan AWS CLI untuk mengelola file di Amazon S3. Administrator tersebut membutuhkan perintah granular tingkat rendah yang memetakan operasi REST API Amazon S3 secara satu-ke-satu (1-to-1 API mapping). Manakah pernyataan yang paling tepat membedakan antara perintah 'aws s3' dan 'aws s3api'?",
     "options": [
       {
         "id": "A",
-        "text": "aws s3 berbayar, s3api gratis"
+        "text": "Perintah aws s3 mengenakan biaya per pemanggilan API, sedangkan aws s3api disediakan gratis"
       },
       {
         "id": "B",
-        "text": "Keduanya tidak memiliki perbedaan fungsi"
+        "text": "Kedua kelompok perintah memiliki fungsi dan cakupan parameter yang sepenuhnya identik"
       },
       {
         "id": "C",
-        "text": "aws s3 khusus Windows, s3api khusus Linux"
+        "text": "Perintah aws s3 dikhususkan untuk lingkungan Windows, sedangkan aws s3api hanya untuk Linux"
       },
       {
         "id": "D",
-        "text": "aws s3 perintah high-level, s3api low-level 1-to-1 API"
+        "text": "Perintah aws s3 menyediakan utilitas tingkat tinggi (high-level), sedangkan aws s3api menyediakan pemetaan langsung granular 1-to-1 ke S3 REST API (low-level)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "aws s3 menyediakan perintah tingkat tinggi (sync, mb, cp), sedangkan aws s3api memberikan kontrol granular 1-to-1 terhadap S3 REST API.",
+    "explanation": "Kelompok perintah 'aws s3' menyediakan abstraksi tingkat tinggi (seperti sync, cp, mb) yang mudah digunakan manusia. Sebaliknya, 'aws s3api' mengekspos pemetaan langsung tingkat rendah (low-level) 1-to-1 terhadap seluruh operasi S3 REST API untuk kontrol yang presisi.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -35,29 +35,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0002",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Aturan penamaan nama bucket Amazon S3 yang WAJIB dipatuhi di seluruh dunia adalah?",
+    "prompt": "Sebuah tim pengembang sedang merancang arsitektur penyimpanan objek baru menggunakan Amazon S3 untuk mendukung aplikasi global. Sebelum membuat bucket, tim harus memastikan penamaan bucket mematuhi konvensi DNS dan standar penamaan AWS. Manakah aturan penamaan bucket Amazon S3 yang benar dan wajib dipatuhi di seluruh dunia?",
     "options": [
       {
         "id": "A",
-        "text": "Wajib diawali dengan kata 'aws-' di depan nama"
+        "text": "Nama bucket wajib diawali dengan kata awalan 'aws-' di depan setiap nama"
       },
       {
         "id": "B",
-        "text": "Boleh huruf kapital asalkan unik dalam satu Region"
+        "text": "Nama bucket boleh menggunakan huruf kapital asalkan unik di dalam satu AWS Region"
       },
       {
         "id": "C",
-        "text": "Unik global & hanya huruf kecil, angka, tanda minus"
+        "text": "Nama bucket harus unik secara global di seluruh dunia serta hanya terdiri dari huruf kecil, angka, dan tanda minus (-)"
       },
       {
         "id": "D",
-        "text": "Boleh sama antar akun asalkan beda Availability Zone"
+        "text": "Nama bucket boleh sama antar akun AWS asalkan dibuat pada Availability Zone yang berbeda"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Nama bucket S3 harus unik secara global di seluruh dunia dan mengikuti konvensi DNS: tidak boleh ada huruf kapital atau spasi.",
+    "explanation": "Nama bucket Amazon S3 berbagi satu namespace global tunggal di seluruh dunia. Nama bucket harus unik secara global dan mematuhi konvensi penamaan DNS: panjang 3-63 karakter, hanya huruf kecil, angka, dan tanda minus (-), serta tanpa huruf kapital atau garis bawah.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -65,7 +65,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0003",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan keamanan threat detection yang menganalisis DNS Logs dan CloudTrail adalah?",
+    "prompt": "Sebuah perusahaan teknologi finansial membutuhkan solusi pemantauan keamanan cerdas yang mampu mendeteksi ancaman secara berkelanjutan pada akun AWS mereka. Solusi ini harus dapat menganalisis AWS CloudTrail management events, VPC Flow Logs, dan DNS logs menggunakan machine learning untuk mengidentifikasi aktivitas mencurigakan seperti komunikasi ke IP berbahaya. Layanan AWS manakah yang harus digunakan?",
     "options": [
       {
         "id": "A",
@@ -77,7 +77,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "AWS KMS"
+        "text": "AWS Key Management Service (AWS KMS)"
       },
       {
         "id": "D",
@@ -87,7 +87,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Amazon GuardDuty adalah layanan intelligent threat detection berbasis machine learning yang memonitor anomali pada akun AWS.",
+    "explanation": "Amazon GuardDuty adalah layanan intelligent threat detection terkelola yang secara kontinu memantau aktivitas mencurigakan dan perilaku tidak sah pada akun AWS dengan menganalisis log dasar seperti CloudTrail events, VPC Flow Logs, dan DNS logs.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -95,11 +95,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0004",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Tipe storage block storage persisten yang dipasang sebagai hard disk virtual EC2?",
+    "prompt": "Sebuah organisasi menjalankan basis data transaksional pada instance Amazon EC2. Beban kerja tersebut memerlukan penyimpanan tingkat blok (block-level storage) yang persisten dan berlatensi rendah untuk diformat sebagai sistem file sistem operasi dan file basis data, serta datanya tetap utuh saat instance EC2 dihentikan (stopped). Layanan penyimpanan AWS manakah yang paling tepat?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon Elastic Block Store (EBS)"
+        "text": "Amazon Elastic Block Store (Amazon EBS)"
       },
       {
         "id": "B",
@@ -107,17 +107,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Amazon Simple Storage Service (S3)"
+        "text": "Amazon Simple Storage Service (Amazon S3)"
       },
       {
         "id": "D",
-        "text": "Amazon Elastic File System (EFS)"
+        "text": "Amazon Elastic File System (Amazon EFS)"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Amazon EBS adalah block-level storage volume yang diformat menjadi filesystem untuk instance EC2.",
+    "explanation": "Amazon EBS menyediakan volume penyimpanan blok persisten yang dapat dipasang ke instance Amazon EC2 sebagai disk virtual untuk sistem operasi dan database, dengan siklus hidup data independen dari instance.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -125,29 +125,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0005",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan file storage bersama yang bisa di-mount bersamaan oleh banyak EC2 Linux?",
+    "prompt": "Sebuah portal berita online memiliki armada server web berbasis Linux yang berjalan di beberapa Availability Zone pada Amazon EC2. Aplikasi web tersebut memerlukan sistem file bersama (shared file system) yang dapat dipasang (mounted) secara simultan oleh puluhan instance menggunakan protokol Network File System (NFSv4). Layanan penyimpanan AWS manakah yang harus digunakan?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon S3"
+        "text": "Amazon Simple Storage Service (Amazon S3)"
       },
       {
         "id": "B",
-        "text": "Amazon FSx"
+        "text": "Amazon FSx for Windows File Server"
       },
       {
         "id": "C",
-        "text": "Amazon EBS"
+        "text": "Amazon Elastic Block Store (Amazon EBS)"
       },
       {
         "id": "D",
-        "text": "Amazon Elastic File System (EFS)"
+        "text": "Amazon Elastic File System (Amazon EFS)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Amazon EFS menyediakan file system bersama berbasis NFSv4 yang elastis dan multi-attach.",
+    "explanation": "Amazon EFS menyediakan sistem file elastis tanpa server yang mendukung protokol NFSv4 dan dapat dipasang secara bersamaan (multi-attach) oleh ratusan hingga ribuan instance EC2 berbasis Linux di lintas Availability Zone.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -155,7 +155,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0006",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan message broker antrean pesan untuk memisahkan (decouple) microservices?",
+    "prompt": "Sebuah platform e-commerce ingin memisahkan (decouple) arsitektur monolitiknya menjadi microservices independen. Mereka membutuhkan antrean pesan terdistribusi (message queue) yang dapat menampung pesanan pelanggan secara asinkron sebelum diproses oleh armada worker backend, sehingga lonjakan transaksi tidak membebani database utama. Layanan AWS manakah yang paling sesuai?",
     "options": [
       {
         "id": "A",
@@ -167,17 +167,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Amazon Simple Notification Service (SNS)"
+        "text": "Amazon Simple Notification Service (Amazon SNS)"
       },
       {
         "id": "D",
-        "text": "Amazon Simple Queue Service (SQS)"
+        "text": "Amazon Simple Queue Service (Amazon SQS)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Amazon SQS adalah distributed message queue yang andal untuk decoupling antar komponen sistem.",
+    "explanation": "Amazon SQS adalah layanan antrean pesan terdistribusi terkelola penuh yang memungkinkan pemisahan (decoupling) komponen aplikasi terdistribusi dan microservices melalui komunikasi asinkron yang andal.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -185,7 +185,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0007",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan keamanan apa yang menggunakan ML untuk menemukan data pribadi (PII) di S3?",
+    "prompt": "Sebuah institusi perbankan menyimpan jutaan dokumen nasabah di dalam bucket Amazon S3. Untuk mematuhi regulasi perlindungan data pribadi, tim kepatuhan memerlukan layanan terkelola yang secara otomatis memindai dan mengklasifikasikan data sensitif seperti Personally Identifiable Information (PII) dan nomor kartu kredit menggunakan machine learning. Layanan AWS manakah yang menyediakan kapabilitas ini?",
     "options": [
       {
         "id": "A",
@@ -207,7 +207,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Amazon Macie secara spesifik memindai bucket S3 untuk mendeteksi data sensitif/PII (Nomor KTP, Kartu Kredit).",
+    "explanation": "Amazon Macie adalah layanan keamanan data terkelola penuh yang menggunakan machine learning dan pencocokan pola untuk secara otomatis menemukan, mengklasifikasikan, dan melindungi data sensitif seperti informasi identitas pribadi (PII) di Amazon S3.",
     "difficulty": "Sulit",
     "lang": "id"
   },
@@ -215,7 +215,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0008",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Konsep cloud apa yang memungkinkan penambahan kapasitas server saat promo diskon?",
+    "prompt": "Sebuah aplikasi retail mengalami lonjakan traffic pengguna yang masif selama periode promosi hari belanja nasional. Sistem arsitektur dirancang agar mampu menambah kapasitas komputasi secara dinamis untuk menangani beban puncak tanpa mengalami penurunan performa. Karakteristik dasar komputasi cloud manakah yang paling tepat menggambarkan kemampuan ini?",
     "options": [
       {
         "id": "A",
@@ -223,21 +223,21 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "High Availability"
+        "text": "Ketersediaan Tinggi (High Availability)"
       },
       {
         "id": "C",
-        "text": "Fault Tolerance"
+        "text": "Toleransi Kesalahan (Fault Tolerance)"
       },
       {
         "id": "D",
-        "text": "Agility"
+        "text": "Agilitas (Agility)"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Skalabilitas adalah kemampuan sistem untuk menangani lonjakan beban kerja dengan menambah sumber daya.",
+    "explanation": "Skalabilitas (Scalability) adalah kemampuan sistem cloud untuk menangani pertumbuhan beban kerja yang semakin besar dengan menambah sumber daya (scale-up atau scale-out) tanpa mengorbankan performa.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -245,29 +245,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0009",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Apa definisi dari AWS Availability Zone (AZ)?",
+    "prompt": "Seorang arsitek solusi sedang merancang arsitektur aplikasi web yang tangguh dan memiliki toleransi kesalahan (fault-tolerant). Arsitek tersebut memutuskan untuk menyebarkan armada instance Amazon EC2 ke beberapa Availability Zone (AZ) di dalam satu AWS Region. Manakah dari pernyataan berikut yang paling tepat mendefinisikan sebuah AWS Availability Zone?",
     "options": [
       {
         "id": "A",
-        "text": "Sebuah kabel fiber optik bawah laut antar benua"
+        "text": "Sebuah kabel serat optik bawah laut global yang menghubungkan dua benua"
       },
       {
         "id": "B",
-        "text": "Satu atau lebih data center fisik terpisah dalam satu Region"
+        "text": "Satu atau lebih pusat data fisik diskret dengan daya, pendingin, dan jaringan terisolasi di dalam satu AWS Region"
       },
       {
         "id": "C",
-        "text": "Sebuah negara tempat server cloud berada"
+        "text": "Sebuah negara atau batas yurisdiksi geografis tempat server cloud ditempatkan"
       },
       {
         "id": "D",
-        "text": "Sebuah server tunggal di kantor cabang"
+        "text": "Sebuah server tunggal terisolasi di dalam kantor cabang fisik pelanggan"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Tiap AZ memiliki fasilitas listrik, pendingin, dan keamanan fisik yang terisolasi dari AZ lain di Region yang sama.",
+    "explanation": "Sebuah AWS Availability Zone (AZ) terdiri dari satu atau lebih pusat data fisik diskret yang dilengkapi daya, pendinginan, dan keamanan fisik independen, serta terhubung dengan latensi ultra-rendah ke AZ lain dalam Region yang sama.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -275,11 +275,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0010",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Alat apa yang memperkirakan biaya bulanan arsitektur solusi SEBELUM dibuat di AWS?",
+    "prompt": "Sebelum mengajukan anggaran proyek migrasi ke dewan direksi, seorang Manajer TI ingin memperkirakan total biaya bulanan dari rancangan arsitektur AWS yang direncanakan (termasuk komputasi, penyimpanan, dan jaringan) tanpa harus membuat resource apa pun di cloud terlebih dahulu. Alat AWS manakah yang dirancang khusus untuk kebutuhan estimasi pra-peluncuran ini?",
     "options": [
       {
         "id": "A",
-        "text": "Cost and Usage Report"
+        "text": "AWS Cost and Usage Report (CUR)"
       },
       {
         "id": "B",
@@ -297,7 +297,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "AWS Pricing Calculator adalah kalkulator web gratis untuk mengestimasi biaya rancangan arsitektur AWS.",
+    "explanation": "AWS Pricing Calculator adalah alat web gratis berbasis browser yang memungkinkan pengguna memodelkan solusi arsitektur dan memperkirakan biaya bulanan penggunaan layanan AWS sebelum membangunnya di cloud.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -305,7 +305,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0011",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan database NoSQL terkelola penuh dengan performa konsisten satu digit milidetik?",
+    "prompt": "Sebuah game online seluler multipemain membutuhkan basis data NoSQL terkelola penuh tanpa server (serverless) yang mampu menangani jutaan permintaan baca dan tulis profil pemain secara bersamaan dengan latensi konsisten di bawah 10 milidetik (single-digit millisecond latency). Layanan basis data AWS manakah yang paling tepat?",
     "options": [
       {
         "id": "A",
@@ -327,7 +327,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Amazon DynamoDB adalah key-value dan document database NoSQL terkelola yang serverless.",
+    "explanation": "Amazon DynamoDB adalah layanan basis data NoSQL key-value dan dokumen yang terkelola penuh, serverless, dan mampu menghasilkan performa konsisten satu digit milidetik pada skala apa pun.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -335,7 +335,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0012",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan apa yang menerima event notification dari S3 lalu mengirim email ke admin?",
+    "prompt": "Sebuah perusahaan logistik ingin agar setiap kali ada file manifest pengiriman baru yang diunggah ke bucket Amazon S3, sistem secara otomatis mengirimkan notifikasi pesan instan ke email administrator dan endpoint webhook pemroses internal menggunakan pola publish/subscribe (pub/sub). Layanan AWS manakah yang harus menerima event notification dari S3 tersebut?",
     "options": [
       {
         "id": "A",
@@ -343,7 +343,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "Amazon Simple Queue Service (SQS)"
+        "text": "Amazon Simple Queue Service (Amazon SQS)"
       },
       {
         "id": "C",
@@ -351,13 +351,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "Amazon Simple Notification Service (SNS)"
+        "text": "Amazon Simple Notification Service (Amazon SNS)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "S3 Event Notifications menerbitkan event ke SNS Topic yang kemudian menyiarkan notifikasi email/SMS ke subscribers.",
+    "explanation": "Amazon S3 Event Notifications dapat menerbitkan event langsung ke Amazon SNS Topic. SNS kemudian menyiarkan (fan-out) pesan notifikasi tersebut ke berbagai pelanggan (subscribers) seperti email, SMS, HTTP/S endpoints, atau Lambda.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -365,7 +365,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0013",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan apa yang menyediakan laporan kepatuhan resmi (SOC 1/2/3, ISO, PCI-DSS) di AWS?",
+    "prompt": "Sebuah institusi perbankan sedang menjalani audit kepatuhan eksternal dan auditor meminta laporan sertifikasi keamanan ISO 27001, laporan SOC 1/2/3, serta perjanjian kepatuhan Payment Card Industry (PCI-DSS) dari infrastruktur AWS. Portal swalayan resmi AWS manakah yang menyediakan akses unduh dokumen kepatuhan tersebut secara gratis?",
     "options": [
       {
         "id": "A",
@@ -387,7 +387,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "AWS Artifact adalah portal self-service gratis untuk mengunduh laporan audit compliance pihak ketiga dan perjanjian kepatuhan AWS.",
+    "explanation": "AWS Artifact adalah portal kepatuhan mandiri (self-service) resmi tanpa biaya di konsol AWS untuk mengunduh laporan audit kepatuhan pihak ketiga (SOC, PCI, ISO) dan menyetujui perjanjian kepatuhan (seperti BAA atau GDPR).",
     "difficulty": "Sulit",
     "lang": "id"
   },
@@ -395,29 +395,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0014",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Keuntungan finansial utama dari komputasi cloud dibandingkan on-premise adalah?",
+    "prompt": "Seorang Chief Financial Officer (CFO) sedang mengevaluasi keuntungan finansial dari memindahkan pusat data on-premise perusahaan ke AWS Cloud. Keuntungan manakah yang paling tepat menggambarkan dampak finansial dari model pembayaran pay-as-you-go di cloud?",
     "options": [
       {
         "id": "A",
-        "text": "Tidak memerlukan koneksi internet untuk mengelola"
+        "text": "Menghilangkan kebutuhan koneksi jaringan internet untuk mengelola infrastruktur"
       },
       {
         "id": "B",
-        "text": "Menghilangkan biaya lisensi software selamanya"
+        "text": "Menghilangkan seluruh biaya lisensi perangkat lunak selamanya"
       },
       {
         "id": "C",
-        "text": "Hardware server menjadi milik permanen perusahaan"
+        "text": "Kepemilikan fisik perangkat keras server dialihkan menjadi aset permanen perusahaan"
       },
       {
         "id": "D",
-        "text": "Mengubah belanja modal (CapEx) menjadi biaya operasional (OpEx)"
+        "text": "Mengubah belanja modal di awal yang besar (Capital Expenditures / CapEx) menjadi biaya operasional berkala yang fleksibel (Operating Expenses / OpEx)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Dengan Pay-as-you-go, perusahaan tidak perlu membeli datacenter di muka (CapEx), melainkan membayar pemakaian berkala (OpEx).",
+    "explanation": "Salah satu keuntungan finansial utama komputasi cloud adalah menukar belanja modal awal yang besar untuk pengadaan server fisik (CapEx) menjadi biaya variabel operasional sesuai pemakaian aktual (OpEx / Pay-as-you-go).",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -425,29 +425,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0015",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Agar Amazon S3 bisa mem-publish notifikasi ke SNS Topic, apa yang harus diatur?",
+    "prompt": "Sebuah perusahaan mengonfigurasi notifikasi event pada Amazon S3 agar mengirim pesan ke Amazon Simple Notification Service (Amazon SNS) Topic setiap kali ada objek baru. Namun, pesan notifikasi gagal terkirim. Konfigurasi perizinan manakah yang wajib diatur agar layanan Amazon S3 memiliki izin memublikasikan pesan ke SNS Topic tersebut?",
     "options": [
       {
         "id": "A",
-        "text": "IAM Role pada EC2 CLI Host"
+        "text": "Menambahkan IAM Role pada host CLI Amazon EC2"
       },
       {
         "id": "B",
-        "text": "Security Group Inbound Port 80"
+        "text": "Mengizinkan port inbound HTTP 80 pada Security Group"
       },
       {
         "id": "C",
-        "text": "Access Policy pada SNS Topic mengizinkan s3.amazonaws.com"
+        "text": "Mengonfigurasi Access Policy (Resource-based Policy) pada SNS Topic yang mengizinkan service principal 's3.amazonaws.com' untuk melakukan aksi 'sns:Publish'"
       },
       {
         "id": "D",
-        "text": "Elastic IP pada SNS Topic"
+        "text": "Menetapkan Elastic IP publik pada SNS Topic"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "SNS Topic memiliki Access Policy (Resource-based Policy) yang wajib memberikan izin Action: 'SNS:Publish' kepada s3.amazonaws.com.",
+    "explanation": "Amazon SNS menggunakan Resource-based Policy (Access Policy). Agar Amazon S3 dapat memublikasikan pesan notifikasi ke SNS Topic, policy pada topik tersebut harus secara eksplisit memberikan izin 'sns:Publish' kepada service principal 's3.amazonaws.com'.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -455,7 +455,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0016",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Model harga EC2 yang memanfaatkan sisa kapasitas nganggur AWS dengan diskon s/d 90%?",
+    "prompt": "Sebuah lab riset universitas menjalankan komputasi analisis data genom berskala besar menggunakan kontainer Docker. Beban kerja ini bersifat fleksibel terhadap waktu, dapat diinterupsi sewaktu-waktu, dan dapat dimulai kembali tanpa kehilangan progres penting. Opsi pembelian Amazon EC2 manakah yang menawarkan penghematan biaya terbesar (diskon hingga 90%)?",
     "options": [
       {
         "id": "A",
@@ -477,7 +477,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Spot Instances menawarkan diskon terbesar untuk workload toleran interupsi (batch processing, data testing).",
+    "explanation": "Amazon EC2 Spot Instances memanfaatkan kapasitas komputasi cadangan (spare capacity) AWS yang tidak terpakai dengan diskon hingga 90% dibandingkan tarif On-Demand, sangat ideal untuk beban kerja yang tahan interupsi (fault-tolerant/batch).",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -485,7 +485,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0017",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Entitas IAM mana yang memberikan izin sementara ke EC2 untuk mengakses S3?",
+    "prompt": "Sebuah aplikasi yang berjalan pada instance Amazon EC2 perlu membaca dan menulis data ke bucket Amazon S3 secara berkala. Menurut rekomendasi keamanan terbaik AWS (Security Best Practices), entitas IAM manakah yang harus dilampirkan ke instance EC2 untuk memberikan kredensial keamanan sementara secara otomatis tanpa perlu menyimpan Access Key statis di server?",
     "options": [
       {
         "id": "A",
@@ -493,7 +493,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "IAM Policy Standalone"
+        "text": "IAM Policy Standalone tanpa asosiasi"
       },
       {
         "id": "C",
@@ -507,7 +507,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "IAM Role memberikan kredensial temporer yang di-rotate otomatis tanpa perlu menyimpan Access Key statis di server.",
+    "explanation": "IAM Role dilampirkan ke instance EC2 (via Instance Profile) untuk menyediakan kredensial keamanan sementara yang dirotasi secara otomatis oleh AWS, menghilangkan risiko penyimpanan hardcoded access keys pada server.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -515,29 +515,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0018",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Storage class S3 paling hemat untuk arsip data jangka panjang yang jarang diakses?",
+    "prompt": "Sebuah lembaga keuangan diwajibkan oleh regulator untuk menyimpan salinan arsip data audit transaksi selama 7 hingga 10 tahun. Data arsip ini sangat jarang sekali diakses (mungkin sekali dalam beberapa tahun), dan waktu pemulihan data (retrieval time) dalam rentang 12 hingga 48 jam dapat diterima demi efisiensi biaya maksimum. Storage class Amazon S3 manakah yang menawarkan biaya penyimpanan per gigabyte terendah?",
     "options": [
       {
         "id": "A",
-        "text": "S3 Express One Zone"
+        "text": "Amazon S3 Express One Zone"
       },
       {
         "id": "B",
-        "text": "S3 Glacier Deep Archive"
+        "text": "Amazon S3 Glacier Deep Archive"
       },
       {
         "id": "C",
-        "text": "S3 One Zone-IA"
+        "text": "Amazon S3 One Zone-IA"
       },
       {
         "id": "D",
-        "text": "S3 Standard"
+        "text": "Amazon S3 Standard"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "S3 Glacier Deep Archive adalah opsi penyimpanan data paling murah untuk arsip regulasi 7-10 tahun.",
+    "explanation": "Amazon S3 Glacier Deep Archive adalah kelas penyimpanan terendah biayanya di AWS untuk arsip jangka panjang yang sangat jarang diakses dengan waktu pemulihan standar dalam 12 jam.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -545,29 +545,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0019",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Tindakan keamanan PALING krusial yang harus diterapkan pada AWS Root User adalah?",
+    "prompt": "Sebuah perusahaan rintisan baru saja membuka akun AWS baru untuk pertama kalinya. Menurut rekomendasi keamanan terbaik (AWS Security Best Practices), tindakan keamanan PALING krusial apakah yang harus segera diterapkan pada akun AWS Root User?",
     "options": [
       {
         "id": "A",
-        "text": "Menghapus password akun root"
+        "text": "Menghapus password akun root dan menonaktifkan akun tersebut"
       },
       {
         "id": "B",
-        "text": "Membuat Access Key ID permanen"
+        "text": "Membuat Access Key ID dan Secret Access Key permanen untuk mengotomatisasi pekerjaan root"
       },
       {
         "id": "C",
-        "text": "Membagikan kredensial root ke semua developer"
+        "text": "Membagikan kredensial root ke seluruh anggota tim pengembang untuk memudahkan administrasi"
       },
       {
         "id": "D",
-        "text": "Mengaktifkan Multi-Factor Authentication (MFA)"
+        "text": "Mengaktifkan Multi-Factor Authentication (MFA) pada akun root dan mengunci kredensialnya dari penggunaan operasional harian"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Root user memiliki akses penuh tanpa batas. MFA adalah rekomendasi keamanan utama untuk melindungi root account.",
+    "explanation": "Akun AWS Root User memiliki akses tanpa batas ke seluruh resource dan penagihan akun. Praktik terbaik keamanan AWS mewajibkan pengaktifan Multi-Factor Authentication (MFA) pada root user dan tidak menggunakannya untuk tugas harian.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -575,7 +575,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0020",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan keamanan apa yang melindungi aplikasi web dari SQL Injection dan XSS?",
+    "prompt": "Sebuah portal e-commerce publik yang dihosting di AWS mengalami peningkatan serangan eksploitasi pada Application Layer (Layer 7), seperti SQL Injection (SQLi) dan Cross-Site Scripting (XSS). Layanan keamanan AWS manakah yang harus dipasang di depan Application Load Balancer atau Amazon CloudFront untuk memfilter dan memblokir permintaan berbahaya tersebut?",
     "options": [
       {
         "id": "A",
@@ -597,7 +597,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "AWS WAF bekerja di Layer 7 (Application Layer) memfilter payload HTTP/HTTPS dari serangan eksploitasi web.",
+    "explanation": "AWS WAF adalah Web Application Firewall yang beroperasi pada OSI Layer 7 (Application Layer) untuk melindungi aplikasi web dari eksploitasi web umum seperti SQL Injection dan XSS.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -605,29 +605,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0021",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Paket AWS Support mana yang menyediakan dedicated Technical Account Manager (TAM)?",
+    "prompt": "Sebuah korporasi skala besar berencana memigrasikan sistem ERP mission-critical mereka ke AWS. Perusahaan memerlukan akses 24/7 ke teknisi senior via telepon, review arsitektur secara berkala, serta seorang Technical Account Manager (TAM) khusus yang didedikasikan untuk mendampingi operasional cloud mereka. Tingkat AWS Support Plan manakah yang harus dipilih?",
     "options": [
       {
         "id": "A",
-        "text": "Developer Support"
+        "text": "Basic Support Plan"
       },
       {
         "id": "B",
-        "text": "Business Support"
+        "text": "Developer Support Plan"
       },
       {
         "id": "C",
-        "text": "Basic Support"
+        "text": "Business Support Plan"
       },
       {
         "id": "D",
-        "text": "Enterprise Support"
+        "text": "Enterprise Support Plan"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "TAM (Technical Account Manager) adalah penasihat teknis khusus yang hanya didapatkan pada paket Enterprise Support (dan Enterprise On-Ramp).",
+    "explanation": "Paket AWS Enterprise Support adalah satu-satunya paket support yang menyediakan Technical Account Manager (TAM) yang didedikasikan secara eksklusif serta dukungan Concierge dan konsultasi arsitektur proaktif.",
     "difficulty": "Sulit",
     "lang": "id"
   },
@@ -635,7 +635,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0022",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan DNS terkelola yang sangat andal dan scalable pada port 53 adalah?",
+    "prompt": "Sebuah perusahaan membutuhkan layanan Domain Name System (DNS) web cloud yang sangat andal, hemat biaya, dan memiliki ketersediaan 100% SLA untuk menerjemahkan nama domain publik (seperti www.perusahaan.com) menjadi alamat IP pada port 53. Layanan jaringan AWS manakah yang menyediakan fungsi DNS ini?",
     "options": [
       {
         "id": "A",
@@ -647,17 +647,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Elastic Load Balancing"
+        "text": "AWS Transit Gateway"
       },
       {
         "id": "D",
-        "text": "Amazon CloudFront"
+        "text": "Amazon Virtual Private Cloud (Amazon VPC)"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Amazon Route 53 adalah layanan DNS domain dan routing lalu lintas jaringan cloud AWS.",
+    "explanation": "Amazon Route 53 adalah layanan web Domain Name System (DNS) cloud yang sangat andal dan scalable yang dirancang untuk merutekan traffic pengguna ke endpoint aplikasi pada standar port 53.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -665,29 +665,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0023",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Berdasarkan AWS Shared Responsibility Model, apa yang menjadi tanggung jawab AWS?",
+    "prompt": "Di bawah model tanggung jawab bersama AWS (AWS Shared Responsibility Model), AWS bertanggung jawab atas 'keamanan dari cloud' (security OF the cloud). Manakah dari aspek berikut yang secara eksklusif menjadi tanggung jawab langsung AWS?",
     "options": [
       {
         "id": "A",
-        "text": "Manajemen data enkripsi pelanggan"
+        "text": "Mengonfigurasi aturan firewall Security Group pada instance Amazon EC2"
       },
       {
         "id": "B",
-        "text": "Konfigurasi firewall Security Group"
+        "text": "Melakukan instalasi patch pembaruan keamanan pada sistem operasi tamu (guest OS)"
       },
       {
         "id": "C",
-        "text": "Update sistem operasi pada instance EC2"
+        "text": "Mengatur enkripsi data at-rest pada tabel database pelanggan"
       },
       {
         "id": "D",
-        "text": "Keamanan fisik data center, server rack, & hypervisor"
+        "text": "Keamanan fisik fasilitas pusat data, rak server, perangkat keras komputasi, dan lapisan hypervisor"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "AWS bertanggung jawab 'Security OF the Cloud' (fasilitas fisik, daya, hardware, kabel jaringan, dan software virtualisasi dasar).",
+    "explanation": "AWS bertanggung jawab atas keamanan 'dari' cloud (security OF the cloud), yang mencakup infrastruktur fisik pusat data, perangkat keras server, fasilitas kelistrikan/pendingin, dan lapisan virtualisasi (hypervisor).",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -695,7 +695,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0024",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan komputasi serverless yang mengeksekusi kode tanpa perlu setup OS/server?",
+    "prompt": "Sebuah tim pengembang aplikasi ingin menjalankan kode logika bisnis dalam bahasa Python saat ada pesan transaksi masuk, tanpa perlu memprovisikan, mengonfigurasi, atau mengelola server maupun sistem operasi yang mendasarinya. Layanan komputasi serverless AWS manakah yang paling tepat digunakan?",
     "options": [
       {
         "id": "A",
@@ -703,11 +703,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "AWS Elastic Beanstalk"
+        "text": "Amazon Elastic Container Service (Amazon ECS)"
       },
       {
         "id": "C",
-        "text": "Amazon Lightsail"
+        "text": "AWS Elastic Beanstalk"
       },
       {
         "id": "D",
@@ -717,7 +717,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "AWS Lambda menjalankan kode berdasarkan trigger/event dan Anda hanya membayar waktu komputasi milidetik yang digunakan.",
+    "explanation": "AWS Lambda adalah layanan komputasi tanpa server (serverless) yang mengeksekusi kode berdasarkan event (event-driven) dan mengelola seluruh infrastruktur komputasi secara otomatis.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -725,11 +725,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0025",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Kebijakan apa di AWS Organizations untuk membatasi izin maksimum semua akun member?",
+    "prompt": "Sebuah organisasi enterprise menggunakan AWS Organizations untuk mengelola puluhan akun AWS milik berbagai divisi bisnis. Tim tata kelola keamanan ingin menetapkan batasan izin maksimum terpusat (guardrails) yang secara tegas melarang seluruh akun anggota menonaktifkan CloudTrail atau meluncurkan resource di luar Region tertentu. Fitur AWS Organizations manakah yang harus diterapkan?",
     "options": [
       {
         "id": "A",
-        "text": "IAM Permissions Boundary"
+        "text": "IAM Managed Policies"
       },
       {
         "id": "B",
@@ -737,17 +737,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Session Policy"
+        "text": "AWS Resource Access Manager (AWS RAM)"
       },
       {
         "id": "D",
-        "text": "Resource-based Policy"
+        "text": "Network Access Control Lists (NACLs)"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Service Control Policies (SCPs) di AWS Organizations menetapkan batas atas (guardrail) izin yang tidak dapat dilanggar akun member.",
+    "explanation": "Service Control Policies (SCPs) di AWS Organizations berfungsi sebagai guardrails perizinan maksimum untuk membatasi aksi yang dapat dilakukan oleh akun-akun anggota di dalam organisasi.",
     "difficulty": "Sulit",
     "lang": "id"
   },
@@ -755,15 +755,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0026",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan relational database terkelola (RDS) yang eksklusif dan dioptimasi AWS?",
+    "prompt": "Sebuah perusahaan e-commerce membutuhkan basis data relasional berkinerja tinggi yang sepenuhnya kompatibel dengan MySQL dan PostgreSQL, mampu menghasilkan throughput hingga 5 kali lipat dibanding MySQL standar, serta secara otomatis mereplikasi 6 salinan data di 3 Availability Zone. Layanan basis data terkelola AWS manakah yang dirancang khusus untuk kebutuhan ini?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon Redshift"
+        "text": "Amazon DynamoDB"
       },
       {
         "id": "B",
-        "text": "Amazon DynamoDB"
+        "text": "Amazon Redshift"
       },
       {
         "id": "C",
@@ -771,13 +771,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "Amazon OpenSearch"
+        "text": "Amazon DocumentDB"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Amazon Aurora adalah relational database engine buatan AWS yang kompatibel dengan MySQL dan PostgreSQL hingga 5x lebih cepat.",
+    "explanation": "Amazon Aurora adalah basis data relasional proprietary terkelola penuh dari AWS yang kompatibel dengan MySQL dan PostgreSQL, menawarkan kecepatan hingga 5x MySQL dengan penyimpanan terdistribusi berdaya tahan tinggi (6 salinan di 3 AZ).",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -785,11 +785,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0027",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Virtual firewall di level subnet yang bersifat stateless di Amazon VPC disebut?",
+    "prompt": "Seorang Network Security Engineer sedang merancang lapisan pertahanan perimeter untuk Amazon VPC. Engineer tersebut membutuhkan firewall virtual di tingkat subnet yang bersifat tanpa status (stateless), di mana aturan inbound dan outbound harus dievaluasi secara eksplisit berdasarkan nomor urutan aturan (rule number). Komponen keamanan VPC manakah yang memiliki karakteristik tersebut?",
     "options": [
       {
         "id": "A",
-        "text": "Route Table"
+        "text": "Security Group"
       },
       {
         "id": "B",
@@ -797,7 +797,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Security Group"
+        "text": "AWS WAF"
       },
       {
         "id": "D",
@@ -807,7 +807,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Network ACL (NACL) adalah firewall di level subnet yang bersifat stateless (inbound dan outbound harus diatur eksplisit).",
+    "explanation": "Network Access Control List (NACL) adalah firewall virtual opsional di tingkat subnet yang bersifat stateless, memproses aturan bernomor secara berurutan, dan mengharuskan izin lalu lintas masuk maupun balasan keluar didefinisikan secara eksplisit.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -815,11 +815,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0028",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Prinsip keamanan yang hanya memberikan hak akses minimum sesuai fungsi kerja adalah?",
+    "prompt": "Seorang administrator keamanan AWS sedang menyusun kebijakan hak akses IAM bagi karyawan baru di departemen akuntansi. Administrator tersebut memastikan bahwa setiap staf hanya diberikan izin akses minimum yang benar-benar esensial untuk menyelesaikan tugas operasional harian mereka, dan tidak lebih. Prinsip keamanan informasi manakah yang diterapkan?",
     "options": [
       {
         "id": "A",
-        "text": "Zero Trust Perimeter"
+        "text": "Separation of Duties"
       },
       {
         "id": "B",
@@ -827,17 +827,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Principle of Least Privilege"
+        "text": "Principle of Least Privilege (Prinsip Hak Akses Terkecil)"
       },
       {
         "id": "D",
-        "text": "Separation of Powers"
+        "text": "Implicit Allow"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Principle of Least Privilege membatasi izin hanya pada aksi yang benar-benar esensial untuk tugas user.",
+    "explanation": "Principle of Least Privilege (Prinsip Hak Akses Terkecil) menyatakan bahwa identitas pengguna atau sistem hanya boleh diberikan hak akses minimum yang mutlak diperlukan untuk melakukan tugas kerja mereka.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -845,11 +845,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0029",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan Content Delivery Network (CDN) global milik AWS disebut?",
+    "prompt": "Sebuah situs media berita global memiliki pembaca yang tersebar di seluruh benua. Untuk mempercepat pemuatan halaman web dan meminimalkan latensi jaringan, perusahaan ingin menyimpan salinan konten statis (gambar, CSS, video) pada titik kehadiran jaringan (Edge Locations) yang berada paling dekat dengan lokasi fisik pengguna. Layanan Content Delivery Network (CDN) AWS manakah yang harus digunakan?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon VPC Peering"
+        "text": "AWS Global Accelerator"
       },
       {
         "id": "B",
@@ -861,13 +861,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "AWS Global Accelerator"
+        "text": "AWS Direct Connect"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Amazon CloudFront adalah layanan CDN global yang melakukan caching data statis di Edge Locations terdekat dengan user.",
+    "explanation": "Amazon CloudFront adalah layanan Content Delivery Network (CDN) global yang mengantarkan data, video, dan aplikasi web secara aman dengan latensi rendah dan kecepatan transfer tinggi memanfaatkan jaringan Edge Locations AWS di seluruh dunia.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -875,29 +875,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0030",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Untuk membatasi user hanya bisa upload ke folder tertentu di bucket S3, gunakan?",
+    "prompt": "Sebuah tim arsitek ingin memastikan bahwa pengguna dari departemen media hanya dapat mengunggah file ke prefix folder tertentu ('images/*') di dalam bucket Amazon S3 perusahaan, dan tidak diizinkan memodifikasi folder lainnya. Kebijakan perizinan manakah yang paling tepat diterapkan untuk membatasi akses secara granular tersebut?",
     "options": [
       {
         "id": "A",
-        "text": "Security Group port 443"
+        "text": "Mengaktifkan S3 Object Lock pada seluruh konfigurasi bucket"
       },
       {
         "id": "B",
-        "text": "Route Table Subnet"
+        "text": "Mengaktifkan fitur S3 Block Public Access di tingkat akun"
       },
       {
         "id": "C",
-        "text": "Network ACL Inbound Rule"
+        "text": "Mengatur Security Group inbound rules pada port HTTPS 443"
       },
       {
         "id": "D",
-        "text": "IAM Policy dengan Condition Prefix (misal: images/*)"
+        "text": "Membuat IAM Policy dengan elemen Condition yang membatasi hak akses 's3:PutObject' berdasarkan resource prefix (misal: arn:aws:s3:::bucket-name/images/*)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Di S3 folder disebut prefix. Kita membatasi izin user di IAM policy dengan Condition StringLike s3:prefix: images/*.",
+    "explanation": "Dengan menggunakan IAM Policy yang dilengkapi elemen Resource ARN spesifik dan Condition prefix (seperti images/*), administrator dapat secara granular membatasi aksi unggah (s3:PutObject) hanya pada folder tertentu dalam bucket S3.",
     "difficulty": "Sulit",
     "lang": "id"
   },
@@ -905,29 +905,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0031",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan file storage bersama berbasis NFS yang dapat di-mount banyak instance EC2 Linux?",
+    "prompt": "Sebuah aplikasi pengolahan citra memerlukan ruang penyimpanan file bersama yang dapat di-mount secara elastis melalui protokol NFSv4 oleh puluhan instance Amazon EC2 berbasis Linux di beberapa Availability Zone secara bersamaan. Layanan penyimpanan AWS manakah yang dirancang untuk skenario ini?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon EBS"
+        "text": "Amazon Simple Storage Service (Amazon S3)"
       },
       {
         "id": "B",
-        "text": "Amazon FSx for Windows"
+        "text": "Amazon Elastic Block Store (Amazon EBS)"
       },
       {
         "id": "C",
-        "text": "Amazon Elastic File System (EFS)"
+        "text": "Amazon Elastic File System (Amazon EFS)"
       },
       {
         "id": "D",
-        "text": "Amazon S3"
+        "text": "AWS Storage Gateway"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Amazon EFS adalah serverless file system berbasis NFS yang elastis dan dapat diakses bersamaan oleh ribuan instance EC2 Linux.",
+    "explanation": "Amazon EFS menyediakan penyimpanan sistem file bersama berbasis NFS yang elastis, terkelola, dan dapat di-mount secara bersamaan oleh banyak instance Linux di berbagai Availability Zone.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -935,7 +935,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0032",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan threat detection cerdas berbasis ML yang menganalisis CloudTrail dan DNS Logs?",
+    "prompt": "Sebuah tim keamanan siber ingin mendeteksi potensi kompromi pada akun AWS, seperti adanya instance EC2 yang berkomunikasi dengan botnet atau pemanggilan API IAM dari IP yang masuk daftar hitam (blacklisted). Mereka memerlukan layanan deteksi ancaman cerdas bertenaga machine learning yang menganalisis VPC Flow Logs dan DNS logs secara otomatis. Layanan AWS manakah yang dimaksud?",
     "options": [
       {
         "id": "A",
@@ -943,21 +943,21 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "AWS Shield"
-      },
-      {
-        "id": "C",
         "text": "Amazon Inspector"
       },
       {
+        "id": "C",
+        "text": "AWS Trusted Advisor"
+      },
+      {
         "id": "D",
-        "text": "AWS KMS"
+        "text": "AWS Shield"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Amazon GuardDuty adalah layanan intelligent threat detection yang terus memantau aktivitas mencurigakan dan akses tidak sah di akun AWS.",
+    "explanation": "Amazon GuardDuty menggunakan algoritma machine learning dan threat intelligence terintegrasi untuk menganalisis miliaran event dari VPC Flow Logs, DNS logs, dan CloudTrail guna mendeteksi ancaman keamanan secara cerdas.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -965,29 +965,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0033",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Di bawah Shared Responsibility Model, apa yang menjadi tanggung jawab pelanggan AWS?",
+    "prompt": "Dalam model tanggung jawab bersama AWS (Shared Responsibility Model), pelanggan bertanggung jawab atas 'keamanan di dalam cloud' (security IN the cloud). Manakah dari aktivitas operasional berikut yang menjadi tanggung jawab pelanggan saat menjalankan server aplikasi pada Amazon EC2?",
     "options": [
       {
         "id": "A",
-        "text": "Pembaruan firmware perangkat keras hypervisor"
+        "text": "Perawatan dan penggantian modul RAM fisik pada server pusat data"
       },
       {
         "id": "B",
-        "text": "Pembuangan hard disk fisik yang rusak"
+        "text": "Pembaruan firmware pada router jaringan fisik pusat data"
       },
       {
         "id": "C",
-        "text": "Konfigurasi Security Group dan patch pada Guest OS EC2"
+        "text": "Pembaruan patch keamanan pada sistem operasi tamu (guest OS) dan konfigurasi aturan Security Group"
       },
       {
         "id": "D",
-        "text": "Keamanan fisik gedung data center AWS"
+        "text": "Pemusnahan fisik media penyimpanan hard disk yang telah usang di fasilitas AWS"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "AWS bertanggung jawab atas keamanan OF the cloud (fisik, hypervisor), sedangkan pelanggan bertanggung jawab atas keamanan IN the cloud (OS tamu, firewall).",
+    "explanation": "Pada layanan IaaS seperti Amazon EC2, pelanggan bertanggung jawab penuh atas konfigurasi firewall (Security Group), pengelolaan patch sistem operasi tamu (guest OS), perangkat lunak aplikasi, dan enkripsi data pelanggan.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -995,19 +995,19 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0034",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Alat apa yang memungkinkan pembuatan batas anggaran biaya dan peringatan saat terlampaui?",
+    "prompt": "Seorang Cloud Financial Manager ingin menetapkan batas pengeluaran bulanan sebesar $1.000 untuk lingkungan pengembangan (development) dan menerima notifikasi email otomatis jika perkiraan biaya (forecasted cost) diproyeksikan akan melampaui 80% dari batas anggaran sebelum akhir bulan. Layanan AWS Cost Management manakah yang paling tepat digunakan?",
     "options": [
       {
         "id": "A",
-        "text": "AWS Pricing Calculator"
+        "text": "AWS Cost and Usage Report (CUR)"
       },
       {
         "id": "B",
-        "text": "AWS Cost Explorer"
+        "text": "AWS Pricing Calculator"
       },
       {
         "id": "C",
-        "text": "AWS Organizations"
+        "text": "AWS Cost Anomaly Detection"
       },
       {
         "id": "D",
@@ -1017,7 +1017,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "AWS Budgets memungkinkan pembuatan budget khusus untuk melacak biaya dan penggunaan, serta memicu notifikasi peringatan jika terlampaui.",
+    "explanation": "AWS Budgets memungkinkan pengguna menetapkan anggaran biaya dan penggunaan kustom, serta memicu notifikasi peringatan (via SNS/email) saat biaya aktual atau perkiraan (forecasted) melampaui batas ambang batas tertentu.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1025,29 +1025,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0035",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan messaging pub/sub yang mengirimkan notifikasi satu-ke-banyak (fanout) ke email/SMS?",
+    "prompt": "Sebuah aplikasi perbankan perlu mengirimkan konfirmasi transaksi belanja kepada nasabah secara serentak ke berbagai saluran komunikasi, seperti pesan teks SMS, email, dan webhook backend menggunakan arsitektur publish/subscribe satu-ke-banyak (fan-out). Layanan pesan terkelola AWS manakah yang harus diintegrasikan?",
     "options": [
       {
         "id": "A",
-        "text": "AWS SES"
+        "text": "Amazon Simple Queue Service (Amazon SQS)"
       },
       {
         "id": "B",
-        "text": "Amazon MQ"
+        "text": "AWS Step Functions"
       },
       {
         "id": "C",
-        "text": "Amazon SQS"
+        "text": "Amazon MQ"
       },
       {
         "id": "D",
-        "text": "Amazon Simple Notification Service (SNS)"
+        "text": "Amazon Simple Notification Service (Amazon SNS)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Amazon SNS adalah layanan publish/subscribe terkelola untuk pesan fanout ke banyak endpoint pelanggan seperti email, SMS, SQS, atau Lambda.",
+    "explanation": "Amazon SNS adalah layanan pesan terkelola berbasis pub/sub yang menyediakan pengiriman pesan satu-ke-banyak (fan-out) berkecepatan tinggi ke berbagai penerima seperti SMS, email, SQS queue, dan fungsi Lambda.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1055,29 +1055,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0036",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Apa keuntungan finansial utama komputasi cloud dibanding infrastruktur on-premise?",
+    "prompt": "Seorang eksekutif bisnis menanyakan keuntungan finansial utama dari adopsi cloud dibandingkan mempertahankan pusat data tradisional. Penjelasan manakah yang paling akurat mengenai keunggulan model finansial komputasi cloud?",
     "options": [
       {
         "id": "A",
-        "text": "Menghilangkan biaya lisensi sistem operasi selamanya"
+        "text": "Menjamin biaya infrastruktur menjadi nol rupiah setelah 3 tahun berjalan"
       },
       {
         "id": "B",
-        "text": "Menghilangkan kebutuhan koneksi internet untuk pengelolaan"
+        "text": "Mewajibkan perusahaan membayar seluruh biaya estimasi 5 tahun di awal kontrak"
       },
       {
         "id": "C",
-        "text": "Mengubah belanja modal (CapEx) menjadi biaya operasional (OpEx)"
+        "text": "Menggantikan belanja modal awal yang besar (CapEx) dengan biaya operasional variabel yang dapat disesuaikan kebutuhan bisnis (OpEx)"
       },
       {
         "id": "D",
-        "text": "Hardware server menjadi milik permanen perusahaan"
+        "text": "Mengalihkan kepemilikan aset fisik pusat data menjadi hak milik pelanggan"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Di cloud, pelanggan beralih dari belanja modal di muka yang besar (CapEx) menjadi biaya operasional berjalan (OpEx) sesuai pemakaian (pay-as-you-go).",
+    "explanation": "Komputasi cloud memungkinkan bisnis berhenti membelanjakan modal besar di awal (CapEx) untuk pembelian perangkat keras, dan beralih ke biaya operasional variabel (OpEx) yang hanya dibayar sesuai sumber daya yang digunakan.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -1085,19 +1085,19 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0037",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Konsep cloud apa yang memungkinkan penambahan kapasitas server saat beban melonjak?",
+    "prompt": "Sebuah startup fintech merancang arsitektur sistem pembayarannya agar mampu secara mulus memperbesar kapasitas pemrosesan server saat volume transaksi meningkat drastis, sehingga tidak terjadi kelebihan beban pada sistem. Karakteristik arsitektur cloud manakah yang paling tepat menggambarkan hal ini?",
     "options": [
       {
         "id": "A",
-        "text": "Fault Tolerance"
+        "text": "Keandalan (Reliability)"
       },
       {
         "id": "B",
-        "text": "Agilitas (Agility)"
+        "text": "Ketersediaan Tinggi (High Availability)"
       },
       {
         "id": "C",
-        "text": "High Availability"
+        "text": "Portabilitas (Portability)"
       },
       {
         "id": "D",
@@ -1107,7 +1107,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Skalabilitas adalah kemampuan sistem untuk menangani lonjakan beban kerja dengan menambah sumber daya komputasi secara terarah.",
+    "explanation": "Skalabilitas (Scalability) adalah kapasitas sistem untuk menangani pertumbuhan beban kerja secara bertahap atau mendadak dengan meningkatkan kemampuan sumber daya komputasi.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -1115,7 +1115,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0038",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Entitas IAM mana yang tepat digunakan untuk memberikan izin akses sementara ke EC2?",
+    "prompt": "Sebuah aplikasi analitik data di Amazon EC2 membutuhkan izin untuk membaca objek dari bucket Amazon S3. Untuk mematuhi prinsip keamanan terbaik AWS tanpa perlu menyimpan Access Key ID dan Secret Access Key di dalam file konfigurasi server, entitas IAM manakah yang harus digunakan?",
     "options": [
       {
         "id": "A",
@@ -1123,21 +1123,21 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "IAM User dengan password"
+        "text": "IAM User"
       },
       {
         "id": "C",
-        "text": "Kredensial root akun"
+        "text": "IAM Group"
       },
       {
         "id": "D",
-        "text": "IAM Group dengan API key"
+        "text": "Root Account Credential"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "IAM Role memberikan kredensial keamanan sementara (temporary credentials) kepada resource seperti instance EC2 tanpa hardcoded API keys.",
+    "explanation": "IAM Role adalah mekanisme terbaik dan paling aman untuk memberikan izin akses AWS ke sumber daya seperti instance Amazon EC2 karena menggunakan kredensial temporer yang dirotasi otomatis oleh sistem.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1145,15 +1145,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0039",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan keamanan apa yang menggunakan Machine Learning untuk mendeteksi data pribadi di S3?",
+    "prompt": "Sebuah instansi pemerintah menyimpan arsip data kependudukan dalam format dokumen teks dan PDF di Amazon S3. Mereka membutuhkan alat audit keamanan berbasis kecerdasan buatan (AI/ML) yang dapat memindai isi bucket secara otomatis untuk menemukan Nomor Induk Kependudukan (NIK) dan data sensitif lainnya yang belum terenkripsi. Layanan AWS manakah yang harus digunakan?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon Detective"
+        "text": "AWS Secrets Manager"
       },
       {
         "id": "B",
-        "text": "AWS Secrets Manager"
+        "text": "Amazon Inspector"
       },
       {
         "id": "C",
@@ -1167,7 +1167,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Amazon Macie adalah layanan keamanan data berbasis ML untuk menemukan, mengklasifikasi, dan melindungi data sensitif/PII di Amazon S3.",
+    "explanation": "Amazon Macie memanfaatkan machine learning untuk secara otomatis menemukan, memindai, mengklasifikasikan, dan melindungi data pribadi (Personally Identifiable Information / PII) yang tersimpan di Amazon S3.",
     "difficulty": "Sulit",
     "lang": "id"
   },
@@ -1175,29 +1175,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0040",
     "domain": "Cloud Concepts",
     "type": "single",
-    "prompt": "Konsep arsitektur cloud apa yang memastikan sistem tetap berjalan meski ada komponen gagal?",
+    "prompt": "Sebuah perusahaan e-commerce merancang sistem infrastrukturnya di AWS agar tetap dapat melayani transaksi pengguna tanpa downtime, meskipun salah satu komponen server atau bahkan satu data center Availability Zone mengalami kegagalan total. Konsep arsitektur cloud manakah yang diterapkan oleh perusahaan ini?",
     "options": [
       {
         "id": "A",
-        "text": "Cost Optimization"
+        "text": "Skalabilitas Vertikal (Vertical Scalability)"
       },
       {
         "id": "B",
-        "text": "Horizontal Elasticity"
+        "text": "Agilitas Bisnis (Business Agility)"
       },
       {
         "id": "C",
-        "text": "Fault Tolerance & High Availability"
+        "text": "Toleransi Kesalahan dan Ketersediaan Tinggi (Fault Tolerance & High Availability)"
       },
       {
         "id": "D",
-        "text": "Microservices Decoupling"
+        "text": "Elastisitas Biaya (Cost Elasticity)"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Fault Tolerance adalah kemampuan sistem untuk tetap berfungsi normal tanpa downtime ketika terjadi kegagalan pada satu atau lebih komponen pendukung.",
+    "explanation": "Fault Tolerance (Toleransi Kesalahan) dan High Availability (Ketersediaan Tinggi) memastikan sistem tetap beroperasi normal dan melayani pengguna tanpa henti meskipun ada komponen infrastruktur yang mengalami kegagalan.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1205,11 +1205,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0041",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Alat web gratis AWS untuk memperkirakan estimasi biaya SEBELUM membangun solusi?",
+    "prompt": "Seorang konsultan cloud sedang menyusun proposal arsitektur bagi calon klien yang ingin memindahkan infrastruktur on-premise ke AWS. Konsultan perlu menyajikan simulasi perkiraan biaya bulanan dari kombinasi instance EC2, volume EBS, dan database RDS SEBELUM akun AWS dibuat. Alat resmi AWS manakah yang harus dimanfaatkan?",
     "options": [
       {
         "id": "A",
-        "text": "Cost and Usage Report"
+        "text": "AWS Cost Explorer"
       },
       {
         "id": "B",
@@ -1217,7 +1217,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "AWS Cost Explorer"
+        "text": "AWS Cost and Usage Report"
       },
       {
         "id": "D",
@@ -1227,7 +1227,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "AWS Pricing Calculator adalah alat estimasi berbasis web gratis untuk merencanakan dan memperkirakan biaya arsitektur AWS sebelum implementasi.",
+    "explanation": "AWS Pricing Calculator adalah alat kalkulator estimasi web resmi gratis dari AWS yang membantu merancang arsitektur solusi dan memproyeksikan total biaya pemakaian sebelum sistem benar-benar diluncurkan.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -1235,7 +1235,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0042",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Fitur apa di AWS Organizations yang menggabungkan tagihan seluruh akun untuk diskon volume?",
+    "prompt": "Sebuah holding company mengelola beberapa anak perusahaan dengan masing-masing akun AWS terpisah. Mereka ingin menyatukan pembayaran seluruh tagihan akun di bawah satu faktur pembayaran bulanan sekaligus mendapatkan keuntungan diskon volume (tiered pricing discounts) pada layanan seperti Amazon S3 dan transfer data. Fitur AWS Organizations manakah yang harus diaktifkan?",
     "options": [
       {
         "id": "A",
@@ -1243,21 +1243,21 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "Service Control Policies"
+        "text": "Service Control Policies (SCPs)"
       },
       {
         "id": "C",
-        "text": "AWS Cost Explorer Sharing"
+        "text": "AWS Cost Explorer"
       },
       {
         "id": "D",
-        "text": "Cost Allocation Tags"
+        "text": "AWS Resource Access Manager"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Consolidated Billing menyatukan pembayaran seluruh member account ke satu management account dan menggabungkan penggunaan untuk diskon volume tiering.",
+    "explanation": "Fitur Consolidated Billing di AWS Organizations menggabungkan tagihan dari seluruh akun anggota ke dalam satu akun pembayaran (Management Account), memungkinkan akumulasi penggunaan untuk mendapatkan diskon volume.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1265,29 +1265,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0043",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan antrean pesan terdistribusi (message queue) untuk memisahkan microservices?",
+    "prompt": "Sebuah aplikasi pemesanan tiket bioskop mengalami perlambatan saat ribuan pengguna memesan tiket bersamaan. Arsitek solusi ingin memisahkan modul penerima pesanan dari modul pemrosesan pembayaran menggunakan antrean pesan yang andal agar pesanan tidak hilang jika modul pembayaran sedang sibuk. Layanan AWS manakah yang paling tepat?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon Simple Queue Service (SQS)"
+        "text": "Amazon Simple Queue Service (Amazon SQS)"
       },
       {
         "id": "B",
-        "text": "AWS Step Functions"
+        "text": "Amazon Simple Notification Service (Amazon SNS)"
       },
       {
         "id": "C",
-        "text": "Amazon Kinesis"
+        "text": "AWS Step Functions"
       },
       {
         "id": "D",
-        "text": "Amazon Simple Notification Service (SNS)"
+        "text": "Amazon Kinesis Data Streams"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Amazon SQS adalah distributed message queuing service untuk mendecouple dan menskalakan microservices serta distributed systems.",
+    "explanation": "Amazon SQS menyediakan antrean pesan (message queuing) terdistribusi yang sangat andal untuk memisahkan komponen sistem (decoupling) dan menampung pesan transaksi hingga komponen konsumen siap memprosesnya.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1295,7 +1295,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0044",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan apa yang menyediakan laporan kepatuhan resmi (SOC, ISO, PCI-DSS) di AWS?",
+    "prompt": "Sebuah perusahaan layanan kesehatan yang diatur ketat oleh regulasi sedang mempersiapkan audit eksternal. Tim audit meminta salinan sertifikat kepatuhan HIPAA dan laporan audit SOC 2 dari infrastruktur cloud AWS. Di manakah tim keamanan perusahaan dapat mengunduh dokumen-dokumen resmi tersebut secara mandiri?",
     "options": [
       {
         "id": "A",
@@ -1303,7 +1303,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "Amazon Inspector"
+        "text": "AWS Security Hub"
       },
       {
         "id": "C",
@@ -1311,13 +1311,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "AWS Security Hub"
+        "text": "Amazon CloudWatch"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "AWS Artifact adalah portal swalayan untuk mengunduh laporan audit kepatuhan dan perjanjian hukum (compliance reports) resmi dari AWS.",
+    "explanation": "AWS Artifact adalah portal kepatuhan sentral di konsol AWS tempat pelanggan dapat mengunduh dokumen kepatuhan pihak ketiga, laporan audit keamanan SOC/PCI/ISO, serta menyetujui perjanjian kepatuhan secara on-demand.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -1325,7 +1325,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0045",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Model harga EC2 yang memanfaatkan sisa kapasitas nganggur dengan diskon hingga 90%?",
+    "prompt": "Sebuah perusahaan rintisan AI ingin melatih model machine learning menggunakan armada server komputasi berkekuatan tinggi. Pelatihan model ini dapat dijeda dan dilanjutkan kapan saja tanpa merusak data jika kapasitas komputasi ditarik kembali oleh AWS. Model penetapan harga Amazon EC2 manakah yang paling ekonomis?",
     "options": [
       {
         "id": "A",
@@ -1333,11 +1333,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "Dedicated Hosts"
+        "text": "Reserved Instances"
       },
       {
         "id": "C",
-        "text": "Reserved Instances"
+        "text": "Dedicated Hosts"
       },
       {
         "id": "D",
@@ -1347,7 +1347,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Amazon EC2 Spot Instances menawarkan diskon hingga 90% dari harga On-Demand untuk beban kerja yang fleksibel terhadap interupsi.",
+    "explanation": "Spot Instances menawarkan penghematan biaya terbesar (diskon hingga 90%) untuk beban kerja yang tahan interupsi (seperti pelatihan model ML, rendering video, atau batch computing) dengan memanfaatkan kapasitas EC2 yang menganggur.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1355,15 +1355,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0046",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan apa yang dipakai untuk menginstal CloudWatch Agent ke banyak EC2 tanpa SSH?",
+    "prompt": "Seorang System Administrator perlu menginstal agen pemantauan Amazon CloudWatch secara serentak ke 200 instance Amazon EC2 berbasis Linux tanpa perlu membuka port 22 SSH dan tanpa perlu masuk ke setiap instance secara manual satu per satu. Layanan AWS manakah yang menyediakan kemampuan eksekusi perintah jarak jauh berskala besar ini?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon EC2 Auto Scaling Lifecycle Hook"
+        "text": "Amazon EC2 Instance Connect"
       },
       {
         "id": "B",
-        "text": "AWS CodeDeploy"
+        "text": "AWS CloudFormation"
       },
       {
         "id": "C",
@@ -1371,13 +1371,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "AWS Elastic Beanstalk"
+        "text": "AWS CodeDeploy"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "AWS Systems Manager Run Command memungkinkan eksekusi perintah administrasi dan instalasi software secara massal dan aman tanpa membuka port 22 (SSH).",
+    "explanation": "AWS Systems Manager Run Command memungkinkan administrator mengelola konfigurasi dan menjalankan skrip atau perintah shell pada armada instance EC2 berskala besar secara aman tanpa perlu koneksi SSH langsung.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1385,11 +1385,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0047",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Virtual firewall di level subnet yang bersifat stateless di dalam Amazon VPC disebut?",
+    "prompt": "Seorang insinyur keamanan cloud ingin menambahkan aturan firewall tambahan pada batas subnet di dalam Amazon VPC untuk secara eksplisit menolak (deny) lalu lintas masuk dari rentang alamat IP penyerang tertentu. Komponen keamanan VPC manakah yang harus dikonfigurasi?",
     "options": [
       {
         "id": "A",
-        "text": "Internet Gateway"
+        "text": "Security Group"
       },
       {
         "id": "B",
@@ -1397,17 +1397,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Security Group"
+        "text": "NAT Gateway"
       },
       {
         "id": "D",
-        "text": "NAT Gateway"
+        "text": "Route Table"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Network ACL (NACL) adalah firewall stateless di tingkat subnet, yang mengevaluasi aturan inbound dan outbound secara terpisah.",
+    "explanation": "Network Access Control List (NACL) bekerja di tingkat subnet, bersifat stateless, dan memiliki kemampuan unik untuk mendefinisikan aturan ALLOW maupun DENY eksplisit berdasarkan alamat IP.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1415,19 +1415,19 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0048",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Fitur CloudWatch Logs apa yang mengubah teks log HTTP 404 menjadi metrik kuantitatif?",
+    "prompt": "Sebuah aplikasi web mencatat jutaan baris log akses ke Amazon CloudWatch Logs. Tim operasional ingin menghitung jumlah kemunculan pesan kesalahan HTTP 404 pada log tersebut dan mengubahnya menjadi metrik numerik yang dapat ditampilkan di dashboard CloudWatch serta dipasangi alarm. Fitur CloudWatch Logs manakah yang harus digunakan?",
     "options": [
       {
         "id": "A",
-        "text": "Log Stream Multiplexer"
+        "text": "Subscription Filters"
       },
       {
         "id": "B",
-        "text": "CloudWatch Insights Export"
+        "text": "Log Insights query export"
       },
       {
         "id": "C",
-        "text": "Subscription Filter"
+        "text": "CloudWatch Contributor Insights"
       },
       {
         "id": "D",
@@ -1437,7 +1437,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Metric Filter memfilter baris log teks mentah berdasarkan pola tertentu (misal: status_code=404) dan mengubahnya menjadi metrik numerik time-series.",
+    "explanation": "Metric Filter pada CloudWatch Logs memungkinkan ekstraksi pola teks atau istilah tertentu dari data log (seperti status HTTP 404) dan mengubah frekuensi kemunculannya menjadi metrik numerik kuantitatif di CloudWatch.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1445,15 +1445,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0049",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Prinsip keamanan yang hanya memberikan hak akses minimum sesuai pekerjaan disebut?",
+    "prompt": "Kebijakan keamanan di sebuah korporasi mewajibkan seluruh pengembang hanya diberikan hak akses ke bucket S3 lingkungan pengujian (development) dan dilarang keras mengakses lingkungan produksi. Praktik pemberian hak akses seminimal mungkin sesuai batasan tanggung jawab pekerjaan ini dikenal dengan istilah apa?",
     "options": [
       {
         "id": "A",
-        "text": "Zero Trust Perimeter"
+        "text": "Separation of Duties"
       },
       {
         "id": "B",
-        "text": "Separation of Environments"
+        "text": "Defense in Depth"
       },
       {
         "id": "C",
@@ -1461,13 +1461,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "Defense in Depth"
+        "text": "Role-Based Access Control Eksklusif"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Principle of Least Privilege membatasi hak akses pengguna hanya pada aksi dan sumber daya yang benar-benar esensial untuk tugasnya.",
+    "explanation": "Principle of Least Privilege (Prinsip Hak Akses Terkecil) adalah praktik keamanan dasar di mana pengguna, proses, atau sistem hanya diberikan hak akses minimum yang mutlak diperlukan untuk menyelesaikan fungsi pekerjaannya.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1475,15 +1475,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0050",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan inspeksi otomatis rekomendasi optimasi biaya, performa, dan keamanan di AWS?",
+    "prompt": "Sebuah perusahaan ingin mengoptimalkan infrastruktur cloud mereka dan membutuhkan alat otomatis yang secara rutin memeriksa akun AWS terhadap praktik terbaik industri seputar optimalisasi biaya, performa, keamanan, toleransi kesalahan, dan batas kuota layanan. Layanan inspeksi AWS manakah yang menyediakan rekomendasi ini?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon Inspector"
+        "text": "AWS Cost Explorer"
       },
       {
         "id": "B",
-        "text": "AWS Well-Architected Tool"
+        "text": "AWS Config"
       },
       {
         "id": "C",
@@ -1491,13 +1491,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "AWS Health Dashboard"
+        "text": "Amazon Inspector"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "AWS Trusted Advisor memberikan panduan real-time untuk membantu mengoptimalkan biaya, meningkatkan performa, dan memperkuat keamanan arsitektur.",
+    "explanation": "AWS Trusted Advisor adalah alat terkelola yang memberikan rekomendasi waktu-nyata untuk membantu pelanggan mematuhi praktik terbaik AWS dalam 5 kategori: Cost Optimization, Security, Fault Tolerance, Performance, dan Service Quotas.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1505,7 +1505,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0051",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan AWS yang tepat untuk mengaudit kepatuhan tag dan EBS volume yang unattached?",
+    "prompt": "Sebuah tim tata kelola kepatuhan cloud ingin memantau konfigurasi seluruh resource AWS secara berkelanjutan. Mereka perlu mendeteksi secara otomatis apakah ada volume Amazon EBS yang tidak terpasang (unattached) atau instance EC2 yang tidak memiliki tag wajib sesuai standar perusahaan. Layanan audit kepatuhan konfigurasi AWS manakah yang harus digunakan?",
     "options": [
       {
         "id": "A",
@@ -1513,21 +1513,21 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "Amazon Inspector"
-      },
-      {
-        "id": "C",
         "text": "AWS CloudTrail"
       },
       {
+        "id": "C",
+        "text": "Amazon CloudWatch"
+      },
+      {
         "id": "D",
-        "text": "AWS Shield Advanced"
+        "text": "AWS Trusted Advisor"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "AWS Config berfungsi melacak inventaris, mengaudit histori konfigurasi resource, dan mengevaluasi kepatuhan terhadap aturan (seperti required-tags & ec2-volume-inuse-check).",
+    "explanation": "AWS Config menyediakan inventaris resource, pencatatan riwayat konfigurasi, dan evaluasi kepatuhan konfigurasi secara otomatis terhadap aturan (rules) yang telah ditentukan, seperti mendeteksi volume EBS unattached atau tag yang hilang.",
     "difficulty": "Sulit",
     "lang": "id"
   },
@@ -1535,11 +1535,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0052",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan pencatatan dan audit seluruh aktivitas API call serta login di akun AWS?",
+    "prompt": "Setelah terjadinya insiden perubahan konfigurasi Security Group yang tidak sah, tim audit keamanan perlu menyelidiki siapa pelaku yang melakukan perubahan tersebut, kapan tindakan dilakukan, dan alamat IP asal pemanggil API. Layanan pencatatan dan audit tata kelola AWS manakah yang menyimpan riwayat seluruh aktivitas API ini?",
     "options": [
       {
         "id": "A",
-        "text": "AWS Trusted Advisor"
+        "text": "Amazon CloudWatch Logs"
       },
       {
         "id": "B",
@@ -1547,17 +1547,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "AWS Config"
+        "text": "AWS Shield"
       },
       {
         "id": "D",
-        "text": "Amazon CloudWatch"
+        "text": "Amazon GuardDuty"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "AWS CloudTrail merekam aktivitas tata kelola, kepatuhan, dan audit operasional akun AWS melalui pencatatan setiap panggilan API.",
+    "explanation": "AWS CloudTrail mencatat seluruh aktivitas pemanggilan API dan login di akun AWS, menyediakan catatan audit komprehensif mengenai 'siapa melakukan apa, dari mana, dan kapan'.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1565,29 +1565,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0053",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Definisi dari AWS Availability Zone (AZ) yang paling tepat adalah?",
+    "prompt": "Seorang arsitek cloud sedang menjelaskan rancangan ketahanan infrastruktur kepada manajemen. Arsitek tersebut menekankan bahwa sistem akan ditempatkan di beberapa Availability Zone di Region Jakarta (ap-southeast-3). Manakah penjelasan yang paling tepat mengenai karakteristik sebuah AWS Availability Zone (AZ)?",
     "options": [
       {
         "id": "A",
-        "text": "Satu atau lebih data center fisik terpisah dalam satu Region"
+        "text": "Satu atau lebih pusat data fisik diskret dengan sumber daya listrik, pendingin, dan koneksi jaringan redundan di dalam satu Region"
       },
       {
         "id": "B",
-        "text": "Pusat data bersama pihak ketiga di luar AWS"
+        "text": "Pusat data bersama pihak ketiga yang disewa oleh banyak penyedia cloud publik"
       },
       {
         "id": "C",
-        "text": "Satu negara tempat server cloud diletakkan"
+        "text": "Sebuah zona geografis yang mencakup seluruh negara di Asia Tenggara"
       },
       {
         "id": "D",
-        "text": "Kabel fiber optik bawah laut yang menghubungkan benua"
+        "text": "Titik kehadiran edge (Edge Location) yang hanya berfungsi melayani caching DNS"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Setiap AZ terdiri dari satu atau lebih data center diskrit dengan fasilitas daya, pendingin, dan jaringan yang terisolasi dalam satu AWS Region.",
+    "explanation": "AWS Availability Zone (AZ) adalah satu atau sekumpulan data center fisik yang terisolasi secara infrastruktur (daya, pendingin, fisik) namun terhubung dengan latensi sangat rendah di dalam satu Region AWS.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -1595,29 +1595,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0054",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Pilar AWS Well-Architected Framework mana yang berfokus menghindari pemborosan dana?",
+    "prompt": "Sebuah perusahaan sedang meninjau rancangan arsitektur sistem mereka berdasarkan panduan AWS Well-Architected Framework. Tim ingin memastikan bahwa arsitektur yang dibuat menghindari alokasi kapasitas berlebih (overprovisioning) dan selalu memilih opsi model penetapan harga yang paling ekonomis. Pilar Well-Architected Framework manakah yang berfokus pada tujuan ini?",
     "options": [
       {
         "id": "A",
-        "text": "Cost Optimization"
+        "text": "Optimalisasi Biaya (Cost Optimization)"
       },
       {
         "id": "B",
-        "text": "Operational Excellence"
+        "text": "Keandalan (Reliability)"
       },
       {
         "id": "C",
-        "text": "Performance Efficiency"
+        "text": "Efisiensi Kinerja (Performance Efficiency)"
       },
       {
         "id": "D",
-        "text": "Reliability"
+        "text": "Keunggulan Operasional (Operational Excellence)"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Pilar Cost Optimization berfokus pada kemampuan menjalankan sistem untuk memberikan nilai bisnis optimal dengan pengeluaran biaya serendah mungkin.",
+    "explanation": "Pilar Cost Optimization (Optimalisasi Biaya) pada AWS Well-Architected Framework berfokus pada kemampuan menjalankan sistem untuk memberikan nilai bisnis pada titik harga serendah mungkin tanpa mengorbankan kualitas.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1625,15 +1625,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0055",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan database NoSQL terkelola penuh dengan latensi satu digit milidetik skala besar?",
+    "prompt": "Sebuah aplikasi perbankan digital membutuhkan basis data NoSQL terkelola penuh yang dapat menyimpan data sesi pengguna dengan latensi baca dan tulis di bawah 10 milidetik secara konsisten, bahkan saat menangani puluhan juta permintaan per detik. Layanan basis data AWS manakah yang paling sesuai?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon RDS"
+        "text": "Amazon RDS for PostgreSQL"
       },
       {
         "id": "B",
-        "text": "Amazon DocumentDB"
+        "text": "Amazon Redshift"
       },
       {
         "id": "C",
@@ -1641,13 +1641,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "Amazon Redshift"
+        "text": "Amazon Aurora Serverless"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Amazon DynamoDB adalah database key-value dan document serverless yang menawarkan latensi satu digit milidetik pada skala beban berapapun.",
+    "explanation": "Amazon DynamoDB adalah basis data NoSQL key-value dan dokumen yang serverless, terkelola penuh, dan menawarkan latensi konsisten di bawah satu digit milidetik pada skala apa pun.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -1655,29 +1655,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0056",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Mengapa utilisasi RAM pada EC2 tidak terlihat di grafik default Amazon CloudWatch?",
+    "prompt": "Seorang insinyur operasional mengamati metrik bawaan Amazon CloudWatch untuk sebuah instance Amazon EC2. Insinyur tersebut dapat melihat grafik utilisasi CPU dan Network In/Out, namun metrik utilisasi memori (RAM) tidak muncul secara default. Mengapa metrik utilisasi RAM tidak tersedia secara default di Amazon CloudWatch?",
     "options": [
       {
         "id": "A",
-        "text": "CloudWatch membebankan biaya tambahan untuk melihat RAM"
+        "text": "AWS membatasi visibilitas metrik RAM hanya untuk tipe instance berukuran besar (metal)"
       },
       {
         "id": "B",
-        "text": "EC2 tidak memiliki memori fisik RAM"
+        "text": "Utilisasi RAM hanya dapat dipantau jika instance EC2 berjalan di dalam Subnet Publik"
       },
       {
         "id": "C",
-        "text": "RAM ada di level OS tamu, di luar jangkauan Hypervisor AWS"
+        "text": "RAM berada di dalam sistem operasi tamu (guest OS) yang terisolasi dari lapisan hypervisor AWS, sehingga membutuhkan agen internal CloudWatch"
       },
       {
         "id": "D",
-        "text": "RAM hanya bisa dipantau lewat AWS CloudTrail"
+        "text": "CloudWatch hanya mendukung pemantauan metrik pada basis data, bukan pada server komputasi"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Hypervisor AWS hanya memantau metrik eksternal host (CPU, disk I/O, network). RAM dan file sistem berada di dalam Guest OS sehingga memerlukan CloudWatch Agent.",
+    "explanation": "Di bawah model Shared Responsibility, AWS Hypervisor tidak dapat mengintip ke dalam memori sistem operasi tamu (guest OS) demi privasi dan keamanan. Untuk memantau utilisasi RAM, pelanggan wajib menginstal CloudWatch Agent di dalam instance.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -1685,29 +1685,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0057",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan apa yang bereaksi seketika saat status instance EC2 berubah menjadi Stopped?",
+    "prompt": "Sebuah tim DevOps ingin mengotomatiskan respons insiden secara instan. Begitu sebuah instance Amazon EC2 produksi berubah statusnya menjadi 'Stopped', sistem harus segera memicu fungsi AWS Lambda untuk mengirimkan peringatan darurat ke kanal chat tim. Layanan perutean event tanpa server AWS manakah yang paling tepat menangani skenario ini?",
     "options": [
       {
         "id": "A",
-        "text": "AWS CloudTrail Insights"
+        "text": "Amazon Simple Queue Service (Amazon SQS)"
       },
       {
         "id": "B",
-        "text": "Amazon CloudWatch Metric Alarm"
+        "text": "AWS CloudTrail Event History"
       },
       {
         "id": "C",
-        "text": "AWS Trusted Advisor"
+        "text": "Amazon Kinesis Data Firehose"
       },
       {
         "id": "D",
-        "text": "Amazon CloudWatch Events (Amazon EventBridge)"
+        "text": "Amazon EventBridge (sebelumnya Amazon CloudWatch Events)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "CloudWatch Events (kini berevolusi menjadi EventBridge) bersifat event-driven near real-time, mendeteksi perubahan status resource secara instan.",
+    "explanation": "Amazon EventBridge (sebelumnya CloudWatch Events) adalah layanan event bus serverless yang mengalirkan event perubahan status resource AWS (seperti perubahan status instance EC2) secara real-time ke target seperti fungsi AWS Lambda.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1715,29 +1715,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0058",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Storage class S3 paling hemat biaya untuk arsip jangka panjang yang jarang diakses?",
+    "prompt": "Sebuah rumah sakit diwajibkan menyimpan rekaman hasil rontgen dan pemindaian medis pasien selama 15 tahun untuk kepatuhan hukum. Data ini hampir tidak pernah diakses kembali setelah disimpan, dan waktu pengambilan data (retrieval time) dalam rentang 12 jam dapat diterima sepenuhnya demi biaya penyimpanan seminimal mungkin. Storage class Amazon S3 manakah yang paling ekonomis?",
     "options": [
       {
         "id": "A",
-        "text": "S3 Standard-Infrequent Access"
+        "text": "Amazon S3 Standard-Infrequent Access"
       },
       {
         "id": "B",
-        "text": "S3 Glacier Deep Archive"
+        "text": "Amazon S3 Glacier Deep Archive"
       },
       {
         "id": "C",
-        "text": "S3 Express One Zone"
+        "text": "Amazon S3 One Zone-Infrequent Access"
       },
       {
         "id": "D",
-        "text": "S3 One Zone-IA"
+        "text": "Amazon S3 Glacier Instant Retrieval"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "S3 Glacier Deep Archive adalah storage class paling ekonomis di AWS untuk pengarsipan jangka panjang dengan waktu retrieval beberapa jam.",
+    "explanation": "Amazon S3 Glacier Deep Archive adalah storage class paling murah di AWS untuk arsip jangka panjang yang sangat jarang diakses, dengan waktu pengambilan data standar sekitar 12 jam.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -1745,11 +1745,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0059",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Service AWS apa yang memberikan rekomendasi penghematan biaya, keamanan, dan toleransi kesalahan?",
+    "prompt": "Sebuah perusahaan rintisan ingin memeriksa apakah akun AWS mereka memiliki port keamanan yang terbuka bebas ke internet (0.0.0.0/0), apakah ada volume EBS yang menganggur, atau apakah ada instance EC2 yang kurang dimanfaatkan. Layanan AWS manakah yang secara proaktif menyajikan rekomendasi best practice seputar biaya, performa, keamanan, dan toleransi kesalahan?",
     "options": [
       {
         "id": "A",
-        "text": "AWS Systems Manager"
+        "text": "AWS Cost Explorer"
       },
       {
         "id": "B",
@@ -1757,17 +1757,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "AWS Config"
+        "text": "AWS Systems Manager"
       },
       {
         "id": "D",
-        "text": "AWS CloudTrail"
+        "text": "AWS Config Rules"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "AWS Trusted Advisor memberikan rekomendasi real-time untuk 5 pilar: biaya, performa, keamanan, toleransi kesalahan, dan kuota layanan.",
+    "explanation": "AWS Trusted Advisor bertindak sebagai konsultan cloud otomatis yang memberikan rekomendasi nyata berdasarkan pilar best practice AWS: cost optimization, security, fault tolerance, performance, dan service quotas.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1775,11 +1775,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0060",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan apa yang digunakan di lab untuk menjalankan query SQL langsung atas log CloudTrail di S3?",
+    "prompt": "Selama sesi investigasi keamanan forensik, tim insinyur perlu meneliti file-file log AWS CloudTrail yang tersimpan dalam format terkompresi JSON di bucket Amazon S3. Mereka ingin menjalankan query SQL standar langsung ke file log di S3 tersebut tanpa perlu memuat data ke basis data relasional atau mengelola server. Layanan analitik serverless AWS manakah yang digunakan?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon RDS PostgreSQL"
+        "text": "Amazon Redshift"
       },
       {
         "id": "B",
@@ -1787,7 +1787,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Amazon Redshift"
+        "text": "Amazon EMR"
       },
       {
         "id": "D",
@@ -1797,7 +1797,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Amazon Athena adalah serverless query service interaktif yang memungkinkan analisis log CloudTrail di S3 menggunakan SQL standar tanpa ETL.",
+    "explanation": "Amazon Athena adalah layanan query interaktif serverless yang memungkinkan analisis data langsung di Amazon S3 menggunakan SQL standar tanpa perlu memindahkan data atau mengelola server infrastruktur.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1805,29 +1805,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0061",
     "domain": "Cloud Concepts",
     "type": "single",
-    "prompt": "Pilar AWS Well-Architected mana yang fokus pada efisiensi penggunaan sumber daya komputasi?",
+    "prompt": "Dalam tinjauan arsitektur AWS Well-Architected Framework, tim pengembang memilih untuk mengganti server fisik yang jarang terpakai dengan arsitektur komputasi serverless dan memanfaatkan database terkelola untuk memaksimalkan efisiensi sumber daya komputasi. Pilar Well-Architected Framework manakah yang paling didukung oleh keputusan ini?",
     "options": [
       {
         "id": "A",
-        "text": "Performance Efficiency"
+        "text": "Efisiensi Kinerja (Performance Efficiency)"
       },
       {
         "id": "B",
-        "text": "Cost Optimization"
+        "text": "Optimalisasi Biaya (Cost Optimization)"
       },
       {
         "id": "C",
-        "text": "Operational Excellence"
+        "text": "Keandalan (Reliability)"
       },
       {
         "id": "D",
-        "text": "Reliability"
+        "text": "Keberlanjutan (Sustainability)"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Pilar Performance Efficiency berfokus pada penggunaan sumber daya komputasi secara efisien untuk memenuhi kebutuhan sistem dan mempertahankan efisiensi.",
+    "explanation": "Pilar Performance Efficiency (Efisiensi Kinerja) berfokus pada kemampuan menggunakan sumber daya komputasi secara efisien untuk memenuhi persyaratan sistem dan mempertahankan efisiensi tersebut seiring perubahan teknologi.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -1835,29 +1835,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0062",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Fitur AWS Organizations apa yang digunakan untuk menetapkan batas izin maksimum pada member accounts?",
+    "prompt": "Sebuah korporasi multinasional menggunakan AWS Organizations untuk mengelola 50 akun anggota. Tim tata kelola keamanan ingin menetapkan batasan izin maksimum terpusat pada unit organisasi (OU) tertentu untuk mencegah pengguna di akun-akun tersebut membuat resource di luar Region yang disetujui. Fitur AWS Organizations manakah yang harus diterapkan?",
     "options": [
       {
         "id": "A",
-        "text": "IAM Role Delegation"
+        "text": "IAM Roles"
       },
       {
         "id": "B",
-        "text": "Resource Access Manager (RAM)"
+        "text": "IAM Permission Boundaries"
       },
       {
         "id": "C",
-        "text": "Service Control Policies (SCP)"
+        "text": "Service Control Policies (SCPs)"
       },
       {
         "id": "D",
-        "text": "Security Group Ingress Rules"
+        "text": "Resource-based Policies"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Service Control Policies (SCP) menetapkan batasan izin (guardrails) maksimum untuk akun member di AWS Organizations.",
+    "explanation": "Service Control Policies (SCPs) adalah fitur sentral di AWS Organizations yang bertindak sebagai pagar pengaman (guardrails) untuk membatasi izin maksimum yang dapat dimiliki oleh identitas IAM pada akun anggota.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1865,7 +1865,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0063",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Secara default, berapa lama AWS CloudTrail menyimpan riwayat log pada menu Event History di konsol?",
+    "prompt": "Seorang administrator keamanan membuka konsol AWS CloudTrail dan meninjau menu Event History untuk memeriksa aktivitas pemanggilan API yang terjadi di akun AWS tanpa mengaktifkan Trail khusus ke bucket S3. Secara default, berapa lamakah AWS CloudTrail menyimpan riwayat log pada menu Event History di konsol?",
     "options": [
       {
         "id": "A",
@@ -1887,7 +1887,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "CloudTrail Event History menyimpan catatan aktivitas API manajemen selama 90 hari secara gratis tanpa perlu membuat trail.",
+    "explanation": "Secara default, menu Event History di konsol AWS CloudTrail menyimpan catatan aktivitas API manajemen selama 90 hari tanpa biaya tambahan. Untuk retensi lebih lama, pengguna wajib membuat Trail yang mengirim log ke Amazon S3.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1895,19 +1895,19 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0064",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan storage hibrida apa yang menghubungkan aplikasi on-premise ke cloud storage AWS secara seamless?",
+    "prompt": "Sebuah perusahaan memiliki pusat data on-premise dengan keterbatasan kapasitas penyimpanan fisik. Mereka ingin memperluas penyimpanan lokal ke cloud secara mulus menggunakan protokol penyimpanan standar industri (seperti NFS, SMB, atau iSCSI) sehingga aplikasi lokal dapat menyimpan file cadangan langsung ke Amazon S3. Layanan penyimpanan hibrida AWS manakah yang dirancang untuk kebutuhan ini?",
     "options": [
       {
         "id": "A",
-        "text": "AWS DataSync"
+        "text": "AWS Direct Connect"
       },
       {
         "id": "B",
-        "text": "Amazon S3 Transfer Acceleration"
+        "text": "AWS DataSync"
       },
       {
         "id": "C",
-        "text": "AWS Snowball Edge"
+        "text": "Amazon S3 Transfer Acceleration"
       },
       {
         "id": "D",
@@ -1917,7 +1917,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "AWS Storage Gateway menyediakan integrasi penyimpanan hybrid (File, Volume, Tape Gateway) antara on-premise dan cloud AWS.",
+    "explanation": "AWS Storage Gateway adalah layanan penyimpanan cloud hibrida yang menghubungkan lingkungan lokal on-premise ke penyimpanan AWS (seperti S3 dan EBS) menggunakan protokol standar (NFS, SMB, iSCSI).",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1925,29 +1925,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0065",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Tipe support plan terendah yang memberikan akses Technical Account Manager (TAM) khusus adalah?",
+    "prompt": "Sebuah perusahaan retail enterprise memerlukan pendampingan proaktif dari seorang Technical Account Manager (TAM) yang didedikasikan secara eksklusif untuk membantu tinjauan arsitektur dan kesiapan operasional cloud mereka. Tingkat AWS Support Plan terendah manakah yang menyertakan dukungan seorang TAM?",
     "options": [
       {
         "id": "A",
-        "text": "Developer Plan"
+        "text": "Developer Support Plan"
       },
       {
         "id": "B",
-        "text": "Business Plan"
+        "text": "Business Support Plan"
       },
       {
         "id": "C",
-        "text": "Enterprise Support"
+        "text": "Enterprise Support Plan"
       },
       {
         "id": "D",
-        "text": "Basic Support"
+        "text": "Enterprise On-Ramp Support Plan"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Enterprise Support adalah paket dukungan AWS yang menyediakan Technical Account Manager (TAM) khusus dan Concierge Support 24/7.",
+    "explanation": "Akses ke dedicated Technical Account Manager (TAM) yang ditugaskan khusus secara eksklusif hanya tersedia pada paket AWS Enterprise Support Plan (pada Enterprise On-Ramp disediakan tim TAM bersama/pool).",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -1955,7 +1955,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0066",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan CDN global AWS yang mempercepat pengiriman konten web statis dan dinamis dengan caching adalah?",
+    "prompt": "Sebuah situs e-commerce global ingin mempercepat waktu pemuatan halaman katalog produk bagi pelanggan di seluruh dunia dengan menyimpan cache file gambar, video produk, dan file CSS statis pada titik kehadiran jaringan (Edge Locations) yang berada paling dekat dengan pengguna. Layanan AWS manakah yang harus diintegrasikan?",
     "options": [
       {
         "id": "A",
@@ -1963,11 +1963,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "AWS Direct Connect"
+        "text": "AWS Global Accelerator"
       },
       {
         "id": "C",
-        "text": "AWS Global Accelerator"
+        "text": "Amazon S3 Transfer Acceleration"
       },
       {
         "id": "D",
@@ -1977,7 +1977,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Amazon CloudFront adalah Content Delivery Network (CDN) yang mengirimkan data, video, dan aplikasi secara aman dengan latensi rendah melalui Edge Locations.",
+    "explanation": "Amazon CloudFront adalah layanan Content Delivery Network (CDN) global yang meng-cache konten web statis dan dinamis pada jaringan Edge Locations di seluruh dunia guna menyajikan data dengan latensi ultra-rendah.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -1985,15 +1985,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0067",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Field apa di log CloudTrail yang menunjukkan akun atau entitas IAM yang memanggil aksi/API?",
+    "prompt": "Saat mengaudit log peristiwa JSON di AWS CloudTrail untuk mengidentifikasi siapa yang menghapus tabel database Amazon RDS produksi, auditor keamanan memeriksa rekaman event. Field kunci manakah di dalam log event CloudTrail yang berisi informasi identitas akun IAM, ARN, dan tipe pengguna yang memanggil operasi API tersebut?",
     "options": [
       {
         "id": "A",
-        "text": "requestParameters"
+        "text": "eventSource"
       },
       {
         "id": "B",
-        "text": "sourceIPAddress"
+        "text": "requestParameters"
       },
       {
         "id": "C",
@@ -2001,13 +2001,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "eventSource"
+        "text": "responseElements"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Field userIdentity dalam struktur JSON log CloudTrail memuat informasi identitas pemanggil (userName, ARN, type, dsb).",
+    "explanation": "Di dalam rekaman event AWS CloudTrail, elemen 'userIdentity' memuat rincian lengkap mengenai identitas yang melakukan pemanggilan API, termasuk tipe identitas (Root, IAMUser, AssumedRole), ARN, principalId, dan akun.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2015,29 +2015,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0068",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Perbedaan mendasar antara AWS CloudTrail dan Amazon CloudWatch adalah?",
+    "prompt": "Seorang insinyur cloud junior sering tertukar antara fungsi layanan AWS CloudTrail dan Amazon CloudWatch. Manakah dari pernyataan berikut yang paling tepat merangkum perbedaan mendasar antara kedua layanan pemantauan AWS tersebut?",
     "options": [
       {
         "id": "A",
-        "text": "CloudTrail untuk metrik performa, CloudWatch untuk audit API"
+        "text": "CloudTrail digunakan untuk memantau performa CPU server, sedangkan CloudWatch digunakan untuk mengaudit login pengguna"
       },
       {
         "id": "B",
-        "text": "CloudTrail untuk audit API pemanggil, CloudWatch untuk metrik & alarm"
+        "text": "CloudTrail mencatat riwayat pemanggilan API untuk audit kepatuhan ('siapa melakukan apa'), sedangkan CloudWatch memantau metrik performa sistem, log aplikasi, dan alarm"
       },
       {
         "id": "C",
-        "text": "CloudTrail hanya untuk billing, CloudWatch untuk enkripsi data"
+        "text": "CloudTrail adalah firewall aplikasi web, sedangkan CloudWatch adalah layanan enkripsi data"
       },
       {
         "id": "D",
-        "text": "CloudTrail mengelola server fisik, CloudWatch membuat VPC"
+        "text": "CloudTrail hanya bekerja untuk Amazon EC2, sedangkan CloudWatch bekerja eksklusif untuk Amazon S3"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "CloudTrail melacak aktivitas API dan audit ('WHO did WHAT'), sedangkan CloudWatch memantau performa sistem, log aplikasi, dan alarm.",
+    "explanation": "AWS CloudTrail bertindak sebagai rekaman CCTV audit (merekam panggilan API, pengguna, dan waktu), sedangkan Amazon CloudWatch bertindak sebagai dashboard pemantau kesehatan (metrik performa seperti CPU/RAM, log, dan pemicu alarm).",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -2045,7 +2045,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0069",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan kepatuhan apa yang memberikan akses on-demand ke laporan keamanan & sertifikasi AWS (misal SOC, PCI)?",
+    "prompt": "Sebuah startup fintech sedang mempersiapkan izin operasional dari Bank Sentral dan wajib membuktikan bahwa infrastruktur cloud AWS yang mereka gunakan telah memenuhi sertifikasi PCI-DSS Level 1 dan SOC 2 Tipe II. Layanan AWS manakah yang menyediakan akses swalayan (self-service) on-demand ke laporan kepatuhan resmi tersebut?",
     "options": [
       {
         "id": "A",
@@ -2057,17 +2057,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Amazon Inspector"
+        "text": "AWS Security Hub"
       },
       {
         "id": "D",
-        "text": "AWS Secrets Manager"
+        "text": "Amazon Inspector"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "AWS Artifact adalah portal pusat untuk mengunduh laporan kepatuhan AWS (seperti ISO, SOC, PCI) dan perjanjian hukum secara mandiri.",
+    "explanation": "AWS Artifact adalah portal resmi tanpa biaya di konsol AWS untuk mengunduh laporan kepatuhan, sertifikasi keamanan (ISO, PCI, SOC), dan menyetujui perjanjian kepatuhan.",
     "difficulty": "Sulit",
     "lang": "id"
   },
@@ -2075,7 +2075,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0070",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Komponen VPC apa yang berfungsi sebagai virtual firewall stateless di tingkat subnet?",
+    "prompt": "Seorang arsitek jaringan sedang merancang segmentasi keamanan di dalam Amazon VPC. Arsitek tersebut memerlukan lapisan pertahanan perimeter virtual di tingkat subnet yang memeriksa paket data secara stateless, di mana lalu lintas balasan keluar tidak otomatis diizinkan dan harus dikonfigurasi secara terpisah. Komponen jaringan VPC manakah ini?",
     "options": [
       {
         "id": "A",
@@ -2083,11 +2083,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "NAT Gateway"
+        "text": "Internet Gateway"
       },
       {
         "id": "C",
-        "text": "Internet Gateway"
+        "text": "Route Table"
       },
       {
         "id": "D",
@@ -2097,7 +2097,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Network ACL (NACL) adalah lapisan keamanan firewall stateless di level subnet yang memeriksa lalu lintas inbound dan outbound.",
+    "explanation": "Network Access Control List (NACL) adalah firewall virtual opsional di tingkat subnet pada Amazon VPC yang bersifat stateless (lalu lintas masuk dan keluar dievaluasi secara independen dan terpisah).",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2105,11 +2105,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0071",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "EventName CloudTrail apa yang tercatat saat hacker menambahkan inbound rule SSH baru di Security Group?",
+    "prompt": "Saat melakukan penelusuran insiden keamanan pada log CloudTrail, seorang analis forensik mencari rekaman event di mana seseorang membuka port SSH 22 ke publik (0.0.0.0/0) pada Security Group instance EC2. Nama event API resmi (eventName) manakah yang tercatat di CloudTrail saat aturan izin inbound baru ditambahkan ke Security Group?",
     "options": [
       {
         "id": "A",
-        "text": "CreateSecurityGroup"
+        "text": "CreateSecurityGroupRule"
       },
       {
         "id": "B",
@@ -2117,17 +2117,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "ModifyInstanceAttribute"
+        "text": "ModifySecurityGroupInbound"
       },
       {
         "id": "D",
-        "text": "RevokeSecurityGroupEgress"
+        "text": "UpdateSecurityGroupPort"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "AuthorizeSecurityGroupIngress adalah API call yang dipanggil ketika sebuah rule masuk (inbound) baru ditambahkan ke Security Group.",
+    "explanation": "API resmi Amazon EC2 untuk menambahkan aturan lalu lintas masuk (inbound) ke Security Group adalah 'AuthorizeSecurityGroupIngress'. EventName ini akan tercatat di log AWS CloudTrail setiap kali ada aturan masuk baru yang ditambahkan.",
     "difficulty": "Sulit",
     "lang": "id"
   },
@@ -2135,7 +2135,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0072",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan keamanan AI apa yang mendeteksi ancaman terus-menerus dengan menganalisis CloudTrail dan VPC Flow Logs?",
+    "prompt": "Sebuah organisasi ingin mendeteksi ancaman keamanan secara cerdas pada akun AWS mereka, seperti adanya komunikasi instance EC2 ke IP server Command and Control (C2) botnet atau eksfiltrasi data via DNS. Mereka memerlukan layanan keamanan berbasis machine learning terintegrasi yang terus memantau CloudTrail dan VPC Flow Logs. Layanan AWS manakah yang harus diaktifkan?",
     "options": [
       {
         "id": "A",
@@ -2143,21 +2143,21 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "AWS WAF"
+        "text": "Amazon Macie"
       },
       {
         "id": "C",
-        "text": "AWS Shield"
+        "text": "AWS WAF"
       },
       {
         "id": "D",
-        "text": "Amazon CloudWatch"
+        "text": "AWS Secrets Manager"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Amazon GuardDuty menganalisis AWS CloudTrail events, VPC Flow Logs, dan DNS query logs untuk mendeteksi ancaman keamanan secara cerdas.",
+    "explanation": "Amazon GuardDuty adalah layanan intelligent threat detection yang terus memantau akun dan beban kerja AWS menggunakan machine learning untuk mengidentifikasi perilaku tidak sah dan ancaman siber.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2165,7 +2165,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0073",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Opsi pricing EC2 apa yang menawarkan diskon terbesar (hingga 90%) untuk workload fleksibel & tahan interupsi?",
+    "prompt": "Sebuah tim riset big data memiliki alur pemrosesan data batch yang dapat dihentikan dan dilanjutkan kapan saja jika kapasitas server ditarik kembali oleh penyedia cloud. Tim ingin meminimalkan biaya komputasi hingga serendah mungkin. Opsi pembelian Amazon EC2 manakah yang menawarkan diskon tertinggi (hingga 90%)?",
     "options": [
       {
         "id": "A",
@@ -2177,7 +2177,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Dedicated Hosts"
+        "text": "Dedicated Instances"
       },
       {
         "id": "D",
@@ -2187,7 +2187,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Spot Instances memanfaatkan kapasitas komputasi cadangan AWS yang tidak terpakai dengan diskon hingga 90%, namun dapat dihentikan dengan pemberitahuan 2 menit.",
+    "explanation": "EC2 Spot Instances menyediakan diskon hingga 90% dibandingkan On-Demand dengan memanfaatkan kapasitas komputasi AWS yang menganggur, sangat cocok untuk beban kerja fleksibel dan toleran interupsi.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -2195,19 +2195,19 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0074",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan AWS apa yang digunakan untuk membuat arsitektur as code (IaC) menggunakan template JSON/YAML?",
+    "prompt": "Sebuah tim platform engineering ingin mengotomatiskan pembuatan seluruh infrastruktur AWS mereka (meliputi VPC, Subnet, EC2, dan RDS) menggunakan pendekatan Infrastructure as Code (IaC) melalui file template deklaratif berformat JSON atau YAML. Layanan AWS manakah yang dirancang untuk tujuan ini?",
     "options": [
       {
         "id": "A",
-        "text": "AWS CodeDeploy"
+        "text": "AWS Elastic Beanstalk"
       },
       {
         "id": "B",
-        "text": "AWS OpsWorks"
+        "text": "AWS CodeDeploy"
       },
       {
         "id": "C",
-        "text": "AWS Elastic Beanstalk"
+        "text": "AWS OpsWorks"
       },
       {
         "id": "D",
@@ -2217,7 +2217,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "AWS CloudFormation memungkinkan pengguna memodelkan dan mengonfigurasi seluruh sumber daya infrastruktur AWS melalui kode (IaC).",
+    "explanation": "AWS CloudFormation adalah layanan Infrastructure as Code (IaC) yang memungkinkan pemodelan, provisi, dan pengelolaan seluruh kumpulan sumber daya AWS secara otomatis menggunakan template deklaratif (JSON/YAML).",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2225,29 +2225,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0075",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Untuk mengeraskan keamanan SSH pada instance Linux lab, opsi apa yang diubah pada file /etc/ssh/sshd_config?",
+    "prompt": "Untuk meningkatkan postur keamanan (systems hardening) pada server Linux Amazon EC2 di lingkungan lab, seorang insinyur sistem ingin menonaktifkan autentikasi berbasis kata sandi dan hanya mengizinkan login melalui kunci privat SSH (SSH key pair). Konfigurasi manakah yang harus diubah pada file '/etc/ssh/sshd_config'?",
     "options": [
       {
         "id": "A",
-        "text": "Port 80 menjadi Port 443"
+        "text": "Mengubah PermitRootLogin menjadi yes"
       },
       {
         "id": "B",
-        "text": "PermitRootLogin yes menjadi no"
+        "text": "Mengubah Port 22 menjadi Port 80"
       },
       {
         "id": "C",
-        "text": "PasswordAuthentication yes menjadi no"
+        "text": "Mengubah PasswordAuthentication yes menjadi no"
       },
       {
         "id": "D",
-        "text": "AllowUsers ec2-user menjadi chaos"
+        "text": "Mengubah PubkeyAuthentication yes menjadi no"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Mengubah 'PasswordAuthentication no' menonaktifkan login SSH berbasis password sehingga hanya autentikasi key pair kriptografis yang diizinkan.",
+    "explanation": "Mengubah direktif 'PasswordAuthentication yes' menjadi 'no' pada file konfigurasi SSH daemon (/etc/ssh/sshd_config) adalah langkah hardening standar untuk menonaktifkan login berbasis kata sandi dan memaksa penggunaan pasangan kunci SSH yang jauh lebih aman.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2255,11 +2255,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0076",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan database NoSQL key-value terkelola penuh dari AWS yang menawarkan latensi single-digit milidetik adalah?",
+    "prompt": "Sebuah platform media sosial memerlukan basis data NoSQL terkelola penuh yang menggunakan model key-value dan dokumen, mampu menangani volume data berskala besar, serta menghasilkan waktu respons latensi satu digit milidetik secara konsisten tanpa perlu memelihara klaster server. Layanan basis data AWS manakah ini?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon Aurora"
+        "text": "Amazon RDS"
       },
       {
         "id": "B",
@@ -2267,17 +2267,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Amazon Redshift"
+        "text": "Amazon DocumentDB"
       },
       {
         "id": "D",
-        "text": "Amazon DocumentDB"
+        "text": "Amazon Redshift"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Amazon DynamoDB adalah database NoSQL serverless fully-managed yang memberikan performa konsisten di bawah 10 milidetik pada skala apa pun.",
+    "explanation": "Amazon DynamoDB adalah layanan basis data NoSQL key-value dan dokumen terkelola penuh dari AWS yang menawarkan latensi konsisten di bawah 10 milidetik pada skala transaksi berapa pun.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2285,7 +2285,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0077",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Fitur AWS apa yang memungkinkan beberapa akun AWS digabung untuk mendapatkan diskon volume (Volume Discounts)?",
+    "prompt": "Sebuah konglomerat memiliki belasan akun AWS untuk masing-masing anak perusahaannya. Mereka ingin menggabungkan seluruh tagihan bulanan akun-akun tersebut di bawah satu faktur pembayaran terpusat agar total penggunaan penyimpanan Amazon S3 mereka memenuhi batas tier diskon volume (Volume Discounts). Fitur AWS Organizations manakah yang memfasilitasi hal ini?",
     "options": [
       {
         "id": "A",
@@ -2293,21 +2293,21 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "Cost Allocation Tags"
+        "text": "Service Control Policies (SCPs)"
       },
       {
         "id": "C",
-        "text": "AWS Budgets Alerts"
+        "text": "AWS Resource Access Manager"
       },
       {
         "id": "D",
-        "text": "AWS Cost Explorer Reports"
+        "text": "AWS Cost Explorer Allocation"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Consolidated Billing menggabungkan tagihan semua member account di bawah satu payer account sehingga penggunaan diakumulasi untuk diskon volume.",
+    "explanation": "Fitur Consolidated Billing di AWS Organizations menggabungkan tagihan dari seluruh akun anggota, memungkinkan penggabungan volume penggunaan antar-akun untuk memenuhi ambang batas diskon volume harga AWS.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -2315,29 +2315,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0078",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan apa yang mempermudah migrasi database on-premise ke AWS dengan meminimalkan downtime aplikasi?",
+    "prompt": "Sebuah bank swasta berencana memindahkan basis data Oracle on-premise mereka ke Amazon Aurora di AWS. Selama proses migrasi data berlangsung, basis data sumber harus tetap dapat melayani transaksi nasabah tanpa henti (near-zero downtime). Layanan migrasi AWS manakah yang paling sesuai untuk kebutuhan ini?",
     "options": [
       {
         "id": "A",
-        "text": "AWS DataSync"
+        "text": "AWS Snowball Edge"
       },
       {
         "id": "B",
-        "text": "AWS Snowcone"
+        "text": "AWS DataSync"
       },
       {
         "id": "C",
-        "text": "AWS Schema Conversion Tool saja"
+        "text": "AWS Application Migration Service (MGN)"
       },
       {
         "id": "D",
-        "text": "AWS Database Migration Service (DMS)"
+        "text": "AWS Database Migration Service (AWS DMS)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "AWS Database Migration Service (AWS DMS) membantu memigrasikan database ke AWS dengan cepat, aman, dan meminimalkan downtime sistem sumber.",
+    "explanation": "AWS Database Migration Service (AWS DMS) mempermudah migrasi basis data ke AWS dengan mempertahankan replikasi data berkelanjutan (Change Data Capture / CDC), sehingga aplikasi sumber tetap beroperasi selama migrasi dengan downtime minimal.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2345,29 +2345,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0079",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Dalam Shared Responsibility Model, siapakah yang bertanggung jawab mengonfigurasi enkripsi data at-rest di S3?",
+    "prompt": "Berdasarkan AWS Shared Responsibility Model, siapakah yang bertanggung jawab untuk memastikan bahwa opsi enkripsi data saat istirahat (encryption at-rest) telah diaktifkan dan dikonfigurasi dengan benar pada bucket Amazon S3 milik perusahaan?",
     "options": [
       {
         "id": "A",
-        "text": "Hanya AWS secara otomatis"
+        "text": "AWS secara otomatis dan sepenuhnya bertanggung jawab mengonfigurasinya"
       },
       {
         "id": "B",
-        "text": "Pelanggan (Customer)"
+        "text": "Pelanggan (Customer) yang mengelola konfigurasi bucket dan kunci enkripsi"
       },
       {
         "id": "C",
-        "text": "Penyedia hardware data center"
+        "text": "Penyedia layanan jaringan internet (ISP) yang menghubungkan ke AWS"
       },
       {
         "id": "D",
-        "text": "AWS Marketplace vendor"
+        "text": "Auditor kepatuhan pihak ketiga"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Pelanggan bertanggung jawab atas pengelolaan data pelanggan, klasifikasi aset, serta konfigurasi enkripsi (data at-rest & in-transit).",
+    "explanation": "Di bawah Shared Responsibility Model, data pelanggan adalah tanggung jawab penuh pelanggan ('Security IN the cloud'). Pelanggan bertanggung jawab mengaktifkan, mengelola, dan mengonfigurasi enkripsi data at-rest pada resource penyimpanan seperti Amazon S3.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2375,29 +2375,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0080",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Manakah storage class Amazon S3 yang paling hemat biaya untuk data arsip jangka panjang yang jarang diakses?",
+    "prompt": "Sebuah institusi pemerintah perlu mengarsipkan rekaman video berukuran puluhan terabyte untuk kepatuhan regulasi jangka panjang. Video tersebut sangat jarang sekali diakses kembali di masa depan, dan biaya penyimpanan per gigabyte harus menjadi prioritas paling hemat. Storage class Amazon S3 manakah yang paling tepat dipilih?",
     "options": [
       {
         "id": "A",
-        "text": "S3 Standard"
+        "text": "Amazon S3 Standard"
       },
       {
         "id": "B",
-        "text": "S3 Standard-Infrequent Access"
+        "text": "Amazon S3 One Zone-IA"
       },
       {
         "id": "C",
-        "text": "S3 One Zone-IA"
+        "text": "Amazon S3 Express One Zone"
       },
       {
         "id": "D",
-        "text": "S3 Glacier Flexible / Deep Archive"
+        "text": "Amazon S3 Glacier Flexible Retrieval atau Glacier Deep Archive"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Amazon S3 Glacier Flexible Retrieval dan S3 Glacier Deep Archive adalah opsi penyimpanan arsip jangka panjang dengan biaya terendah di AWS.",
+    "explanation": "Storage class Amazon S3 Glacier (Flexible Retrieval dan Deep Archive) dirancang khusus untuk pengarsipan data jangka panjang dengan biaya penyimpanan bulanan terendah di AWS.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -2405,7 +2405,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0081",
     "domain": "Billing & Pricing",
     "type": "single",
-    "prompt": "Tool apa yang dapat memperkirakan biaya bulanan arsitektur AWS sebelum sistem dibangun di cloud?",
+    "prompt": "Sebelum mengajukan permohonan investasi proyek komputasi awan kepada dewan direksi, seorang Solutions Architect ingin membuat kalkulasi estimasi biaya bulanan untuk rencana infrastruktur AWS baru (kombinasi EC2, S3, dan VPC) tanpa harus membuka akun AWS berbayar terlebih dahulu. Alat web resmi gratis AWS manakah yang harus digunakan?",
     "options": [
       {
         "id": "A",
@@ -2421,13 +2421,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "AWS Billing Conductor"
+        "text": "AWS Cost and Usage Report"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "AWS Pricing Calculator adalah tool estimasi berbasis web untuk memperkirakan biaya pemakaian layanan AWS sebelum solusi diimplementasikan.",
+    "explanation": "AWS Pricing Calculator adalah alat web interaktif gratis berbasis browser yang memungkinkan siapa saja memodelkan solusi arsitektur dan memperkirakan biaya penggunaan AWS sebelum meluncurkan sumber daya.",
     "difficulty": "Sulit",
     "lang": "id"
   },
@@ -2435,7 +2435,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0082",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan komputasi serverless yang menjalankan kode berdasarkan trigger event tanpa mengelola server sama sekali?",
+    "prompt": "Sebuah aplikasi ingin mengeksekusi kode logika validasi gambar secara otomatis setiap kali ada file baru diunggah ke Amazon S3. Pengembang menginginkan solusi serverless di mana mereka tidak perlu mengelola server, sistem operasi, atau penskalaan, dan hanya membayar durasi eksekusi dalam milidetik. Layanan AWS manakah ini?",
     "options": [
       {
         "id": "A",
@@ -2457,7 +2457,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "AWS Lambda memungkinkan Anda menjalankan kode tanpa mengelola server, dengan penagihan hanya per milidetik saat kode dieksekusi.",
+    "explanation": "AWS Lambda adalah layanan komputasi tanpa server (serverless) yang menjalankan kode berdasarkan trigger event dan secara otomatis mengelola seluruh alokasi infrastruktur dan penskalaan.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2465,29 +2465,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0083",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Fitur apa yang memungkinkan transfer data pribadi berkecepatan tinggi antara VPC dan layanan AWS seperti S3?",
+    "prompt": "Sebuah perusahaan memiliki instance Amazon EC2 di dalam Private Subnet tanpa akses Internet Gateway atau NAT Gateway. Instance tersebut perlu mengakses bucket Amazon S3 secara pribadi melalui jaringan backbone AWS dengan kecepatan tinggi tanpa melalui internet publik. Fitur jaringan Amazon VPC manakah yang harus digunakan?",
     "options": [
       {
         "id": "A",
-        "text": "VPC Endpoint (Gateway / Interface)"
+        "text": "VPC Endpoint (Gateway Endpoint / Interface Endpoint)"
       },
       {
         "id": "B",
-        "text": "Internet Gateway"
+        "text": "Egress-Only Internet Gateway"
       },
       {
         "id": "C",
-        "text": "Egress-only Internet Gateway"
+        "text": "Virtual Private Gateway"
       },
       {
         "id": "D",
-        "text": "NAT Instance"
+        "text": "AWS Direct Connect"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "VPC Endpoint memungkinkan koneksi privat antara VPC Anda dan layanan AWS yang didukung tanpa memerlukan Internet Gateway atau NAT.",
+    "explanation": "VPC Endpoint (seperti Gateway Endpoint untuk S3 dan DynamoDB) memungkinkan koneksi privat berkecepatan tinggi antara VPC dan layanan AWS tanpa memerlukan Internet Gateway, NAT Gateway, atau koneksi VPN.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2495,7 +2495,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0084",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan apa yang bertindak sebagai Web Application Firewall untuk memblokir serangan umum seperti SQLi dan XSS?",
+    "prompt": "Sebuah situs web e-commerce sering menjadi sasaran upaya peretasan injeksi SQL dan skrip lintas situs (Cross-Site Scripting / XSS). Tim keamanan ingin memasang firewall aplikasi web di lapisan 7 (Application Layer) yang dapat memeriksa payload HTTP/S dan memblokir pola serangan berbahaya sebelum mencapai web server. Layanan AWS manakah yang dirancang untuk hal ini?",
     "options": [
       {
         "id": "A",
@@ -2507,17 +2507,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "AWS WAF"
+        "text": "AWS WAF (Web Application Firewall)"
       },
       {
         "id": "D",
-        "text": "AWS Network Firewall"
+        "text": "Network Access Control List (NACL)"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "AWS WAF membantu melindungi aplikasi web dari eksploitasi web umum (SQL Injection, Cross-Site Scripting) di level aplikasi (Layer 7).",
+    "explanation": "AWS WAF adalah Web Application Firewall yang beroperasi pada Layer 7 untuk melindungi aplikasi web dan API dari eksploitasi web umum seperti SQL Injection dan XSS.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2525,29 +2525,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0085",
     "domain": "Cloud Concepts",
     "type": "single",
-    "prompt": "Prinsip arsitektur cloud mana yang menyarankan pemisahan komponen agar kegagalan satu modul tidak mematikan sistem?",
+    "prompt": "Seorang Cloud Architect merancang arsitektur aplikasi e-commerce di mana subsistem pemrosesan pesanan dan subsistem pemrosesan faktur dihubungkan menggunakan antrean pesan perantara (Amazon SQS), sehingga kegagalan atau lonjakan beban pada satu subsistem tidak langsung merusak subsistem lainnya. Prinsip arsitektur cloud Well-Architected manakah ini?",
     "options": [
       {
         "id": "A",
-        "text": "Loose Coupling (Kopling Longgar)"
+        "text": "Loose Coupling (Kopling Longgar / Decoupling)"
       },
       {
         "id": "B",
-        "text": "Monolithic Integration"
+        "text": "Tight Coupling (Kopling Ketat)"
       },
       {
         "id": "C",
-        "text": "Single Point of Architecture"
+        "text": "Monolithic Architecture"
       },
       {
         "id": "D",
-        "text": "Centralized Data Storage"
+        "text": "Single Point of Failure"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Loose Coupling (pengurangan dependensi antar komponen) memastikan bahwa jika satu komponen gagal, komponen lain tetap dapat beroperasi.",
+    "explanation": "Prinsip Loose Coupling (Kopling Longgar / Decoupling) menganjurkan pemisahan komponen sistem sehingga setiap komponen dapat beroperasi, diskalakan, dan diperbaiki secara independen tanpa melumpuhkan komponen lain saat terjadi kegagalan.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2555,15 +2555,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0086",
     "domain": "Security & Compliance",
     "type": "single",
-    "prompt": "Layanan apa yang mengelola lifecycle kunci enkripsi dan terintegrasi dengan sebagian besar layanan AWS?",
+    "prompt": "Sebuah organisasi ingin mengenkripsi seluruh data sensitif mereka di berbagai layanan AWS (seperti Amazon S3, Amazon EBS, dan Amazon RDS). Mereka membutuhkan layanan terkelola terpusat untuk membuat, merotasi, mengontrol hak akses, dan mengaudit siklus hidup kunci kriptografi (cryptographic keys). Layanan AWS manakah yang dimaksud?",
     "options": [
       {
         "id": "A",
-        "text": "AWS CloudHSM"
+        "text": "AWS Secrets Manager"
       },
       {
         "id": "B",
-        "text": "AWS Secrets Manager"
+        "text": "AWS Certificate Manager (ACM)"
       },
       {
         "id": "C",
@@ -2571,13 +2571,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "Amazon Cognito"
+        "text": "AWS CloudHSM"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "AWS KMS adalah layanan terkelola yang memudahkan pembuatan, pengelolaan, dan kontrol kunci kriptografis yang digunakan untuk mengenkripsi data.",
+    "explanation": "AWS Key Management Service (AWS KMS) mempermudah pembuatan dan pengelolaan kunci kriptografi (KMS keys) serta mengontrol penggunaannya di berbagai layanan AWS dan aplikasi.",
     "difficulty": "Sulit",
     "lang": "id"
   },
@@ -2585,7 +2585,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0087",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Karakteristik komputasi cloud apa yang memungkinkan alokasi dan pelepasan sumber daya otomatis sesuai beban?",
+    "prompt": "Sebuah aplikasi streaming video secara otomatis menambah 10 instance Amazon EC2 baru saat konser musik langsung dimulai pada pukul 19.00 WIB, dan kemudian secara otomatis mematikan 10 instance tersebut pada pukul 22.00 WIB begitu konser selesai untuk menghentikan pemborosan biaya. Karakteristik komputasi cloud manakah yang paling tepat menggambarkan penambahan dan pengurangan kapasitas dua arah ini?",
     "options": [
       {
         "id": "A",
@@ -2593,21 +2593,21 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "Penyimpanan Statis"
+        "text": "Ketersediaan Tinggi (High Availability)"
       },
       {
         "id": "C",
-        "text": "Toleransi Fisik"
+        "text": "Toleransi Kesalahan (Fault Tolerance)"
       },
       {
         "id": "D",
-        "text": "Latensi Rendah"
+        "text": "Agilitas (Agility)"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Elastisitas adalah kemampuan untuk menyesuaikan (tambah/kurangi) kapasitas komputasi secara dinamis dan otomatis sesuai fluktuasi permintaan.",
+    "explanation": "Elastisitas (Elasticity) adalah kemampuan sistem cloud untuk secara dinamis menambah kapasitas saat beban naik dan melepaskan kapasitas saat beban turun, menyesuaikan alokasi sumber daya dengan permintaan nyata.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -2615,7 +2615,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0088",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan transfer data fisik berkapasitas Petabyte menggunakan perangkat keras khusus terlindungi dari AWS adalah?",
+    "prompt": "Sebuah perusahaan migas memiliki data seismik berukuran 100 Terabyte di lokasi pengeboran terpencil dengan koneksi internet yang sangat lambat. Mereka perlu memindahkan data tersebut ke bucket Amazon S3 dalam waktu kurang dari satu minggu. Layanan transfer data fisik menggunakan perangkat keras khusus terlindungi dari AWS manakah yang harus digunakan?",
     "options": [
       {
         "id": "A",
@@ -2623,11 +2623,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "AWS Snowball"
+        "text": "AWS Snowball (Snow Family)"
       },
       {
         "id": "C",
-        "text": "AWS Storage Gateway"
+        "text": "AWS DataSync"
       },
       {
         "id": "D",
@@ -2637,7 +2637,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Keluarga AWS Snow (termasuk AWS Snowball) menyediakan perangkat keras fisik khusus untuk memindahkan data skala Petabyte ke AWS secara offline.",
+    "explanation": "AWS Snowball adalah bagian dari AWS Snow Family yang menyediakan perangkat penyimpanan fisik aman dan tahan benturan untuk memindahkan data berskala petabyte ke AWS tanpa bergantung pada bandwidth jaringan internet.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2645,29 +2645,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0089",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Entitas IAM mana yang paling tepat digunakan untuk memberikan izin akses sementara ke EC2?",
+    "prompt": "Sebuah aplikasi pengolah log yang berjalan pada armada Amazon EC2 perlu menulis file hasil agregasi ke bucket Amazon S3. Menurut rekomendasi keamanan terbaik AWS (Security Best Practices), bagaimana cara paling aman memberikan izin akses S3 kepada instance EC2 tersebut tanpa perlu menyimpan kredensial permanen di disk server?",
     "options": [
       {
         "id": "A",
-        "text": "IAM User"
+        "text": "Menyimpan Access Key ID dan Secret Access Key di dalam file konfigurasi aplikasi"
       },
       {
         "id": "B",
-        "text": "IAM Group"
+        "text": "Membuat IAM User khusus untuk setiap instance EC2"
       },
       {
         "id": "C",
-        "text": "IAM Role"
+        "text": "Melampirkan IAM Role yang memiliki policy S3 ke instance EC2 melalui Instance Profile"
       },
       {
         "id": "D",
-        "text": "IAM Root Account"
+        "text": "Membagikan kredensial AWS Root User kepada aplikasi"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "IAM Role digunakan untuk memberikan temporary credentials ke resource AWS seperti EC2 tanpa perlu hardcode access key.",
+    "explanation": "Melampirkan IAM Role ke instance EC2 adalah praktik terbaik AWS karena menyediakan kredensial keamanan sementara yang dirotasi secara otomatis oleh instance metadata service (IMDS).",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -2675,29 +2675,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0090",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Perbedaan utama antara opsi --filter dan --query pada perintah AWS CLI adalah?",
+    "prompt": "Seorang insinyur cloud menggunakan AWS CLI untuk mencari instance EC2 yang sedang berjalan. Insinyur tersebut dapat menggunakan opsi '--filter' atau opsi '--query' pada perintah CLI. Manakah penjelasan yang paling akurat mengenai perbedaan cara kerja kedua opsi tersebut?",
     "options": [
       {
         "id": "A",
-        "text": "--filter di server-side AWS, --query di client-side (JMESPath)"
+        "text": "Opsi --filter memproses penyaringan di sisi server AWS sebelum data dikirimkan, sedangkan opsi --query memproses penyaringan di sisi klien menggunakan ekspresi JMESPath"
       },
       {
         "id": "B",
-        "text": "--filter hanya untuk JSON, --query untuk table"
+        "text": "Opsi --filter khusus untuk format output teks, sedangkan --query khusus untuk output JSON"
       },
       {
         "id": "C",
-        "text": "--filter di client-side, --query di server-side AWS"
+        "text": "Opsi --filter hanya dapat digunakan pada layanan S3, sedangkan --query hanya untuk EC2"
       },
       {
         "id": "D",
-        "text": "Keduanya identik dan hanya alias sintaks"
+        "text": "Keduanya memiliki mekanisme eksekusi yang sama di server AWS tanpa perbedaan performa"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "--filter menyaring data di server-side AWS (hemat bandwidth), sedangkan --query memproyeksikan data di client-side dengan JMESPath.",
+    "explanation": "Parameter '--filter' melakukan pemfilteran di sisi server (server-side) oleh API AWS sebelum respons dikirim, sedangkan parameter '--query' melakukan pemfilteran dan pemformatan di sisi klien (client-side) menggunakan sintaks JMESPath setelah data diterima dari AWS.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2735,7 +2735,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0092",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Berapa batas maksimal user-defined tags yang dapat dipasang pada satu resource AWS?",
+    "prompt": "Sebuah perusahaan ingin menerapkan standarisasi pelabelan resource (tagging) untuk alokasi biaya departemen, identifikasi kepemilikan lingkungan (Environment), dan otomatisasi skrip operasional. Berapakah batas maksimal tag yang ditentukan pengguna (user-defined tags) yang dapat dilampirkan pada satu resource AWS?",
     "options": [
       {
         "id": "A",
@@ -2757,7 +2757,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "AWS menetapkan batas kuota maksimal 50 user-defined tags untuk sebagian besar resource AWS.",
+    "explanation": "AWS menetapkan batas maksimal 50 user-defined tags (tag yang dibuat pengguna) per resource AWS untuk membantu pelacakan biaya, kontrol akses, dan otomatisasi tata kelola.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2765,139 +2765,19 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0093",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Tipe block storage persisten yang dipasang sebagai virtual disk pada instance EC2 adalah?",
+    "prompt": "Sebuah sistem operasi Linux pada Amazon EC2 membutuhkan penyimpanan tingkat blok (block storage) yang persisten untuk partisi sistem operasi (root volume) dan instalasi dependensi perangkat lunak. Layanan penyimpanan AWS manakah yang digunakan sebagai volume virtual disk tersebut?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon EFS"
+        "text": "Amazon Simple Storage Service (Amazon S3)"
       },
       {
         "id": "B",
-        "text": "Amazon EBS"
+        "text": "Amazon Elastic Block Store (Amazon EBS)"
       },
       {
         "id": "C",
-        "text": "Amazon S3"
-      },
-      {
-        "id": "D",
-        "text": "Instance Store"
-      }
-    ],
-    "correctAnswers": [
-      "B"
-    ],
-    "explanation": "Amazon Elastic Block Store (EBS) menyediakan raw block storage persisten berkinerja tinggi untuk instance EC2.",
-    "difficulty": "Mudah",
-    "lang": "id"
-  },
-  {
-    "id": "ccp_kahoot_0094",
-    "domain": "Technology & Services",
-    "type": "single",
-    "prompt": "Fitur AWS Organizations apa yang dapat menolak pembuatan EC2 jika tidak menyertakan tag wajib?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Consolidated Billing"
-      },
-      {
-        "id": "B",
-        "text": "Tag Policies & SCP"
-      },
-      {
-        "id": "C",
-        "text": "Resource Groups"
-      },
-      {
-        "id": "D",
-        "text": "AWS Cost Explorer"
-      }
-    ],
-    "correctAnswers": [
-      "B"
-    ],
-    "explanation": "Service Control Policies (SCP) dan Tag Policies di AWS Organizations dapat memberlakukan guardrail wajib tag (preventive control).",
-    "difficulty": "Sedang",
-    "lang": "id"
-  },
-  {
-    "id": "ccp_kahoot_0095",
-    "domain": "Technology & Services",
-    "type": "single",
-    "prompt": "Layanan message queue terdistribusi yang digunakan untuk decoupling microservices adalah?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Amazon SNS"
-      },
-      {
-        "id": "B",
-        "text": "AWS Step Functions"
-      },
-      {
-        "id": "C",
-        "text": "Amazon SQS"
-      },
-      {
-        "id": "D",
-        "text": "Amazon MQ"
-      }
-    ],
-    "correctAnswers": [
-      "C"
-    ],
-    "explanation": "Amazon Simple Queue Service (SQS) adalah antrean pesan terkelola penuh untuk decoupling komponen aplikasi dan microservices.",
-    "difficulty": "Sedang",
-    "lang": "id"
-  },
-  {
-    "id": "ccp_kahoot_0096",
-    "domain": "Technology & Services",
-    "type": "single",
-    "prompt": "Layanan threat detection cerdas yang menganalisis CloudTrail dan DNS Logs menggunakan ML adalah?",
-    "options": [
-      {
-        "id": "A",
-        "text": "AWS GuardDuty"
-      },
-      {
-        "id": "B",
-        "text": "AWS Shield"
-      },
-      {
-        "id": "C",
-        "text": "Amazon Inspector"
-      },
-      {
-        "id": "D",
-        "text": "AWS Macie"
-      }
-    ],
-    "correctAnswers": [
-      "A"
-    ],
-    "explanation": "Amazon GuardDuty adalah layanan intelligent threat detection berbasis Machine Learning yang menganalisis CloudTrail, VPC Flow, dan DNS Logs.",
-    "difficulty": "Sedang",
-    "lang": "id"
-  },
-  {
-    "id": "ccp_kahoot_0097",
-    "domain": "Technology & Services",
-    "type": "single",
-    "prompt": "Shared storage berbasis NFS yang dapat di-mount secara simultan oleh banyak EC2 Linux adalah?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Amazon EBS"
-      },
-      {
-        "id": "B",
-        "text": "Amazon EFS"
-      },
-      {
-        "id": "C",
-        "text": "Amazon S3 Glacier"
+        "text": "Amazon Elastic File System (Amazon EFS)"
       },
       {
         "id": "D",
@@ -2907,7 +2787,127 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Amazon Elastic File System (EFS) adalah serverless shared file storage berbasis NFS v4 untuk instance Linux yang dapat diakses bersamaan.",
+    "explanation": "Amazon EBS adalah volume penyimpanan tingkat blok berkinerja tinggi yang dirancang untuk digunakan bersama instance Amazon EC2 sebagai root volume dan volume data tambahan.",
+    "difficulty": "Mudah",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_kahoot_0094",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah korporasi ingin memberlakukan aturan tata kelola di mana pembuatan instance Amazon EC2 baru akan ditolak secara otomatis jika pengguna tidak menyertakan tag wajib 'CostCenter' dan 'Owner'. Fitur AWS Organizations manakah yang dapat digabungkan untuk memaksakan kebijakan kepatuhan tag ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "AWS Budgets"
+      },
+      {
+        "id": "B",
+        "text": "Tag Policies dan Service Control Policies (SCPs)"
+      },
+      {
+        "id": "C",
+        "text": "AWS Trusted Advisor"
+      },
+      {
+        "id": "D",
+        "text": "Amazon CloudWatch Logs"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Tag Policies di AWS Organizations membantu menstandarisasi tag, dan ketika digabungkan dengan Service Control Policies (SCPs) dengan kondisi 'aws:RequestTag', dapat secara tegas menolak permintaan pembuatan resource yang tidak menyertakan tag wajib.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_kahoot_0095",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah platform pemesanan tiket ingin memisahkan modul penerima pesanan dari modul pemroses pembayaran agar kedua komponen dapat diskalakan secara independen dan pesanan tetap aman di dalam antrean saat terjadi lonjakan traffic. Layanan antrean pesan terdistribusi AWS manakah yang harus diintegrasikan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon Simple Notification Service (Amazon SNS)"
+      },
+      {
+        "id": "B",
+        "text": "AWS Step Functions"
+      },
+      {
+        "id": "C",
+        "text": "Amazon Simple Queue Service (Amazon SQS)"
+      },
+      {
+        "id": "D",
+        "text": "Amazon Kinesis Data Streams"
+      }
+    ],
+    "correctAnswers": [
+      "C"
+    ],
+    "explanation": "Amazon SQS menyediakan antrean pesan (message queue) terdistribusi yang sangat andal untuk memisahkan (decouple) komponen microservices secara asinkron.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_kahoot_0096",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah tim keamanan cloud ingin mendeteksi aktivitas mencurigakan pada akun AWS mereka, seperti panggilan API yang tidak biasa atau adanya instance EC2 yang disusupi malware penambang kripto. Layanan deteksi ancaman cerdas AWS manakah yang menganalisis CloudTrail, VPC Flow Logs, dan DNS Logs menggunakan machine learning?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon GuardDuty"
+      },
+      {
+        "id": "B",
+        "text": "Amazon Inspector"
+      },
+      {
+        "id": "C",
+        "text": "AWS WAF"
+      },
+      {
+        "id": "D",
+        "text": "AWS Shield"
+      }
+    ],
+    "correctAnswers": [
+      "A"
+    ],
+    "explanation": "Amazon GuardDuty adalah layanan intelligent threat detection yang menganalisis sumber data dasar (CloudTrail, VPC Flow Logs, DNS logs) menggunakan machine learning untuk mendeteksi ancaman keamanan pada akun AWS.",
+    "difficulty": "Sedang",
+    "lang": "id"
+  },
+  {
+    "id": "ccp_kahoot_0097",
+    "domain": "Technology & Services",
+    "type": "single",
+    "prompt": "Sebuah aplikasi web berbasis Linux memerlukan direktori penyimpanan file bersama yang dapat di-mount secara simultan oleh puluhan instance Amazon EC2 di lintas Availability Zone menggunakan protokol Network File System (NFS). Layanan penyimpanan terkelola AWS manakah yang dirancang untuk skenario ini?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Amazon Elastic Block Store (Amazon EBS)"
+      },
+      {
+        "id": "B",
+        "text": "Amazon Elastic File System (Amazon EFS)"
+      },
+      {
+        "id": "C",
+        "text": "Amazon Simple Storage Service (Amazon S3)"
+      },
+      {
+        "id": "D",
+        "text": "Amazon FSx for Windows"
+      }
+    ],
+    "correctAnswers": [
+      "B"
+    ],
+    "explanation": "Amazon EFS menyediakan sistem file bersama berbasis NFSv4 yang elastis dan dapat di-mount secara simultan oleh ratusan instance Linux di berbagai Availability Zone.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -2915,29 +2915,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0098",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Agar custom tag dapat digunakan untuk breakdown laporan biaya di AWS Cost Explorer, tag harus?",
+    "prompt": "Sebuah tim keuangan perusahaan telah membuat custom tag seperti 'CostCenter' dan 'Project' pada berbagai resource AWS. Namun, saat membuka AWS Cost Explorer, tag tersebut belum muncul sebagai opsi filter laporan biaya. Tindakan konfigurasi apakah yang wajib dilakukan pada AWS Billing Console agar tag tersebut dapat digunakan dalam laporan biaya?",
     "options": [
       {
         "id": "A",
-        "text": "Ditambahkan ke IAM User Policy"
+        "text": "Membuat IAM Role baru untuk tim keuangan"
       },
       {
         "id": "B",
-        "text": "Diaktivasi di Cost Allocation Tags pada Billing Console"
+        "text": "Mengaktifkan tag tersebut pada menu Cost Allocation Tags di Billing Console"
       },
       {
         "id": "C",
-        "text": "Didaftarkan manual di AWS Trusted Advisor"
+        "text": "Melakukan reboot pada seluruh instance EC2 yang memiliki tag"
       },
       {
         "id": "D",
-        "text": "Menggunakan format huruf kapital semua (UPPERCASE)"
+        "text": "Membuka tiket permohonan ke AWS Support"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Custom tag tidak otomatis muncul di laporan tagihan; administrator harus mengaktifkannya di menu Cost Allocation Tags pada AWS Billing Console.",
+    "explanation": "Agar user-defined tags dapat digunakan sebagai filter atau kategori pemecahan biaya di AWS Cost Explorer dan laporan tagihan, tag tersebut wajib diaktifkan terlebih dahulu di menu 'Cost Allocation Tags' pada AWS Billing Console.",
     "difficulty": "Sulit",
     "lang": "id"
   },
@@ -2945,11 +2945,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0099",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan keamanan yang menggunakan Machine Learning untuk mendeteksi data sensitif (PII) di S3?",
+    "prompt": "Sebuah organisasi keuangan menyimpan jutaan dokumen pelanggan di Amazon S3. Untuk mematuhi peraturan privasi data (seperti GDPR), tim kepatuhan perlu mendeteksi secara otomatis apakah ada file yang mengandung data sensitif seperti informasi identitas pribadi (PII) atau nomor kartu kredit yang tidak terproteksi. Layanan keamanan AWS manakah yang harus diaktifkan?",
     "options": [
       {
         "id": "A",
-        "text": "AWS KMS"
+        "text": "Amazon GuardDuty"
       },
       {
         "id": "B",
@@ -2961,13 +2961,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "AWS GuardDuty"
+        "text": "Amazon Inspector"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Amazon Macie adalah layanan data security dan privacy yang menggunakan pattern matching dan ML untuk menemukan data sensitif (PII) di S3.",
+    "explanation": "Amazon Macie adalah layanan keamanan data terkelola yang memanfaatkan machine learning untuk menemukan, mengklasifikasikan, dan melindungi data sensitif (PII) yang tersimpan di Amazon S3.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -2975,11 +2975,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0100",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Fitur AWS Organizations yang menggabungkan tagihan seluruh akun untuk diskon volume adalah?",
+    "prompt": "Sebuah grup korporasi memiliki 20 akun AWS anggota di bawah satu organisasi terpadu. Mereka ingin menggabungkan seluruh tagihan bulanan akun-akun tersebut ke dalam satu faktur pembayaran tunggal agar penggunaan kumulatif Amazon S3 dan Amazon EC2 mendapatkan tier diskon volume. Fitur AWS Organizations manakah yang menyediakan fungsi ini?",
     "options": [
       {
         "id": "A",
-        "text": "Cost Allocation Tags"
+        "text": "Service Control Policies (SCPs)"
       },
       {
         "id": "B",
@@ -2987,17 +2987,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "AWS Budgets"
+        "text": "AWS Cost Explorer Shared"
       },
       {
         "id": "D",
-        "text": "Service Control Policies"
+        "text": "AWS Resource Access Manager"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Consolidated Billing menggabungkan seluruh tagihan member accounts ke payer account untuk mendapatkan diskon volume secara agregat.",
+    "explanation": "Fitur Consolidated Billing di AWS Organizations menyatukan tagihan pembayaran dari semua akun anggota ke akun utama (Management Account) dan menggabungkan volume penggunaan untuk mendapatkan diskon harga bertingkat (volume tiered discounts).",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -3005,29 +3005,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0101",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Pada kebijakan 'Tag-or-Terminate', tindakan apa yang dilakukan terhadap resource non-compliant?",
+    "prompt": "Sebuah organisasi menerapkan kebijakan tata kelola ketat bernama 'Tag-or-Terminate' menggunakan fungsi otomatisasi AWS Lambda. Kebijakan ini mendeteksi resource komputasi yang tidak mematuhi standar penandaan tag wajib dalam waktu 24 jam setelah dibuat. Tindakan apakah yang secara otomatis dieksekusi terhadap resource yang tidak patuh (non-compliant) tersebut?",
     "options": [
       {
         "id": "A",
-        "text": "Otomatis di-quarantine ke VPC lain"
+        "text": "Resource dipindahkan secara otomatis ke Region yang berbeda"
       },
       {
         "id": "B",
-        "text": "Diberikan tag default secara otomatis"
+        "text": "Resource diberikan alamat IP publik baru secara acak"
       },
       {
         "id": "C",
-        "text": "Resource langsung di-terminate / dimusnahkan"
+        "text": "Resource langsung dihentikan dan dihapus permanen (terminated / dimusnahkan)"
       },
       {
         "id": "D",
-        "text": "Tagihan akun langsung dibekukan"
+        "text": "Resource secara otomatis di-upgrade ke tipe instance yang lebih besar"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Tag-or-terminate policy adalah governance strict di mana resource liar tanpa tag wajib langsung diterminasi untuk mencegah security risk & unbudgeted cost.",
+    "explanation": "Pada arsitektur tata kelola 'Tag-or-Terminate', resource yang tidak menyertakan tag wajib (seperti Environment atau Owner) akan otomatis di-terminate (dimusnahkan) oleh skrip otomatisasi guna mencegah resource liar dan pemborosan biaya.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -3035,7 +3035,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0102",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan portal mandiri untuk mengakses dokumen audit dan laporan compliance resmi AWS adalah?",
+    "prompt": "Sebuah institusi perbankan sedang diaudit oleh regulator industri keuangan dan diwajibkan untuk menyerahkan dokumen sertifikasi kepatuhan ISO 27001 dan laporan SOC 2 Type II dari infrastruktur cloud AWS. Portal swalayan resmi AWS manakah yang menyediakan akses gratis untuk mengunduh laporan audit kepatuhan pihak ketiga tersebut?",
     "options": [
       {
         "id": "A",
@@ -3057,7 +3057,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "AWS Artifact adalah portal compliance on-demand resmi untuk mengunduh laporan keamanan (SOC 1/2/3, ISO, PCI-DSS) dan perjanjian kepatuhan.",
+    "explanation": "AWS Artifact adalah portal kepatuhan sentral resmi AWS yang menyediakan akses gratis on-demand untuk mengunduh laporan audit keamanan dan sertifikasi kepatuhan pihak ketiga (SOC, PCI, ISO) serta menyetujui perjanjian kepatuhan.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -3065,15 +3065,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0103",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Tool gratis AWS untuk memproyeksikan estimasi biaya bulanan SEBELUM membangun infrastruktur?",
+    "prompt": "Sebelum mengajukan permohonan investasi cloud ke jajaran pimpinan perusahaan, seorang Solutions Architect perlu menghitung estimasi pengeluaran biaya bulanan untuk rancangan arsitektur AWS baru (terdiri dari 10 instance EC2, 2 database RDS, dan 5 TB penyimpanan S3) SEBELUM sistem dibangun. Alat AWS manakah yang harus digunakan?",
     "options": [
       {
         "id": "A",
-        "text": "AWS Budgets"
+        "text": "AWS Cost Explorer"
       },
       {
         "id": "B",
-        "text": "AWS Cost Explorer"
+        "text": "AWS Budgets"
       },
       {
         "id": "C",
@@ -3081,13 +3081,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "Cost & Usage Report"
+        "text": "AWS Cost and Usage Report"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "AWS Pricing Calculator adalah web tool gratis untuk membuat arsitektur perkiraan biaya AWS sebelum workload dibangun.",
+    "explanation": "AWS Pricing Calculator adalah alat web resmi bebas biaya dari AWS yang memungkinkan pengguna memodelkan arsitektur solusi dan memproyeksikan estimasi biaya bulanan sebelum resource diluncurkan ke cloud.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -3095,15 +3095,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0104",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan database relational terkelola eksklusif AWS dengan kompatibilitas MySQL & PostgreSQL?",
+    "prompt": "Sebuah platform e-commerce enterprise membutuhkan basis data relasional terkelola penuh yang sepenuhnya kompatibel dengan MySQL dan PostgreSQL, menawarkan throughput performa hingga 5 kali lipat dibanding MySQL standar, serta secara otomatis mereplikasi data ke 6 salinan di 3 Availability Zone. Layanan basis data AWS manakah yang dirancang khusus untuk skenario ini?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon DynamoDB"
+        "text": "Amazon RDS for MariaDB"
       },
       {
         "id": "B",
-        "text": "Amazon Redshift"
+        "text": "Amazon DynamoDB"
       },
       {
         "id": "C",
@@ -3111,13 +3111,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "Amazon OpenSearch"
+        "text": "Amazon Redshift"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Amazon Aurora adalah relational database enterprise eksklusif AWS yang kompatibel dengan MySQL dan PostgreSQL dengan performa hingga 5x lipat.",
+    "explanation": "Amazon Aurora adalah mesin basis data relasional enterprise terkelola penuh milik AWS yang kompatibel dengan MySQL dan PostgreSQL, dengan performa hingga 5x MySQL serta penyimpanan terdistribusi berdaya tahan tinggi (6 salinan di 3 AZ).",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -3125,15 +3125,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0105",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Pricing model EC2 yang memanfaatkan spare capacity dengan diskon hingga 90% namun interruptible?",
+    "prompt": "Sebuah universitas menjalankan simulasi pemodelan iklim berskala besar yang membutuhkan ribuan inti CPU (vCPU). Beban kerja ini bersifat batch, dapat dijeda dan dilanjutkan kapan saja tanpa merusak data jika kapasitas komputasi ditarik kembali oleh AWS. Model pembelian Amazon EC2 manakah yang menawarkan diskon tertinggi (hingga 90%)?",
     "options": [
       {
         "id": "A",
-        "text": "Reserved Instances"
+        "text": "On-Demand Instances"
       },
       {
         "id": "B",
-        "text": "On-Demand Instances"
+        "text": "Dedicated Hosts"
       },
       {
         "id": "C",
@@ -3141,13 +3141,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "Dedicated Hosts"
+        "text": "Reserved Instances"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "EC2 Spot Instances memanfaatkan spare compute capacity AWS dengan diskon hingga 90%, cocok untuk fault-tolerant & flexible workloads.",
+    "explanation": "Amazon EC2 Spot Instances menawarkan diskon hingga 90% dibandingkan tarif On-Demand dengan memanfaatkan sisa kapasitas komputasi AWS yang menganggur, sangat ideal untuk beban kerja yang tahan interupsi (fault-tolerant/batch).",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -3155,29 +3155,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0106",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Dalam AWS Shared Responsibility Model, manakah yang merupakan tanggung jawab pelanggan?",
+    "prompt": "Berdasarkan AWS Shared Responsibility Model (Model Tanggung Jawab Bersama), manakah dari tugas operasional berikut yang sepenuhnya menjadi tanggung jawab pelanggan saat mengoperasikan beban kerja aplikasi pada instance Amazon EC2?",
     "options": [
       {
         "id": "A",
-        "text": "Patching OS pada instance Amazon EC2"
+        "text": "Melakukan instalasi pembaruan keamanan (patching) pada sistem operasi tamu (guest OS) instance EC2"
       },
       {
         "id": "B",
-        "text": "Pemusnahan fisik media storage di Data Center"
+        "text": "Melakukan pembaruan firmware pada server perangkat keras fisik di data center AWS"
       },
       {
         "id": "C",
-        "text": "Keamanan fisik fasilitas Edge Location"
+        "text": "Mengelola pendingin dan pasokan listrik pada fasilitas data center"
       },
       {
         "id": "D",
-        "text": "Patching hypervisor virtualisasi AWS"
+        "text": "Memusnahkan disk fisik yang rusak di lingkungan infrastruktur global AWS"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Berdasarkan Shared Responsibility Model (Security IN the Cloud), pelanggan bertanggung jawab atas konfigurasi OS, patching OS EC2, dan firewall.",
+    "explanation": "Pada model infrastruktur IaaS seperti Amazon EC2, pelanggan bertanggung jawab penuh atas 'keamanan di dalam cloud', yang mencakup pengelolaan patch keamanan sistem operasi tamu (guest OS), aplikasi, firewall Security Group, dan data.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -3185,19 +3185,19 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0107",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan pub/sub messaging untuk mengirimkan notifikasi satu-ke-banyak (fanout) ke email/SMS?",
+    "prompt": "Sebuah aplikasi sistem peringatan dini gempa bumi perlu menyiarkan pesan peringatan darurat secara instan kepada ribuan penerima sekaligus, termasuk notifikasi push email, SMS, dan panggilan ke webhook pemrosesan otomatis (arsitektur fan-out). Layanan messaging AWS manakah yang paling tepat?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon SES"
+        "text": "Amazon Simple Queue Service (Amazon SQS)"
       },
       {
         "id": "B",
-        "text": "Amazon SQS"
+        "text": "AWS Step Functions"
       },
       {
         "id": "C",
-        "text": "Amazon SNS"
+        "text": "Amazon Simple Notification Service (Amazon SNS)"
       },
       {
         "id": "D",
@@ -3207,7 +3207,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Amazon Simple Notification Service (SNS) adalah layanan pub/sub messaging terkelola untuk pengiriman pesan fanout ke subscriber (email, SMS, Lambda, SQS).",
+    "explanation": "Amazon SNS adalah layanan pesan pub/sub yang dirancang untuk pengiriman pesan satu-ke-banyak (fan-out) bervolume tinggi ke berbagai endpoint pelanggan seperti email, SMS, mobile push, dan HTTP/S endpoints.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -3215,29 +3215,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0108",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Keuntungan finansial utama dari komputasi cloud dibandingkan model on-premises tradisional adalah?",
+    "prompt": "Seorang Direktur Keuangan sedang meninjau manfaat transisi dari data center on-premise ke AWS Cloud. Manakah pernyataan berikut yang paling tepat menjelaskan keuntungan finansial utama dari komputasi cloud dibandingkan model infrastruktur tradisional?",
     "options": [
       {
         "id": "A",
-        "text": "Mengganti biaya operasional (OpEx) menjadi modal besar (CapEx)"
+        "text": "Mengharuskan perusahaan membeli perangkat server di muka untuk mendapatkan diskon"
       },
       {
         "id": "B",
-        "text": "Mengganti belanja modal di awal (CapEx) menjadi biaya variabel (OpEx)"
+        "text": "Mengubah belanja modal besar di awal (Capital Expenditures / CapEx) menjadi biaya variabel operasional yang fleksibel (Operating Expenses / OpEx)"
       },
       {
         "id": "C",
-        "text": "Menghilangkan kewajiban monitoring performa aplikasi"
+        "text": "Menghilangkan seluruh kebutuhan personil tim teknologi informasi di perusahaan"
       },
       {
         "id": "D",
-        "text": "Mengurangi kebutuhan konektivitas internet"
+        "text": "Menjamin biaya tagihan bulanan selalu bernilai tetap tanpa mempedulikan penggunaan"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Cloud computing mengubah Capital Expenditures (CapEx) besar di awal menjadi Operational Expenditures (OpEx) variabel yang fleksibel (pay-as-you-go).",
+    "explanation": "Keuntungan finansial utama komputasi cloud adalah menukar investasi modal besar di awal untuk perangkat keras (CapEx) menjadi biaya variabel operasional yang dibayar sesuai pemakaian nyata (OpEx / Pay-as-you-go).",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -3245,7 +3245,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0109",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan DNS terkelola yang highly available dan scalable pada port 53 adalah?",
+    "prompt": "Sebuah perusahaan membutuhkan layanan Domain Name System (DNS) terkelola yang memiliki tingkat ketersediaan 100% SLA, hemat biaya, dan mampu merutekan pengguna internet global ke aplikasi mereka pada port standar 53 dengan berbagai kebijakan perutean cerdas. Layanan jaringan AWS manakah ini?",
     "options": [
       {
         "id": "A",
@@ -3257,17 +3257,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Amazon CloudFront"
+        "text": "Amazon Virtual Private Cloud (Amazon VPC)"
       },
       {
         "id": "D",
-        "text": "AWS Global Accelerator"
+        "text": "AWS Transit Gateway"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Amazon Route 53 adalah layanan cloud Domain Name System (DNS) terkelola yang sangat andal dan dapat diskalakan secara global.",
+    "explanation": "Amazon Route 53 adalah layanan web Domain Name System (DNS) cloud yang sangat andal dan dapat diskalakan yang dirancang untuk menerjemahkan nama domain dan merutekan lalu lintas pengguna pada port 53.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -3275,29 +3275,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0110",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Pilar AWS Well-Architected Framework mana yang berfokus pada penghindaran pemborosan dana?",
+    "prompt": "Sebuah organisasi sedang melakukan audit arsitektur cloud mereka dan ingin memastikan bahwa mereka tidak mengalokasikan kapasitas instance secara berlebihan, selalu menghapus volume penyimpanan yang tidak terpakai, dan memilih model penetapan harga yang paling efisien. Pilar AWS Well-Architected Framework manakah yang berfokus pada efisiensi dana ini?",
     "options": [
       {
         "id": "A",
-        "text": "Operational Excellence"
+        "text": "Keandalan (Reliability)"
       },
       {
         "id": "B",
-        "text": "Cost Optimization"
+        "text": "Optimalisasi Biaya (Cost Optimization)"
       },
       {
         "id": "C",
-        "text": "Reliability"
+        "text": "Efisiensi Kinerja (Performance Efficiency)"
       },
       {
         "id": "D",
-        "text": "Performance Efficiency"
+        "text": "Keamanan (Security)"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Pilar Cost Optimization berfokus pada kemampuan menjalankan sistem untuk memberikan nilai bisnis dengan harga serendah mungkin.",
+    "explanation": "Pilar Cost Optimization (Optimalisasi Biaya) pada AWS Well-Architected Framework mencakup kemampuan untuk menjalankan sistem guna memberikan nilai bisnis pada titik harga serendah mungkin.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -3305,11 +3305,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0111",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan database NoSQL key-value terkelola penuh dengan performa single-digit millisecond latency?",
+    "prompt": "Sebuah aplikasi leaderboard game multipemain online membutuhkan penyimpanan basis data NoSQL model key-value yang terkelola penuh, serverless, dan mampu memberikan latensi respons baca dan tulis di bawah 10 milidetik (single-digit millisecond latency) secara konsisten pada skala beban jutaan pemain. Layanan AWS manakah yang harus dipilih?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon RDS"
+        "text": "Amazon RDS for MySQL"
       },
       {
         "id": "B",
@@ -3317,17 +3317,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Amazon DocumentDB"
+        "text": "Amazon Redshift"
       },
       {
         "id": "D",
-        "text": "Amazon Redshift"
+        "text": "Amazon Aurora Serverless"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Amazon DynamoDB adalah database NoSQL serverless terkelola penuh yang menawarkan single-digit millisecond latency pada skala apa pun.",
+    "explanation": "Amazon DynamoDB adalah basis data NoSQL terkelola penuh yang menyediakan performa konsisten satu digit milidetik pada skala apa pun tanpa memerlukan manajemen server (serverless).",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -3335,11 +3335,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0112",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan compute serverless yang mengeksekusi kode berdasarkan event trigger tanpa server provisioning?",
+    "prompt": "Sebuah tim pengembang ingin membuat fungsi otomatisasi yang memproses data sensor IoT setiap kali ada data baru terkirim, tanpa perlu memprovisikan server, mengonfigurasi klaster, atau membayar saat tidak ada data yang masuk (hanya membayar durasi eksekusi kode dalam milidetik). Layanan komputasi serverless AWS manakah yang dimaksud?",
     "options": [
       {
         "id": "A",
-        "text": "AWS Elastic Beanstalk"
+        "text": "Amazon Elastic Container Service (Amazon ECS)"
       },
       {
         "id": "B",
@@ -3347,17 +3347,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Amazon ECS"
+        "text": "Amazon EC2"
       },
       {
         "id": "D",
-        "text": "Amazon EC2"
+        "text": "AWS Elastic Beanstalk"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "AWS Lambda adalah layanan compute serverless berbasis event yang menjalankan kode tanpa perlu provisioning atau mengelola server.",
+    "explanation": "AWS Lambda memungkinkan eksekusi kode tanpa perlu memprovisikan atau mengelola server (serverless). Pengguna hanya membayar untuk waktu komputasi yang digunakan dalam pecahan milidetik saat fungsi dipicu.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -3365,7 +3365,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0113",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Manakah tindakan keamanan PALING krusial yang harus segera diterapkan pada AWS Root User?",
+    "prompt": "Sebuah perusahaan baru saja mendaftarkan akun AWS organisasi mereka. Menurut rekomendasi keamanan terbaik AWS (AWS Security Best Practices), tindakan perlindungan identitas PALING krusial apakah yang harus segera diaktifkan pada akun AWS Root User?",
     "options": [
       {
         "id": "A",
@@ -3373,21 +3373,21 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "Membuat Access Key untuk pemakaian CLI rutin"
+        "text": "Membuat Access Key ID permanen untuk mempermudah akses terminal"
       },
       {
         "id": "C",
-        "text": "Menghapus izin AdministratorAccess"
+        "text": "Membagikan kata sandi root ke seluruh administrator sistem"
       },
       {
         "id": "D",
-        "text": "Membagikan kredensial login ke seluruh tim DevOps"
+        "text": "Menonaktifkan logging CloudTrail pada akun root"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Mengaktifkan MFA dan tidak membuat access key untuk root user adalah best practice keamanan utama untuk mengamankan akun AWS.",
+    "explanation": "Mengaktifkan Multi-Factor Authentication (MFA) pada akun AWS Root User adalah tindakan keamanan paling mendasar dan krusial untuk mencegah pengambilalihan akun yang memiliki hak akses tertinggi tanpa batas.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -3395,15 +3395,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0114",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan otomatis untuk mengaudit kepatuhan konfigurasi resource dan mendeteksi unattached volume?",
+    "prompt": "Tim kepatuhan keamanan membutuhkan layanan otomatis yang terus-menerus mengevaluasi konfigurasi seluruh resource AWS, mencatat perubahan konfigurasi dari waktu ke waktu, dan secara otomatis mendeteksi jika ada volume Amazon EBS yang berstatus tidak terpasang (unattached). Layanan kepatuhan AWS manakah ini?",
     "options": [
       {
         "id": "A",
-        "text": "AWS CloudTrail"
+        "text": "Amazon CloudWatch"
       },
       {
         "id": "B",
-        "text": "Amazon CloudWatch"
+        "text": "AWS CloudTrail"
       },
       {
         "id": "C",
@@ -3417,7 +3417,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "AWS Config mencatat perubahan konfigurasi resource cloud dari waktu ke waktu dan mengevaluasi kepatuhannya terhadap aturan tata kelola (Config Rules).",
+    "explanation": "AWS Config mencatat, mengaudit, dan mengevaluasi konfigurasi sumber daya AWS terhadap aturan kepatuhan yang telah ditentukan (seperti mendeteksi volume EBS unattached).",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -3425,29 +3425,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0115",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Fitur AWS Organizations untuk menetapkan batasan izin maksimum (guardrails) pada member accounts?",
+    "prompt": "Sebuah korporasi multinasional menggunakan AWS Organizations untuk mengelola puluhan akun AWS divisi. Tim keamanan ingin menetapkan batas izin maksimum terpusat (guardrails) yang secara mutlak melarang seluruh akun anggota meluncurkan instance di luar Region tertentu, bahkan jika admin akun anggota memiliki hak administrator penuh. Fitur AWS Organizations manakah yang harus digunakan?",
     "options": [
       {
         "id": "A",
-        "text": "IAM Policy Delegation"
+        "text": "IAM Managed Policies"
       },
       {
         "id": "B",
-        "text": "Service Control Policies (SCP)"
+        "text": "Service Control Policies (SCPs)"
       },
       {
         "id": "C",
-        "text": "AWS Shield"
+        "text": "AWS Directory Service"
       },
       {
         "id": "D",
-        "text": "Resource Access Manager"
+        "text": "Network Access Control Lists"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Service Control Policies (SCP) menetapkan batasan izin maksimum di tingkat Organization Unit (OU) atau member accounts.",
+    "explanation": "Service Control Policies (SCPs) di AWS Organizations menetapkan batas izin maksimum (guardrails) bagi seluruh entitas IAM di dalam akun anggota, dan tidak dapat dilewati bahkan oleh akun administrator lokal di akun anggota.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -3455,15 +3455,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0116",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Prinsip arsitektur cloud untuk memisahkan komponen agar kegagalan satu komponen tidak melumpuhkan sistem?",
+    "prompt": "Seorang arsitek solusi merancang sistem aplikasi di mana modul penerimaan pesanan dan modul pemrosesan faktur dihubungkan secara asinkron melalui antrean Amazon SQS, sehingga kegagalan sementara pada modul faktur tidak menghentikan operasional modul pesanan. Prinsip arsitektur cloud manakah yang diterapkan?",
     "options": [
       {
         "id": "A",
-        "text": "Tight Coupling"
+        "text": "Monolithic Design"
       },
       {
         "id": "B",
-        "text": "Decoupling"
+        "text": "Decoupling (Loose Coupling / Pemisahan Komponen)"
       },
       {
         "id": "C",
@@ -3471,13 +3471,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "Monolithic Architecture"
+        "text": "Hard Dependency"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Decoupling (loosely coupled architecture) memisahkan komponen sistem (misalnya menggunakan queue/broker) agar kegagalan satu komponen terisolasi.",
+    "explanation": "Prinsip Decoupling (Loose Coupling) menganjurkan pemisahan komponen sistem agar kegagalan atau beban tinggi pada satu modul tidak berdampak buruk atau melumpuhkan modul lainnya.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -3485,29 +3485,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0117",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Karakteristik komputasi cloud yang memungkinkan alokasi dan pelepasan resource otomatis sesuai beban?",
+    "prompt": "Sebuah situs e-commerce secara otomatis menambah 10 instance Amazon EC2 saat lonjakan diskon tengah malam terjadi, dan kemudian secara otomatis mengurangi 10 instance tersebut setelah pengunjung kembali normal sehingga perusahaan tidak membayar server yang menganggur. Karakteristik komputasi cloud manakah yang paling tepat menggambarkan hal ini?",
     "options": [
       {
         "id": "A",
-        "text": "High Availability"
+        "text": "Ketersediaan Tinggi (High Availability)"
       },
       {
         "id": "B",
-        "text": "Elasticity"
+        "text": "Elastisitas (Elasticity)"
       },
       {
         "id": "C",
-        "text": "Fault Tolerance"
+        "text": "Agilitas (Agility)"
       },
       {
         "id": "D",
-        "text": "Durability"
+        "text": "Toleransi Kesalahan (Fault Tolerance)"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Elasticity adalah kemampuan mengalokasikan dan melepaskan resource komputasi secara dinamis dan otomatis sesuai fluktuasi workload real-time.",
+    "explanation": "Elastisitas (Elasticity) adalah kemampuan sistem cloud untuk secara dinamis mengalokasikan dan melepaskan kapasitas sumber daya komputasi secara otomatis mengikuti fluktuasi permintaan nyata.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -3515,29 +3515,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0118",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Definisi AWS Availability Zone (AZ) yang paling tepat adalah?",
+    "prompt": "Seorang Cloud Engineer sedang menjelaskan konsep ketahanan fisik cloud kepada tim operasional. Manakah dari pernyataan berikut yang paling tepat mendefinisikan sebuah AWS Availability Zone (AZ)?",
     "options": [
       {
         "id": "A",
-        "text": "Satu lokasi fisik data center tunggal di satu negara"
+        "text": "Sebuah server rak tunggal di pusat data lokal"
       },
       {
         "id": "B",
-        "text": "Satu atau lebih data center terpisah dengan daya & jaringan redundan"
+        "text": "Satu atau lebih pusat data fisik terpisah dengan sumber daya listrik, pendingin, dan jaringan terisolasi di dalam satu Region"
       },
       {
         "id": "C",
-        "text": "Kumpulan Edge Locations untuk Content Delivery Network"
+        "text": "Sebuah zona benua yang mencakup seluruh negara di belahan bumi tertentu"
       },
       {
         "id": "D",
-        "text": "Batas yurisdiksi geografis global AWS"
+        "text": "Titik kehadiran edge (Edge Location) untuk caching konten CloudFront"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Availability Zone (AZ) terdiri dari satu atau lebih data center fisik terpisah dalam satu AWS Region yang dilengkapi catu daya dan jaringan redundan.",
+    "explanation": "Sebuah AWS Availability Zone (AZ) terdiri dari satu atau lebih pusat data fisik terpisah yang memiliki daya, pendinginan, dan jaringan redundan di dalam satu AWS Region.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6155,29 +6155,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0206",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Apa fungsi utama mengaktifkan Multi-Factor Authentication (MFA) pada Root User AWS?",
+    "prompt": "Seorang Administrator Keamanan mewajibkan pengaktifan Multi-Factor Authentication (MFA) pada akun Root User dan seluruh pengguna IAM berhak istimewa di AWS. Apakah fungsi utama dari pengaktifan MFA dalam strategi perlindungan identitas akun AWS?",
     "options": [
       {
         "id": "A",
-        "text": "Memberikan lapisan keamanan ekstra di luar email dan password"
+        "text": "Memberikan lapisan keamanan pertahanan ekstra di luar nama pengguna dan kata sandi dengan mewajibkan kode token sekali pakai dari perangkat fisik/aplikasi"
       },
       {
         "id": "B",
-        "text": "Membatasi biaya tagihan bulanan secara otomatis"
+        "text": "Mempercepat proses masuk (login) ke AWS Management Console tanpa perlu memasukkan kata sandi"
       },
       {
         "id": "C",
-        "text": "Mencegah instance EC2 terkena serangan DDoS"
+        "text": "Mencegah pengguna mengubah konfigurasi Security Group di dalam VPC"
       },
       {
         "id": "D",
-        "text": "Mempercepat akses login ke AWS Management Console"
+        "text": "Menghilangkan kebutuhan pembuatan akun IAM untuk pengguna lain"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "MFA memberikan lapisan keamanan tambahan berupa kode dinamis dari token fisik/aplikasi sehingga akses root terlindungi meskipun password bocor.",
+    "explanation": "Multi-Factor Authentication (MFA) menambahkan lapisan keamanan pertahanan kedua di luar kredensial nama pengguna dan kata sandi, mewajibkan kode autentikasi unik dari perangkat fisik atau aplikasi autentikator.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -6185,29 +6185,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0207",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan AWS apa yang paling tepat untuk mengirim email alert jika tagihan bulanan mendekati $1.00?",
+    "prompt": "Seorang Cloud Financial Manager ingin menerima peringatan email instan segera setelah perkiraan pengeluaran biaya bulanan pada akun AWS mendekati ambang batas anggaran $1,00. Kombinasi layanan AWS manakah yang paling tepat digunakan untuk menyetel batas anggaran dan mengirimkan notifikasi tersebut?",
     "options": [
       {
         "id": "A",
-        "text": "AWS CloudTrail"
+        "text": "AWS Cost Explorer terintegrasi dengan AWS CloudTrail"
       },
       {
         "id": "B",
-        "text": "AWS Budgets terintegrasi dengan Amazon SNS"
+        "text": "AWS Budgets terintegrasi dengan Amazon Simple Notification Service (Amazon SNS)"
       },
       {
         "id": "C",
-        "text": "Amazon CloudWatch Logs"
+        "text": "AWS Pricing Calculator terintegrasi dengan Amazon CloudWatch"
       },
       {
         "id": "D",
-        "text": "AWS Trusted Advisor"
+        "text": "AWS Trusted Advisor terintegrasi dengan AWS Systems Manager"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "AWS Budgets digunakan untuk menetapkan batas anggaran biaya dan terhubung ke Amazon SNS untuk mengirimkan email notifikasi alert.",
+    "explanation": "AWS Budgets memungkinkan pembuatan ambang batas anggaran biaya dan penggunaan, dan ketika terintegrasi dengan Amazon SNS, dapat secara otomatis mengirimkan notifikasi email saat biaya aktual atau proyeksi mendekati batas.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6215,29 +6215,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0208",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Mengapa best practice industri menyarankan remote EC2 menggunakan AWS Systems Manager (SSM)?",
+    "prompt": "Dalam praktik terbaik keamanan industri AWS (Security Best Practices), administrator disarankan menggunakan AWS Systems Manager (SSM) Session Manager untuk mengelola instance Amazon EC2 jarak jauh daripada menggunakan koneksi SSH konvensional. Mengapa Session Manager jauh lebih aman?",
     "options": [
       {
         "id": "A",
-        "text": "Karena SSM meningkatkan performa CPU server web"
+        "text": "Karena Session Manager mewajibkan instance EC2 memiliki alamat IP publik"
       },
       {
         "id": "B",
-        "text": "Karena SSM otomatis melakukan patch update setiap jam"
+        "text": "Karena Session Manager secara otomatis menaikkan spesifikasi kapasitas RAM server"
       },
       {
         "id": "C",
-        "text": "Karena tidak perlu membuka port 22 SSH dan tanpa public IP"
+        "text": "Karena Session Manager memungkinkan remote shell tanpa perlu membuka port inbound SSH 22 pada Security Group dan tanpa memerlukan alamat IP publik atau bastion host"
       },
       {
         "id": "D",
-        "text": "Karena SSM adalah satu-satunya cara menjalankan Linux"
+        "text": "Karena Session Manager menonaktifkan pencatatan log pada CloudTrail"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "AWS Systems Manager Session Manager memungkinkan akses shell aman ke instans tanpa membuka inbound port 22 ke internet dan tanpa membutuhkan public IP.",
+    "explanation": "AWS Systems Manager Session Manager menyediakan koneksi shell aman melalui agen SSM tanpa perlu membuka port inbound 22 SSH, tanpa memerlukan bastion host, dan tanpa memerlukan alamat IP publik pada instance.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -6245,19 +6245,19 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0209",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Berapa CIDR block default yang umum digunakan untuk membuat 1 Custom VPC skala private?",
+    "prompt": "Seorang Network Engineer sedang merancang Custom VPC baru di AWS untuk lingkungan produksi perusahaan. Rentang blok alamat IPv4 privat standar (RFC 1918) dengan ukuran CIDR berkapasitas 65.536 alamat IP manakah yang paling umum digunakan sebagai CIDR block utama sebuah VPC?",
     "options": [
       {
         "id": "A",
-        "text": "192.168.1.1/32"
+        "text": "192.168.1.0/24"
       },
       {
         "id": "B",
-        "text": "0.0.0.0/0"
+        "text": "172.16.0.0/28"
       },
       {
         "id": "C",
-        "text": "172.31.0.0/28"
+        "text": "8.8.8.8/32"
       },
       {
         "id": "D",
@@ -6267,7 +6267,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "10.0.0.0/16 adalah CIDR range standar privat Class A yang menyediakan hingga 65.536 alamat IP privat untuk subnetting dalam VPC.",
+    "explanation": "Rentang CIDR 10.0.0.0/16 adalah standar paling umum untuk membuat Amazon VPC privat kustom, menyediakan 65.536 alamat IP privat yang dapat dipecah menjadi berbagai subnet publik dan privat.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6275,29 +6275,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0210",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Bagaimana cara membuat Security Group EC2 hanya menerima traffic web dari Application Load Balancer?",
+    "prompt": "Dalam arsitektur web bertingkat (multi-tier), seorang insinyur keamanan ingin memastikan bahwa instance Amazon EC2 di lapisan web server hanya dapat menerima lalu lintas HTTP dari Application Load Balancer (ALB) dan memblokir seluruh lalu lintas langsung lainnya. Bagaimana cara paling aman mengonfigurasi aturan inbound Security Group pada instance EC2 tersebut?",
     "options": [
       {
         "id": "A",
-        "text": "Mengatur source rule HTTP ke Security Group ID milik ALB"
+        "text": "Mengatur Source pada aturan inbound port HTTP 80 agar merujuk langsung ke ID Security Group milik Application Load Balancer (sg-xxxxxx)"
       },
       {
         "id": "B",
-        "text": "Membuka port 80 ke CIDR block 0.0.0.0/0"
+        "text": "Membuka port HTTP 80 ke seluruh internet dengan CIDR source 0.0.0.0/0"
       },
       {
         "id": "C",
-        "text": "Memasang Internet Gateway langsung ke subnet privat"
+        "text": "Menetapkan aturan port 80 pada Network ACL subnet publik saja"
       },
       {
         "id": "D",
-        "text": "Menghubungkan Elastic IP publik ke instance EC2"
+        "text": "Menghubungkan instance EC2 langsung ke Internet Gateway tanpa Security Group"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Security Group chaining dilakukan dengan mengarahkan source inbound rule ke ID Security Group ALB (misal sg-xxxx) bukan IP publik.",
+    "explanation": "Praktik terbaik arsitektur AWS adalah menautkan Security Group EC2 langsung ke Security Group ID milik Load Balancer sebagai Source, memastikan instance hanya menerima lalu lintas yang telah melalui load balancer.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -6305,29 +6305,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0211",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Mengapa arsitektur web production disarankan deploy minimal di 2 Availability Zone (Multi-AZ)?",
+    "prompt": "Seorang Solutions Architect menyarankan agar aplikasi web produksi disebarkan minimal pada dua instance Amazon EC2 yang berada di dua Availability Zone (AZ) berbeda (pola Multi-AZ deployment). Apakah alasan arsitektural utama di balik rekomendasi penempatan lintas AZ ini?",
     "options": [
       {
         "id": "A",
-        "text": "Untuk mengurangi biaya sewa server hingga 50%"
+        "text": "Untuk mengurangi biaya lisensi perangkat lunak sistem operasi hingga 50%"
       },
       {
         "id": "B",
-        "text": "Untuk High Availability dan toleransi bencana fisik datacenter"
+        "text": "Untuk mencapai Ketersediaan Tinggi (High Availability) dan toleransi kesalahan fisik terhadap potensi kegagalan data center pada satu AZ"
       },
       {
         "id": "C",
-        "text": "Agar kapasitas hard disk server otomatis berlipat ganda"
+        "text": "Untuk mempercepat instalasi pembaruan patch Windows Update"
       },
       {
         "id": "D",
-        "text": "Karena regulasi AWS mewajibkan 2 region aktif"
+        "text": "Karena AWS melarang penempatan dua instance pada AZ yang sama"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Multi-AZ mendistribusikan beban aplikasi di datacenter fisik yang terpisah sehingga jika satu AZ padam, sistem tetap beroperasi normal.",
+    "explanation": "Penyebaran multi-AZ memastikan bahwa jika salah satu pusat data fisik di sebuah Availability Zone mengalami pemadaman listrik atau bencana, aplikasi tetap berjalan normal dilayani oleh instance di AZ lainnya.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -6335,15 +6335,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0212",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Komponen VPC apa yang berfungsi menghubungkan subnet publik dengan internet luar secara dua arah?",
+    "prompt": "Sebuah tim pengembang meluncurkan instance web server pada subnet publik di Amazon VPC. Komponen jaringan VPC manakah yang harus dilampirkan (attached) ke VPC dan dirutekan pada Route Table agar subnet publik tersebut memiliki konektivitas komunikasi dua arah dengan internet luar?",
     "options": [
       {
         "id": "A",
-        "text": "Virtual Private Gateway (VGW)"
+        "text": "NAT Gateway"
       },
       {
         "id": "B",
-        "text": "NAT Instance"
+        "text": "Virtual Private Gateway"
       },
       {
         "id": "C",
@@ -6351,13 +6351,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "VPC Endpoint"
+        "text": "Egress-Only Internet Gateway"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Internet Gateway (IGW) adalah gateway terkelola yang menyediakan target pada route table VPC untuk komunikasi dua arah dengan internet.",
+    "explanation": "Internet Gateway (IGW) adalah komponen VPC redundan yang menyediakan konektivitas dua arah antara sumber daya di dalam subnet publik VPC dengan internet publik luar.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6365,29 +6365,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0213",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Apa perbedaan utama sifat state antara Security Group dan Network ACL (NACL)?",
+    "prompt": "Seorang insinyur jaringan sedang membandingkan mekanisme kerja antara Security Group dan Network Access Control List (NACL) di Amazon VPC. Manakah dari pernyataan berikut yang paling tepat menjelaskan perbedaan sifat 'state' antara kedua kontrol firewall tersebut?",
     "options": [
       {
         "id": "A",
-        "text": "Security Group tidak punya aturan outbound"
+        "text": "Security Group bersifat stateless, sedangkan Network ACL bersifat stateful"
       },
       {
         "id": "B",
-        "text": "NACL otomatis mengizinkan return traffic"
+        "text": "Keduanya bersifat stateless dan tidak mengingat status koneksi"
       },
       {
         "id": "C",
-        "text": "Security Group bekerja di level subnet"
+        "text": "Keduanya bersifat stateful dan otomatis mengizinkan lalu lintas balasan"
       },
       {
         "id": "D",
-        "text": "Security Group bersifat stateful, sedangkan NACL stateless"
+        "text": "Security Group bersifat stateful (lalu lintas balasan otomatis diizinkan), sedangkan Network ACL bersifat stateless (aturan masuk dan keluar harus didefinisikan secara terpisah)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Security Group bersifat stateful (respon otomatis diizinkan jika inbound lolos), sedangkan NACL stateless (inbound dan outbound harus diatur eksplisit).",
+    "explanation": "Security Group bersifat stateful (respons koneksi otomatis diizinkan keluar/masuk), sedangkan Network ACL bersifat stateless (lalu lintas masuk dan keluar dievaluasi secara terpisah dan harus diizinkan secara eksplisit pada kedua arah).",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -6395,29 +6395,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0214",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Di bawah Shared Responsibility Model, manakah yang merupakan tanggung jawab AWS?",
+    "prompt": "Di bawah model tanggung jawab bersama AWS (AWS Shared Responsibility Model), manakah dari tanggung jawab operasional berikut yang secara eksklusif berada di pihak AWS (Security OF the Cloud)?",
     "options": [
       {
         "id": "A",
-        "text": "Keamanan fisik fasilitas datacenter dan hardware"
+        "text": "Keamanan fisik fasilitas pusat data, pemeliharaan perangkat keras server fisik, dan lapisan virtualisasi infrastruktur"
       },
       {
         "id": "B",
-        "text": "Konfigurasi firewall Security Group pada instance"
+        "text": "Pengelolaan kredensial akun pengguna IAM dan rotasi kata sandi"
       },
       {
         "id": "C",
-        "text": "Patching sistem operasi tamu pada Amazon EC2"
+        "text": "Konfigurasi aturan firewall masuk dan keluar pada Security Group VPC"
       },
       {
         "id": "D",
-        "text": "Enkripsi data aplikasi sisi klien"
+        "text": "Penerapan enkripsi sisi klien pada data pelanggan sebelum diunggah ke cloud"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "AWS bertanggung jawab atas keamanan fasilitas fisik, hardware server, dan infrastruktur global (Security OF the Cloud).",
+    "explanation": "AWS bertanggung jawab atas keamanan 'dari' cloud, yang mencakup perlindungan fisik fasilitas pusat data, infrastruktur perangkat keras, pasokan listrik, dan lapisan perangkat lunak dasar virtualisasi (hypervisor).",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6425,29 +6425,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0215",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Di bawah Shared Responsibility Model, manakah yang merupakan tanggung jawab pelanggan?",
+    "prompt": "Di bawah model tanggung jawab bersama AWS (AWS Shared Responsibility Model), manakah dari tugas operasional berikut yang sepenuhnya menjadi tanggung jawab pelanggan (Security IN the Cloud)?",
     "options": [
       {
         "id": "A",
-        "text": "Pemeliharaan kabel jaringan antardatacenter"
+        "text": "Memperbaiki kerusakan fisik kabel serat optik antar fasilitas data center AWS"
       },
       {
         "id": "B",
-        "text": "Pengelolaan user account dan hak akses IAM"
+        "text": "Pengelolaan akun pengguna, rotasi kredensial, dan konfigurasi hak akses IAM"
       },
       {
         "id": "C",
-        "text": "Penggantian hard drive server fisik yang rusak"
+        "text": "Pembaruan firmware pada sakelar jaringan fisik data center"
       },
       {
         "id": "D",
-        "text": "Pembaruan firmware switch fisik AWS"
+        "text": "Pemusnahan media magnetik hard drive yang sudah usang di fasilitas AWS"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Pelanggan bertanggung jawab mengelola data, konfigurasi IAM, autentikasi pengguna, dan sistem operasi (Security IN the Cloud).",
+    "explanation": "Pelanggan bertanggung jawab atas keamanan 'di dalam' cloud, yang mencakup manajemen akun pengguna, kontrol akses IAM, konfigurasi firewall, enkripsi data, dan perlindungan sistem operasi tamu.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6455,29 +6455,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0216",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Manakah pilar AWS Well-Architected Framework yang fokus mencegah dan memitigasi risiko keamanan?",
+    "prompt": "Sebuah organisasi menerapkan enkripsi data at-rest pada seluruh database Amazon RDS, mengonfigurasi autentikasi multifaktor (MFA), dan menggunakan AWS WAF untuk melindungi aplikasi dari eksploitasi web. Pilar AWS Well-Architected Framework manakah yang paling didukung oleh praktik-praktik ini?",
     "options": [
       {
         "id": "A",
-        "text": "Operational Excellence"
+        "text": "Keandalan (Reliability)"
       },
       {
         "id": "B",
-        "text": "Reliability"
+        "text": "Efisiensi Kinerja (Performance Efficiency)"
       },
       {
         "id": "C",
-        "text": "Security"
+        "text": "Keamanan (Security)"
       },
       {
         "id": "D",
-        "text": "Cost Optimization"
+        "text": "Keunggulan Operasional (Operational Excellence)"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Pilar Security berfokus pada perlindungan data, sistem, integritas aset, dan pengelolaan identitas sesuai prinsip least privilege.",
+    "explanation": "Pilar Security (Keamanan) pada AWS Well-Architected Framework berfokus pada perlindungan data, sistem, dan aset digital melalui kontrol hak akses, enkripsi data, dan deteksi ancaman proaktif.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6485,29 +6485,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0217",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Pilar Well-Architected Framework mana yang berfokus menjalankan sistem tanpa memboroskan dana?",
+    "prompt": "Sebuah tim arsitek rutin mematikan instance EC2 lingkungan uji di luar jam kerja, mengidentifikasi dan menghapus volume EBS yang tidak terpasang, serta memilih komitmen Savings Plans untuk beban kerja stabil. Pilar AWS Well-Architected Framework manakah yang paling didukung oleh inisiatif ini?",
     "options": [
       {
         "id": "A",
-        "text": "Performance Efficiency"
+        "text": "Keberlanjutan (Sustainability)"
       },
       {
         "id": "B",
-        "text": "Sustainability"
+        "text": "Keandalan (Reliability)"
       },
       {
         "id": "C",
-        "text": "Reliability"
+        "text": "Keamanan (Security)"
       },
       {
         "id": "D",
-        "text": "Cost Optimization"
+        "text": "Optimalisasi Biaya (Cost Optimization)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Cost Optimization berfokus pada pengelolaan alokasi dana, pemilihan jenis resource yang tepat, dan penghapusan biaya yang tidak perlu.",
+    "explanation": "Pilar Cost Optimization (Optimalisasi Biaya) berfokus pada kemampuan menjalankan sistem secara hemat, menghilangkan pengeluaran yang tidak perlu, dan memaksimalkan nilai bisnis dari setiap rupiah yang dibelanjakan di cloud.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6515,7 +6515,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0218",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan AWS apa yang mencatat riwayat panggilan API untuk keperluan tata kelola dan audit kepatuhan?",
+    "prompt": "Sebuah perusahaan memerlukan rekaman catatan audit yang komprehensif mengenai seluruh aktivitas pemanggilan API AWS (baik yang dilakukan melalui AWS Management Console, CLI, SDK, maupun perkakas otomatisasi) untuk keperluan tata kelola dan audit kepatuhan regulasi. Layanan AWS manakah yang harus diaktifkan?",
     "options": [
       {
         "id": "A",
@@ -6527,17 +6527,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "AWS Config"
+        "text": "AWS Trusted Advisor"
       },
       {
         "id": "D",
-        "text": "AWS Trusted Advisor"
+        "text": "AWS Config"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "AWS CloudTrail mencatat seluruh aktivitas akun dan panggilan API yang dilakukan pengguna, role, atau layanan AWS lain.",
+    "explanation": "AWS CloudTrail menyediakan tata kelola, kepatuhan, dan audit operasional akun AWS dengan mencatat seluruh riwayat pemanggilan API dan tindakan pengguna di seluruh layanan AWS.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -6545,7 +6545,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0219",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan AWS apa yang menyediakan metrik pemantauan real-time seperti penggunaan CPU dan memori?",
+    "prompt": "Tim operasional membutuhkan dashboard pemantauan waktu nyata (real-time) yang menampilkan grafik metrik pemakaian CPU, lalu lintas jaringan (Network I/O), dan operasi baca-tulis disk (Disk I/O) pada armada Amazon EC2 mereka, lengkap dengan kemampuan memicu alarm jika CPU melampaui 85%. Layanan AWS manakah yang menyediakan fungsi pemantauan metrik ini?",
     "options": [
       {
         "id": "A",
@@ -6557,17 +6557,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "AWS Artifact"
+        "text": "AWS Systems Manager"
       },
       {
         "id": "D",
-        "text": "AWS Shield"
+        "text": "Amazon Inspector"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Amazon CloudWatch mengumpulkan metrik, log operasional, serta memantau utilisasi resource seperti CPU utilization pada EC2.",
+    "explanation": "Amazon CloudWatch adalah layanan pemantauan dan observabilitas yang mengumpulkan data metrik operasional, log, dan memicu alarm otomatis saat batas performa tercapai.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6575,15 +6575,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0220",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Fitur AWS apa yang memungkinkan pengelompokan akun dengan Service Control Policies (SCP)?",
+    "prompt": "Sebuah grup korporasi ingin mengelola puluhan akun AWS anak perusahaan secara terpusat, mengelompokkan akun ke dalam Unit Organisasi (OU), dan menerapkan Service Control Policies (SCPs) untuk membatasi izin operasional pada akun-akun tersebut. Layanan tata kelola AWS manakah yang menyediakan kapabilitas ini?",
     "options": [
       {
         "id": "A",
-        "text": "AWS IAM User Groups"
+        "text": "AWS IAM Identity Center"
       },
       {
         "id": "B",
-        "text": "AWS Resource Access Manager"
+        "text": "AWS Control Tower"
       },
       {
         "id": "C",
@@ -6597,7 +6597,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "AWS Organizations memungkinkan konsolidasi multi-akun dalam satu organisasi dan menerapkan batasan izin via Service Control Policies (SCP).",
+    "explanation": "AWS Organizations adalah layanan manajemen akun terpusat yang memungkinkan penggabungan beberapa akun AWS ke dalam satu organisasi, pengelompokan OU, dan penerapan Service Control Policies (SCPs).",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -6605,29 +6605,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0221",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Apa keuntungan utama dari konsep cloud computing yang disebut 'Agility'?",
+    "prompt": "Sebelum adanya cloud computing, sebuah perusahaan membutuhkan waktu hingga beberapa bulan untuk memesan, merakit, dan mengonfigurasi perangkat keras server baru. Dengan AWS, tim pengembang dapat meluncurkan puluhan server komputasi dalam hitungan menit untuk bereksperimen. Keuntungan utama komputasi cloud manakah yang digambarkan oleh skenario ini?",
     "options": [
       {
         "id": "A",
-        "text": "Biaya hardware dibayar penuh di muka"
+        "text": "Penyimpanan global terpusat"
       },
       {
         "id": "B",
-        "text": "Lokasi server berada di kantor pelanggan"
+        "text": "Penghematan biaya lisensi tetap"
       },
       {
         "id": "C",
-        "text": "Perlu waktu berminggu-minggu untuk provisioning server"
+        "text": "Toleransi kesalahan bawaan"
       },
       {
         "id": "D",
-        "text": "Mampu berinovasi dan merilis resource dalam hitungan menit"
+        "text": "Kelincahan dan Kecepatan Inovasi (Agility)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Agility memungkinkan organisasi bereksperimen dan meluncurkan resource baru secara instan tanpa menunggu siklus pengadaan hardware.",
+    "explanation": "Agility (Kelincahan) adalah keuntungan cloud di mana sumber daya teknologi baru dapat diluncurkan hanya dengan beberapa klik dalam hitungan menit, secara dramatis mempercepat laju inovasi dan eksperimen bisnis.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6635,29 +6635,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0222",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Apa perbedaan mendasar antara konsep Scalability dan Elasticity pada AWS?",
+    "prompt": "Seorang insinyur cloud sedang menjelaskan perbedaan konsep arsitektur antara 'Scalability' dan 'Elasticity' pada AWS. Manakah dari pernyataan berikut yang paling tepat merangkum perbedaan mendasar antara kedua konsep tersebut?",
     "options": [
       {
         "id": "A",
-        "text": "Scalability menambah kapasitas; Elasticity otomatis naik dan turun"
+        "text": "Scalability adalah kemampuan sistem untuk menangani pertumbuhan beban dengan menambah kapasitas; sedangkan Elasticity adalah kemampuan untuk menambah dan mengurangi kapasitas secara otomatis mengikuti fluktuasi permintaan"
       },
       {
         "id": "B",
-        "text": "Scalability hanya untuk storage; Elasticity hanya untuk compute"
+        "text": "Scalability hanya berlaku untuk database relasional, sedangkan Elasticity hanya berlaku untuk server komputasi"
       },
       {
         "id": "C",
-        "text": "Scalability bersifat manual; Elasticity tidak bisa diotomatisasi"
+        "text": "Scalability bersifat otomatis penuh, sedangkan Elasticity membutuhkan campur tangan manual admin"
       },
       {
         "id": "D",
-        "text": "Keduanya adalah istilah yang identik tanpa perbedaan fungsi"
+        "text": "Scalability mengacu pada penyimpanan disk, sedangkan Elasticity mengacu pada jaringan bandwidth"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Scalability adalah kemampuan sistem menangani kenaikan beban, sedangkan Elasticity adalah kemampuan menyesuaikan kapasitas naik dan turun otomatis.",
+    "explanation": "Scalability mengacu pada kapasitas sistem untuk menangani peningkatan beban kerja jangka panjang; sedangkan Elasticity adalah kemampuan dinamis dua arah untuk otomatis scale-out saat beban naik dan scale-in saat beban turun guna menghemat biaya.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6665,29 +6665,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0223",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Storage class Amazon S3 apa yang paling tepat untuk data yang jarang diakses tapi harus instan saat dibutuhkan?",
+    "prompt": "Sebuah perusahaan memiliki data gambar profil pengguna yang jarang sekali diakses kembali setelah 30 hari, namun jika sewaktu-waktu pengguna membuka halaman profil mereka, gambar tersebut harus dapat diambil seketika dalam hitungan milidetik. Storage class Amazon S3 manakah yang paling hemat biaya untuk pola akses ini?",
     "options": [
       {
         "id": "A",
-        "text": "S3 Glacier Flexible Retrieval"
+        "text": "Amazon S3 Standard"
       },
       {
         "id": "B",
-        "text": "S3 Standard-Infrequent Access (S3 Standard-IA)"
+        "text": "Amazon S3 Standard-Infrequent Access (S3 Standard-IA)"
       },
       {
         "id": "C",
-        "text": "S3 Glacier Deep Archive"
+        "text": "Amazon S3 Glacier Flexible Retrieval"
       },
       {
         "id": "D",
-        "text": "S3 Intelligent-Tiering Archive"
+        "text": "Amazon S3 Glacier Deep Archive"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "S3 Standard-IA ideal untuk data yang jarang diakses namun membutuhkan waktu pengambilan dalam hitungan milidetik saat diminta.",
+    "explanation": "Amazon S3 Standard-IA dirancang untuk data yang jarang diakses namun membutuhkan akses cepat seketika (milidetik) saat diminta, dengan biaya penyimpanan bulanan lebih rendah dibanding S3 Standard.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -6695,29 +6695,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0224",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Storage class Amazon S3 apa yang menawarkan biaya penyimpanan terendah untuk arsip jangka panjang?",
+    "prompt": "Sebuah lembaga medis diwajibkan oleh undang-undang untuk mempertahankan salinan cadangan rekam medis digital selama 10 tahun. Data cadangan ini sangat jarang diakses, dan penundaan waktu pengambilan data dalam 12 jam dapat diterima demi efisiensi biaya penyimpanan terendah. Storage class Amazon S3 manakah yang paling tepat?",
     "options": [
       {
         "id": "A",
-        "text": "S3 Standard"
+        "text": "Amazon S3 Standard"
       },
       {
         "id": "B",
-        "text": "S3 One Zone-IA"
+        "text": "Amazon S3 One Zone-IA"
       },
       {
         "id": "C",
-        "text": "S3 Glacier Deep Archive"
+        "text": "Amazon S3 Glacier Deep Archive"
       },
       {
         "id": "D",
-        "text": "S3 Express One Zone"
+        "text": "Amazon S3 Express One Zone"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "S3 Glacier Deep Archive adalah opsi penyimpanan paling murah di AWS untuk data arsip 7-10 tahun dengan waktu retrieval beberapa jam.",
+    "explanation": "Amazon S3 Glacier Deep Archive adalah kelas penyimpanan arsip paling hemat di AWS yang dirancang untuk retensi data jangka panjang 7-10 tahun dengan waktu pengambilan data standar sekitar 12 jam.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6725,29 +6725,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0225",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Apa fungsi utama dari Amazon CloudFront dalam arsitektur web modern?",
+    "prompt": "Sebuah perusahaan media menyiarkan konten video dan situs web berita kepada jutaan pengguna di seluruh dunia. Apakah fungsi utama dari layanan Amazon CloudFront dalam arsitektur pengiriman konten web modern ini?",
     "options": [
       {
         "id": "A",
-        "text": "Menggantikan fungsi database relasional MySQL"
+        "text": "Menjalankan database relasional lintas benua"
       },
       {
         "id": "B",
-        "text": "Mengonfigurasi rute jaringan internal VPC"
+        "text": "Mengonversi video resolusi tinggi menjadi resolusi seluler"
       },
       {
         "id": "C",
-        "text": "Membuat cadangan snapshot disk secara harian"
+        "text": "Menyediakan koneksi VPN privat khusus antara kantor dan VPC"
       },
       {
         "id": "D",
-        "text": "Mengirimkan konten global dengan latensi rendah via Edge Location"
+        "text": "Menyajikan konten statis dan dinamis dengan latensi rendah dan kecepatan transfer tinggi ke pengguna global memanfaatkan jaringan Edge Locations"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Amazon CloudFront adalah layanan Content Delivery Network (CDN) yang menyimpan cache konten web di Edge Location dekat pengguna.",
+    "explanation": "Amazon CloudFront bertindak sebagai Content Delivery Network (CDN) global yang meng-cache konten pada jaringan Edge Locations di seluruh dunia untuk meminimalkan latensi dan mempercepat akses bagi pengguna.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -6755,7 +6755,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0226",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan DNS terkelola yang sangat andal dan scalable dari AWS adalah:",
+    "prompt": "Sebuah organisasi membutuhkan layanan Domain Name System (DNS) terkelola yang sangat andal, hemat biaya, dan dapat diskalakan secara elastis untuk merutekan traffic pengguna internet ke aplikasi web mereka pada port standar 53. Layanan jaringan AWS manakah yang dirancang untuk kebutuhan ini?",
     "options": [
       {
         "id": "A",
@@ -6767,7 +6767,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Amazon CloudFront"
+        "text": "Amazon Virtual Private Cloud (Amazon VPC)"
       },
       {
         "id": "D",
@@ -6777,7 +6777,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Amazon Route 53 adalah layanan DNS (Domain Name System) web service yang berfungsi menerjemahkan nama domain menjadi IP address.",
+    "explanation": "Amazon Route 53 adalah layanan DNS cloud berdaya tahan tinggi dan dapat diskalakan yang dirancang untuk menerjemahkan nama domain dan merutekan traffic pada port 53 dengan tingkat SLA ketersediaan 100%.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6785,11 +6785,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0227",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan database AWS apa yang dirancang untuk model NoSQL key-value dengan performa satu digit milidetik?",
+    "prompt": "Sebuah aplikasi seluler membutuhkan basis data NoSQL terkelola penuh tanpa server yang menggunakan model key-value dan dokumen, serta mampu menangani jutaan permintaan baca/tulis per detik dengan latensi konsisten satu digit milidetik. Layanan basis data AWS manakah ini?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon RDS MySQL"
+        "text": "Amazon RDS for PostgreSQL"
       },
       {
         "id": "B",
@@ -6797,17 +6797,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Amazon Aurora"
+        "text": "Amazon Redshift"
       },
       {
         "id": "D",
-        "text": "Amazon Redshift"
+        "text": "Amazon Aurora"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Amazon DynamoDB adalah database serverless NoSQL key-value dan document yang menawarkan latensi konsisten di bawah 10 milidetik.",
+    "explanation": "Amazon DynamoDB adalah basis data NoSQL key-value terkelola penuh tanpa server yang menawarkan performa konsisten satu digit milidetik pada skala apa pun.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -6815,29 +6815,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0228",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Tipe database apa yang paling tepat dikelola menggunakan Amazon RDS?",
+    "prompt": "Sebuah aplikasi enterprise akuntansi membutuhkan basis data terstruktur yang mendukung transaksi ACID, skema tabel relasional, query SQL kompleks, dan foreign keys. Layanan terkelola AWS manakah yang paling tepat untuk mengelola mesin basis data seperti PostgreSQL, MySQL, MariaDB, atau Oracle ini?",
     "options": [
       {
         "id": "A",
-        "text": "Key-value dan document database"
+        "text": "Amazon DynamoDB"
       },
       {
         "id": "B",
-        "text": "Graph database"
+        "text": "Amazon DocumentDB"
       },
       {
         "id": "C",
-        "text": "Database relasional (SQL)"
+        "text": "Amazon Relational Database Service (Amazon RDS)"
       },
       {
         "id": "D",
-        "text": "Wide-column database"
+        "text": "Amazon Keyspaces"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Amazon Relational Database Service (RDS) mempermudah setup dan pengelolaan database relasional seperti MySQL, PostgreSQL, dan MariaDB.",
+    "explanation": "Amazon RDS (Relational Database Service) mempermudah penyiapan, pengoperasian, dan penskalaan basis data relasional (SQL) di cloud dengan dukungan untuk mesin seperti PostgreSQL, MySQL, MariaDB, Oracle, dan SQL Server.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6845,15 +6845,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0229",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan AWS apa yang menyediakan data warehouse berbasis cloud untuk analisis SQL skala petabyte?",
+    "prompt": "Sebuah perusahaan retail besar ingin menggabungkan data transaksi dari berbagai sumber toko fisik dan online ke dalam satu gudang data cloud berskala petabyte untuk menjalankan query analitik bisnis (OLAP) yang kompleks secara cepat. Layanan data warehouse AWS manakah yang dirancang untuk skenario ini?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon ElastiCache"
+        "text": "Amazon DynamoDB"
       },
       {
         "id": "B",
-        "text": "Amazon DynamoDB"
+        "text": "Amazon RDS for MySQL"
       },
       {
         "id": "C",
@@ -6867,7 +6867,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Amazon Redshift adalah layanan data warehouse cloud yang cepat dan terkelola penuh untuk analisis data skala besar menggunakan standar SQL.",
+    "explanation": "Amazon Redshift adalah layanan data warehouse berskala petabyte berbasis cloud yang dioptimalkan untuk analisis data berskala besar (OLAP) dan Business Intelligence menggunakan SQL standar.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -6875,7 +6875,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0230",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan compute serverless AWS yang menjalankan kode hanya saat ada event yang memicunya adalah:",
+    "prompt": "Sebuah tim pengembang ingin membuat alur kerja pemrosesan data di mana sebuah fungsi kode Python dijalankan hanya saat ada file gambar baru yang diunggah ke bucket Amazon S3, dan berhenti total saat tidak ada file baru (zero idle cost). Layanan komputasi serverless AWS manakah yang dirancang untuk arsitektur event-driven ini?",
     "options": [
       {
         "id": "A",
@@ -6887,17 +6887,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Amazon Lightsail"
+        "text": "AWS Elastic Beanstalk"
       },
       {
         "id": "D",
-        "text": "AWS Elastic Beanstalk"
+        "text": "Amazon ECS"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "AWS Lambda memungkinkan eksekusi kode tanpa server provisioning, di mana pengguna hanya membayar waktu komputasi saat kode aktif berjalan.",
+    "explanation": "AWS Lambda adalah layanan komputasi tanpa server (serverless) yang mengeksekusi kode berdasarkan pemicu event (event-driven) dan secara otomatis mengelola seluruh alokasi infrastruktur dan penskalaan.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6905,7 +6905,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0231",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Opsi pricing EC2 mana yang paling hemat untuk workload dengan jadwal fleksibel yang bisa terhenti mendadak?",
+    "prompt": "Sebuah lab komputasi riset menjalankan pemrosesan citra satelit batch yang sangat fleksibel terhadap jadwal eksekusi dan toleran terhadap interupsi (dapat dijeda dan dilanjutkan kapan saja). Opsi penetapan harga Amazon EC2 manakah yang paling hemat biaya untuk beban kerja ini?",
     "options": [
       {
         "id": "A",
@@ -6927,7 +6927,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Spot Instances memanfaatkan kapasitas komputasi cadangan AWS dengan diskon hingga 90%, cocok untuk beban kerja yang tahan interupsi.",
+    "explanation": "Spot Instances memanfaatkan sisa kapasitas komputasi AWS yang menganggur dengan diskon hingga 90% dibandingkan On-Demand, menjadikannya pilihan paling hemat biaya untuk beban kerja toleran interupsi.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -6935,7 +6935,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0232",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Opsi pembelian EC2 mana yang menawarkan diskon besar dengan komitmen penggunaan 1 atau 3 tahun?",
+    "prompt": "Sebuah korporasi memiliki beban kerja basis data inti yang berjalan stabil sepanjang waktu (steady-state workload) selama 24 jam sehari, 7 hari seminggu. Perusahaan bersedia membuat komitmen pemakaian komputasi stabil selama 1 atau 3 tahun untuk mendapatkan diskon besar (hingga 72%). Model pembelian Amazon EC2 manakah yang paling tepat?",
     "options": [
       {
         "id": "A",
@@ -6947,17 +6947,17 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Savings Plans / Reserved Instances"
+        "text": "Savings Plans atau Reserved Instances"
       },
       {
         "id": "D",
-        "text": "Dedicated Instances"
+        "text": "Dedicated Hosts On-Demand"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Savings Plans dan Reserved Instances memberikan diskon signifikan dibandingkan On-Demand dengan komitmen konsisten selama 1 atau 3 tahun.",
+    "explanation": "Savings Plans dan Reserved Instances menawarkan penghematan signifikan (hingga 72%) dibandingkan tarif On-Demand sebagai imbalan atas komitmen penggunaan komputasi stabil selama periode 1 atau 3 tahun.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -6965,15 +6965,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0233",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan penyimpanan blok persisten yang digunakan sebagai root volume pada Amazon EC2 adalah:",
+    "prompt": "Sebuah instance Amazon EC2 membutuhkan penyimpanan tingkat blok (block-level storage) yang persisten dan dapat diformat dengan sistem file untuk digunakan sebagai drive sistem operasi (root volume). Layanan penyimpanan AWS manakah yang digunakan untuk tujuan ini?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon S3"
+        "text": "Amazon Simple Storage Service (Amazon S3)"
       },
       {
         "id": "B",
-        "text": "Amazon EFS"
+        "text": "Amazon Elastic File System (Amazon EFS)"
       },
       {
         "id": "C",
@@ -6981,13 +6981,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "Amazon Elastic Block Store (EBS)"
+        "text": "Amazon Elastic Block Store (Amazon EBS)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Amazon EBS menyediakan penyimpanan level blok (block storage) yang persisten dan terhubung langsung ke satu instans EC2.",
+    "explanation": "Amazon EBS menyediakan volume penyimpanan blok persisten yang berkinerja tinggi yang dirancang khusus untuk dipasang ke instance Amazon EC2 sebagai root volume sistem operasi dan volume data.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -6995,15 +6995,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0234",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan storage apa yang menyediakan shared file storage elastis menggunakan protokol NFS untuk banyak EC2?",
+    "prompt": "Sebuah arsitektur aplikasi berbasis Linux terdiri dari puluhan instance Amazon EC2 yang membutuhkan sistem file penyimpanan bersama (shared storage) yang elastis, terkelola, dan dapat diakses bersamaan melalui protokol Network File System (NFS). Layanan AWS manakah yang harus diimplementasikan?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon Elastic File System (EFS)"
+        "text": "Amazon Elastic File System (Amazon EFS)"
       },
       {
         "id": "B",
-        "text": "Amazon EBS"
+        "text": "Amazon Elastic Block Store (Amazon EBS)"
       },
       {
         "id": "C",
@@ -7017,7 +7017,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Amazon EFS menyediakan file system terkelola berbasis NFS yang dapat di-mount dan diakses bersamaan oleh ribuan instans EC2.",
+    "explanation": "Amazon EFS menyediakan sistem file bersama berbasis NFS yang elastis dan dapat dipasang (mounted) secara simultan oleh ratusan instance Linux di berbagai Availability Zone.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -7025,15 +7025,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0235",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan messaging AWS apa yang menggunakan pola publish/subscribe (pub/sub) untuk mengirim notifikasi?",
+    "prompt": "Sebuah aplikasi pemantauan server perlu mengirimkan sinyal notifikasi darurat ke berbagai saluran (seperti SMS ke ponsel staf on-call, email ke manajer, dan memicu webhook ke sistem ticketing) secara bersamaan menggunakan pola publish/subscribe. Layanan perpesanan AWS manakah ini?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon SQS"
+        "text": "Amazon Simple Queue Service (Amazon SQS)"
       },
       {
         "id": "B",
-        "text": "Amazon Simple Notification Service (SNS)"
+        "text": "Amazon Simple Notification Service (Amazon SNS)"
       },
       {
         "id": "C",
@@ -7047,7 +7047,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Amazon SNS adalah layanan messaging terkelola berbasis pub/sub yang mendistribusikan pesan ke banyak subscriber (email, SMS, Lambda).",
+    "explanation": "Amazon SNS adalah layanan pesan pub/sub yang menyediakan pengiriman notifikasi instan satu-ke-banyak (fan-out) ke berbagai pelanggan seperti SMS, email, dan HTTP/S endpoints.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -7055,29 +7055,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0236",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan AWS apa yang menyediakan antrean pesan (message queuing) untuk mendecouple komponen aplikasi?",
+    "prompt": "Sebuah situs e-commerce ingin memisahkan modul penerima pesanan dari modul pemroses pembayaran agar lonjakan pesanan pelanggan ditampung terlebih dahulu di dalam antrean terdistribusi yang aman tanpa membebani server backend. Layanan antrean pesan (message queuing) AWS manakah yang harus digunakan?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon SNS"
+        "text": "Amazon Simple Notification Service (Amazon SNS)"
       },
       {
         "id": "B",
-        "text": "Amazon Kinesis"
+        "text": "Amazon EventBridge"
       },
       {
         "id": "C",
-        "text": "Amazon Simple Queue Service (SQS)"
+        "text": "Amazon Simple Queue Service (Amazon SQS)"
       },
       {
         "id": "D",
-        "text": "Amazon EventBridge"
+        "text": "AWS AppSync"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Amazon SQS menyediakan antrean pesan terkelola penuh yang memungkinkan decoupling arsitektur microservices secara andal.",
+    "explanation": "Amazon SQS adalah layanan antrean pesan terdistribusi terkelola penuh yang memungkinkan pemisahan (decoupling) komponen aplikasi terdistribusi melalui komunikasi asinkron.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -7085,7 +7085,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0237",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan keamanan AWS apa yang melindungi aplikasi web dari serangan DDoS layer 3 dan 4 secara gratis?",
+    "prompt": "Semua pelanggan AWS secara otomatis mendapatkan perlindungan tanpa biaya tambahan terhadap serangan penolakan layanan terdistribusi (Distributed Denial of Service / DDoS) umum pada lapisan jaringan (Layer 3) dan transport (Layer 4) seperti SYN floods dan UDP reflection. Layanan keamanan AWS manakah yang menyediakan perlindungan default ini?",
     "options": [
       {
         "id": "A",
@@ -7093,11 +7093,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "Amazon Inspector"
+        "text": "Amazon GuardDuty"
       },
       {
         "id": "C",
-        "text": "AWS Secrets Manager"
+        "text": "Amazon Inspector"
       },
       {
         "id": "D",
@@ -7107,7 +7107,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "AWS Shield Standard aktif secara otomatis dan melindungi seluruh pelanggan AWS dari serangan DDoS umum pada layer 3/4 tanpa biaya tambahan.",
+    "explanation": "AWS Shield Standard disertakan secara gratis bagi seluruh pelanggan AWS untuk secara otomatis melindungi infrastruktur dan aplikasi dari serangan DDoS umum pada Layer 3 dan Layer 4.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -7115,7 +7115,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0238",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan keamanan AWS apa yang memfilter lalu lintas web terhadap eksploitasi SQL Injection dan XSS?",
+    "prompt": "Sebuah perusahaan ingin melindungi aplikasi web publik mereka dari eksploitasi pada lapisan aplikasi (OSI Layer 7), seperti serangan injeksi SQL (SQL Injection) dan skrip lintas situs (Cross-Site Scripting / XSS). Layanan keamanan AWS manakah yang harus dipasang di depan Application Load Balancer?",
     "options": [
       {
         "id": "A",
@@ -7131,13 +7131,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "AWS KMS"
+        "text": "Network Access Control List (NACL)"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "AWS WAF memungkinkan pembuatan rule untuk memantau request HTTP/HTTPS dan memblokir serangan aplikasi umum seperti SQLi dan XSS.",
+    "explanation": "AWS WAF adalah Web Application Firewall yang beroperasi pada OSI Layer 7 untuk memfilter dan memblokir lalu lintas web berbahaya dari eksploitasi web umum seperti SQLi dan XSS.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -7145,11 +7145,11 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0239",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan deteksi ancaman cerdas AWS yang menganalisis VPC Flow Logs dan DNS Logs menggunakan machine learning adalah:",
+    "prompt": "Sebuah organisasi ingin mendeteksi ancaman keamanan secara cerdas pada akun AWS mereka, seperti adanya komunikasi instance EC2 ke IP server penyerang atau adanya eksfiltrasi data melalui kueri DNS mencurigakan. Layanan keamanan cerdas AWS manakah yang menganalisis VPC Flow Logs dan DNS Logs menggunakan machine learning?",
     "options": [
       {
         "id": "A",
-        "text": "Amazon Macie"
+        "text": "Amazon Inspector"
       },
       {
         "id": "B",
@@ -7157,7 +7157,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "C",
-        "text": "Amazon Inspector"
+        "text": "AWS Secrets Manager"
       },
       {
         "id": "D",
@@ -7167,7 +7167,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Amazon GuardDuty adalah layanan threat detection cerdas yang terus memantau aktivitas mencurigakan pada akun menggunakan machine learning.",
+    "explanation": "Amazon GuardDuty adalah layanan intelligent threat detection yang terus memantau akun AWS menggunakan machine learning untuk mendeteksi perilaku tidak sah dan ancaman keamanan.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -7175,7 +7175,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0240",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan keamanan AWS apa yang dirancang untuk menemukan dan melindungi data sensitif (PII) di Amazon S3?",
+    "prompt": "Sebuah institusi perbankan menyimpan jutaan file formulir nasabah di Amazon S3. Untuk mematuhi peraturan kepatuhan privasi data, tim keamanan memerlukan layanan yang secara otomatis memindai, mengidentifikasi, dan melindungi data sensitif seperti Personally Identifiable Information (PII) menggunakan machine learning. Layanan AWS manakah ini?",
     "options": [
       {
         "id": "A",
@@ -7183,7 +7183,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "B",
-        "text": "AWS KMS"
+        "text": "AWS Secrets Manager"
       },
       {
         "id": "C",
@@ -7191,13 +7191,13 @@ export const ccpQuestionBank: ExamQuestion[] = [
       },
       {
         "id": "D",
-        "text": "AWS CloudHSM"
+        "text": "Amazon Inspector"
       }
     ],
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Amazon Macie menggunakan machine learning dan pattern matching untuk mendeteksi data sensitif seperti nomor KTP atau kartu kredit di S3.",
+    "explanation": "Amazon Macie adalah layanan keamanan data terkelola yang memanfaatkan machine learning untuk menemukan, mengklasifikasikan, dan melindungi data sensitif (PII) di Amazon S3.",
     "difficulty": "Sedang",
     "lang": "id"
   },
@@ -7205,29 +7205,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0241",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan apa yang digunakan untuk membuat dan mengelola kunci enkripsi (cryptographic keys) di AWS?",
+    "prompt": "Sebuah perusahaan ingin mengenkripsi data pada volume Amazon EBS dan tabel Amazon RDS mereka. Mereka membutuhkan layanan terkelola untuk membuat, mengontrol hak akses, merotasi, dan mengaudit siklus hidup kunci enkripsi kriptografi. Layanan AWS manakah yang digunakan untuk tujuan ini?",
     "options": [
       {
         "id": "A",
-        "text": "AWS IAM"
-      },
-      {
-        "id": "B",
-        "text": "AWS Certificate Manager"
-      },
-      {
-        "id": "C",
         "text": "AWS Secrets Manager"
       },
       {
+        "id": "B",
+        "text": "AWS Certificate Manager (ACM)"
+      },
+      {
+        "id": "C",
+        "text": "Amazon GuardDuty"
+      },
+      {
         "id": "D",
-        "text": "AWS Key Management Service (KMS)"
+        "text": "AWS Key Management Service (AWS KMS)"
       }
     ],
     "correctAnswers": [
       "D"
     ],
-    "explanation": "AWS KMS mempermudah pembuatan dan kontrol cryptographic keys yang digunakan untuk mengenkripsi data di berbagai layanan AWS.",
+    "explanation": "AWS Key Management Service (AWS KMS) mempermudah pembuatan, pengelolaan, dan pengontrolan kunci kriptografi (KMS keys) di berbagai layanan AWS dan aplikasi.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -7235,29 +7235,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0242",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "AWS Support Plan level mana yang paling rendah yang memberikan akses 24/7 via telepon, chat, dan email?",
+    "prompt": "Sebuah perusahaan yang mengoperasikan beban kerja produksi di AWS membutuhkan dukungan teknis responsif 24/7 melalui telepon, obrolan langsung (chat), dan email dengan waktu respons kasus tingkat keparahan tinggi di bawah 1 jam. Tingkat AWS Support Plan terendah manakah yang memenuhi kriteria dukungan 24/7 ini?",
     "options": [
       {
         "id": "A",
-        "text": "Business Support"
+        "text": "Business Support Plan"
       },
       {
         "id": "B",
-        "text": "Developer Support"
+        "text": "Developer Support Plan"
       },
       {
         "id": "C",
-        "text": "Basic Support"
+        "text": "Basic Support Plan"
       },
       {
         "id": "D",
-        "text": "Enterprise On-Ramp"
+        "text": "Enterprise Support Plan"
       }
     ],
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Business Support adalah tier terendah yang memberikan akses 24x7 ke Cloud Support Engineers via telepon, chat, dan email.",
+    "explanation": "Paket AWS Business Support adalah tingkat dukungan terendah yang menyediakan akses 24/7 ke Cloud Support Engineers melalui telepon, chat, dan email untuk lingkungan produksi.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -7265,29 +7265,29 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0243",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Dukungan apa yang hanya tersedia eksklusif pada AWS Enterprise Support Plan?",
+    "prompt": "Sebuah korporasi besar mempertimbangkan untuk berlangganan paket AWS Enterprise Support Plan. Fasilitas pendampingan ahli tingkat tinggi manakah yang secara eksklusif hanya tersedia pada paket Enterprise Support (tidak ada di paket Business atau Developer)?",
     "options": [
       {
         "id": "A",
-        "text": "Akses ke dokumentasi AWS resmi"
+        "text": "Akses ke dokumentasi resmi AWS dan forum komunitas"
       },
       {
         "id": "B",
-        "text": "Technical Account Manager (TAM) yang didedikasikan"
+        "text": "Dukungan seorang Technical Account Manager (TAM) yang didedikasikan secara eksklusif untuk akun perusahaan"
       },
       {
         "id": "C",
-        "text": "Akses ke forum komunitas AWS"
+        "text": "Kemampuan membuka tiket dukungan via email"
       },
       {
         "id": "D",
-        "text": "Laporan bulanan AWS Billing"
+        "text": "Akses ke dashboard pemeriksaan dasar AWS Trusted Advisor"
       }
     ],
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Designated Technical Account Manager (TAM) adalah penasihat teknis khusus yang hanya tersedia pada paket Enterprise Support.",
+    "explanation": "Akses ke dedicated Technical Account Manager (TAM) yang ditugaskan khusus secara eksklusif hanya disediakan pada paket AWS Enterprise Support Plan.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -7295,15 +7295,15 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0244",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Layanan online gratis apa yang memberikan rekomendasi best practice seputar biaya, performa, dan keamanan akun?",
+    "prompt": "Sebuah startup ingin mengaudit konfigurasi akun AWS mereka untuk mengidentifikasi peluang penghematan biaya (seperti volume EBS yang menganggur), celah keamanan (seperti port terbuka 0.0.0.0/0), dan peningkatan toleransi kesalahan. Layanan online AWS manakah yang menyediakan rekomendasi best practice otomatis ini?",
     "options": [
       {
         "id": "A",
-        "text": "AWS Artifact"
+        "text": "AWS Cost Explorer"
       },
       {
         "id": "B",
-        "text": "AWS Cost Explorer"
+        "text": "Amazon CloudWatch"
       },
       {
         "id": "C",
@@ -7317,7 +7317,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "AWS Trusted Advisor memindai lingkungan AWS Anda dan memberikan rekomendasi optimasi biaya, performa, keamanan, dan toleransi kesalahan.",
+    "explanation": "AWS Trusted Advisor adalah alat online yang secara proaktif membandingkan akun AWS terhadap praktik terbaik dalam lima kategori: optimalisasi biaya, performa, keamanan, toleransi kesalahan, dan kuota layanan.",
     "difficulty": "Mudah",
     "lang": "id"
   },
@@ -7325,19 +7325,19 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "id": "ccp_kahoot_0245",
     "domain": "Technology & Services",
     "type": "single",
-    "prompt": "Portal mandiri apa di AWS tempat pelanggan dapat mengunduh dokumen kepatuhan (compliance reports) dan sertifikat ISO?",
+    "prompt": "Sebuah perusahaan layanan kesehatan yang sedang menjalani audit kepatuhan eksternal perlu mengunduh laporan audit SOC 2 Type II, sertifikasi ISO 27001, dan menyetujui Business Associate Agreement (BAA) terkait regulasi HIPAA di AWS. Portal mandiri resmi AWS manakah yang harus diakses?",
     "options": [
       {
         "id": "A",
-        "text": "AWS Trusted Advisor"
-      },
-      {
-        "id": "B",
         "text": "AWS Security Hub"
       },
       {
-        "id": "C",
+        "id": "B",
         "text": "Amazon Inspector"
+      },
+      {
+        "id": "C",
+        "text": "AWS Trusted Advisor"
       },
       {
         "id": "D",
@@ -7347,7 +7347,7 @@ export const ccpQuestionBank: ExamQuestion[] = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "AWS Artifact adalah portal resmi tanpa biaya untuk mengakses laporan kepatuhan keamanan AWS seperti SOC, PCI DSS, dan sertifikasi ISO.",
+    "explanation": "AWS Artifact adalah portal kepatuhan sentral mandiri resmi di AWS tempat pelanggan dapat mengunduh laporan audit kepatuhan pihak ketiga dan menyetujui perjanjian kepatuhan secara on-demand.",
     "difficulty": "Sedang",
     "lang": "id"
   },

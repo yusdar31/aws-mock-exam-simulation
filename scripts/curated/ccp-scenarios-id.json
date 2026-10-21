@@ -1,0 +1,534 @@
+{
+  "curated-ccp-id-2": {
+    "prompt": "Sebuah platform e-commerce mengalami lonjakan traffic pengguna yang masif selama periode promosi kilat (flash sale) dan membutuhkan penambahan kapasitas komputasi secara otomatis. Setelah kampanye promosi berakhir dan traffic normal kembali, kapasitas komputasi yang tidak lagi terpakai otomatis dihentikan untuk menghindari pemborosan biaya. Konsep cloud computing manakah yang paling tepat menggambarkan kemampuan adaptasi kapasitas dua arah ini?",
+    "explanation": "Elastisitas (Elasticity) adalah kemampuan sistem cloud untuk menambah kapasitas secara otomatis saat permintaan naik (scale-out) dan melepaskannya saat permintaan turun (scale-in)."
+  },
+  "curated-ccp-id-3": {
+    "prompt": "Sebuah aplikasi SaaS startup mengalami pertumbuhan basis pelanggan yang pesat dari 100 pengguna menjadi lebih dari 10.000 pengguna aktif dalam waktu enam bulan. Arsitektur sistem mampu menangani peningkatan volume beban kerja jangka panjang ini dengan menambah kapasitas sumber daya tanpa mengalami penurunan performa sistem. Karakteristik komputasi cloud manakah yang paling tepat?",
+    "explanation": "Skalabilitas (Scalability) adalah kemampuan sistem untuk menangani pertumbuhan beban kerja yang semakin meningkat dari waktu ke waktu dengan menambah sumber daya komputasi."
+  },
+  "curated-ccp-id-4": {
+    "prompt": "Sebuah tim riset dan pengembangan (R&D) ingin menguji prototipe arsitektur analitik baru. Mereka mampu memprovisikan puluhan server komputasi dan basis data dalam hitungan jam untuk eksperimen tanpa perlu melalui proses pengadaan perangkat keras fisik selama berbulan-bulan. Manfaat utama komputasi cloud manakah yang diperoleh tim tersebut?",
+    "explanation": "Kecepatan dan kelincahan (Speed and agility) memungkinkan tim teknologi meluncurkan sumber daya baru dalam hitungan menit untuk bereksperimen dan berinovasi dengan cepat."
+  },
+  "curated-ccp-id-5": {
+    "prompt": "Sebuah perusahaan teknologi berencana memperluas jangkauan layanannya ke pasar Eropa dan Amerika Selatan. Dengan memanfaatkan infrastruktur global AWS, tim dapat meluncurkan aplikasi dekat dengan pengguna akhir di berbagai benua dalam hitungan menit tanpa harus membangun fasilitas pusat data fisik sendiri. Manfaat komputasi cloud manakah yang dimaksud?",
+    "explanation": "Jangkauan global (Global reach / Go global in minutes) memungkinkan deployment aplikasi ke berbagai Region di seluruh dunia dengan latensi minimal bagi pengguna lokal."
+  },
+  "curated-ccp-id-6": {
+    "prompt": "AWS mampu membeli perangkat keras server, media penyimpanan, dan kapasitas jaringan dalam volume yang luar biasa masif karena menggabungkan kebutuhan ratusan ribu pelanggan global, sehingga biaya per unit menjadi jauh lebih rendah dan menghasilkan harga yang lebih ekonomis bagi pengguna. Prinsip ekonomi cloud manakah yang menjelaskan fenomena ini?",
+    "explanation": "Skala ekonomis masif (Massive economies of scale) terjadi karena agregasi penggunaan ratusan ribu pelanggan memungkinkan penyedia cloud mencapai efisiensi biaya pembelian yang menghasilkan penurunan harga unit bagi pelanggan."
+  },
+  "curated-ccp-id-7": {
+    "prompt": "Sebuah perusahaan rintisan memutuskan untuk tidak lagi menyewa ruang colocation server dan menyerahkan seluruh pengelolaan fasilitas fisik (kelistrikan, pendingin, rak server) kepada penyedia cloud agar tim pengembang dapat fokus sepenuhnya pada inovasi produk dan fitur bisnis. Keuntungan cloud computing manakah yang digambarkan oleh keputusan ini?",
+    "explanation": "Berhenti menghabiskan uang untuk menjalankan dan memelihara pusat data (Stop spending money running and maintaining data centers / Reduce data-center operations) memungkinkan bisnis fokus pada diferensiasi kompetitif."
+  },
+  "curated-ccp-id-8": {
+    "prompt": "Sebuah institusi keuangan mempertahankan sebagian aplikasi perbankan inti (legacy) dan data nasabah di pusat data on-premise lokal mereka, sembari menghubungkannya secara aman ke infrastruktur cloud AWS untuk menjalankan portal web interaktif yang scalable. Model penerapan (deployment model) cloud manakah yang paling tepat menggambarkan skenario ini?",
+    "explanation": "Deployment model Hybrid (Hibrida) menghubungkan infrastruktur dan aplikasi lokal (on-premises) dengan sumber daya cloud untuk beroperasi secara terintegrasi."
+  },
+  "curated-ccp-id-9": {
+    "prompt": "Sebuah aplikasi web perbankan dirancang sedemikian rupa sehingga ketika salah satu server web atau satu modul database mengalami crash atau kegagalan perangkat keras mendadak, sistem tetap beroperasi normal dan melayani transaksi nasabah tanpa henti tanpa penurunan layanan. Karakteristik arsitektur cloud manakah yang ditunjukkan oleh sistem ini?",
+    "explanation": "Toleransi kesalahan (Fault tolerance) adalah kemampuan sistem untuk terus beroperasi dengan benar bahkan saat terjadi kegagalan pada satu atau lebih komponen perangkat keras atau perangkat lunak."
+  },
+  "curated-ccp-id-10": {
+    "prompt": "Seorang Cloud Architect merancang arsitektur aplikasi web agar disebarkan ke minimal dua Availability Zone (AZ) di dalam satu Region AWS. Apakah tujuan utama dan manfaat arsitektural terpenting dari mendistribusikan beban kerja ke beberapa Availability Zone tersebut?",
+    "explanation": "Mendistribusikan aplikasi ke beberapa Availability Zone membatasi dampak kegagalan pada satu AZ fisik (seperti kebakaran atau pemadaman listrik) sehingga aplikasi tetap tersedia (High Availability)."
+  },
+  "curated-ccp-id-11": {
+    "prompt": "Sebuah tim teknis memilih menggunakan Amazon RDS dan AWS Lambda daripada menginstal database dan mengelola server Linux sendiri di Amazon EC2. Mereka ingin mengurangi beban tugas operasional rutin seperti patch sistem operasi, provisioning perangkat keras, dan pencadangan otomatis. Manfaat operasional cloud manakah yang dicapai tim ini?",
+    "explanation": "Memanfaatkan layanan terkelola (managed services) mengurangi 'undifferentiated heavy lifting' (pekerjaan berat yang tidak memberikan pembeda nilai bisnis), seperti perawatan hardware dan OS patching."
+  },
+  "curated-ccp-id-12": {
+    "prompt": "Di lingkungan data center tradisional, tim infrastruktur harus membeli server fisik berdasarkan perkiraan beban puncak tertinggi tahunan (misal lonjakan promo akhir tahun), sehingga sebagian besar server menganggur di sisa bulan lainnya. Mengapa praktik provisioning kapasitas berbasis puncak ini sangat tidak efisien dibandingkan komputasi cloud?",
+    "explanation": "Provisioning berbasis kapasitas puncak menghasilkan pemborosan biaya besar karena kapasitas komputasi yang mahal dibiarkan menganggur (idle capacity) selama periode beban permintaan normal atau rendah."
+  },
+  "curated-ccp-id-13": {
+    "prompt": "Dalam arsitektur microservices, tim pengembang memisahkan antarmuka pengguna, pemrosesan transaksi, dan penyimpanan data menggunakan antrean pesan Amazon SQS (loosely coupled architecture). Bagaimana prinsip kopling longgar (loose coupling) ini membantu meningkatkan ketahanan (resilience) sistem secara keseluruhan?",
+    "explanation": "Arsitektur loosely coupled memastikan setiap komponen dapat gagal atau diskalakan secara independen tanpa melumpuhkan komponen lain di sekitarnya."
+  },
+  "curated-ccp-id-14": {
+    "prompt": "Sebuah tim platform cloud menerapkan praktik pengujian perubahan konfigurasi dalam skala kecil, mengukur metrik dampaknya secara kuantitatif, dan baru meluncurkannya ke skala penuh jika terbukti berhasil. Praktik desain cloud Well-Architected Framework manakah yang tercermin dari pendekatan ini?",
+    "explanation": "Praktik eksperimen terukur yang sering (Frequent, small, reversible changes / Measured experiments) memungkinkan sistem berevolusi secara aman tanpa risiko kegagalan berskala besar."
+  },
+  "curated-ccp-id-15": {
+    "prompt": "Seorang manajer proyek berasumsi bahwa hanya dengan memindahkan server on-premise ke AWS tanpa mengubah konfigurasi apa pun (lift-and-shift), perusahaan akan otomatis menghemat 50% biaya pengeluaran TI. Mengapa komputasi cloud TIDAK secara otomatis menjamin penghematan biaya tanpa adanya pengelolaan aktif?",
+    "explanation": "Cloud tidak secara otomatis menjamin penghematan biaya; pengoptimalan ukuran sumber daya (right-sizing), pemilihan model harga (Spot/Savings Plans), dan tata kelola penggunaan aktif sangat diperlukan untuk mencapai efisiensi biaya."
+  },
+  "curated-ccp-id-16": {
+    "prompt": "Sebuah tim DevOps menggunakan template AWS CloudFormation untuk mendefinisikan infrastruktur VPC, subnet, dan security group. Manfaat utama apakah yang diperoleh perusahaan dengan menerapkan pendekatan Infrastructure as Code (IaC) yang dapat diprovisikan ulang dari template kode ini?",
+    "explanation": "Infrastructure as Code (IaC) memungkinkan pembuatan lingkungan infrastruktur yang konsisten, terstandarisasi, dapat direproduksi ulang dengan cepat, dan terdokumentasi dalam kontrol versi (Git)."
+  },
+  "curated-ccp-id-18": {
+    "prompt": "Sebuah aplikasi enterprise membutuhkan penyimpanan kredensial kata sandi basis data relasional yang aman dan terenkripsi, dengan kemampuan untuk merotasi kata sandi secara otomatis secara berkala tanpa memerlukan perubahan kode program aplikasi. Layanan keamanan AWS manakah yang dirancang untuk kebutuhan ini?",
+    "explanation": "AWS Secrets Manager membantu mengamankan, mengelola, merotasi, dan mengambil kredensial database, kunci API, dan secret lainnya secara otomatis sepanjang siklus hidupnya."
+  },
+  "curated-ccp-id-19": {
+    "prompt": "Sebuah perusahaan memerlukan solusi terpusat untuk membuat dan mengontrol kunci enkripsi data (encryption keys), menetapkan kebijakan akses berbasis peran (key policies), serta mengaudit penggunaan kunci kriptografi tersebut melalui integrasi log CloudTrail. Layanan keamanan AWS manakah yang tepat?",
+    "explanation": "AWS Key Management Service (AWS KMS) mempermudah pembuatan dan pengelolaan kunci kriptografi serta mengontrol penggunaannya di berbagai layanan AWS dengan audit log CloudTrail."
+  },
+  "curated-ccp-id-20": {
+    "prompt": "Sebuah situs web menyajikan aset gambar yang disimpan di bucket privat Amazon S3 melalui distribusi Amazon CloudFront. Perusahaan ingin memastikan bahwa pengguna HANYA dapat mengakses gambar melalui URL distribusi CloudFront dan memblokir seluruh akses langsung ke URL bucket S3. Konfigurasi keamanan manakah yang harus diimplementasikan?",
+    "explanation": "Origin Access Control (OAC) yang dikombinasikan dengan S3 Bucket Policy membatasi akses baca objek S3 hanya untuk permohonan yang berasal dari distribusi CloudFront yang ditentukan."
+  },
+  "curated-ccp-id-21": {
+    "prompt": "Sebuah aplikasi web publik sering menerima lalu lintas berbahaya yang mencoba mengeksploitasi celah keamanan injeksi SQL (SQL Injection) dan skrip lintas situs (Cross-Site Scripting / XSS) pada protokol HTTP/HTTPS. Layanan keamanan AWS manakah yang harus dipasang untuk memfilter dan memblokir lalu lintas berbahaya pada OSI Layer 7 ini?",
+    "explanation": "AWS WAF adalah Web Application Firewall yang memantau permintaan HTTP/S yang diteruskan ke Amazon CloudFront atau Application Load Balancer dan memblokir pola serangan Layer 7 seperti SQLi dan XSS."
+  },
+  "curated-ccp-id-22": {
+    "prompt": "Sebuah instance Amazon EC2 yang berjalan di dalam Subnet Privat pada Amazon VPC perlu membaca data dari bucket Amazon S3. Kebijakan keamanan melarang instance memiliki alamat IP publik atau menggunakan NAT Gateway dan Internet Gateway. Komponen jaringan VPC manakah yang harus digunakan?",
+    "explanation": "VPC Gateway Endpoint untuk Amazon S3 memungkinkan instance di private subnet terhubung ke S3 secara privat melalui jaringan privat AWS tanpa memerlukan Internet Gateway atau NAT Gateway."
+  },
+  "curated-ccp-id-23": {
+    "prompt": "Seorang System Administrator perlu mengakses shell perintah Linux pada armada instance Amazon EC2 secara aman tanpa perlu membuka port inbound SSH 22 pada Security Group, tanpa memerlukan bastion host, dan tanpa memerlukan alamat IP publik pada instance. Fitur atau layanan AWS manakah yang harus digunakan?",
+    "explanation": "AWS Systems Manager Session Manager menyediakan manajemen instance yang aman melalui browser atau CLI tanpa perlu membuka port inbound 22 SSH atau mengelola bastion host."
+  },
+  "curated-ccp-id-24": {
+    "prompt": "Sebuah akun AWS khusus audit (Audit Account) perlu memeriksa konfigurasi sumber daya pada akun AWS produksi (Workload Account). Untuk memungkinkan akun audit mengasumsikan peran IAM (IAM Role) di akun produksi secara aman, elemen perizinan apakah yang wajib dikonfigurasi?",
+    "explanation": "Diperlukan Role Trust Policy pada akun target yang mempercayai akun audit, serta izin 'sts:AssumeRole' pada identitas IAM pemanggil di akun audit."
+  },
+  "curated-ccp-id-25": {
+    "prompt": "Sebuah organisasi enterprise menggunakan AWS Organizations untuk mengelola puluhan akun anggota. Tim kepatuhan ingin menerapkan aturan wajib terpusat yang melarang akun-akun anggota meluncurkan resource di luar AWS Region yang telah disetujui perusahaan. Mekanisme tata kelola AWS manakah yang harus digunakan?",
+    "explanation": "Service Control Policies (SCPs) di AWS Organizations adalah kontrol tata kelola terpusat yang membatasi aksi dan Region yang dapat diakses oleh akun-akun anggota di dalam organisasi."
+  },
+  "curated-ccp-id-26": {
+    "prompt": "Seorang insinyur keamanan menambahkan aturan masuk (inbound rule) port 80 pada Security Group sebuah instance EC2. Ketika instance tersebut merespons permintaan HTTP klien dan mengirim paket data balasan keluar, bagaimana Security Group memperlakukan lalu lintas balasan tersebut?",
+    "explanation": "Security Group bersifat stateful; artinya, jika sebuah koneksi lalu lintas masuk (inbound) diizinkan, lalu lintas balasan keluar (outbound) yang sesuai akan secara otomatis diizinkan tanpa memandang aturan outbound."
+  },
+  "curated-ccp-id-27": {
+    "prompt": "Sebuah tim keamanan jaringan mendeteksi serangan pemindaian port yang berasal dari alamat IP penyerang tertentu (misal: 203.0.113.50). Mereka ingin secara tegas memblokir (explicit deny) seluruh lalu lintas dari IP tersebut di tingkat subnet pada Amazon VPC. Komponen keamanan manakah yang memiliki kapabilitas aturan DENY ini?",
+    "explanation": "Network Access Control List (NACL) bekerja di tingkat subnet dan mendukung aturan bernomor eksplisit untuk ALLOW maupun DENY berdasarkan alamat IP."
+  },
+  "curated-ccp-id-28": {
+    "prompt": "Sebuah perusahaan perbankan ingin menegakkan standar kepatuhan di mana seluruh transfer data ke bucket Amazon S3 wajib menggunakan enkripsi dalam perjalanan (encryption in-transit) melalui HTTPS (TLS). Permintaan HTTP tanpa enkripsi harus ditolak secara otomatis. Kebijakan manakah yang harus diterapkan pada S3 Bucket Policy?",
+    "explanation": "Menambahkan pernyataan DENY pada S3 Bucket Policy dengan kondisi 'aws:SecureTransport': 'false' akan secara otomatis menolak semua permintaan HTTP tanpa enkripsi TLS."
+  },
+  "curated-ccp-id-29": {
+    "prompt": "Tim auditor kepatuhan internal memerlukan rekaman komprehensif mengenai seluruh aktivitas pemanggilan API AWS (termasuk identitas pemanggil, stempel waktu, dan parameter operasi) untuk penyelidikan tata kelola di akun AWS. Layanan AWS manakah yang menyediakan rekaman jejak audit ini?",
+    "explanation": "AWS CloudTrail mencatat riwayat pemanggilan API dan tindakan pengguna di akun AWS, menyediakan catatan jejak audit untuk tata kelola, kepatuhan, dan investigasi operasional."
+  },
+  "curated-ccp-id-30": {
+    "prompt": "Sebuah aplikasi analitik memerlukan izin untuk membaca data dari satu tabel Amazon DynamoDB tertentu bernama 'ProductCatalog'. Untuk menerapkan prinsip hak akses terkecil (Principle of Least Privilege), bagaimana kebijakan IAM Policy seharusnya disusun?",
+    "explanation": "Prinsip Least Privilege mengharuskan IAM Policy hanya memuat aksi spesifik yang diperlukan (seperti dynamodb:GetItem, dynamodb:Query) dan membatasi cakupan Resource ARN secara presisi hanya ke ARN tabel ProductCatalog tersebut."
+  },
+  "curated-ccp-id-31": {
+    "prompt": "Sebuah aplikasi web mobile mengizinkan pengguna masuk menggunakan kredensial akun sosial (seperti Google atau Facebook) dan kemudian menukarnya dengan kredensial keamanan sementara AWS untuk mengakses file foto di Amazon S3. Layanan token keamanan AWS manakah yang menerbitkan kredensial sementara ini?",
+    "explanation": "AWS Security Token Service (AWS STS) menerbitkan kredensial keamanan sementara dengan hak istimewa terbatas untuk federasi identitas dan IAM Role."
+  },
+  "curated-ccp-id-32": {
+    "prompt": "Sebuah platform aplikasi web membutuhkan layanan terkelola untuk menangani proses pendaftaran pengguna (sign-up), autentikasi masuk (sign-in), verifikasi email/SMS, dan penerbitan token identitas (JWT) bagi jutaan pengguna akhir aplikasi. Layanan AWS manakah yang paling sesuai?",
+    "explanation": "Amazon Cognito User Pools menyediakan direktori pengguna yang aman dan terkelola penuh untuk menangani autentikasi pendaftaran, login, dan manajemen token identitas aplikasi web dan seluler."
+  },
+  "curated-ccp-id-33": {
+    "prompt": "Tim keamanan cloud ingin mengidentifikasi apakah ada bucket Amazon S3 atau peran IAM di akun mereka yang secara tidak sengaja dapat diakses oleh entitas atau principal di luar organisasi AWS mereka. Alat analisis keamanan IAM manakah yang dirancang untuk mendeteksi temuan akses eksternal ini?",
+    "explanation": "IAM Access Analyzer memindai resource-based policies pada bucket S3, peran IAM, dan KMS keys untuk mengidentifikasi resource yang dapat diakses oleh entitas eksternal di luar zona kepercayaan (trust zone)."
+  },
+  "curated-ccp-id-34": {
+    "prompt": "Dalam arsitektur aplikasi tiga tingkat (3-tier), tim keamanan ingin memastikan bahwa instans basis data Amazon RDS di private subnet HANYA menerima koneksi jaringan dari armada server aplikasi di tier aplikasi. Konfigurasi Security Group manakah yang paling tepat?",
+    "explanation": "Praktik terbaik keamanan adalah mengonfigurasi Security Group database dengan aturan inbound port database yang menetapkan Source-nya langsung ke ID Security Group milik server aplikasi."
+  },
+  "curated-ccp-id-35": {
+    "prompt": "Sebuah lembaga keuangan diwajibkan oleh regulator pemerintah (seperti SEC Rule 17a-4) untuk menyimpan rekaman transaksi di Amazon S3 dalam model WORM (Write Once, Read Many), di mana objek tidak boleh ditimpa atau dihapus oleh siapa pun (termasuk oleh AWS Root User) selama masa retensi 7 tahun. Fitur Amazon S3 manakah yang wajib diaktifkan?",
+    "explanation": "S3 Object Lock dalam mode Compliance (Compliance Mode) memastikan bahwa objek yang terkunci tidak dapat ditimpa atau dihapus oleh pengguna mana pun, termasuk AWS Root User, selama masa retensi yang ditetapkan."
+  },
+  "curated-ccp-id-36": {
+    "prompt": "Seorang Administrator Keamanan ingin memitigasi risiko pengambilalihan akun akibat pencurian atau kebocoran kata sandi pada seluruh akun IAM berhak istimewa di AWS. Kontrol keamanan tambahan apakah yang paling efektif untuk diterapkan?",
+    "explanation": "Mengaktifkan Multi-Factor Authentication (MFA) mewajibkan faktor kedua (seperti kode token dari aplikasi autentikator atau kunci keamanan fisik) di samping kata sandi, secara dramatis memitigasi risiko pencurian kredensial."
+  },
+  "curated-ccp-id-38": {
+    "prompt": "Sebuah aplikasi web stateless harus dirancang agar tetap tersedia tanpa downtime bagi pengguna meskipun salah satu Availability Zone (AZ) di Region mengalami pemadaman listrik total. Pola desain arsitektur komputasi manakah yang paling tepat?",
+    "explanation": "Menggabungkan Application Load Balancer (ALB) dengan Auto Scaling Group yang menyebarkan instance EC2 stateless ke beberapa Availability Zone (Multi-AZ) menjamin ketersediaan tinggi saat salah satu AZ gagal."
+  },
+  "curated-ccp-id-39": {
+    "prompt": "Dalam sistem pemrosesan pesanan toko online, modul penerima pesanan (producer) harus tetap dapat menerima transaksi pelanggan dengan lancar meskipun modul pemroses backend (consumer) sedang mengalami crash atau sedang dimatikan untuk pemeliharaan. Komponen perantara asinkron manakah yang harus dipasang di antara kedua modul tersebut?",
+    "explanation": "Amazon SQS bertindak sebagai buffer antrean pesan terdistribusi yang menampung pesanan secara aman dan memisahkan (decouple) produsen dari konsumen sehingga sistem tetap berfungsi saat konsumen mati."
+  },
+  "curated-ccp-id-40": {
+    "prompt": "Sebuah aplikasi konsumen membaca pesan transaksi dari antrean Amazon SQS. Jika sebuah pesan tertentu berulang kali gagal diproses karena data korup (poison pill message), tim ingin mengisolasi pesan tersebut ke antrean khusus agar tidak menghambat pemrosesan pesan lainnya. Fitur Amazon SQS manakah yang harus dikonfigurasi?",
+    "explanation": "Dead-Letter Queue (DLQ) pada Amazon SQS dengan Redrive Policy memungkinkan pengisolasian pesan yang gagal diproses berulang kali setelah mencapai batas 'Maximum Receives' yang ditentukan."
+  },
+  "curated-ccp-id-41": {
+    "prompt": "Sebuah sistem pemrosesan transaksi menggunakan antrean Amazon SQS Standard, yang menjamin pengiriman pesan 'setidaknya sekali' (at-least-once delivery) dan sesekali dapat mengirimkan salinan duplikat pesan yang sama. Praktik desain perangkat lunak manakah yang wajib diterapkan pada modul konsumen agar pemrosesan duplikat tidak menimbulkan efek samping ganda?",
+    "explanation": "Pemrosesan Idempoten (Idempotent processing) memastikan bahwa pemrosesan pesan yang sama lebih dari satu kali menghasilkan hasil akhir yang identik tanpa menimbulkan efek samping ganda (seperti tagihan ganda)."
+  },
+  "curated-ccp-id-42": {
+    "prompt": "Ketika sebuah transaksi penjualan berhasil dilakukan, event penjualan tersebut harus dikirimkan secara serentak ke tiga subsistem independen: subsistem pengiriman email, subsistem manajemen inventaris, dan subsistem analitik data. Desain pola perpesanan (messaging pattern) AWS manakah yang paling tepat?",
+    "explanation": "Pola fan-out menggunakan satu Amazon SNS Topic yang dilanggani (subscribed) oleh beberapa Amazon SQS queues independen memungkinkan distribusi event tunggal ke banyak subsistem secara terpisah."
+  },
+  "curated-ccp-id-43": {
+    "prompt": "Sebuah platform perdagangan saham membutuhkan antrean pesan di mana transaksi untuk setiap nasabah tertentu wajib diproses tepat sesuai urutan waktu pengiriman (First-In, First-Out) dan tanpa duplikasi pesan. Tipe antrean Amazon SQS dan konfigurasi manakah yang harus dipilih?",
+    "explanation": "Amazon SQS FIFO Queue dengan Message Group ID memastikan urutan pesan yang ketat (strictly-ordered) berdasarkan grup dan menjamin pemrosesan tepat satu kali (exactly-once processing)."
+  },
+  "curated-ccp-id-44": {
+    "prompt": "Seorang pengembang secara tidak sengaja menjalankan perintah 'DROP TABLE' pada basis data produksi Amazon RDS. Tim operasional perlu segera mengembalikan basis data ke kondisi tepat beberapa menit sebelum perintah kesalahan tersebut dieksekusi. Fitur pencadangan Amazon RDS manakah yang memungkinkan pemulihan ke detik spesifik ini?",
+    "explanation": "Automated Backups pada Amazon RDS dengan kemampuan Point-In-Time Recovery (PITR) memungkinkan pemulihan basis data ke detik mana pun di dalam rentang retensi cadangan (backup retention period)."
+  },
+  "curated-ccp-id-45": {
+    "prompt": "Sebuah armada server web berbasis Linux yang berjalan di beberapa Availability Zone pada Amazon EC2 membutuhkan sistem penyimpanan file bersama yang terkelola penuh dan dapat di-mount secara simultan menggunakan protokol NFS. Layanan penyimpanan AWS manakah yang harus dipilih?",
+    "explanation": "Amazon EFS Regional menyediakan penyimpanan file bersama berbasis NFS yang terkelola, elastis, dan dapat diakses bersamaan oleh ratusan instance Linux di berbagai Availability Zone."
+  },
+  "curated-ccp-id-46": {
+    "prompt": "Sebuah perusahaan mengoperasikan dua armada web server di dua Region berbeda untuk pemulihan bencana (Active-Passive Disaster Recovery). Mereka ingin agar traffic pengguna secara otomatis dialihkan ke armada cadangan jika armada utama dinyatakan tidak sehat oleh pemeriksaan kesehatan. Kebijakan routing Amazon Route 53 manakah yang harus dikonfigurasi?",
+    "explanation": "Failover Routing Policy pada Amazon Route 53 yang dihubungkan dengan Route 53 Health Checks secara otomatis merutekan traffic ke resource cadangan (Secondary) saat resource utama (Primary) tidak sehat."
+  },
+  "curated-ccp-id-47": {
+    "prompt": "Sebuah aplikasi web menyimpan data sesi login pengguna langsung di dalam memori lokal masing-masing server web Amazon EC2. Akibatnya, jika salah satu server web crash atau dimatikan oleh Auto Scaling, pengguna yang berada di server tersebut langsung terlempar keluar (logout). Perubahan arsitektur manakah yang paling tepat untuk meningkatkan ketahanan aplikasi?",
+    "explanation": "Menyimpan status sesi pengguna di penyimpanan bersama eksternal terpusat (seperti Amazon ElastiCache for Redis atau Amazon DynamoDB) membuat lapisan web menjadi stateless dan tahan terhadap kegagalan instance."
+  },
+  "curated-ccp-id-48": {
+    "prompt": "Sebuah situs e-commerce yang dihosting di Region AS mengalami keluhan waktu pemuatan halaman yang lambat dari pelanggan di Asia dan Eropa saat mengunduh gambar produk statis. Solusi arsitektur jaringan AWS manakah yang paling efektif untuk menurunkan latensi bagi pengguna global tersebut tanpa memindahkan server utama?",
+    "explanation": "Mengimplementasikan Amazon CloudFront memanfaatkan jaringan global Edge Locations untuk meng-cache aset statis dekat dengan pengguna global, secara signifikan menurunkan latensi pengiriman konten."
+  },
+  "curated-ccp-id-49": {
+    "prompt": "Sebuah aplikasi game online membaca data profil pemain dari tabel Amazon DynamoDB jutaan kali per detik. Tim pengembang membutuhkan lapisan cache in-memory yang terintegrasi penuh dan kompatibel dengan API DynamoDB untuk menghasilkan waktu respons baca sub-milidetik (mikrodetik). Solusi akselerasi manakah yang dirancang khusus untuk ini?",
+    "explanation": "DynamoDB Accelerator (DAX) adalah cache in-memory terkelola penuh dan sangat tersedia yang dirancang khusus untuk Amazon DynamoDB guna mengurangi waktu respons pembacaan dari milidetik menjadi mikrodetik."
+  },
+  "curated-ccp-id-50": {
+    "prompt": "Seorang Data Analyst perlu menjalankan query analitik SQL ad-hoc atas log akses yang tersimpan dalam format file terkompresi di bucket Amazon S3 tanpa ingin mengelola klaster database, tanpa memuat data ke penyimpanan lain, dan hanya ingin membayar per volume data yang dipindai oleh query. Layanan serverless AWS manakah yang harus digunakan?",
+    "explanation": "Amazon Athena adalah layanan query interaktif tanpa server (serverless) yang mempermudah analisis data langsung di Amazon S3 menggunakan SQL standar tanpa perlu mengelola server infrastruktur."
+  },
+  "curated-ccp-id-51": {
+    "prompt": "Sebuah aplikasi basis data relasional Amazon RDS for MySQL mengalami beban pembacaan data pelaporan (read workload) yang sangat tinggi sementara operasi penulisan transaksi (write) tetap stabil. Solusi arsitektur basis data AWS manakah yang paling tepat untuk menambah kapasitas throughput baca secara horizontal?",
+    "explanation": "Membuat satu atau lebih Amazon RDS Read Replicas memungkinkan pengalihan lalu lintas kueri baca (read-heavy traffic) dari basis data utama ke replika baca untuk meningkatkan kapasitas throughput baca."
+  },
+  "curated-ccp-id-52": {
+    "prompt": "Sebuah platform analitik IoT menerima jutaan aliran data telemetri sensor secara kontinu. Aplikasi konsumen perlu memproses data tersebut secara berurutan dan memiliki kemampuan untuk memutar ulang (replay) aliran data event hingga masa retensi 7 hari jika terjadi kesalahan logika pemrosesan. Layanan streaming data AWS manakah yang paling tepat?",
+    "explanation": "Amazon Kinesis Data Streams adalah layanan penyerapan data streaming terdistribusi yang menyimpan rekaman data secara berurutan dan memungkinkan beberapa konsumen membaca dan memutar ulang (replay) data dalam periode retensi."
+  },
+  "curated-ccp-id-53": {
+    "prompt": "Sebuah aplikasi microservices memiliki jalur URL yang berbeda, di mana permintaan ke '/api/orders' harus diarahkan ke armada container pemesanan, dan permintaan ke '/api/users' harus diarahkan ke armada container pengguna. Tipe Elastic Load Balancing (ELB) manakah yang mendukung perutean cerdas berbasis path URL (Path-based Routing) pada Layer 7 ini?",
+    "explanation": "Application Load Balancer (ALB) beroperasi pada OSI Layer 7 (Application Layer) dan secara native mendukung fitur perutean lanjutan seperti path-based routing, host-based routing, dan perutean berbasis HTTP header."
+  },
+  "curated-ccp-id-54": {
+    "prompt": "Sebuah aplikasi game real-time membutuhkan load balancer yang mampu menangani jutaan koneksi jaringan berbasis protokol TCP/UDP per detik dengan latensi ultra-rendah dan menyediakan alamat IP publik statis elastis (Elastic IP) per Availability Zone. Tipe Elastic Load Balancer manakah yang harus dipilih?",
+    "explanation": "Network Load Balancer (NLB) beroperasi pada OSI Layer 4 (Transport Layer) dan dioptimalkan untuk menangani beban kerja berlatensi ultra-rendah dengan throughput jutaan permintaan per detik serta mendukung IP statis per AZ."
+  },
+  "curated-ccp-id-55": {
+    "prompt": "Sebuah tim ilmuwan menjalankan simulasi komputasi performa tinggi (High Performance Computing / HPC) yang membutuhkan komunikasi jaringan antar-instance dengan latensi serendah mungkin dan bandwidth tertinggi di dalam satu Availability Zone. Opsi penempatan Amazon EC2 Placement Group manakah yang harus digunakan?",
+    "explanation": "Cluster Placement Group mengelompokkan instance Amazon EC2 secara fisik berdekatan di dalam satu Availability Zone untuk mencapai latensi jaringan antar-node terendah dan throughput jaringan tertinggi (hingga 100 Gbps)."
+  },
+  "curated-ccp-id-56": {
+    "prompt": "Sebuah aplikasi e-commerce sering melakukan kueri basis data berulang untuk informasi katalog produk yang jarang berubah. Untuk mempercepat waktu muat halaman dan mengurangi beban kueri pada basis data relasional Amazon RDS, tim pengembang ingin memasang cache in-memory terkelola berbasis Redis atau Memcached. Layanan AWS manakah ini?",
+    "explanation": "Amazon ElastiCache adalah layanan penyimpanan data in-memory terkelola penuh yang mendukung Redis dan Memcached untuk mempercepat waktu respons aplikasi dan mengurangi beban kerja basis data relasional."
+  },
+  "curated-ccp-id-57": {
+    "prompt": "Sebuah fungsi AWS Lambda sering mengalami lonjakan latensi inisialisasi awal (cold start) saat pertama kali dipanggil setelah lama tidak aktif. Fitur AWS Lambda manakah yang dapat menjaga lingkungan eksekusi tetap hangat dan siap merespons seketika dalam hitungan milidetik dua digit?",
+    "explanation": "Fitur Provisioned Concurrency pada AWS Lambda mengalokasikan lingkungan eksekusi yang telah dihangatkan dan siap pakai sebelumnya, secara efektif menghilangkan latensi cold start untuk aplikasi sensitif latensi."
+  },
+  "curated-ccp-id-58": {
+    "prompt": "Sebuah basis data I/O intensif pada Amazon EC2 membutuhkan performa throughput penyimpanan blok yang sangat tinggi dan latensi sub-milidetik yang konsisten hingga mencapai 64.000 IOPS per volume. Tipe volume penyimpanan Amazon EBS manakah yang paling sesuai untuk beban kerja kritis ini?",
+    "explanation": "Volume Amazon EBS Provisioned IOPS SSD (io1 / io2 Block Express) dirancang khusus untuk beban kerja I/O intensif dan basis data transaksional mission-critical yang membutuhkan performa IOPS tinggi dan konsisten."
+  },
+  "curated-ccp-id-60": {
+    "prompt": "Sebuah perusahaan memiliki jutaan objek dokumen di Amazon S3 yang jarang sekali diakses setelah 90 hari pertama, dan waktu pengambilan data dalam beberapa jam dapat diterima demi efisiensi biaya. Konfigurasi otomatisasi Amazon S3 manakah yang paling tepat untuk memindahkan objek ke kelas penyimpanan arsip yang lebih murah?",
+    "explanation": "S3 Lifecycle Configuration Rules memungkinkan otomatisasi transisi objek antar kelas penyimpanan (seperti memindahkan objek dari S3 Standard ke S3 Glacier) berdasarkan umur objek untuk mengoptimalkan biaya penyimpanan."
+  },
+  "curated-ccp-id-61": {
+    "prompt": "Sebuah platform media menyimpan jutaan video yang pola aksesnya berubah-ubah secara acak dan sangat sulit diprediksi (beberapa video lama tiba-tiba viral, sementara video baru bisa sepi penonton). Kelas penyimpanan Amazon S3 manakah yang secara otomatis memindahkan objek antar tingkat akses (Frequent, Infrequent, Archive) berdasarkan pola akses tanpa biaya pengambilan data?",
+    "explanation": "Amazon S3 Intelligent-Tiering adalah satu-satunya kelas penyimpanan cloud yang secara otomatis mengoptimalkan biaya penyimpanan dengan memindahkan data antar tingkat akses saat pola akses berubah tanpa biaya pemulihan data."
+  },
+  "curated-ccp-id-62": {
+    "prompt": "Sebuah tim pengembangan menjalankan 20 instance Amazon EC2 untuk lingkungan pengujian yang hanya digunakan oleh staf pada hari kerja pukul 08.00 hingga 18.00. Langkah operasional manakah yang paling efektif dan sederhana untuk memangkas biaya komputasi instance tersebut hingga lebih dari 50%?",
+    "explanation": "Mengatur jadwal otomatisasi penghentian (stop) instance pada malam hari dan akhir pekan (Scheduled stop/start) memastikan perusahaan hanya membayar biaya komputasi saat server benar-benar digunakan."
+  },
+  "curated-ccp-id-63": {
+    "prompt": "Seorang Manajer Keuangan TI ingin menganalisis tren pengeluaran biaya cloud perusahaan selama 6 bulan terakhir, membuat rincian grafik biaya berdasarkan layanan AWS (seperti EC2 vs RDS), dan melihat proyeksi perkiraan tagihan untuk bulan depan. Layanan AWS Cost Management manakah yang menyediakan visualisasi analitik biaya ini?",
+    "explanation": "AWS Cost Explorer menyediakan antarmuka visual intuitif untuk melihat, menganalisis, dan melacak pola pengeluaran serta penggunaan biaya layanan AWS dari waktu ke waktu dan memprediksi biaya masa depan."
+  },
+  "curated-ccp-id-64": {
+    "prompt": "Seorang Manajer Operasional TI ingin menetapkan batas anggaran biaya pengeluaran bulanan sebesar $5.000 untuk akun AWS perusahaan dan mengonfigurasi notifikasi email otomatis jika perkiraan pengeluaran diproyeksikan akan melampaui 80% dari batas tersebut sebelum akhir bulan. Layanan AWS manakah yang harus digunakan?",
+    "explanation": "AWS Budgets memungkinkan pembuatan batas anggaran biaya dan penggunaan kustom, serta memicu notifikasi peringatan (via SNS/email) saat biaya aktual atau perkiraan (forecasted) melampaui ambang batas yang ditentukan."
+  },
+  "curated-ccp-id-65": {
+    "prompt": "Sebuah startup meluncurkan aplikasi baru yang pola beban transaksinya sangat fluktuatif dan tidak dapat diprediksi. Tim pengembang ingin menggunakan Amazon DynamoDB namun tidak ingin memperkirakan kapasitas baca/tulis di awal atau membayar kapasitas yang menganggur. Mode kapasitas DynamoDB manakah yang paling tepat dipilih?",
+    "explanation": "DynamoDB On-Demand Capacity Mode menangani beban kerja yang tidak terprediksi dengan menyesuaikan kapasitas baca/tulis secara instan sesuai kebutuhan dan hanya menagih untuk permintaan yang dieksekusi secara nyata."
+  },
+  "curated-ccp-id-66": {
+    "prompt": "Sebuah organisasi ingin mengotomatiskan pembuatan salinan cadangan snapshot Amazon EBS setiap malam hari dan secara otomatis menghapus snapshot lama setelah mencapai masa retensi 30 hari untuk menghemat biaya penyimpanan. Layanan terkelola AWS manakah yang dirancang untuk mengelola siklus hidup snapshot ini?",
+    "explanation": "Amazon Data Lifecycle Manager (Amazon DLM) menyediakan pengelolaan siklus hidup otomatis untuk membuat, mempertahankan, dan menghapus snapshot Amazon EBS dan AMI yang didukung EBS berdasarkan kebijakan terstandarisasi."
+  },
+  "curated-ccp-id-67": {
+    "prompt": "Sebuah startup menghadapi permintaan pasar yang sangat dinamis dan sering berubah-ubah. Manakah DUA manfaat komputasi cloud AWS yang paling langsung membantu startup tersebut menghadapi ketidakpastian permintaan bisnis tanpa risiko kerugian besar? (Pilih DUA).",
+    "explanation": "Kapasitas elastis (Elastic capacity) memungkinkan penyesuaian sumber daya dengan cepat mengikuti lonjakan beban, sedangkan model biaya variabel (Trading capital expense for variable expense) menghilangkan risiko investasi perangkat keras yang sia-sia."
+  },
+  "curated-ccp-id-68": {
+    "prompt": "Berdasarkan AWS Shared Responsibility Model, manakah DUA tugas operasional yang menjadi tanggung jawab pelanggan saat menggunakan layanan basis data terkelola Amazon RDS? (Pilih DUA).",
+    "explanation": "Pada layanan PaaS seperti Amazon RDS, AWS mengelola patching sistem operasi dan perangkat keras server, sedangkan pelanggan tetap bertanggung jawab penuh atas manajemen konfigurasi hak akses pengguna basis data (IAM/DB users) dan perlindungan data pelanggan (seperti enkripsi at-rest)."
+  },
+  "curated-ccp-id-69": {
+    "prompt": "Sebuah arsitektur aplikasi web modern membutuhkan solusi penyimpanan untuk file media dokumen (object storage) dan basis data dokumen terkelola dengan performa latensi satu digit milidetik (key-value storage). Manakah DUA layanan AWS yang paling tepat untuk memenuhi kedua kebutuhan penyimpanan tersebut? (Pilih DUA).",
+    "explanation": "Amazon S3 adalah layanan penyimpanan objek terkelola untuk file dokumen dan media, sedangkan Amazon DynamoDB adalah layanan basis data NoSQL model key-value dan dokumen yang terkelola penuh."
+  },
+  "curated-ccp-id-70": {
+    "prompt": "Sebuah tim tata kelola keuangan cloud membutuhkan solusi untuk menganalisis tren pengeluaran biaya historis berdasarkan tag departemen, serta solusi untuk menyetel batas anggaran belanja bulanan dengan peringatan email otomatis jika biaya melampaui batas. Manakah DUA layanan AWS Cost Management yang harus digunakan? (Pilih DUA).",
+    "explanation": "AWS Cost Explorer digunakan untuk meneliti dan memvisualisasikan tren biaya historis, sedangkan AWS Budgets digunakan untuk menetapkan batas anggaran belanja dan memicu notifikasi peringatan saat ambang batas tercapai."
+  },
+  "curated-ccp-id-71": {
+    "prompt": "Sebuah platform tiket konser online mengalami lonjakan pembelian tiket yang sangat drastis selama 1 jam penjualan pertama dan kemudian traffic turun kembali ke tingkat normal. Infrastruktur cloud secara otomatis menambah puluhan server komputasi saat sibuk dan mematikannya kembali saat sepi pengunjung. Konsep cloud manakah yang ditunjukkan oleh skenario ini?",
+    "explanation": "Elastisitas (Elasticity) adalah kemampuan sistem cloud untuk secara dinamis menambah dan melepaskan kapasitas sumber daya komputasi secara otomatis mengikuti fluktuasi permintaan nyata."
+  },
+  "curated-ccp-id-72": {
+    "prompt": "Sebuah tim pengembang perangkat lunak mampu menguji tiga rancangan arsitektur sistem baru dalam satu hari kerja dengan meluncurkan dan mematikan puluhan instans cloud dalam hitungan menit tanpa harus memesan perangkat keras fisik ke vendor. Manfaat komputasi cloud manakah yang paling langsung dirasakan tim ini?",
+    "explanation": "Kelincahan (Agility) memungkinkan tim pengembang meluncurkan sumber daya baru secara instan dalam hitungan menit untuk bereksperimen, mempercepat time-to-market produk inovatif."
+  },
+  "curated-ccp-id-73": {
+    "prompt": "Sebuah startup teknologi memilih untuk tidak membeli server fisik berbiaya mahal di awal berdirinya perusahaan, melainkan menggunakan layanan komputasi awan di mana mereka hanya membayar tagihan sesuai durasi pemakaian server setiap bulannya. Model biaya komputasi cloud manakah yang diterapkan oleh startup ini?",
+    "explanation": "Model biaya variabel (Variable expense / OpEx) memungkinkan bisnis membayar infrastruktur hanya sesuai kapasitas yang dikonsumsi, menggantikan belanja modal tetap di awal (CapEx)."
+  },
+  "curated-ccp-id-74": {
+    "prompt": "Penyedia cloud publik seperti AWS membeli jutaan komponen perangkat keras server dan media penyimpanan dalam volume raksasa untuk melayani ratusan ribu pelanggan di seluruh dunia, sehingga menghasilkan penghematan biaya pembelian per unit yang diteruskan kembali ke pelanggan dalam bentuk penurunan harga layanan. Prinsip ekonomi manakah yang menjelaskan efisiensi ini?",
+    "explanation": "Skala ekonomis (Economies of scale) adalah prinsip ekonomi di mana volume pembelian agregat yang sangat masif menurunkan biaya unit operasional, menghasilkan harga layanan yang lebih murah bagi konsumen."
+  },
+  "curated-ccp-id-75": {
+    "prompt": "Sebuah aplikasi keuangan mission-critical harus dirancang agar tetap beroperasi normal dan melayani nasabah tanpa henti meskipun salah satu fasilitas fisik pusat data di dalam Region mengalami bencana banjir atau pemadaman listrik total. Unit infrastruktur fisik AWS manakah yang harus dipisahkan dalam penyebaran aplikasi?",
+    "explanation": "Availability Zones (AZ) adalah unit infrastruktur fisik terpisah di dalam satu Region yang memiliki daya, pendingin, dan jaringan independen untuk memberikan toleransi bencana tingkat data center."
+  },
+  "curated-ccp-id-76": {
+    "prompt": "Sebuah korporasi multinasional ingin mematuhi regulasi kedaulatan data (data sovereignty) Uni Eropa (GDPR) dan memastikan bahwa data nasabah Eropa mereka disimpan di dalam yurisdiksi geografis benua Eropa dengan latensi jaringan minimal. Unit infrastruktur global AWS manakah yang dipilih oleh perusahaan?",
+    "explanation": "AWS Region adalah area geografis terpisah di seluruh dunia yang berisi beberapa Availability Zone, dipilih oleh pelanggan berdasarkan lokasi geografis, yurisdiksi kepatuhan data, dan latensi pengguna."
+  },
+  "curated-ccp-id-77": {
+    "prompt": "Sebuah portal media global ingin mempercepat pengiriman file gambar dan video statis kepada pengguna di seluruh dunia dengan latensi serendah mungkin tanpa perlu memindahkan basis data utama mereka keluar dari Region asal. Komponen infrastruktur global AWS manakah yang memfasilitasi hal ini?",
+    "explanation": "Edge Locations adalah titik kehadiran jaringan global AWS yang digunakan oleh Amazon CloudFront untuk meng-cache dan menyajikan konten statis dekat dengan pengguna akhir."
+  },
+  "curated-ccp-id-78": {
+    "prompt": "AWS menjamin keamanan fasilitas fisik pusat data, perangkat keras server, dan lapisan hypervisor, sedangkan pelanggan bertanggung jawab atas konfigurasi sistem operasi tamu, firewall Security Group, dan enkripsi data pelanggan. Kerangka kerja pembagian tugas keamanan ini dikenal dengan istilah apa?",
+    "explanation": "AWS Shared Responsibility Model membagi tanggung jawab keamanan menjadi dua bagian: AWS bertanggung jawab atas keamanan 'dari' cloud, sedangkan pelanggan bertanggung jawab atas keamanan 'di dalam' cloud."
+  },
+  "curated-ccp-id-79": {
+    "prompt": "Sebuah tim platform engineering ingin memastikan bahwa seluruh konfigurasi topologi jaringan VPC, subnet, dan route table didefinisikan ke dalam file kode deklaratif yang tersimpan di sistem version control (Git) agar dapat dibuat ulang secara identik di Region lain kapan saja. Praktik arsitektur cloud manakah yang diterapkan?",
+    "explanation": "Infrastructure as Code (IaC) adalah praktik mendefinisikan dan memprovisikan infrastruktur teknologi melalui kode template (seperti AWS CloudFormation) yang dapat diuji dan dikelola dalam version control."
+  },
+  "curated-ccp-id-80": {
+    "prompt": "Sebuah toko online menggunakan antrean pesan untuk memisahkan modul penerimaan pesanan dari modul pemrosesan pembayaran. Ketika modul pembayaran dihentikan sementara untuk pembaruan sistem, modul penerimaan pesanan tetap dapat beroperasi normal menampung pesanan pelanggan di dalam antrean. Prinsip desain arsitektur cloud manakah yang diterapkan?",
+    "explanation": "Kopling longgar (Loose coupling / Decoupling) memastikan komponen aplikasi terhubung secara asinkron sehingga pemadaman atau lonjakan pada satu komponen tidak melumpuhkan komponen lainnya."
+  },
+  "curated-ccp-id-81": {
+    "prompt": "Sebuah tim operasional mengamati metrik CloudWatch dan melihat bahwa penggunaan CPU pada armada instance Amazon EC2 mereka secara konsisten berada di bawah 5% selama tiga bulan terakhir. Tim memutuskan untuk menurunkan ukuran tipe instance (misalnya dari m5.2xlarge ke m5.large) agar sesuai dengan beban kerja nyata. Praktik optimalisasi biaya manakah yang dilakukan?",
+    "explanation": "Right-sizing adalah praktik menyesuaikan tipe dan ukuran instance komputasi dengan kebutuhan beban kerja aktual untuk mengeliminasi alokasi kapasitas berlebih dan menekan biaya pemborosan."
+  },
+  "curated-ccp-id-82": {
+    "prompt": "Seorang pengembang perangkat lunak ingin mengunggah file kode fungsi bisnis ke AWS dan mengeksekusinya berdasarkan pemicu event tanpa perlu memikirkan penyediaan server, pembaruan patch sistem operasi, atau manajemen klaster komputasi. Model komputasi awan manakah yang paling tepat?",
+    "explanation": "Serverless computing (seperti AWS Lambda) mengabstraksi seluruh lapisan infrastruktur server, memungkinkan pengembang hanya berfokus pada logika kode bisnis sementara penskalaan dan perawatan host dikelola otomatis oleh AWS."
+  },
+  "curated-ccp-id-84": {
+    "prompt": "Sebuah aplikasi layanan publik mengalami pola penggunaan di mana beban kerja pada malam hari turun drastis hingga sepersepuluh dari beban kerja siang hari. Sistem secara otomatis mengurangi jumlah instance server komputasi pada malam hari dan menambahkannya kembali saat fajar menyingsing. Sifat utama komputasi cloud manakah yang dimanfaatkan?",
+    "explanation": "Elastisitas (Elasticity) adalah kemampuan sistem cloud untuk secara dinamis mencocokkan jumlah kapasitas sumber daya yang dialokasikan dengan kebutuhan permintaan nyata yang berfluktuasi."
+  },
+  "curated-ccp-id-85": {
+    "prompt": "Sebuah tim perusahaan bermigrasi dari basis data on-premise ke basis data terkelola Amazon RDS for MySQL. Meskipun AWS menangani pencadangan otomatis dan patch mesin basis data, tim keamanan perusahaan tetap harus mengonfigurasi siapa saja pengguna yang berhak membaca tabel dan mengaktifkan enkripsi data. Prinsip pembagian keamanan manakah yang berlaku?",
+    "explanation": "Shared Responsibility Model (Model Tanggung Jawab Bersama) menyatakan bahwa pada layanan PaaS/database terkelola seperti RDS, AWS mengelola infrastruktur dan OS patch, namun pelanggan tetap memegang kendali atas tata kelola data, otorisasi pengguna, dan enkripsi."
+  },
+  "curated-ccp-id-86": {
+    "prompt": "Seorang auditor keamanan ingin mengetahui identitas akun atau pengguna IAM manakah yang mengeksekusi operasi API 'DeleteBucket' pada salah satu bucket Amazon S3 kemarin sore beserta alamat IP asal permohonan. Layanan pencatatan audit AWS manakah yang harus diperiksa?",
+    "explanation": "AWS CloudTrail mencatat seluruh aktivitas pemanggilan API di akun AWS, menyediakan catatan bukti audit forensik mengenai siapa yang memanggil API, kapan dilakukan, dan dari IP mana."
+  },
+  "curated-ccp-id-87": {
+    "prompt": "Sebuah tim keamanan cloud ingin mendeteksi secara otomatis jika ada aturan Security Group yang baru saja dimodifikasi oleh administrator dan membuka port sensitif ke internet publik (0.0.0.0/0), serta mengevaluasi status kepatuhan akun secara terus-menerus. Layanan audit kepatuhan konfigurasi AWS manakah yang sesuai?",
+    "explanation": "AWS Config terus memantau dan mencatat perubahan konfigurasi sumber daya AWS serta mengevaluasinya terhadap aturan kepatuhan (Config Rules), seperti mendeteksi port keamanan yang terbuka bebas."
+  },
+  "curated-ccp-id-88": {
+    "prompt": "Sebuah perusahaan memerlukan solusi keamanan cerdas yang terus memantau aktivitas akun AWS mereka menggunakan algoritma machine learning untuk mendeteksi perilaku anomali seperti panggilan API yang tidak biasa atau komunikasi ke IP botnet berbahaya dari data log VPC dan DNS. Layanan deteksi ancaman AWS manakah yang harus diaktifkan?",
+    "explanation": "Amazon GuardDuty adalah layanan intelligent threat detection terkelola yang secara otomatis menganalisis event CloudTrail, VPC Flow Logs, dan DNS logs untuk mendeteksi ancaman keamanan siber."
+  },
+  "curated-ccp-id-89": {
+    "prompt": "Tim operasional membutuhkan alat otomatis untuk memindai kerentanan perangkat lunak (software vulnerabilities) dan paparan jaringan yang tidak disengaja pada armada instance Amazon EC2 dan image kontainer di Amazon ECR. Layanan penilaian kerentanan otomatis AWS manakah yang dirancang untuk kebutuhan ini?",
+    "explanation": "Amazon Inspector adalah layanan manajemen kerentanan otomatis yang terus memindai beban kerja Amazon EC2 dan container images untuk menemukan kerentanan perangkat lunak dan paparan jaringan yang tidak diinginkan."
+  },
+  "curated-ccp-id-90": {
+    "prompt": "Sebuah tim kepatuhan hukum menduga ada bucket Amazon S3 yang secara tidak sengaja berisi file teks dengan data identitas nasabah (Personally Identifiable Information / PII) yang belum terproteksi. Layanan keamanan bertenaga machine learning AWS manakah yang dirancang khusus untuk memindai dan mengklasifikasikan data sensitif di Amazon S3?",
+    "explanation": "Amazon Macie menggunakan machine learning dan pencocokan pola untuk secara otomatis menemukan, menginventarisasi, dan melindungi data sensitif seperti informasi identitas pribadi (PII) di Amazon S3."
+  },
+  "curated-ccp-id-91": {
+    "prompt": "Seorang analis pusat operasi keamanan (SOC) ingin melihat dashboard terpusat yang menggabungkan seluruh temuan peringatan keamanan dari Amazon GuardDuty, Amazon Inspector, Amazon Macie, dan AWS IAM Access Analyzer di dalam satu konsol terpadu. Layanan manajemen postur keamanan AWS manakah ini?",
+    "explanation": "AWS Security Hub menyediakan tampilan komprehensif terpusat dari postur keamanan akun AWS dengan mengagregasikan, mengorganisasikan, dan memprioritaskan temuan peringatan keamanan dari berbagai layanan AWS."
+  },
+  "curated-ccp-id-92": {
+    "prompt": "Sebuah situs aplikasi web publik perlu memblokir permintaan HTTP yang mengandung payload serangan injeksi SQL (SQL Injection) dan skrip lintas situs (Cross-Site Scripting / XSS) pada Application Layer (Layer 7) sebelum mencapai web server. Layanan keamanan AWS manakah yang harus digunakan?",
+    "explanation": "AWS WAF adalah firewall aplikasi web yang memantau dan memblokir lalu lintas HTTP/S yang cocok dengan pola eksploitasi web berbahaya seperti SQLi dan XSS."
+  },
+  "curated-ccp-id-93": {
+    "prompt": "Sebuah perusahaan sedang mengevaluasi perlindungan terhadap potensi serangan penolakan layanan terdistribusi (Distributed Denial of Service / DDoS) skala besar pada lapisan jaringan dan transport (Layer 3 dan 4) serta membutuhkan dukungan tim respons mitigasi DDoS khusus 24/7. Layanan keamanan AWS khusus DDoS manakah yang relevan?",
+    "explanation": "AWS Shield (khususnya AWS Shield Advanced) dirancang khusus untuk memberikan perlindungan komprehensif terhadap serangan DDoS berskala besar pada Layer 3, 4, dan 7 lengkap dengan akses ke AWS DDoS Response Team (DRT)."
+  },
+  "curated-ccp-id-94": {
+    "prompt": "Sebuah aplikasi enterprise memerlukan kontrol terpusat untuk menentukan siapa saja pengguna atau layanan yang berhak menggunakan kunci enkripsi data melalui kebijakan kunci (key policies) dan mengaudit penggunaan kunci kriptografi secara ketat. Layanan manajemen kunci enkripsi AWS manakah yang harus digunakan?",
+    "explanation": "AWS Key Management Service (AWS KMS) mempermudah pembuatan, pengelolaan, dan pengontrolan kunci kriptografi (KMS keys) dengan kontrol akses granular melalui Key Policies dan audit log CloudTrail."
+  },
+  "curated-ccp-id-95": {
+    "prompt": "Sebuah aplikasi web perlu mengambil kredensial kata sandi basis data relasional secara aman saat runtime tanpa menyimpan hardcoded password di dalam kode sumber aplikasi, serta memerlukan kemampuan rotasi kata sandi otomatis secara berkala. Layanan keamanan AWS manakah yang tepat?",
+    "explanation": "AWS Secrets Manager memungkinkan penyimpanan aman, pengambilan, dan rotasi otomatis kredensial database dan kunci API tanpa perlu menyimpannya di kode sumber."
+  },
+  "curated-ccp-id-96": {
+    "prompt": "Sebuah Application Load Balancer (ALB) membutuhkan sertifikat enkripsi SSL/TLS publik terkelola untuk domain perusahaan agar komunikasi web dilindungi enkripsi HTTPS. Tim ingin agar pembaruan perpanjangan masa berlaku sertifikat (certificate renewal) ditangani secara otomatis oleh AWS tanpa biaya tambahan. Layanan AWS manakah yang harus digunakan?",
+    "explanation": "AWS Certificate Manager (ACM) menangani penyediaan, pengelolaan, dan perpanjangan otomatis sertifikat SSL/TLS publik gratis untuk digunakan bersama layanan seperti ALB dan CloudFront."
+  },
+  "curated-ccp-id-97": {
+    "prompt": "Sebuah aplikasi lintas akun AWS membutuhkan kredensial keamanan sementara (temporary security credentials) yang memiliki masa berlaku terbatas untuk mengakses sumber daya melalui operasi 'sts:AssumeRole'. Layanan token keamanan AWS manakah yang menerbitkan kredensial sementara ini?",
+    "explanation": "AWS Security Token Service (AWS STS) adalah layanan web yang memungkinkan pembuatan dan penerbitan kredensial keamanan sementara dengan hak istimewa terbatas untuk pengguna atau peran terfederasi."
+  },
+  "curated-ccp-id-98": {
+    "prompt": "Seorang Cloud Security Engineer ingin memverifikasi apakah ada konfigurasi S3 Bucket Policy atau IAM Role di akun AWS mereka yang secara tidak sengaja memberikan akses publik atau akses kepada pengguna di luar organisasi perusahaan. Alat analisis perizinan IAM manakah yang membantu menemukan temuan ini?",
+    "explanation": "IAM Access Analyzer menganalisis kebijakan berbasis sumber daya (resource-based policies) untuk mengidentifikasi sumber daya yang dapat diakses dari luar zona kepercayaan (trust zone) akun atau organisasi."
+  },
+  "curated-ccp-id-99": {
+    "prompt": "Sebuah situs web e-commerce membutuhkan solusi direktori identitas pelanggan terkelola yang menyediakan fitur pendaftaran akun baru (sign-up), login pengguna dengan autentikasi dua faktor, serta integrasi login media sosial (seperti Google dan Facebook). Layanan identitas pengguna AWS manakah yang paling sesuai?",
+    "explanation": "Amazon Cognito User Pools menyediakan direktori pengguna yang aman dan terkelola penuh untuk menangani pendaftaran, autentikasi masuk, dan manajemen profil pengguna pada aplikasi web dan mobile."
+  },
+  "curated-ccp-id-100": {
+    "prompt": "Sebuah korporasi ingin menetapkan kebijakan terpusat pada tingkat organisasi yang secara tegas melarang seluruh akun anggota menonaktifkan fitur keamanan tertentu, bahkan jika pengguna di akun anggota tersebut memiliki hak istimewa AdministratorAccess lokal. Mekanisme tata kelola AWS Organizations manakah yang harus diterapkan?",
+    "explanation": "Service Control Policies (SCPs) di AWS Organizations berfungsi sebagai pagar pembatas (guardrails) terpusat yang membatasi hak akses maksimum di seluruh akun anggota dan tidak dapat dilewati oleh administrator lokal akun anggota."
+  },
+  "curated-ccp-id-101": {
+    "prompt": "Seorang Administrator Keamanan ingin memastikan bahwa akun-akun IAM berhak istimewa tinggi (seperti administrator akun) memiliki verifikasi identitas tambahan di luar kata sandi saat masuk ke AWS Management Console guna mencegah pengambilalihan akun akibat pencurian kredensial. Kontrol keamanan manakah yang wajib diterapkan?",
+    "explanation": "Multi-Factor Authentication (MFA) mewajibkan pengguna memberikan faktor autentikasi kedua (kode token angka sekali pakai dari aplikasi atau kunci fisik) di samping kata sandi sebelum akses diberikan."
+  },
+  "curated-ccp-id-102": {
+    "prompt": "Sebuah kontainer aplikasi yang berjalan di Amazon ECS membutuhkan izin untuk membaca data dari satu bucket Amazon S3 tertentu tanpa perlu menyimpan Access Key ID dan Secret Access Key statis di dalam konfigurasi kontainer. Mekanisme perizinan IAM manakah yang harus diimplementasikan?",
+    "explanation": "Menggunakan IAM Task Role pada Amazon ECS memungkinkan kontainer memperoleh kredensial keamanan sementara secara otomatis dengan kebijakan hak akses terkecil (least-privilege policy) tanpa kredensial statis."
+  },
+  "curated-ccp-id-103": {
+    "prompt": "Seorang System Administrator perlu mengakses shell terminal pada armada instance Amazon EC2 berbasis Linux di private subnet untuk pemecahan masalah tanpa perlu membuka port 22 SSH pada Security Group dan tanpa memerlukan alamat IP publik pada server. Layanan atau fitur AWS manakah yang menyediakan koneksi shell aman ini?",
+    "explanation": "AWS Systems Manager Session Manager menyediakan manajemen shell jarak jauh yang aman melalui browser atau CLI tanpa perlu membuka port inbound SSH 22 atau menggunakan IP publik."
+  },
+  "curated-ccp-id-104": {
+    "prompt": "Sebuah instance Amazon EC2 di dalam Private Subnet perlu mengakses bucket Amazon S3 untuk mengunduh file pembaruan aplikasi secara berkala. Kebijakan keamanan melarang instance melewati NAT Gateway atau Internet Gateway untuk menghemat biaya transfer dan menjaga privasi data. Komponen jaringan VPC manakah yang harus dikonfigurasi?",
+    "explanation": "S3 Gateway VPC Endpoint memungkinkan perutean lalu lintas privat langsung dari route table subnet VPC ke Amazon S3 melalui jaringan internal AWS tanpa melewati NAT Gateway atau internet publik."
+  },
+  "curated-ccp-id-105": {
+    "prompt": "Sebuah korporasi ingin menerapkan rem pengaman terpusat di tingkat akun AWS untuk memastikan bahwa tidak ada karyawan yang dapat membuka akses publik ke bucket Amazon S3 mana pun melalui Access Control List (ACL) atau Bucket Policy yang salah konfigurasi. Kontrol keamanan S3 terpusat manakah yang harus diaktifkan?",
+    "explanation": "Fitur Amazon S3 Block Public Access menyediakan pengaturan kontrol akses terpusat di tingkat akun atau bucket untuk memblokir seluruh izin akses publik yang mungkin diberikan oleh ACL atau bucket policy."
+  },
+  "curated-ccp-id-106": {
+    "prompt": "Sebuah institusi pemerintah diwajibkan oleh peraturan pengarsipan data hukum untuk menyimpan salinan dokumen bukti digital di Amazon S3 dalam format WORM (Write Once, Read Many), di mana objek dilarang keras untuk dihapus atau ditimpa oleh siapa pun (termasuk oleh AWS Root User) selama masa retensi 10 tahun. Fitur penyimpanan S3 manakah yang memenuhi persyaratan mutlak ini?",
+    "explanation": "Amazon S3 Object Lock dalam Compliance Mode memastikan bahwa objek yang disimpan tidak dapat ditimpa atau dihapus oleh pengguna mana pun, termasuk pengguna root akun AWS, selama durasi periode retensi yang ditentukan."
+  },
+  "curated-ccp-id-107": {
+    "prompt": "Sebuah aplikasi basis data relasional enterprise pada Amazon RDS for MySQL membutuhkan mekanisme failover otomatis ke data center cadangan di Availability Zone berbeda jika data center utama mengalami kegagalan fisik mendadak, tanpa ada kebutuhan penskalaan kueri baca. Opsi deployment Amazon RDS manakah yang paling tepat?",
+    "explanation": "Amazon RDS Multi-AZ DB Instance deployment secara otomatis mereplikasi data secara sinkron ke instance siaga (standby instance) di Availability Zone berbeda dan melakukan failover otomatis saat terjadi gangguan fisik."
+  },
+  "curated-ccp-id-108": {
+    "prompt": "Sebuah aplikasi basis data relasional Amazon RDS for PostgreSQL mengalami penurunan performa kueri transaksi karena tim analis data sering menjalankan kueri laporan read-only yang berat pada basis data utama. Tim analis dapat mentoleransi keterlambatan replikasi data beberapa detik. Solusi arsitektur basis data manakah yang paling sesuai?",
+    "explanation": "Amazon RDS Read Replicas memungkinkan pembongkaran (offloading) kueri pembacaan data pelaporan read-only dari basis data utama ke replika baca terpisah untuk menjaga performa kueri penulisan transaksi."
+  },
+  "curated-ccp-id-109": {
+    "prompt": "Dalam sistem pemrosesan pesanan transaksi, pesanan pelanggan harus tetap dapat diterima dan ditampung dengan aman saat armada server worker backend sedang dimatikan untuk proses penyebaran pembaruan kode perangkat lunak (deployment). Komponen perantara asinkron manakah yang paling tepat memisahkan kedua lapisan sistem tersebut?",
+    "explanation": "Amazon SQS Standard Queue bertindak sebagai antrean pesan terdistribusi yang sangat andal untuk menampung pesan transaksi secara asinkron sehingga produsen tetap dapat menerima pesanan saat konsumen tidak aktif."
+  },
+  "curated-ccp-id-110": {
+    "prompt": "Sebuah aplikasi perbankan mengharuskan instruksi pemindahan dana nasabah diproses secara berurutan persis sesuai urutan waktu pengiriman (First-In, First-Out) dan menjamin tidak ada duplikasi pesan transaksi yang dieksekusi ganda. Tipe antrean Amazon SQS manakah yang dirancang untuk kebutuhan pemrosesan berurutan ini?",
+    "explanation": "Amazon SQS FIFO (First-In-First-Out) Queue dirancang khusus untuk menjamin urutan pesan yang ketat dan pemrosesan tepat satu kali (exactly-once processing) tanpa pesan duplikat."
+  },
+  "curated-ccp-id-111": {
+    "prompt": "Ketika sebuah event pesanan berhasil dibuat pada situs e-commerce, notifikasi transaksi tersebut harus dikirimkan secara serentak ke tiga layanan penerima independen: layanan notifikasi email pelanggan, layanan analitik penjualan, dan layanan pemenuhan gudang (arsitektur fan-out). Komponen perpesanan AWS manakah yang harus menerima event pertama kali?",
+    "explanation": "Amazon SNS Topic menggunakan pola publish/subscribe satu-ke-banyak (fan-out) yang dapat menyiarkan satu pesan event secara instan ke beberapa pelanggan sekaligus (seperti SQS queues, email, dan fungsi Lambda)."
+  },
+  "curated-ccp-id-112": {
+    "prompt": "Sebuah portal web berbasis Linux yang berjalan pada armada Amazon EC2 di dua Availability Zone membutuhkan sistem penyimpanan direktori file unggahan bersama yang terkelola penuh dan dapat di-mount secara simultan menggunakan protokol Network File System (NFS). Layanan penyimpanan AWS manakah yang harus dipilih?",
+    "explanation": "Amazon EFS Regional menyediakan penyimpanan sistem file elastis berbasis NFSv4 yang dapat di-mount secara simultan oleh ratusan instance Linux di berbagai Availability Zone."
+  },
+  "curated-ccp-id-113": {
+    "prompt": "Sebuah instance Amazon EC2 membutuhkan media penyimpanan disk berbasis blok (block-level storage) yang persisten untuk sistem operasi dan file aplikasinya, di mana data pada disk tersebut tetap utuh dan tersimpan secara aman saat instance EC2 dihentikan (stopped) dan dapat dinyalakan kembali sewaktu-waktu. Layanan penyimpanan AWS manakah ini?",
+    "explanation": "Amazon Elastic Block Store (Amazon EBS) menyediakan volume penyimpanan blok persisten dengan ketersediaan tinggi yang siklus hidup datanya independen dari status siklus hidup instance EC2."
+  },
+  "curated-ccp-id-114": {
+    "prompt": "Sebuah korporasi ingin mengelola jadwal pencadangan data otomatis (automated backup), kebijakan retensi, dan kepatuhan audit cadangan di seluruh resource AWS mereka (meliputi volume EBS, database RDS, tabel DynamoDB, dan sistem file EFS) secara terpusat melalui satu kebijakan kebijakan berbasis konsol. Layanan AWS manakah yang dirancang untuk tata kelola backup terpusat ini?",
+    "explanation": "AWS Backup menyediakan layanan terkelola terpusat berbasis kebijakan untuk mengotomatiskan dan mengonsolidasikan aktivitas pencadangan data di berbagai layanan AWS dan beban kerja hybrid."
+  },
+  "curated-ccp-id-115": {
+    "prompt": "Seorang pengguna di departemen pemasaran secara tidak sengaja menimpa (overwrite) file presentasi penting di dalam bucket Amazon S3 dengan file kosong. Fitur perlindungan data Amazon S3 manakah yang harus sudah diaktifkan sebelumnya agar pengguna dapat dengan mudah memulihkan versi file yang ditimpa tersebut?",
+    "explanation": "Amazon S3 Versioning mempertahankan beberapa varian dari sebuah objek di dalam bucket yang sama, memungkinkan pemulihan objek yang tidak sengaja tertimpa atau terhapus."
+  },
+  "curated-ccp-id-116": {
+    "prompt": "Sebuah platform aplikasi global membutuhkan basis data NoSQL model key-value yang dapat menerima operasi penulisan data pelanggan secara lokal di dua Region AWS berbeda (misal Region Singapura dan Region Frankfurt) serta mereplikasi data secara otomatis dua arah dengan latensi rendah. Solusi basis data AWS manakah yang memenuhi kebutuhan ini?",
+    "explanation": "Amazon DynamoDB Global Tables menyediakan basis data terdistribusi multi-Region yang sepenuhnya aktif (multi-active / multi-master), memungkinkan pembacaan dan penulisan lokal cepat di berbagai Region AWS dengan replikasi otomatis."
+  },
+  "curated-ccp-id-117": {
+    "prompt": "Sebuah arsitektur tier web aplikasi e-commerce perlu memantau kesehatan armada server Amazon EC2 secara otomatis, mengganti instance yang tidak sehat dengan instance baru, serta menambah atau mengurangi jumlah instance secara dinamis sesuai lonjakan traffic pengguna. Layanan AWS manakah yang menyediakan otomatisasi penskalaan armada ini?",
+    "explanation": "Amazon EC2 Auto Scaling secara otomatis memantau kesehatan armada instance, mengganti instance yang gagal, dan menyesuaikan jumlah kapasitas komputasi EC2 naik atau turun mengikuti fluktuasi permintaan beban kerja."
+  },
+  "curated-ccp-id-118": {
+    "prompt": "Dua layanan microservices berbasis web berbagi satu nama domain publik yang sama, di mana permintaan dengan path '/orders' harus diarahkan ke target group armada pemesanan, sedangkan permintaan dengan path '/catalog' diarahkan ke target group katalog produk. Tipe load balancer Elastic Load Balancing (ELB) manakah yang mendukung perutean cerdas berbasis path URL pada Layer 7 ini?",
+    "explanation": "Application Load Balancer (ALB) beroperasi pada OSI Layer 7 dan mendukung fitur perutean lanjutan seperti Path-based Routing dan Host-based Routing untuk mendistribusikan lalu lintas ke berbagai target group."
+  },
+  "curated-ccp-id-119": {
+    "prompt": "Sebuah situs e-commerce global menyajikan ribuan gambar katalog produk beresolusi tinggi kepada jutaan pembeli di berbagai benua. Untuk mengurangi beban server asal dan menyajikan gambar dengan latensi pemuatan minimal di browser pengguna global, layanan Content Delivery Network (CDN) AWS manakah yang harus digunakan?",
+    "explanation": "Amazon CloudFront adalah layanan CDN global yang meng-cache konten gambar dan aset web pada jaringan Edge Locations di seluruh dunia guna menyajikan konten dengan latensi rendah dan kecepatan transfer tinggi."
+  },
+  "curated-ccp-id-120": {
+    "prompt": "Sebuah aplikasi berita online sering mengeksekusi kueri pembacaan data artikel populer yang sama ribuan kali per detik ke basis data relasional Amazon RDS. Data artikel tersebut jarang sekali diperbarui. Layanan penyimpanan in-memory caching AWS manakah yang paling tepat dipasang di depan basis data untuk mengurangi beban kueri dan mempercepat latensi baca menjadi mikrodetik?",
+    "explanation": "Amazon ElastiCache (mendukung Redis atau Memcached) menyediakan cache in-memory terkelola berlatensi sub-milidetik untuk menyimpan data kueri yang sering dibaca, secara signifikan mengurangi beban baca pada database utama."
+  },
+  "curated-ccp-id-121": {
+    "prompt": "Sebuah aplikasi game seluler membaca data skor pemain dari tabel Amazon DynamoDB jutaan kali per detik. Tim pengembang membutuhkan solusi in-memory caching akselerasi yang dirancang khusus dan terintegrasi secara transparan dengan Amazon DynamoDB tanpa perlu mengubah logika kueri aplikasi. Solusi akselerasi manakah yang paling tepat?",
+    "explanation": "DynamoDB Accelerator (DAX) adalah in-memory cache terkelola yang kompatibel secara transparan dengan API Amazon DynamoDB untuk memberikan peningkatan performa baca hingga 10 kali lipat dari milidetik menjadi mikrodetik."
+  },
+  "curated-ccp-id-122": {
+    "prompt": "Seorang Data Analyst perlu sesekali menjalankan kueri SQL ad-hoc atas kumpulan data log berformat Parquet yang tersimpan di Amazon S3 tanpa perlu memuat data ke basis data relasional dan tanpa perlu membiayai klaster server data warehouse yang berjalan terus-menerus. Layanan analitik serverless AWS manakah yang paling sesuai?",
+    "explanation": "Amazon Athena adalah layanan kueri analitik interaktif tanpa server (serverless) yang memungkinkan analisis data langsung di Amazon S3 menggunakan SQL standar dengan model pembayaran per volume data yang dipindai."
+  },
+  "curated-ccp-id-123": {
+    "prompt": "Sebuah korporasi retail skala besar ingin mengonsolidasikan data penjualan historis berskala ratusan terabyte dari berbagai toko cabang ke dalam satu gudang data analitik terstruktur untuk mendukung kueri Business Intelligence (BI) dan pelaporan eksekutif yang kompleks (OLAP). Layanan data warehouse cloud terkelola AWS manakah yang dirancang khusus untuk beban kerja ini?",
+    "explanation": "Amazon Redshift adalah layanan data warehouse berskala petabyte berbasis cloud yang dioptimalkan untuk analisis data bisnis berskala besar (OLAP) dan integrasi Business Intelligence menggunakan SQL terdistribusi."
+  },
+  "curated-ccp-id-124": {
+    "prompt": "Sebuah armada sensor Internet of Things (IoT) pada pabrik manufaktur mengirimkan jutaan rekaman data telemetri berurutan per menit. Data tersebut harus diserap secara real-time dan didistribusikan ke beberapa aplikasi analitik konsumen yang membutuhkan kemampuan untuk memutar ulang (replay) data streaming selama masa retensi. Layanan streaming data AWS manakah yang paling tepat?",
+    "explanation": "Amazon Kinesis Data Streams adalah layanan pengumpulan dan pemrosesan data streaming real-time yang dapat diskalakan secara masif dan memungkinkan pembacaan berulang (replay) oleh beberapa konsumen independen."
+  },
+  "curated-ccp-id-125": {
+    "prompt": "Sebuah aplikasi ingin mengeksekusi fungsi kode singkat untuk membuat gambar thumbnail secara otomatis setiap kali ada foto baru yang diunggah oleh pengguna ke dalam bucket Amazon S3, tanpa perlu memprovisikan atau membayar server komputasi yang menganggur. Layanan komputasi serverless AWS manakah yang dirancang untuk arsitektur berbasis event ini?",
+    "explanation": "AWS Lambda mengeksekusi kode secara langsung sebagai respons terhadap event (seperti unggahan objek di S3) secara serverless, mengelola seluruh kapasitas komputasi dan hanya menagih untuk durasi waktu eksekusi kode."
+  },
+  "curated-ccp-id-126": {
+    "prompt": "Sebuah tim pengembang ingin menjalankan kontainer Docker pada Amazon Elastic Container Service (Amazon ECS), namun tim tidak ingin mengelola, memprovisikan, mengonfigurasi, atau memelihara klaster host instance Amazon EC2 di balik layar. Mesin komputasi kontainer tanpa server (serverless compute engine) AWS manakah yang harus dipilih?",
+    "explanation": "AWS Fargate adalah mesin komputasi serverless untuk kontainer yang bekerja bersama Amazon ECS dan EKS, memungkinkan eksekusi kontainer tanpa perlu mengelola atau memprovisikan server virtual host EC2."
+  },
+  "curated-ccp-id-127": {
+    "prompt": "Sebuah aplikasi berbasis arsitektur serverless (AWS Lambda) membuka ribuan koneksi basis data singkat secara bersamaan ke instans basis data relasional Amazon RDS, menyebabkan basis data kehabisan memori akibat kelebihan koneksi (connection exhaustion). Komponen AWS terkelola manakah yang menyediakan pooling koneksi terpusat untuk mengatasi masalah ini?",
+    "explanation": "Amazon RDS Proxy adalah proksi basis data terkelola penuh dan berketersediaan tinggi yang mengumpulkan dan membagikan koneksi basis data (connection pooling) yang dibuat oleh aplikasi, meningkatkan efisiensi dan skalabilitas koneksi RDS."
+  },
+  "curated-ccp-id-128": {
+    "prompt": "Sebuah portal web aplikasi e-commerce membutuhkan mesin pencarian teks lengkap (full-text search) yang cepat dan analitik visualisasi dashboard untuk mencari katalog produk serta menganalisis log operasional aplikasi yang diindeks. Layanan pencarian dan analitik terkelola AWS manakah yang paling sesuai?",
+    "explanation": "Amazon OpenSearch Service mempermudah penyebaran, pengoperasian, dan penskalaan klaster OpenSearch untuk pencarian aplikasi interaktif, pengindeksan dokumen teks lengkap, dan visualisasi analisis log."
+  },
+  "curated-ccp-id-129": {
+    "prompt": "Sebuah aplikasi game online multipemain global menggunakan protokol UDP dan membutuhkan alamat IP anycast statis global yang merutekan lalu lintas pemain secara langsung ke endpoint aplikasi melalui jaringan backbone AWS global untuk meminimalkan jitter dan paket loss. Layanan jaringan AWS manakah yang dirancang untuk kebutuhan ini?",
+    "explanation": "AWS Global Accelerator menggunakan jaringan global AWS dan alamat IP anycast statis untuk mengoptimalkan jalur perutean lalu lintas pengguna ke aplikasi (baik TCP maupun UDP), meningkatkan ketersediaan dan performa jaringan."
+  },
+  "curated-ccp-id-130": {
+    "prompt": "Sebuah perusahaan analitik data menjalankan pemrosesan batch data besar yang mampu menyimpan checkpoint secara teratur dan dapat diulang kembali jika terjadi interupsi mendadak. Opsi penetapan harga Amazon EC2 manakah yang paling hemat biaya (diskon hingga 90%) untuk beban kerja yang tahan interupsi ini?",
+    "explanation": "Spot Instances memanfaatkan kapasitas komputasi cadangan AWS yang menganggur dengan diskon terbesar (hingga 90%) dibandingkan tarif On-Demand, sangat ideal untuk pekerjaan batch yang toleran terhadap interupsi."
+  },
+  "curated-ccp-id-131": {
+    "prompt": "Sebuah korporasi memiliki armada server komputasi yang berjalan stabil sepanjang tahun. Perusahaan bersedia membuat komitmen pengeluaran moneter tetap per jam (misal $10/jam) selama 1 atau 3 tahun pada layanan komputasi (mencakup EC2, Fargate, dan Lambda) untuk mendapatkan diskon biaya yang signifikan. Opsi penghematan biaya manakah yang paling fleksibel?",
+    "explanation": "Compute Savings Plans menawarkan penghematan biaya yang signifikan (hingga 66%) dengan fleksibilitas tinggi di seluruh keluarga instance EC2, ukuran instance, Region, OS, serta mencakup AWS Fargate dan AWS Lambda dengan komitmen pengeluaran per jam."
+  },
+  "curated-ccp-id-132": {
+    "prompt": "Seorang pemilik akun AWS ingin memastikan bahwa pengeluaran biaya bulanan tidak membengkak tanpa disadari. Pemilik akun ingin menerima peringatan email instan segera setelah total biaya layanan mendekati atau diproyeksikan akan melampaui batas anggaran bulanan sebesar $2.000. Layanan AWS manakah yang harus dikonfigurasi?",
+    "explanation": "AWS Budgets memungkinkan penetapan anggaran biaya dan penggunaan kustom serta memicu notifikasi peringatan email saat pengeluaran aktual atau perkiraan (forecasted) melampaui batas yang ditentukan."
+  },
+  "curated-ccp-id-133": {
+    "prompt": "Seorang analis biaya TI mengamati adanya kenaikan tagihan cloud sebesar 30% pada bulan lalu. Analis tersebut ingin memeriksa grafik pengeluaran historis, mengidentifikasi layanan AWS spesifik mana yang menyebabkan lonjakan biaya terbesar, dan memfilter biaya berdasarkan tag proyek selama 3 bulan terakhir. Layanan AWS manakah yang menyediakan kapabilitas analitik ini?",
+    "explanation": "AWS Cost Explorer memungkinkan pengguna menganalisis, memvisualisasikan, dan memahami pengeluaran historis serta pola penggunaan layanan AWS dari waktu ke waktu dengan berbagai dimensi filter dan perincian grafik."
+  },
+  "curated-ccp-id-134": {
+    "prompt": "Sebuah platform media menyimpan jutaan file video pengguna di mana pola aksesnya sangat sulit diprediksi (beberapa video lama tiba-tiba sering ditonton kembali, sementara video baru bisa jarang diakses). Kelas penyimpanan Amazon S3 manakah yang secara otomatis memindahkan objek antar tingkat akses guna meminimalkan biaya penyimpanan tanpa biaya pengambilan data?",
+    "explanation": "Amazon S3 Intelligent-Tiering secara otomatis memindahkan objek antar tingkat akses (Frequent Access, Infrequent Access, Archive Instant Access) berdasarkan perubahan pola akses data tanpa biaya pengambilan data atau dampak performa."
+  },
+  "curated-ccp-id-135": {
+    "prompt": "Sebuah kantor hukum diwajibkan oleh undang-undang untuk mengarsipkan dokumen rekaman sidang selama 7 tahun. Data arsip ini hampir tidak pernah dibaca kembali di masa depan, dan waktu pengambilan data dalam 12 jam dapat diterima demi biaya penyimpanan serendah mungkin per gigabyte. Kelas penyimpanan Amazon S3 manakah yang paling ekonomis?",
+    "explanation": "Amazon S3 Glacier Deep Archive adalah kelas penyimpanan arsip paling hemat di AWS yang dirancang untuk retensi data jangka panjang yang sangat jarang diakses dengan waktu pemulihan standar dalam 12 jam."
+  },
+  "curated-ccp-id-136": {
+    "prompt": "Sebuah tim pengembang perlu menjalankan beban kerja pemrosesan migrasi data satu kali yang berlangsung selama 2 hari penuh. Beban kerja ini tidak boleh terputus atau diinterupsi di tengah jalan, dan perusahaan tidak memiliki komitmen penggunaan jangka panjang setelah pekerjaan selesai. Opsi penetapan harga Amazon EC2 manakah yang paling tepat?",
+    "explanation": "EC2 On-Demand Instances memungkinkan pembayaran komputasi per detik atau per jam tanpa komitmen jangka panjang di muka dan tidak dapat diinterupsi oleh AWS, sangat cocok untuk beban kerja jangka pendek yang tidak boleh terputus."
+  },
+  "curated-ccp-id-137": {
+    "prompt": "Sebuah holding company ingin mengalokasikan dan memecah rincian pengeluaran biaya cloud bulanan mereka secara presisi kepada masing-masing departemen internal (seperti Tim Pemasaran, Tim Finansial, dan Tim Teknik) menggunakan metadata label pada resource AWS. Mekanisme tata kelola biaya AWS manakah yang harus diaktifkan?",
+    "explanation": "Cost Allocation Tags memungkinkan pelabelan sumber daya AWS dengan tag metadata (seperti Department atau CostCenter) yang kemudian diaktifkan di Billing Console untuk memecah laporan pengeluaran biaya di AWS Cost Explorer."
+  },
+  "curated-ccp-id-138": {
+    "prompt": "Sebuah tim arsitek cloud meninjau metrik pemakaian sistem pada armada server Amazon EC2 mereka dan menemukan bahwa server yang digunakan saat ini hanya mengonsumsi 10% CPU dan RAM. Tim memutuskan untuk memilih tipe instance yang lebih kecil yang tepat sesuai kebutuhan beban kerja riil daripada mempertahankan instance terbesar. Praktik efisiensi arsitektur cloud manakah ini?",
+    "explanation": "Right-sizing adalah proses memilih dan mencocokkan tipe dan ukuran instance komputasi secara tepat dengan persyaratan performa dan kapasitas beban kerja nyata untuk menghilangkan pemborosan biaya sumber daya yang tidak terpakai."
+  }
+}
