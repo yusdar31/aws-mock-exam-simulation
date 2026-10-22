@@ -1,5 +1,6 @@
 // Original Indonesian practice scenarios, not recalled/live examination items.
 // Objectives follow the standard guide linked by Google, reviewed 2026-10-21.
+import { buildAceGuide } from "./gcp-ace-guide.mjs";
 const refs = {
   hierarchy:
     "https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy",
@@ -116,6 +117,7 @@ const refs = {
   troubleshootIam:
     "https://cloud.google.com/policy-intelligence/docs/troubleshoot-access",
   customRoles: "https://cloud.google.com/iam/docs/creating-custom-roles",
+  assistMonitoring: "https://docs.cloud.google.com/cloud-assist/chat-panel",
 };
 const domains = {
   1: "Pengaturan Lingkungan Solusi Cloud",
@@ -2609,49 +2611,78 @@ q(
 // The remaining scenarios are appended below without renumbering previous items.
 
 export function buildAceScenarios() {
-  return rows.map((row, index) => {
-    const labels = ["A", "B", "C", "D", "E", "F"];
-    const offset = index % row.choices.length;
-    const ordered = row.choices.map(
-      (_, position) => (position + offset) % row.choices.length,
-    );
-    return {
-      id: `ace-scenario-id-20261021-${String(index + 1).padStart(3, "0")}`,
-      examType: "gcp-ace",
-      lang: "id",
-      domain: domains[row.objective[0]],
-      type: row.answers.length > 1 ? "multiple" : "single",
-      prompt:
-        row.prompt +
-        (row.answers.length > 1
-          ? ` (Pilih ${row.answers.length} jawaban.)`
-          : ""),
-      options: ordered.map((original, position) => ({
-        id: labels[position],
-        text: row.choices[original][0],
-      })),
-      correctAnswers: ordered.flatMap((original, position) =>
-        row.answers.includes(original) ? [labels[position]] : [],
-      ),
-      explanation: row.answers
-        .map((answer) => row.choices[answer][1])
-        .join(" "),
-      optionExplanations: Object.fromEntries(
-        ordered.map((original, position) => [
-          labels[position],
-          row.choices[original][1],
-        ]),
-      ),
-      sourceUrl: refs[row.ref],
-      verifiedAt: "2026-10-21",
-      version: 1,
-      difficulty: row.difficulty,
-      status: "approved",
-      sourceRef: "original-practice-scenarios",
-      objective: row.objective,
-      topic: row.topic,
-      blueprintVersion: "2026-10-21",
-      duplicateReviewed: true,
-    };
-  });
+  return [
+    ...rows.map((row, index) => {
+      if (row.topic === "ai-assisted-terraform-review")
+        row = {
+          ...row,
+          topic: "gemini-monitoring-evidence-review",
+          ref: "assistMonitoring",
+          prompt:
+            "Operator meminta Gemini Cloud Assist menjelaskan anomali pada Cloud Monitoring. Sebelum memakai sarannya untuk mengubah produksi, langkah mana yang tepat?",
+          choices: [
+            [
+              "Periksa izin dan konteks metrik, cocokkan saran dengan bukti Monitoring/Logging, lalu tinjau dampak perubahan.",
+              "Asisten mendukung investigasi; akses data dan validasi operator tetap diperlukan sebelum perubahan produksi.",
+            ],
+            [
+              "Terapkan saran tanpa verifikasi karena asisten pasti melihat semua metrik organisasi.",
+              "Cakupan konteks dan izin tetap berlaku; keluaran asisten bukan jaminan seluruh data sudah terlihat.",
+            ],
+            [
+              "Hapus kebijakan alert agar anomali dianggap selesai.",
+              "Menghapus deteksi tidak menyelesaikan penyebab anomali dan dapat menyembunyikan gangguan berikutnya.",
+            ],
+            [
+              "Berikan Owner kepada semua operator sebagai satu-satunya syarat analisis metrik.",
+              "Akses observabilitas yang sesuai lebih tepat daripada pemberian akses Owner menyeluruh.",
+            ],
+          ],
+        };
+      const labels = ["A", "B", "C", "D", "E", "F"];
+      const offset = index % row.choices.length;
+      const ordered = row.choices.map(
+        (_, position) => (position + offset) % row.choices.length,
+      );
+      return {
+        id: `ace-scenario-id-20261021-${String(index + 1).padStart(3, "0")}`,
+        examType: "gcp-ace",
+        lang: "id",
+        domain: domains[row.objective[0]],
+        type: row.answers.length > 1 ? "multiple" : "single",
+        prompt:
+          row.prompt +
+          (row.answers.length > 1
+            ? ` (Pilih ${row.answers.length} jawaban.)`
+            : ""),
+        options: ordered.map((original, position) => ({
+          id: labels[position],
+          text: row.choices[original][0],
+        })),
+        correctAnswers: ordered.flatMap((original, position) =>
+          row.answers.includes(original) ? [labels[position]] : [],
+        ),
+        explanation: row.answers
+          .map((answer) => row.choices[answer][1])
+          .join(" "),
+        optionExplanations: Object.fromEntries(
+          ordered.map((original, position) => [
+            labels[position],
+            row.choices[original][1],
+          ]),
+        ),
+        sourceUrl: refs[row.ref],
+        verifiedAt: index === 78 ? "2026-10-22" : "2026-10-21",
+        version: index === 78 ? 2 : 1,
+        difficulty: row.difficulty,
+        status: "approved",
+        sourceRef: "original-practice-scenarios",
+        objective: row.objective,
+        topic: row.topic,
+        blueprintVersion: "2026-10-21",
+        duplicateReviewed: true,
+      };
+    }),
+    ...buildAceGuide(),
+  ];
 }

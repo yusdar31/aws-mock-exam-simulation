@@ -348,7 +348,7 @@ export default function LiveClass({
         limit,
         duration: minutes,
         domains: form.getAll("domains").map(String),
-        content: type === "gcp-ace" ? "all" : "reviewed",
+        content: "reviewed",
       };
       const questions =
         packet?.length === limit &&

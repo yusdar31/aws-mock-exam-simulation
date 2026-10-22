@@ -173,7 +173,7 @@ export default function ClassroomPacket({
               duration: 0,
               limit: count,
               domains: chosen,
-              content: type === "gcp-ace" ? "all" : "reviewed",
+              content: "reviewed",
             });
             onPacket(qs);
             setIndex(0);

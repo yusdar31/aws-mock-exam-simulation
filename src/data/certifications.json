@@ -15,7 +15,7 @@
     "name": "Associate Cloud Engineer (ACE)", "code": "Google Cloud ACE", "provider": "Google Cloud", "level": "ASSOCIATE",
     "description": "Konfigurasi, implementasi, operasi, dan keamanan Google Cloud.", "languages": ["id"], "minutes": 120, "questions": 50,
     "guide": "https://services.google.com/fh/files/misc/associate_cloud_engineer_exam_guide_english.pdf",
-    "blueprintReviewedAt": "2026-10-21",
+    "blueprintReviewedAt": "2026-10-22",
     "blueprint": {"Pengaturan Lingkungan Solusi Cloud": 20, "Perencanaan dan Implementasi Solusi Cloud": 30, "Memastikan Operasi Solusi Cloud yang Berhasil": 30, "Konfigurasi Akses dan Keamanan": 20},
     "domainAliases": {"Perencanaan dan Konfigurasi Solusi Cloud": "Perencanaan dan Implementasi Solusi Cloud", "Penerapan dan Implementasi Solusi Cloud": "Perencanaan dan Implementasi Solusi Cloud"}
   }

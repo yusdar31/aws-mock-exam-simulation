@@ -124,6 +124,12 @@ try {
   await page.locator('.app-header a[href="#banks"]').click();
   await page.locator('h2 a[href="#banks/gcp-ace-id"]').click();
   await expect(page.locator(".bank-domains li")).toHaveCount(4);
+  await page
+    .getByLabel("Cari soal", { exact: true })
+    .fill("ace-scenario-id-20261022-");
+  await expect(
+    page.getByText("20 dari 71 soal ditampilkan", { exact: true }),
+  ).toBeVisible();
   const archived = bank.find((q) => !q.optionExplanations);
   assert.ok(archived);
   await page.getByLabel("Cari soal", { exact: true }).fill(archived.id);
@@ -179,9 +185,7 @@ try {
   assert.equal(first.config.duration, 0); // simulation deadline comes from certification metadata
   assert.ok(first.deadline - first.savedAt <= 120 * 60 * 1000);
   assert.ok(first.deadline - first.savedAt > 119 * 60 * 1000);
-  assert.ok(
-    first.questions.every((q) => q.id.startsWith("ace-scenario-id-20261021-")),
-  );
+  assert.ok(first.questions.every((q) => q.id.startsWith("ace-scenario-id-")));
   assert.deepEqual(
     Object.fromEntries(
       Object.keys(

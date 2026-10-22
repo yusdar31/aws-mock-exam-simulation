@@ -666,7 +666,7 @@ export default function App() {
           mode: "practice",
           limit: 10,
           duration: 0,
-          content: old.examType === "gcp-ace" ? "all" : "reviewed",
+          content: "reviewed",
         }));
       const requested = route(),
         requestedId = location.hash.split("/")[1];

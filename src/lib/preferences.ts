@@ -47,9 +47,7 @@ export function readConfig(): Config {
       value?.content || "",
     )
       ? value.content
-      : examType === "gcp-ace"
-        ? "all"
-        : "reviewed",
+      : "reviewed",
   };
 }
 export function writeConfig(value: Config) {

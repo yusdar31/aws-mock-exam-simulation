@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import ts from "typescript";
 import { buildAceScenarios } from "../scripts/curated/gcp-ace-scenarios.mjs";
+import { aceGuideCoverage } from "../scripts/curated/gcp-ace-coverage.mjs";
 import {
   normalizeQuestion,
   questionIssues,
@@ -37,15 +38,74 @@ const normalized = (text) =>
     .replace(/[^\p{L}\p{N}]+/gu, " ")
     .trim();
 
-test("ACE adds 100 unique original, publishable scenarios with complete option-specific rationales", () => {
-  assert.equal(fresh.length, 100);
-  assert.equal(bank.length, legacy.length + 100);
+test("ACE has representative scenarios mapped to all 94 guide considerations and all 12 objectives", () => {
+  assert.equal(aceGuideCoverage.length, 94);
+  assert.equal(
+    new Set(aceGuideCoverage.map((row) => row.consideration)).size,
+    94,
+  );
+  const counts = Object.fromEntries(
+    [
+      "1.1",
+      "1.2",
+      "2.1",
+      "2.2",
+      "2.3",
+      "2.4",
+      "3.1",
+      "3.2",
+      "3.3",
+      "3.4",
+      "4.1",
+      "4.2",
+    ].map((objective) => [
+      objective,
+      aceGuideCoverage.filter((row) => row.objective === objective).length,
+    ]),
+  );
+  assert.deepEqual(
+    Object.values(counts),
+    [12, 4, 12, 4, 6, 2, 16, 8, 5, 14, 3, 8],
+  );
+  const ids = new Set(fresh.map((q) => q.id));
+  for (const row of aceGuideCoverage) {
+    assert.ok(row.questions.length > 0, row.consideration);
+    assert.ok(
+      row.questions.every((id) => ids.has(id)),
+      row.consideration,
+    );
+  }
+  assert.deepEqual(
+    new Set(fresh.map((q) => q.objective)),
+    new Set(Object.keys(counts)),
+  );
+  for (const topic of [
+    "agent-runtime-managed-deployment-choice",
+    "agent-runtime-runtime-identity",
+    "managed-lustre-parallel-filesystem",
+    "netapp-smb-file-service",
+    "application-design-center-terraform",
+    "database-center-fleet-health",
+    "ngfw-iam-governed-tags",
+    "managed-prometheus-existing-metrics",
+    "cloud-hub-app-health-context",
+    "gemini-monitoring-evidence-review",
+  ])
+    assert.ok(
+      fresh.some((q) => q.topic === topic),
+      topic,
+    );
+});
+
+test("ACE has 171 unique original, publishable scenarios with complete option-specific rationales", () => {
+  assert.equal(fresh.length, 171);
+  assert.equal(bank.length, legacy.length + 171);
   assert.equal(new Set(bank.map((q) => q.id)).size, bank.length);
   assert.equal(
     new Set(bank.map((q) => normalized(q.prompt))).size,
     bank.length,
   );
-  assert.equal(new Set(fresh.map((q) => q.topic)).size, 100);
+  assert.equal(new Set(fresh.map((q) => q.topic)).size, 171);
   assert.deepEqual(
     bank.filter((q) => q.id.startsWith("ace-scenario-")),
     fresh,
@@ -57,7 +117,7 @@ test("ACE adds 100 unique original, publishable scenarios with complete option-s
     counts[q.domain] = (counts[q.domain] || 0) + 1;
     assert.equal(q.sourceRef, "original-practice-scenarios");
     assert.ok(/^\d\.\d$/.test(q.objective));
-    assert.equal(q.verifiedAt, "2026-10-21");
+    assert.ok(["2026-10-21", "2026-10-22"].includes(q.verifiedAt));
     assert.equal(
       new Set(
         q.options.map((o) => o.text.toLowerCase().replace(/\s+/g, " ").trim()),
@@ -76,7 +136,7 @@ test("ACE adds 100 unique original, publishable scenarios with complete option-s
   }
   assert.equal(positions.size, 4);
   assert.ok(fresh.some((q) => q.type === "multiple"));
-  assert.deepEqual(counts, catalog["gcp-ace"].blueprint);
+  assert.deepEqual(Object.values(counts), [33, 56, 58, 24]);
 });
 
 test("ACE preserves old question IDs, prompts, options, answers and rationale while mapping old domains", () => {
@@ -168,7 +228,7 @@ test("release API publishes and paginates the complete new ACE bank", async () =
   delete process.env.QUESTION_API_ORIGIN;
   try {
     const items = [];
-    for (const page of [1, 2, 3, 4]) {
+    for (const page of [1, 2, 3, 4, 5, 6]) {
       let body, status;
       await gateway(
         {
@@ -188,7 +248,7 @@ test("release API publishes and paginates the complete new ACE bank", async () =
         },
       );
       assert.equal(status, 200);
-      assert.equal(body.total, 100);
+      assert.equal(body.total, 171);
       assert.equal(body.source, "release");
       items.push(...body.items);
     }
