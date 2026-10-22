@@ -130,6 +130,18 @@ try {
   await expect(
     page.getByText("20 dari 71 soal ditampilkan", { exact: true }),
   ).toBeVisible();
+  await page
+    .getByLabel("Cari soal", { exact: true })
+    .fill("ace-scenario-id-20261022-055");
+  await page.locator(".bank-question summary").first().click();
+  const calibratedReview = page.locator(".bank-question .rationale").first();
+  await expect(
+    calibratedReview.locator(".is-correct .review-option"),
+  ).toContainText("Cloud Trace");
+  await expect(calibratedReview).toContainText("Cloud Profiler");
+  await expect(calibratedReview.locator(".review-choice-reason")).toHaveCount(
+    3,
+  );
   const archived = bank.find((q) => !q.optionExplanations);
   assert.ok(archived);
   await page.getByLabel("Cari soal", { exact: true }).fill(archived.id);

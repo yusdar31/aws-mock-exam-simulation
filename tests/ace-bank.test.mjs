@@ -4,6 +4,7 @@ import fs from "node:fs";
 import ts from "typescript";
 import { buildAceScenarios } from "../scripts/curated/gcp-ace-scenarios.mjs";
 import { aceGuideCoverage } from "../scripts/curated/gcp-ace-coverage.mjs";
+import { gearRevisedSuffixes } from "../scripts/curated/gcp-ace-gear-calibration.mjs";
 import {
   normalizeQuestion,
   questionIssues,
@@ -37,6 +38,48 @@ const normalized = (text) =>
     .toLowerCase()
     .replace(/[^\p{L}\p{N}]+/gu, " ")
     .trim();
+
+test("GEAR-style calibration keeps realistic alternatives, correct operational distinctions and revised versions", () => {
+  assert.equal(gearRevisedSuffixes.length, 55);
+  for (const suffix of gearRevisedSuffixes) {
+    const q = fresh.find(
+      (q) =>
+        q.id === `ace-scenario-id-20261022-${String(suffix).padStart(3, "0")}`,
+    );
+    assert.ok(q);
+    assert.equal(q.version, 2);
+    assert.equal(q.options.length, 4);
+    assert.equal(q.correctAnswers.length, 1);
+    assert.equal(new Set(Object.values(q.optionExplanations)).size, 4);
+  }
+  for (const [suffix, answer] of [
+    [39, /Vertical Pod Autoscaler/],
+    [51, /IP eksternal statis/],
+    [55, /Cloud Trace/],
+    [58, /Cloud Profiler/],
+    [71, /instance template.*managed instance group.*autoscaling/],
+  ]) {
+    const q = fresh.find((q) =>
+      q.id.endsWith(`20261022-${String(suffix).padStart(3, "0")}`),
+    );
+    assert.match(
+      q.options.find((o) => o.id === q.correctAnswers[0]).text,
+      answer,
+    );
+  }
+  const query = fresh.find((q) => q.id === "ace-scenario-id-20261022-065");
+  assert.ok(query.options.every((o) => o.text.startsWith("SELECT ")));
+  assert.match(
+    query.options.find((o) => o.id === query.correctAnswers[0]).text,
+    /status = 'FAILED' LIMIT 100/,
+  );
+  const notebook = fresh.find((q) => q.id === "ace-scenario-id-20261022-044");
+  assert.ok(
+    notebook.options.every(
+      (o) => !/Cloud DNS|Cloud Billing|Cloud NAT/.test(o.text),
+    ),
+  );
+});
 
 test("ACE has representative scenarios mapped to all 94 guide considerations and all 12 objectives", () => {
   assert.equal(aceGuideCoverage.length, 94);

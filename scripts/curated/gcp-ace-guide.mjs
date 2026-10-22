@@ -1,4 +1,5 @@
 import catalog from "../../src/data/certifications.json" with { type: "json" };
+import { calibrateAceGear } from "./gcp-ace-gear-calibration.mjs";
 // Original scenarios for gaps in the guide supplied by the user on 2026-10-22.
 // Answers are rotated; explanations describe each option rather than repeat a fallback.
 const domains = Object.keys(catalog["gcp-ace"].blueprint);
@@ -1293,7 +1294,7 @@ q(
 );
 
 export function buildAceGuide() {
-  return rows.map((row, index) => {
+  return rows.map(calibrateAceGear).map((row, index) => {
     const offset = index % row.options.length;
     const order = row.options.map((_, i) => (i + offset) % row.options.length);
     const labels = ["A", "B", "C", "D", "E", "F"];
@@ -1321,7 +1322,7 @@ export function buildAceGuide() {
       ),
       sourceUrl: doc(row.path),
       verifiedAt: "2026-10-22",
-      version: 1,
+      version: row.gearCalibrated ? 2 : 1,
       status: "approved",
       difficulty: "intermediate",
       sourceRef: "original-practice-scenarios",
