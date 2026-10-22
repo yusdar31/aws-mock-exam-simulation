@@ -4,7 +4,8 @@ Addresses five findings from a real classroom session:
 
 - Private question flags appear in the navigator and submission review. Classroom
   v3 stores flags on the participant record. Older servers use browser storage
-  until the migration is installed.
+  until the migration is installed. Flagging or linking an account flushes queued
+  answers before acknowledging the action, so an immediate reload retains both.
 - Submission is separated from Previous/Next. Review & submit opens a modal with
   incomplete/flagged counts, question navigation, Continue answering as the
   initial focus, and a separate irreversible confirmation. Escape returns to

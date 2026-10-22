@@ -172,6 +172,13 @@ try {
   await expect(
     first.page.getByRole("button", { name: "Hapus tanda review", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
+  // Flag acknowledgement must also flush the answer queued just before it.
+  const credential = await first.page.evaluate(() =>
+    JSON.parse(sessionStorage.getItem("aws-classroom-access-v1")),
+  );
+  const stored = (await rpc("state", credential, uid)).member.answers;
+  if (stored[questions[0].id]?.[0] !== questions[0].options[0].id)
+    throw new Error("Flag returned before pending answer was stored");
   await expect(first.page.locator(".live-actions")).not.toContainText(
     "kumpulkan",
   );

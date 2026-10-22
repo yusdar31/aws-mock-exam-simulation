@@ -90,6 +90,7 @@ export default function LiveClass({
     setClock(nextClock);
     stateRef.current = data;
     setRoom(data);
+    setServerVersion((current) => Math.max(current, data.version || 1));
     if (accessRef.current) rememberClassroom(accessRef.current, data);
     if (data.member) {
       revision.current = data.member.revision;
@@ -260,7 +261,11 @@ export default function LiveClass({
     setError("");
     try {
       await inFlight.current;
-      if (action === "submit" && pending.current && accessRef.current) {
+      if (
+        ["submit", "flag", "link_account"].includes(action) &&
+        pending.current &&
+        accessRef.current
+      ) {
         const snapshot = pending.current;
         apply(
           await classroomCall("save", {
