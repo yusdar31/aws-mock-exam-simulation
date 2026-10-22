@@ -84,7 +84,8 @@ export default function ClassroomPacket({
         </fieldset>
         <label>
           {t("Template tersimpan")}
-            <select aria-label={t('Template tersimpan')}
+          <select
+            aria-label={t("Template tersimpan")}
             value={selected}
             onChange={(e) => setSelected(e.target.value)}
           >
@@ -99,8 +100,8 @@ export default function ClassroomPacket({
         <div className="actions">
           <button
             type="button"
-            disabled={!selected}
-            onClick={(e) => {
+            disabled={!selected || busy}
+            onClick={async (e) => {
               const v = options.find((v) => v.id === selected);
               if (!v) return;
               const f = form(e.currentTarget);
@@ -110,9 +111,24 @@ export default function ClassroomPacket({
                 String(v.questions.length);
               (f.elements.namedItem("minutes") as HTMLInputElement).value =
                 String(v.minutes);
-              setChosen([...new Set(v.questions.map((q) => q.domain))]);
-              setIndex(0);
-              onPacket(v.questions);
+              setBusy(true);
+              try {
+                const latest = await loadBank(type, lang);
+                const questions = v.questions.map(
+                  (q) =>
+                    latest.find(
+                      (current) =>
+                        current.id === q.id && current.version > q.version,
+                    ) || q,
+                );
+                setChosen([...new Set(questions.map((q) => q.domain))]);
+                setIndex(0);
+                onPacket(questions);
+              } catch {
+                setNotice("Paket soal belum dapat dibuat.");
+              } finally {
+                setBusy(false);
+              }
             }}
           >
             {t("Gunakan template")}

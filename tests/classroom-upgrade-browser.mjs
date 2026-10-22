@@ -355,7 +355,10 @@ try {
           .check();
     }
     await guest.p
-      .getByRole("button", { name: "Kumpulkan jawaban", exact: true })
+      .getByRole("button", { name: "Tinjau & kumpulkan", exact: true })
+      .click();
+    await guest.p
+      .getByRole("button", { name: "Ya, kumpulkan jawaban", exact: true })
       .click();
   }
   const wrong = Math.max(
@@ -366,7 +369,10 @@ try {
   );
   await bob.p.locator(".choice input").nth(wrong).check();
   await bob.p
-    .getByRole("button", { name: "Kumpulkan jawaban", exact: true })
+    .getByRole("button", { name: "Tinjau & kumpulkan", exact: true })
+    .click();
+  await bob.p
+    .getByRole("button", { name: "Ya, kumpulkan jawaban", exact: true })
     .click();
   await expect(
     nextHost.p.getByRole("heading", { name: "Peringkat peserta", exact: true }),

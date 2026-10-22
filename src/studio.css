@@ -864,6 +864,15 @@ html[data-theme="dark"] .choice.incorrect.selected {
 .live-numbers .answered {
   background: var(--selected-bg);
 }
+.live-flag { position: absolute; bottom: 0; right: 3px; font-size: 13px; }
+.classroom-flag { display: block; margin: 0 0 20px auto; }
+.classroom-submit-area { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border); }
+.classroom-submit-dialog { width: min(640px, calc(100% - 32px)); max-height: calc(100dvh - 48px); overflow-y: auto; color: var(--ink); background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+.classroom-submit-dialog::backdrop { background: rgb(0 0 0 / 50%); }
+.classroom-submit-dialog .actions { margin-top: 24px; }
+.classroom-submit-dialog .live-numbers { display: flex; flex-wrap: wrap; gap: 8px; }
+.classroom-submit-dialog .live-numbers button { min-width: 44px; min-height: 44px; }
+.classroom-account { margin-block: 24px; }
 .live-page .choice {
   font-weight: 400;
 }

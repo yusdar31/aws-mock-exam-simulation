@@ -44,6 +44,8 @@ export type ClassroomState = {
     revision: number;
     submitted: boolean;
     ready?: boolean;
+    flags?: string[];
+    accountLinked?: boolean;
     score: number | null;
   };
   participants?: {

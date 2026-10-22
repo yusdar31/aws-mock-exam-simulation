@@ -4,6 +4,39 @@ import { studyMessages } from "./study";
 export const LANGUAGE_STORAGE_KEY = "aws-exam-ui-language";
 export const messages: Record<string, string> = {
   ...studyMessages,
+  "Simpan sesi ke akun": "Save classroom sessions to your account",
+  "Masuk agar hasil dan pembahasan kelas dapat dibuka dari browser lain. Bergabung sebagai tamu tetap tersedia.":
+    "Sign in to reopen classroom results and explanations in another browser. You can still join as a guest.",
+  "Masuk atau daftar akun": "Sign in or create an account",
+  "Peran akun": "Account option",
+  "Daftar akun baru": "Create a new account",
+  "Lanjutkan dengan akun": "Continue with account",
+  "Login belum berhasil.": "Sign-in was unsuccessful.",
+  "Masuk sebagai {email}": "Signed in as {email}",
+  "Riwayat akun belum dapat dimuat. Coba lagi nanti.":
+    "Account history could not be loaded. Try again later.",
+  "Penyimpanan akun kelas belum tersedia di server.":
+    "Classroom account storage is not available on the server yet.",
+  "Sesi ini tersimpan ke akun Anda.": "This session is saved to your account.",
+  "Hubungkan sesi ini ke akun": "Link this session to your account",
+  "Sesi yang diikuti setelah masuk otomatis terhubung ke akun. Membuka sesi di perangkat lain memindahkan akses pengerjaan ke perangkat tersebut.":
+    "Sessions joined while signed in are linked to your account. Opening a session on another device transfers editing access to that device.",
+  "Sesi akun Anda": "Your account sessions",
+  "Belum ada sesi yang terhubung.": "No linked sessions yet.",
+  "Buka sesi {code}": "Open session {code}",
+  "Sesi akan disimpan ke akun Anda. Nama terlihat oleh instruktur.":
+    "The session will be saved to your account. Your name is visible to the instructor.",
+  "Tinjau & kumpulkan": "Review & submit",
+  "Periksa sebelum mengumpulkan": "Review before submitting",
+  "{incomplete} soal belum lengkap · {flagged} ditandai":
+    "{incomplete} incomplete questions · {flagged} flagged",
+  "Jawaban tidak dapat diubah setelah dikumpulkan. Waktu ujian tetap berjalan selama pemeriksaan.":
+    "Answers cannot be changed after submission. The exam timer continues during this review.",
+  "Periksa soal sebelum mengumpulkan": "Review questions before submitting",
+  "Soal {index}: {status}": "Question {index}: {status}",
+  "Ya, kumpulkan jawaban": "Yes, submit answers",
+  "Penanda belum dapat disimpan.": "The flag could not be saved.",
+  "Hapus tanda review": "Remove review flag",
   "Perencanaan dan Implementasi Solusi Cloud":
     "Planning and implementing a cloud solution",
   "Bank soal": "Question banks",

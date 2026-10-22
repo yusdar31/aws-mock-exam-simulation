@@ -9,6 +9,8 @@ import multiple from "./curated/multiple.mjs";
 import { expand, optionConcept } from "./curated/expansion.mjs";
 import { deepen } from "./curated/depth.mjs";
 import { buildAceScenarios } from "./curated/gcp-ace-scenarios.mjs";
+import { localizeOption } from "./curated/options-id.mjs";
+import { reviewCcpFoundation } from "./curated/ccp-foundations.mjs";
 import certifications from "../src/data/certifications.json" with { type: "json" };
 
 const ccpScenariosId = fs.existsSync("scripts/curated/ccp-scenarios-id.json")
@@ -169,7 +171,11 @@ for (const type of ["ccp", "saa"])
         const scenario =
           type === "ccp" && lang === "id" ? ccpScenariosId[qid] : null;
         const prompt =
-          scenario?.prompt || (lang === "id" ? promptId : promptEn);
+          type === "ccp"
+            ? lang === "id"
+              ? promptId
+              : promptEn
+            : scenario?.prompt || (lang === "id" ? promptId : promptEn);
         const finalExplanation = scenario?.explanation || explanation;
         return {
           id: qid,
@@ -190,7 +196,21 @@ for (const type of ["ccp", "saa"])
           sourceRef: "original-practice-scenarios",
         };
       });
-    banks[`${type}-${lang}`] = [...old, ...deepen(fresh, type, lang)];
+    banks[`${type}-${lang}`] = [...old, ...deepen(fresh, type, lang)]
+      .map(reviewCcpFoundation)
+      .map((q) =>
+        lang === "id"
+          ? {
+              ...q,
+              options: q.options.map((o) => ({
+                ...o,
+                text: localizeOption(o.text),
+              })),
+              version:
+                q.status === "approved" ? Math.max(q.version, 4) : q.version,
+            }
+          : q,
+      );
     fs.mkdirSync("src/data/banks", { recursive: true });
     fs.writeFileSync(
       `src/data/banks/${type}-${lang}.json`,

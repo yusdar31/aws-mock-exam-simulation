@@ -198,9 +198,7 @@ try {
     const [minutes, seconds] = value.split(":").map(Number);
     return minutes * 60 + seconds;
   };
-  expect(
-    Math.abs(seconds(timerA) - seconds(timerB)),
-  ).toBeLessThanOrEqual(2);
+  expect(Math.abs(seconds(timerA) - seconds(timerB))).toBeLessThanOrEqual(2);
   results.push(
     "All participants receive identical packets/options/deadlines despite different device clocks",
   );
@@ -252,7 +250,10 @@ try {
     "Answers remain independent; queued answers retry after reconnect and survive reload/language switching",
   );
   await alice.p
-    .getByRole("button", { name: "Submit answers", exact: true })
+    .getByRole("button", { name: "Review & submit", exact: true })
+    .click();
+  await alice.p
+    .getByRole("button", { name: "Yes, submit answers", exact: true })
     .click();
   await expect(
     alice.p.getByRole("heading", { name: "Answers submitted", exact: true }),
@@ -417,7 +418,10 @@ try {
           .check();
     }
     await guest.p
-      .getByRole("button", { name: "Kumpulkan jawaban", exact: true })
+      .getByRole("button", { name: "Tinjau & kumpulkan", exact: true })
+      .click();
+    await guest.p
+      .getByRole("button", { name: "Ya, kumpulkan jawaban", exact: true })
       .click();
     await expect(
       guest.p.getByRole("heading", {
@@ -432,7 +436,10 @@ try {
   // Final participant submits while host is disconnected; returning host must finalize once.
   await host.p.goto("about:blank");
   await gina.p
-    .getByRole("button", { name: "Kumpulkan jawaban", exact: true })
+    .getByRole("button", { name: "Tinjau & kumpulkan", exact: true })
+    .click();
+  await gina.p
+    .getByRole("button", { name: "Ya, kumpulkan jawaban", exact: true })
     .click();
   await expect(
     gina.p.getByRole("heading", {

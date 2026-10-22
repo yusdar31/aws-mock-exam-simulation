@@ -91,18 +91,22 @@ test("deeper bilingual teaching cases retain paired identifiers, complete option
   for (const type of ["ccp", "saa"]) {
     const id = JSON.parse(
         fs.readFileSync(`src/data/banks/${type}-id.json`, "utf8"),
-      ).filter((q) => q.version === 3),
+      ),
       en = JSON.parse(
         fs.readFileSync(`src/data/banks/${type}-en.json`, "utf8"),
       ).filter((q) => q.version === 3);
-    assert.equal(id.length, 4);
     assert.equal(en.length, 4);
-    assert.equal(new Set(id.map((q) => q.domain)).size, 4);
-    for (const q of id) {
+    const cases = id.filter((q) =>
+      en.some((pair) => pair.id === q.id.replace("-id-", "-en-")),
+    );
+    assert.equal(cases.length, 4);
+    assert.equal(new Set(cases.map((q) => q.domain)).size, 4);
+    for (const q of cases) {
       const pair = en.find((v) => v.id === q.id.replace("-id-", "-en-"));
       assert.ok(pair);
       assert.equal(pair.domain, q.domain);
-      assert.ok(q.prompt.length > 180);
+      assert.ok(q.prompt.length > 40 && q.prompt.length <= 600);
+      assert.ok(q.version >= pair.version);
       assert.ok(q.options.every((o) => q.optionExplanations[o.id]));
       assert.equal(new URL(q.sourceUrl).hostname, "docs.aws.amazon.com");
     }

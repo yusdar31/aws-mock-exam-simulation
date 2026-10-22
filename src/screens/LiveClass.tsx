@@ -5,6 +5,8 @@ import ClassroomHostDashboard from "../components/ClassroomHostDashboard";
 import ClassroomShare from "../components/ClassroomShare";
 import ClassroomPacket from "../components/ClassroomPacket";
 import ClassroomHistory from "../components/ClassroomHistory";
+import ClassroomAccount from "../components/ClassroomAccount";
+import ClassroomSubmitReview from "../components/ClassroomSubmitReview";
 import { rankParticipants } from "../lib/classroomResults";
 import { CERTIFICATIONS, EXAM_TYPES } from "../lib/catalog";
 import { loadBank } from "../lib/banks";
@@ -38,6 +40,9 @@ export default function LiveClass({
     setFollowHost(value);
   }
   const [serverVersion, setServerVersion] = useState(1);
+  const [account, setAccount] = useState<string | null>(null);
+  const [submitReview, setSubmitReview] = useState(false);
+  const [localFlags, setLocalFlags] = useState<string[]>([]);
   const [ready, setReady] = useState<boolean | null>(null);
   const [busy, setBusy] = useState(false),
     [error, setError] = useState("");
@@ -226,6 +231,27 @@ export default function LiveClass({
   useEffect(() => {
     heading.current?.focus();
   }, [index, room?.status, room?.revealed, room?.member?.submitted, running]);
+  useEffect(() => {
+    if (!room?.member) return;
+    try {
+      const stored = JSON.parse(
+        localStorage.getItem(
+          `classroom-flags-${room.code}-${room.member.id}`,
+        ) || "[]",
+      );
+      setLocalFlags(
+        Array.isArray(stored)
+          ? stored.filter(
+              (id: unknown) =>
+                typeof id === "string" &&
+                room.questions.some((q) => q.id === id),
+            )
+          : [],
+      );
+    } catch {
+      setLocalFlags([]);
+    }
+  }, [room?.code, room?.member, room?.questions]);
 
   async function run(action: string, payload: Record<string, unknown> = {}) {
     if (working.current) return null;
@@ -256,7 +282,11 @@ export default function LiveClass({
             }
           : {}),
       });
-      if (["create", "join", "recover", "claim_host"].includes(action)) {
+      if (
+        ["create", "join", "recover", "claim_host", "account_resume"].includes(
+          action,
+        )
+      ) {
         const credential: ClassroomAccess = {
           code: data.code,
           token: String(payload.token),
@@ -420,6 +450,25 @@ export default function LiveClass({
       Math.min(displayedIndex, Math.max(0, (room?.questions.length || 1) - 1))
     ];
   const selected = question ? answers[question.id] || [] : [];
+  const flags = room?.member?.flags || localFlags;
+  async function toggleFlag() {
+    if (!question || locked) return;
+    const next = flags.includes(question.id)
+      ? flags.filter((id) => id !== question.id)
+      : [...flags, question.id];
+    if (serverVersion >= 3) await run("flag", { flags: next });
+    else {
+      try {
+        localStorage.setItem(
+          `classroom-flags-${room?.code}-${room?.member?.id}`,
+          JSON.stringify(next),
+        );
+        setLocalFlags(next);
+      } catch {
+        setError("Penanda belum dapat disimpan.");
+      }
+    }
+  }
   const completed =
     room?.questions.filter(
       (q) =>
@@ -491,6 +540,19 @@ export default function LiveClass({
               </section>
             ) : (
               <div className="stack">
+                <ClassroomAccount
+                  enabled={serverVersion >= 3}
+                  active={false}
+                  linked={false}
+                  onAccount={setAccount}
+                  onLink={() => {}}
+                  onResume={(code) => {
+                    void run("account_resume", {
+                      code,
+                      token: crypto.randomUUID(),
+                    });
+                  }}
+                />
                 <ClassroomHistory
                   items={history}
                   onSelect={(credential) => {
@@ -536,7 +598,7 @@ export default function LiveClass({
                       </label>
                       <label>
                         {t("Peran")}
-                          <select name="role" aria-label={t('Peran')}>
+                        <select name="role" aria-label={t("Peran")}>
                           <option value="member">{t("Peserta")}</option>
                           <option value="host">{t("Instruktur")}</option>
                         </select>
@@ -572,6 +634,7 @@ export default function LiveClass({
                             code: String(f.get("code")).trim().toUpperCase(),
                             token: joinToken.current,
                             name: String(f.get("name")).trim(),
+                            account: !!account && serverVersion >= 3,
                           });
                         } catch (e) {
                           setError((e as Error).message);
@@ -606,7 +669,11 @@ export default function LiveClass({
                         {busy ? t("Menghubungkan…") : t("Gabung sesi")}
                       </button>
                       <small>
-                        {t("Tanpa akun. Nama Anda terlihat oleh instruktur.")}
+                        {t(
+                          account && serverVersion >= 3
+                            ? "Sesi akan disimpan ke akun Anda. Nama terlihat oleh instruktur."
+                            : "Tanpa akun. Nama Anda terlihat oleh instruktur.",
+                        )}
                       </small>
                     </form>
                   </section>
@@ -629,7 +696,7 @@ export default function LiveClass({
                         <label>
                           {t("Sertifikasi")}
                           <select
-                            aria-label={t('Sertifikasi')}
+                            aria-label={t("Sertifikasi")}
                             value={type}
                             onChange={(e) => {
                               const next = e.target.value as Config["examType"];
@@ -650,7 +717,7 @@ export default function LiveClass({
                         <label>
                           {t("Bahasa soal")}
                           <select
-                            aria-label={t('Bahasa soal')}
+                            aria-label={t("Bahasa soal")}
                             value={lang}
                             onChange={(e) =>
                               setLang(e.target.value as Config["lang"])
@@ -968,10 +1035,15 @@ export default function LiveClass({
                                 ? "jawaban lengkap"
                                 : "belum lengkap",
                             ),
-                            flag: "",
+                            flag: flags.includes(q.id) ? t(", ditandai") : "",
                           })}
                         >
                           {i + 1}
+                          {flags.includes(q.id) && (
+                            <span className="live-flag" aria-hidden="true">
+                              ⚑
+                            </span>
+                          )}
                           {(answers[q.id]?.length || 0) === q.required && (
                             <span className="live-complete" aria-hidden="true">
                               ✓
@@ -982,6 +1054,21 @@ export default function LiveClass({
                     </nav>
                     {question && (
                       <article className="panel">
+                        {room.status === "running" &&
+                          !room.member?.submitted && (
+                            <button
+                              className="classroom-flag"
+                              aria-pressed={flags.includes(question.id)}
+                              disabled={locked}
+                              onClick={() => void toggleFlag()}
+                            >
+                              {t(
+                                flags.includes(question.id)
+                                  ? "Hapus tanda review"
+                                  : "Tandai untuk review",
+                              )}
+                            </button>
+                          )}
                         <span className="eyebrow">
                           {t("Soal")} {displayedIndex + 1}/{room.total}
                         </span>
@@ -1061,25 +1148,57 @@ export default function LiveClass({
                       >
                         {t("Berikutnya")}
                       </button>
-                      {room.status === "running" && (
-                        <button
-                          className="primary"
-                          disabled={locked}
-                          onClick={() => {
-                            if (
-                              confirm(
-                                t(
-                                  "Kumpulkan jawaban sekarang? Jawaban tidak dapat diubah setelah dikumpulkan.",
-                                ),
-                              )
-                            )
-                              void run("submit");
-                          }}
-                        >
-                          {t("Kumpulkan jawaban")}
-                        </button>
-                      )}
                     </div>
+                    {room.status === "running" && !room.member?.submitted && (
+                      <section className="classroom-submit-area">
+                        <p>
+                          {t(
+                            "{incomplete} soal belum lengkap · {flagged} ditandai",
+                            {
+                              incomplete: room.total - completed,
+                              flagged: flags.length,
+                            },
+                          )}
+                        </p>
+                        <button
+                          disabled={locked}
+                          onClick={() => setSubmitReview(true)}
+                        >
+                          {t("Tinjau & kumpulkan")}
+                        </button>
+                      </section>
+                    )}
+                    {submitReview &&
+                      room.status === "running" &&
+                      !room.member?.submitted && (
+                        <ClassroomSubmitReview
+                          questions={room.questions}
+                          answers={answers}
+                          flags={flags}
+                          busy={busy}
+                          onClose={() => setSubmitReview(false)}
+                          onQuestion={(next) => {
+                            setIndex(next);
+                            follow(false);
+                            setSubmitReview(false);
+                          }}
+                          onSubmit={() => {
+                            void run("submit").then((data) => {
+                              if (data) setSubmitReview(false);
+                            });
+                          }}
+                        />
+                      )}
+                    <ClassroomAccount
+                      enabled={serverVersion >= 3}
+                      active
+                      linked={!!room.member?.accountLinked}
+                      onAccount={setAccount}
+                      onResume={() => {}}
+                      onLink={() => {
+                        void run("link_account");
+                      }}
+                    />
                   </>
                 )}
               </>

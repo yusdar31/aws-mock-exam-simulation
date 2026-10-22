@@ -10,6 +10,7 @@ for (const file of [
   "studio-browser.mjs",
   "classroom-browser.mjs",
   "classroom-upgrade-browser.mjs",
+  "classroom-learners-browser.mjs",
   "review-quality-browser.mjs",
 ]) {
   const result = spawnSync(process.execPath, [`tests/${file}`], {
