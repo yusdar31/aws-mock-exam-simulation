@@ -1,6 +1,7 @@
 // Original Indonesian practice scenarios, not recalled/live examination items.
 // Objectives follow the standard guide linked by Google, reviewed 2026-10-21.
 import { buildAceGuide } from "./gcp-ace-guide.mjs";
+import gear20261028 from "./gcp-ace-gear-20261028.json" with { type: "json" };
 const refs = {
   hierarchy:
     "https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy",
@@ -2684,5 +2685,6 @@ export function buildAceScenarios() {
       };
     }),
     ...buildAceGuide(),
+    ...structuredClone(gear20261028),
   ];
 }

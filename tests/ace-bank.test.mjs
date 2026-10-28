@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import ts from "typescript";
 import { buildAceScenarios } from "../scripts/curated/gcp-ace-scenarios.mjs";
 import { aceGuideCoverage } from "../scripts/curated/gcp-ace-coverage.mjs";
@@ -38,6 +39,39 @@ const normalized = (text) =>
     .toLowerCase()
     .replace(/[^\p{L}\p{N}]+/gu, " ")
     .trim();
+
+test("October 28 additions preserve the 271 earlier questions and distinguish key operational choices", () => {
+  const additions = fresh.filter((q) =>
+    q.id.startsWith("ace-scenario-id-20261028-"),
+  );
+  assert.equal(additions.length, 24);
+  assert.equal(additions.filter((q) => q.type === "multiple").length, 2);
+  assert.equal(
+    createHash("sha256")
+      .update(
+        JSON.stringify(
+          bank.filter((q) => !q.id.startsWith("ace-scenario-id-20261028-")),
+        ),
+      )
+      .digest("hex"),
+    "73386d98d3bdf097a536bf6739680cb36956f06f25cd921c042d11afd4d06227",
+  );
+  const answers = (suffix) => {
+    const q = additions.find((q) => q.id.endsWith(suffix));
+    return q.options
+      .filter((o) => q.correctAnswers.includes(o.id))
+      .map((o) => o.text)
+      .join(" ");
+  };
+  assert.match(answers("005"), /BigQuery subscription/);
+  assert.match(answers("007"), /CronJob/);
+  assert.match(answers("013"), /age 30.*matchesPrefix exports\//);
+  assert.match(answers("015"), /trace lengkap/);
+  assert.match(answers("017"), /dead-letter topic/);
+  assert.match(answers("021"), /Token Creator.*Storage Object Viewer/);
+  assert.match(answers("022"), /cloud-platform/);
+  assert.match(answers("023"), /signed URL.*GET.*15 menit/);
+});
 
 test("GEAR-style calibration keeps realistic alternatives, correct operational distinctions and revised versions", () => {
   assert.equal(gearRevisedSuffixes.length, 55);
@@ -140,15 +174,15 @@ test("ACE has representative scenarios mapped to all 94 guide considerations and
     );
 });
 
-test("ACE has 171 unique original, publishable scenarios with complete option-specific rationales", () => {
-  assert.equal(fresh.length, 171);
-  assert.equal(bank.length, legacy.length + 171);
+test("ACE has 195 unique original, publishable scenarios with complete option-specific rationales", () => {
+  assert.equal(fresh.length, 195);
+  assert.equal(bank.length, legacy.length + 195);
   assert.equal(new Set(bank.map((q) => q.id)).size, bank.length);
   assert.equal(
     new Set(bank.map((q) => normalized(q.prompt))).size,
     bank.length,
   );
-  assert.equal(new Set(fresh.map((q) => q.topic)).size, 171);
+  assert.equal(new Set(fresh.map((q) => q.topic)).size, 195);
   assert.deepEqual(
     bank.filter((q) => q.id.startsWith("ace-scenario-")),
     fresh,
@@ -160,7 +194,9 @@ test("ACE has 171 unique original, publishable scenarios with complete option-sp
     counts[q.domain] = (counts[q.domain] || 0) + 1;
     assert.equal(q.sourceRef, "original-practice-scenarios");
     assert.ok(/^\d\.\d$/.test(q.objective));
-    assert.ok(["2026-10-21", "2026-10-22"].includes(q.verifiedAt));
+    assert.ok(
+      ["2026-10-21", "2026-10-22", "2026-10-28"].includes(q.verifiedAt),
+    );
     assert.equal(
       new Set(
         q.options.map((o) => o.text.toLowerCase().replace(/\s+/g, " ").trim()),
@@ -179,7 +215,7 @@ test("ACE has 171 unique original, publishable scenarios with complete option-sp
   }
   assert.equal(positions.size, 4);
   assert.ok(fresh.some((q) => q.type === "multiple"));
-  assert.deepEqual(Object.values(counts), [33, 56, 58, 24]);
+  assert.deepEqual(Object.values(counts), [37, 64, 65, 29]);
 });
 
 test("ACE preserves old question IDs, prompts, options, answers and rationale while mapping old domains", () => {
@@ -271,7 +307,7 @@ test("release API publishes and paginates the complete new ACE bank", async () =
   delete process.env.QUESTION_API_ORIGIN;
   try {
     const items = [];
-    for (const page of [1, 2, 3, 4, 5, 6]) {
+    for (const page of [1, 2, 3, 4, 5, 6, 7]) {
       let body, status;
       await gateway(
         {
@@ -291,7 +327,7 @@ test("release API publishes and paginates the complete new ACE bank", async () =
         },
       );
       assert.equal(status, 200);
-      assert.equal(body.total, 171);
+      assert.equal(body.total, 195);
       assert.equal(body.source, "release");
       items.push(...body.items);
     }

@@ -34,8 +34,8 @@ try {
     }
     await wait(200);
   }
-  let executablePath;
-  if (!existsSync(chromium.executablePath()))
+  let executablePath = process.env.EXAM_BROWSER_EXECUTABLE;
+  if (!executablePath && !existsSync(chromium.executablePath()))
     executablePath = (
       await import("../../career-ops/node_modules/playwright/index.mjs")
     ).chromium.executablePath();
@@ -124,6 +124,29 @@ try {
   await page.locator('.app-header a[href="#banks"]').click();
   await page.locator('h2 a[href="#banks/gcp-ace-id"]').click();
   await expect(page.locator(".bank-domains li")).toHaveCount(4);
+  await page
+    .getByLabel("Cari soal", { exact: true })
+    .fill("ace-scenario-id-20261028-");
+  await expect(
+    page.getByText("20 dari 24 soal ditampilkan", { exact: true }),
+  ).toBeVisible();
+  await page
+    .getByLabel("Cari soal", { exact: true })
+    .fill("ace-scenario-id-20261028-021");
+  await page.locator(".bank-question summary").first().click();
+  const newReview = page.locator(".bank-question .rationale").first();
+  await expect(newReview.locator(".is-correct")).toHaveCount(2);
+  await expect(newReview).toContainText("Token Creator");
+  await expect(newReview).toContainText("Storage Object Viewer");
+  await expect(newReview.locator(".review-choice-reason")).toHaveCount(5);
+  await page.setViewportSize({ width: 375, height: 812 });
+  assert.ok(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth + 1,
+    ),
+  );
+  await page.screenshot({ path: `${out}/gear-20261028-mobile.png` });
+  await page.setViewportSize({ width: 1440, height: 1000 });
   await page
     .getByLabel("Cari soal", { exact: true })
     .fill("ace-scenario-id-20261022-");

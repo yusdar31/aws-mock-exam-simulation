@@ -1,0 +1,1068 @@
+[
+  {
+    "id": "ace-scenario-id-20261028-001",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Sebuah proyek pelatihan boleh memakai paling banyak 32 vCPU dari kuota CPU regional yang digunakan VM-nya. Kesalahan skrip pernah membuat terlalu banyak VM. Anda ingin membatasi penggunaan kapasitas tersebut secara langsung. Apa yang sebaiknya dilakukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Turunkan batas kuota CPU regional yang relevan menjadi 32 vCPU"
+      },
+      {
+        "id": "B",
+        "text": "Buat budget sebesar perkiraan biaya bulanan 32 vCPU"
+      },
+      {
+        "id": "C",
+        "text": "Buat alert penggunaan CPU ketika utilisasi mencapai 80%"
+      },
+      {
+        "id": "D",
+        "text": "Beli committed use discount untuk kapasitas 32 vCPU"
+      }
+    ],
+    "correctAnswers": ["A"],
+    "explanation": "Kuota membatasi kapasitas resource yang dapat dialokasikan dalam cakupannya. Periksa juga kuota keluarga mesin yang digunakan; batas vCPU ini bukan batas seluruh biaya proyek.",
+    "optionExplanations": {
+      "A": "Kuota membatasi kapasitas resource yang dapat dialokasikan dalam cakupannya. Periksa juga kuota keluarga mesin yang digunakan; batas vCPU ini bukan batas seluruh biaya proyek.",
+      "B": "Budget membantu memantau pengeluaran dan memberi notifikasi, tetapi tidak otomatis menolak pembuatan VM saat melewati 32 vCPU.",
+      "C": "Utilisasi CPU mengukur kesibukan VM, bukan jumlah vCPU yang dialokasikan; alert juga tidak membatasi alokasi.",
+      "D": "Komitmen pembelian memengaruhi diskon penggunaan yang memenuhi syarat, bukan batas pembuatan VM."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/docs/quotas/view-manage",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "1.2",
+    "topic": "regional-cpu-quota-guardrail",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-002",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Analis menjalankan job BigQuery on-demand di proyek riset menggunakan tabel milik proyek arsip. Tim keuangan ingin memantau biaya komputasi kueri analis tersebut dengan budget. Proyek mana yang harus menjadi cakupan budget untuk biaya kueri itu?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Proyek arsip, karena seluruh tabel sumber berada di sana"
+      },
+      {
+        "id": "B",
+        "text": "Keduanya secara terpisah karena setiap job dikenai biaya kueri dua kali"
+      },
+      {
+        "id": "C",
+        "text": "Proyek yang dipilih sebagai quota project pada seluruh laptop analis"
+      },
+      {
+        "id": "D",
+        "text": "Proyek riset, tempat job kueri dijalankan dan ditagihkan"
+      }
+    ],
+    "correctAnswers": ["D"],
+    "explanation": "Biaya komputasi kueri on-demand dibebankan pada proyek yang menjalankan job; lokasi tabel di proyek lain tidak memindahkan biaya komputasi itu.",
+    "optionExplanations": {
+      "A": "Proyek pemilik dataset menanggung biaya penyimpanan dataset, tetapi bukan otomatis biaya komputasi job dari proyek riset.",
+      "B": "Akses lintas proyek tidak membuat job yang sama dikenai biaya komputasi kueri dua kali.",
+      "C": "Quota project untuk pemanggilan API bukan pengganti proyek job BigQuery yang menentukan penagihan komputasi kueri ini.",
+      "D": "Biaya komputasi kueri on-demand dibebankan pada proyek yang menjalankan job; lokasi tabel di proyek lain tidak memindahkan biaya komputasi itu."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/bigquery/docs/resource-hierarchy",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "1.2",
+    "topic": "bigquery-billing-project-budget",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-003",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Semua proyek produksi berada dalam folder produksi. Grup auditor membutuhkan roles/logging.viewer pada proyek yang ada dan setiap proyek baru di folder itu. Proyek pengembangan berada di folder lain. Anda ingin menghindari penambahan binding setiap kali proyek dibuat. Apa yang sebaiknya dilakukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Berikan roles/logging.viewer kepada setiap auditor pada setiap proyek produksi saat ini"
+      },
+      {
+        "id": "B",
+        "text": "Berikan roles/logging.viewer kepada service account pada satu proyek produksi"
+      },
+      {
+        "id": "C",
+        "text": "Berikan roles/logging.viewer kepada grup auditor pada folder produksi"
+      },
+      {
+        "id": "D",
+        "text": "Berikan roles/logging.viewer kepada grup auditor pada organisasi"
+      }
+    ],
+    "correctAnswers": ["C"],
+    "explanation": "Allow policy diwariskan ke turunan folder, termasuk proyek baru. Cakupan folder produksi tidak memperluas akses ke folder pengembangan.",
+    "optionExplanations": {
+      "A": "Binding individu pada proyek saat ini memerlukan pemeliharaan anggota dan tidak mencakup proyek baru secara otomatis.",
+      "B": "Binding ini memberikan akses kepada identitas dan cakupan yang berbeda dari grup auditor di seluruh folder.",
+      "C": "Allow policy diwariskan ke turunan folder, termasuk proyek baru. Cakupan folder produksi tidak memperluas akses ke folder pengembangan.",
+      "D": "Binding organisasi diwariskan lebih luas, termasuk proyek pengembangan yang tidak diminta."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "1.1",
+    "topic": "folder-auditor-inheritance-new-projects",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-004",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Pengaturan Lingkungan Solusi Cloud",
+    "type": "single",
+    "prompt": "Tim platform harus dapat mengaktifkan dan menonaktifkan API pada satu proyek. Mereka tidak perlu mengubah IAM atau mengelola resource aplikasi. Dari role bawaan berikut, mana yang sesuai dengan tugas tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Project IAM Admin pada proyek tersebut"
+      },
+      {
+        "id": "B",
+        "text": "Service Usage Admin pada proyek tersebut"
+      },
+      {
+        "id": "C",
+        "text": "Service Usage Consumer pada proyek tersebut"
+      },
+      {
+        "id": "D",
+        "text": "Service Usage Viewer pada proyek tersebut"
+      }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "roles/serviceusage.serviceUsageAdmin menyediakan pengelolaan status layanan pada proyek tanpa memberikan kewenangan IAM Owner.",
+    "optionExplanations": {
+      "A": "Project IAM Admin mengelola allow policy proyek; tugas mengelola IAM itu berbeda dari mengaktifkan API.",
+      "B": "roles/serviceusage.serviceUsageAdmin menyediakan pengelolaan status layanan pada proyek tanpa memberikan kewenangan IAM Owner.",
+      "C": "Consumer mengizinkan penggunaan layanan yang diaktifkan dan kuota terkait, tetapi tidak memberikan kemampuan mengaktifkan atau menonaktifkan API.",
+      "D": "Viewer memungkinkan melihat informasi layanan, bukan mengubah status pengaktifannya."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/service-usage/docs/access-control",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "1.1",
+    "topic": "serviceusage-api-enable-role",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-005",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Pesan JSON pada topik Pub/Sub harus masuk langsung ke tabel BigQuery. Schema pesan sudah cocok dengan tabel, dan tidak diperlukan transformasi. Tim ingin menghindari kode subscriber serta worker yang dikelola sendiri. Konfigurasi mana yang paling sederhana?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Buat BigQuery subscription dengan tabel tujuan dan izin service account yang sesuai"
+      },
+      {
+        "id": "B",
+        "text": "Buat pull subscription dan jalankan worker pada managed instance group untuk menulis tabel"
+      },
+      {
+        "id": "C",
+        "text": "Buat push subscription yang mengirim pesan langsung ke URL konsol tabel BigQuery"
+      },
+      {
+        "id": "D",
+        "text": "Buat Cloud Storage subscription tanpa proses pemuatan ke BigQuery"
+      }
+    ],
+    "correctAnswers": ["A"],
+    "explanation": "BigQuery subscription adalah export subscription yang menulis pesan ke tabel tujuan tanpa subscriber yang harus dijalankan sendiri. Schema dan izin penulisan tetap harus dikonfigurasi dengan benar.",
+    "optionExplanations": {
+      "A": "BigQuery subscription adalah export subscription yang menulis pesan ke tabel tujuan tanpa subscriber yang harus dijalankan sendiri. Schema dan izin penulisan tetap harus dikonfigurasi dengan benar.",
+      "B": "Worker dapat menulis data, tetapi menambah kode subscriber dan pengelolaan komputasi yang ingin dihindari.",
+      "C": "URL konsol bukan endpoint push subscriber untuk memasukkan baris; push subscription membutuhkan endpoint pemroses yang sesuai.",
+      "D": "Subscription itu mengekspor ke Cloud Storage, bukan langsung ke tabel BigQuery yang menjadi tujuan."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/pubsub/docs/bigquery",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "2.4",
+    "topic": "pubsub-bigquery-export-without-subscriber",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-006",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "API HTTP di Cloud Run jarang dipanggil pada malam hari. Tim menerima biaya satu instance yang tetap siap, karena permintaan pertama setelah lama tidak aktif sering lambat. Perubahan paling langsung untuk mengurangi cold start tersebut adalah apa?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Atur maximum instances menjadi 1 pada layanan Cloud Run"
+      },
+      {
+        "id": "B",
+        "text": "Perbesar request timeout layanan Cloud Run"
+      },
+      {
+        "id": "C",
+        "text": "Kurangi concurrency layanan menjadi 1"
+      },
+      {
+        "id": "D",
+        "text": "Atur minimum instances menjadi 1 pada layanan Cloud Run"
+      }
+    ],
+    "correctAnswers": ["D"],
+    "explanation": "Minimum instances menjaga kapasitas siap untuk mengurangi cold start setelah tidak ada trafik. Fitur ini menimbulkan biaya dan tidak menghilangkan semua kemungkinan cold start saat penskalaan atau penggantian instance.",
+    "optionExplanations": {
+      "A": "Maximum instances membatasi penskalaan, tetapi tidak menjaga satu instance tetap siap ketika minimum masih nol.",
+      "B": "Timeout lebih panjang memberi waktu lebih lama untuk menyelesaikan permintaan, tetapi tidak menyiapkan instance sebelum permintaan pertama.",
+      "C": "Concurrency membatasi permintaan bersamaan per instance; pengaturan ini tidak mencegah layanan turun ke nol instance.",
+      "D": "Minimum instances menjaga kapasitas siap untuk mengurangi cold start setelah tidak ada trafik. Fitur ini menimbulkan biaya dan tidak menghilangkan semua kemungkinan cold start saat penskalaan atau penggantian instance."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/run/docs/configuring/min-instances",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "2.1",
+    "topic": "cloud-run-minimum-instance-cold-start",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-007",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Cluster GKE sudah tersedia. Container rekonsiliasi harus berjalan setiap malam pukul 01.00, memproses satu batch, lalu berhenti dengan exit code. Anda ingin Kubernetes mengelola jadwalnya tanpa scheduler tambahan. Resource mana yang dipilih?",
+    "options": [
+      {
+        "id": "A",
+        "text": "DaemonSet agar satu container berjalan pada setiap node"
+      },
+      {
+        "id": "B",
+        "text": "Job tanpa CronJob atau pemicu jadwal lainnya"
+      },
+      {
+        "id": "C",
+        "text": "CronJob dengan jadwal harian dan template Job untuk container rekonsiliasi"
+      },
+      {
+        "id": "D",
+        "text": "Deployment dengan satu replica dan restartPolicy Always"
+      }
+    ],
+    "correctAnswers": ["C"],
+    "explanation": "CronJob membuat Job mengikuti jadwal, sedangkan Job mengelola workload yang berjalan sampai selesai. Proses tetap perlu aman terhadap kemungkinan eksekusi ulang atau tumpang tindih sesuai konfigurasi.",
+    "optionExplanations": {
+      "A": "DaemonSet menyebarkan Pod per node yang sesuai, bukan satu batch terjadwal harian.",
+      "B": "Job mengelola eksekusi sampai selesai, tetapi tidak mengulang pembuatan job setiap hari tanpa komponen penjadwal.",
+      "C": "CronJob membuat Job mengikuti jadwal, sedangkan Job mengelola workload yang berjalan sampai selesai. Proses tetap perlu aman terhadap kemungkinan eksekusi ulang atau tumpang tindih sesuai konfigurasi.",
+      "D": "Deployment menjaga Pod terus berjalan; ia tidak secara langsung menjadwalkan batch sekali setiap malam."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/kubernetes-engine/docs/how-to/cronjobs",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "2.1",
+    "topic": "gke-cronjob-nightly-batch",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-008",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Aplikasi lama pada beberapa VM Linux membaca dan memperbarui direktori yang sama melalui NFS. Anda ingin memindahkannya ke Google Cloud tanpa mengubah cara aplikasi mengakses file dan tanpa mengelola server file sendiri. Layanan mana yang dipilih?",
+    "options": [
+      {
+        "id": "A",
+        "text": "VM tambahan dengan server NFS yang dikelola oleh tim"
+      },
+      {
+        "id": "B",
+        "text": "Filestore yang di-mount oleh VM aplikasi melalui NFS"
+      },
+      {
+        "id": "C",
+        "text": "Cloud Storage yang diakses melalui API objek"
+      },
+      {
+        "id": "D",
+        "text": "Persistent Disk terpisah untuk setiap VM aplikasi"
+      }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "Filestore menyediakan layanan file terkelola dengan akses NFS yang sesuai untuk direktori bersama tanpa menjalankan server file sendiri.",
+    "optionExplanations": {
+      "A": "Server NFS pada VM dapat menyediakan protokol yang dibutuhkan, tetapi tetap memerlukan pengelolaan server yang ingin dihindari.",
+      "B": "Filestore menyediakan layanan file terkelola dengan akses NFS yang sesuai untuk direktori bersama tanpa menjalankan server file sendiri.",
+      "C": "API objek mengharuskan perubahan pola akses aplikasi; API tersebut bukan share NFS yang langsung menggantikan direktori ini.",
+      "D": "Disk terpisah menghasilkan data per VM, bukan satu direktori NFS bersama yang konsisten untuk seluruh aplikasi."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/filestore/docs/overview",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "2.2",
+    "topic": "filestore-shared-nfs-existing-app",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-009",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Tabel BigQuery on-demand dipartisi harian berdasarkan event_date. Laporan hanya memerlukan data tujuh hari terakhir, tetapi kueri saat ini membaca seluruh riwayat. Anda ingin mengurangi data yang dipindai tanpa mengubah hasil laporan. Apa yang dilakukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Tambahkan filter rentang tujuh hari langsung pada kolom event_date"
+      },
+      {
+        "id": "B",
+        "text": "Tambahkan LIMIT 100 pada kueri yang sama"
+      },
+      {
+        "id": "C",
+        "text": "Tambahkan ORDER BY event_date DESC tanpa filter tanggal"
+      },
+      {
+        "id": "D",
+        "text": "Ubah label tabel menjadi retention=7days"
+      }
+    ],
+    "correctAnswers": ["A"],
+    "explanation": "Filter yang memenuhi syarat pada kolom partisi memungkinkan partition pruning, sehingga partisi di luar rentang tidak perlu dipindai.",
+    "optionExplanations": {
+      "A": "Filter yang memenuhi syarat pada kolom partisi memungkinkan partition pruning, sehingga partisi di luar rentang tidak perlu dipindai.",
+      "B": "LIMIT membatasi baris keluaran dan tidak dengan sendirinya membatasi byte yang dipindai pada tabel biasa.",
+      "C": "Pengurutan tidak membatasi partisi yang harus dibaca dan tidak memenuhi kebutuhan hanya tujuh hari terakhir.",
+      "D": "Label adalah metadata; label tidak memfilter data kueri atau memangkas partisi yang dibaca."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "2.2",
+    "topic": "bigquery-partition-filter-requirement",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-010",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Dua VPC memakai subnet 10.20.0.0/24 yang sama dan akan dihubungkan dengan VPC Network Peering. Deployment baru belum memiliki data atau VM, sehingga alamatnya masih dapat diubah. Anda ingin koneksi privat langsung menggunakan peering. Apa yang sebaiknya dilakukan sebelum deployment?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Aktifkan pertukaran custom route agar subnet yang sama dapat dipakai di kedua VPC"
+      },
+      {
+        "id": "B",
+        "text": "Tambahkan firewall allow ingress pada kedua subnet tanpa mengubah rentangnya"
+      },
+      {
+        "id": "C",
+        "text": "Aktifkan Public Cloud NAT pada kedua subnet sebelum membuat peering"
+      },
+      {
+        "id": "D",
+        "text": "Ganti rentang subnet salah satu VPC agar tidak tumpang tindih, lalu konfigurasi peering"
+      }
+    ],
+    "correctAnswers": ["D"],
+    "explanation": "Subnet IPv4 yang bertumpang tindih menghalangi peering yang diminta. Merencanakan rentang berbeda sebelum deployment menghindari migrasi resource yang sudah berjalan.",
+    "optionExplanations": {
+      "A": "Pertukaran custom route tidak menghapus larangan tumpang tindih rentang subnet antar-VPC yang di-peer.",
+      "B": "Firewall mengatur izin trafik, tetapi tidak menyelesaikan konflik alamat yang mencegah peering.",
+      "C": "Public Cloud NAT menyediakan translasi untuk koneksi keluar tertentu, bukan penyelesaian konflik rentang subnet pada peering.",
+      "D": "Subnet IPv4 yang bertumpang tindih menghalangi peering yang diminta. Merencanakan rentang berbeda sebelum deployment menghindari migrasi resource yang sudah berjalan."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/vpc/docs/vpc-peering",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "2.3",
+    "topic": "peering-overlap-renumber-planning",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-011",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Mitra menyediakan ribuan file melalui URL HTTPS yang dapat diakses publik. Anda harus menyalinnya ke Cloud Storage satu kali tanpa menyiapkan VM transfer. Daftar URL dan izin bucket sudah tersedia. Cara terkelola mana yang sesuai?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Buat Cloud Storage notification agar setiap URL diunduh ke bucket"
+      },
+      {
+        "id": "B",
+        "text": "Gunakan Storage Transfer Service dengan sumber file system dan pasang transfer agent pada VM baru"
+      },
+      {
+        "id": "C",
+        "text": "Buat transfer Storage Transfer Service dari daftar URL HTTP/HTTPS ke bucket tujuan"
+      },
+      {
+        "id": "D",
+        "text": "Jalankan gcloud storage rsync dari VM Compute Engine yang baru dibuat"
+      }
+    ],
+    "correctAnswers": ["C"],
+    "explanation": "Storage Transfer Service mendukung sumber berupa daftar URL yang dapat diakses melalui HTTP/HTTPS dan tujuan Cloud Storage, tanpa VM transfer yang harus dikelola sendiri.",
+    "optionExplanations": {
+      "A": "Notifikasi bucket mengirim event perubahan objek; fitur ini tidak mengambil file dari daftar URL sumber.",
+      "B": "Sumber file system dengan agen ditujukan untuk file system yang dapat diakses agen, bukan kebutuhan daftar URL publik tanpa VM ini.",
+      "C": "Storage Transfer Service mendukung sumber berupa daftar URL yang dapat diakses melalui HTTP/HTTPS dan tujuan Cloud Storage, tanpa VM transfer yang harus dikelola sendiri.",
+      "D": "Pendekatan ini membutuhkan VM yang ingin dihindari dan bukan transfer terkelola dari daftar URL HTTP/HTTPS tersebut."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/storage-transfer/docs/create-url-list",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "2.2",
+    "topic": "storage-transfer-http-url-manifest",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-012",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Perencanaan dan Implementasi Solusi Cloud",
+    "type": "single",
+    "prompt": "Domain example.com sudah memiliki zona DNS publik. VM dalam satu VPC harus mendapatkan IP internal ketika menanyakan api.example.com, sementara pengguna internet tetap mendapatkan IP publik. Anda ingin pengelolaan DNS terpusat. Apa yang dilakukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Buat private zone yang sama tanpa mengotorisasi VPC mana pun"
+      },
+      {
+        "id": "B",
+        "text": "Buat private zone api.example.com yang diotorisasi untuk VPC itu, lalu isi A record pada apex dengan IP internal"
+      },
+      {
+        "id": "C",
+        "text": "Ganti A record api.example.com di zona publik dengan IP internal"
+      },
+      {
+        "id": "D",
+        "text": "Tambahkan IP publik dan internal pada A record yang sama di zona publik"
+      }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "Private zone yang hanya terlihat dari VPC dapat memberikan jawaban internal untuk nama tersebut, sementara zona publik tetap melayani pengguna internet.",
+    "optionExplanations": {
+      "A": "Private zone perlu diotorisasi untuk jaringan yang harus dapat me-resolve record-nya; tanpa otorisasi VPC target tidak mendapat override ini.",
+      "B": "Private zone yang hanya terlihat dari VPC dapat memberikan jawaban internal untuk nama tersebut, sementara zona publik tetap melayani pengguna internet.",
+      "C": "Perubahan zona publik juga memengaruhi pengguna internet dan mengekspos jawaban alamat privat yang tidak dapat mereka jangkau.",
+      "D": "Jawaban zona publik tidak otomatis memilih alamat berdasarkan apakah klien berada dalam VPC; pengguna internet bisa menerima alamat internal."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/dns/docs/zones/zones-overview",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "2.3",
+    "topic": "cloud-dns-split-horizon-private-override",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-013",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Bucket berisi folder logis exports/ dan contracts/. Hanya objek dengan prefix exports/ yang boleh dihapus otomatis setelah berumur 30 hari. Objek contracts/ harus dipertahankan. Tidak ada retention policy atau object hold. Konfigurasi mana yang sesuai?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Atur lifecycle Delete dengan age 30 dan matchesPrefix exports/ pada aturan yang sama"
+      },
+      {
+        "id": "B",
+        "text": "Atur lifecycle Delete dengan age 30 tanpa kondisi prefix"
+      },
+      {
+        "id": "C",
+        "text": "Buat dua aturan Delete terpisah: satu age 30 dan satu matchesPrefix exports/"
+      },
+      {
+        "id": "D",
+        "text": "Atur default storage class bucket menjadi Archive"
+      }
+    ],
+    "correctAnswers": ["A"],
+    "explanation": "Kondisi dalam satu aturan lifecycle digabungkan: objek harus memenuhi umur dan prefix. Lifecycle berjalan asinkron, sehingga penghapusan bukan janji tepat pada detik ke-30 hari.",
+    "optionExplanations": {
+      "A": "Kondisi dalam satu aturan lifecycle digabungkan: objek harus memenuhi umur dan prefix. Lifecycle berjalan asinkron, sehingga penghapusan bukan janji tepat pada detik ke-30 hari.",
+      "B": "Aturan tersebut juga berlaku untuk objek contracts/ yang cukup tua, melanggar kebutuhan mempertahankannya.",
+      "C": "Aturan terpisah bukan operasi AND. Aturan umur dapat menghapus kontrak, sedangkan aturan prefix dapat menghapus ekspor sebelum 30 hari.",
+      "D": "Default storage class memengaruhi kelas objek baru secara default, bukan penghapusan terjadwal hanya untuk prefix exports/."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/storage/docs/lifecycle",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "3.2",
+    "topic": "lifecycle-prefix-only-temp-exports",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-014",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Managed instance group menjalankan 20 VM dengan template v1. Anda ingin menguji template v2 pada dua VM terlebih dahulu, sambil mempertahankan v1 pada VM lain. Tindakan mana yang sesuai?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Lakukan rolling update seluruh MIG ke template v2 dengan maxUnavailable dua VM"
+      },
+      {
+        "id": "B",
+        "text": "Naikkan minimum autoscaler menjadi 22 VM tanpa mengubah versi template"
+      },
+      {
+        "id": "C",
+        "text": "Ubah boot disk dari template v1 yang sama tanpa membuat template baru"
+      },
+      {
+        "id": "D",
+        "text": "Mulai canary update MIG dengan template v2 dan target size dua VM"
+      }
+    ],
+    "correctAnswers": ["D"],
+    "explanation": "Canary update mendukung dua versi template dan target ukuran untuk versi canary. Pengujian dapat dilakukan sebelum memperluas v2 ke seluruh grup.",
+    "optionExplanations": {
+      "A": "maxUnavailable membatasi ketidaktersediaan saat update, bukan membatasi hasil akhir v2 hanya pada dua VM.",
+      "B": "Menambah ukuran minimum tidak menentukan dua VM menggunakan v2; tanpa konfigurasi versi, VM baru tetap mengikuti template yang digunakan grup.",
+      "C": "Instance template bersifat immutable; perubahan konfigurasi VM membutuhkan template baru, kemudian diterapkan melalui pengelolaan grup.",
+      "D": "Canary update mendukung dua versi template dan target ukuran untuk versi canary. Pengujian dapat dilakukan sebelum memperluas v2 ke seluruh grup."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/compute/docs/instance-groups/updating-migs",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "3.1",
+    "topic": "mig-canary-template-small-target",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-015",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Satu permintaan melewati tiga layanan Cloud Run. Semua layanan sudah menulis structured log dengan field trace yang sama untuk permintaan itu. Anda ingin melihat log permintaan tersebut dari ketiga layanan tanpa mencampurnya dengan permintaan lain. Apa yang dilakukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Filter hanya nama salah satu revisi Cloud Run"
+      },
+      {
+        "id": "B",
+        "text": "Filter seluruh log proyek pada menit ketika permintaan terjadi"
+      },
+      {
+        "id": "C",
+        "text": "Filter Logs Explorer menggunakan nilai trace lengkap milik permintaan tersebut"
+      },
+      {
+        "id": "D",
+        "text": "Filter severity ERROR untuk seluruh layanan Cloud Run"
+      }
+    ],
+    "correctAnswers": ["C"],
+    "explanation": "Field trace yang konsisten menghubungkan entri dari layanan berbeda untuk permintaan yang sama. Filter trace mempersempit hasil berdasarkan identitas permintaan, bukan sekadar waktu atau tingkat severity.",
+    "optionExplanations": {
+      "A": "Nama revisi membatasi hasil ke satu layanan atau revisi dan tidak menggabungkan log dari ketiga layanan untuk permintaan yang sama.",
+      "B": "Rentang waktu membantu penyelidikan, tetapi masih mencampurkan log banyak permintaan yang berjalan pada menit yang sama.",
+      "C": "Field trace yang konsisten menghubungkan entri dari layanan berbeda untuk permintaan yang sama. Filter trace mempersempit hasil berdasarkan identitas permintaan, bukan sekadar waktu atau tingkat severity.",
+      "D": "Severity memilih tingkat kepentingan log, bukan satu permintaan; log normal dari permintaan terkait terlewat dan error permintaan lain dapat ikut tampil."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/logging/docs/view/correlate-logs",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "3.4",
+    "topic": "logging-trace-correlation-cross-service",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-016",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "multiple",
+    "prompt": "Kueri BigQuery gagal dengan quotaExceeded. Anda ingin memeriksa riwayat job dan rincian error sebelum menentukan perbaikan. Anda memiliki akses yang diperlukan, dan audit log terkait tersedia. Dua sumber mana yang paling langsung digunakan? (Pilih 2 jawaban.)",
+    "options": [
+      {
+        "id": "A",
+        "text": "View INFORMATION_SCHEMA.JOBS_BY_PROJECT untuk metadata dan error job"
+      },
+      {
+        "id": "B",
+        "text": "Cloud Audit Logs BigQuery untuk entri kegagalan dan pesan error terkait"
+      },
+      {
+        "id": "C",
+        "text": "Cloud Trace untuk span HTTP frontend aplikasi"
+      },
+      {
+        "id": "D",
+        "text": "BigQuery BI Engine untuk menambah cache sebelum membaca rincian error"
+      },
+      {
+        "id": "E",
+        "text": "Cloud Profiler untuk sampling CPU proses aplikasi"
+      }
+    ],
+    "correctAnswers": ["A", "B"],
+    "explanation": "View job menyediakan metadata eksekusi serta error_result yang dapat digunakan untuk menelusuri job dan pola kegagalannya. Audit log membantu menemukan operasi yang gagal dan detail pesan error. Rincian penyebab menentukan apakah perlu mengubah penggunaan atau meminta penyesuaian kuota.",
+    "optionExplanations": {
+      "A": "View job menyediakan metadata eksekusi serta error_result yang dapat digunakan untuk menelusuri job dan pola kegagalannya.",
+      "B": "Audit log membantu menemukan operasi yang gagal dan detail pesan error. Rincian penyebab menentukan apakah perlu mengubah penggunaan atau meminta penyesuaian kuota.",
+      "C": "Trace frontend berguna untuk latensi permintaan aplikasi, tetapi bukan sumber langsung metadata job BigQuery dan alasan quotaExceeded.",
+      "D": "BI Engine mempercepat beban analitik tertentu; mengaktifkannya bukan langkah diagnosis riwayat job dan penyebab error kuota.",
+      "E": "Profil CPU aplikasi tidak mengungkapkan metadata error job BigQuery yang dibutuhkan untuk diagnosis ini."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "3.4",
+    "topic": "bigquery-quota-job-error-evidence",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-017",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Sebagian pesan Pub/Sub selalu gagal karena format payload rusak. Tim ingin memindahkannya ke topik pemeriksaan setelah beberapa percobaan, sambil tetap memproses pesan lain. Anda ingin memakai mekanisme layanan tanpa antrean kegagalan buatan sendiri. Apa yang dilakukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Konfigurasikan dead-letter topic pada subscription, batas percobaan, dan izin service agent yang diperlukan"
+      },
+      {
+        "id": "B",
+        "text": "Aktifkan message ordering tanpa menambah dead-letter policy"
+      },
+      {
+        "id": "C",
+        "text": "Kirim acknowledgment untuk pesan rusak lalu harapkan Pub/Sub mengirimnya ke topik pemeriksaan"
+      },
+      {
+        "id": "D",
+        "text": "Perbesar acknowledgment deadline saja untuk semua pesan"
+      }
+    ],
+    "correctAnswers": ["A"],
+    "explanation": "Dead-letter policy meneruskan pesan yang gagal diproses ke topik tujuan setelah perkiraan jumlah percobaan yang dikonfigurasi. Batasnya bersifat best effort dan izin service agent diperlukan agar penerusan berjalan.",
+    "optionExplanations": {
+      "A": "Dead-letter policy meneruskan pesan yang gagal diproses ke topik tujuan setelah perkiraan jumlah percobaan yang dikonfigurasi. Batasnya bersifat best effort dan izin service agent diperlukan agar penerusan berjalan.",
+      "B": "Ordering mempertahankan urutan sesuai key, bukan memindahkan pesan rusak ke topik pemeriksaan.",
+      "C": "Acknowledgment menyatakan pemrosesan selesai. Tanpa penerusan atau dead-letter policy, pesan yang di-ack tidak otomatis masuk ke topik pemeriksaan.",
+      "D": "Deadline lebih panjang memberi waktu pemrosesan tambahan, tetapi tidak memperbaiki payload rusak atau menetapkan tujuan pesan gagal."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/pubsub/docs/dead-letter-topics",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "3.1",
+    "topic": "pubsub-dead-letter-poison-message",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-018",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Cloud Monitoring menunjukkan uptime check gagal, tetapi tim on-call tidak menerima email. Alerting policy untuk check tersebut sudah membuat incident, namun belum memiliki notification channel. Perubahan paling langsung adalah apa?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Buat uptime check kedua dengan URL dan periode yang sama"
+      },
+      {
+        "id": "B",
+        "text": "Ubah dashboard agar grafik uptime memakai interval satu menit"
+      },
+      {
+        "id": "C",
+        "text": "Tambahkan email anggota tim sebagai label resource aplikasi"
+      },
+      {
+        "id": "D",
+        "text": "Tambahkan email notification channel yang benar ke alerting policy dan verifikasi alamatnya bila diminta"
+      }
+    ],
+    "correctAnswers": ["D"],
+    "explanation": "Uptime check menghasilkan sinyal, alerting policy membuka incident, dan notification channel menentukan penerima. Channel perlu dikaitkan ke policy, bukan hanya dibuat di proyek.",
+    "optionExplanations": {
+      "A": "Check tambahan tidak menentukan tujuan notifikasi pada policy yang sudah membuka incident.",
+      "B": "Pengaturan visual dashboard tidak menghubungkan incident dengan penerima email.",
+      "C": "Label resource bukan konfigurasi notification channel dan tidak otomatis mengirim email alert.",
+      "D": "Uptime check menghasilkan sinyal, alerting policy membuka incident, dan notification channel menentukan penerima. Channel perlu dikaitkan ke policy, bukan hanya dibuat di proyek."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/monitoring/support/notification-options",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "3.4",
+    "topic": "uptime-check-alert-notification-binding",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-019",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Memastikan Operasi Solusi Cloud yang Berhasil",
+    "type": "single",
+    "prompt": "Sebuah objek Cloud Storage terhapus dua hari lalu. Soft delete dengan retention tujuh hari sudah aktif sebelum penghapusan, bucket masih ada, dan objek belum dipulihkan. Anda memiliki izin yang diperlukan. Langkah mana yang paling langsung untuk memperoleh objek itu kembali?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Buat lifecycle rule SetStorageClass ke Standard pada nama objek yang terhapus"
+      },
+      {
+        "id": "B",
+        "text": "Nonaktifkan soft delete lalu unggah objek kosong dengan nama yang sama"
+      },
+      {
+        "id": "C",
+        "text": "Temukan objek soft-deleted beserta generation-nya, lalu jalankan pemulihan dalam periode retention"
+      },
+      {
+        "id": "D",
+        "text": "Aktifkan Object Versioning sekarang lalu baca generation lama secara normal"
+      }
+    ],
+    "correctAnswers": ["C"],
+    "explanation": "Objek yang berada dalam periode soft delete dapat dipulihkan menggunakan operasi restore yang sesuai. Mengidentifikasi generation memastikan versi objek yang dimaksud dipilih.",
+    "optionExplanations": {
+      "A": "Perubahan kelas penyimpanan bukan operasi pemulihan objek yang soft-deleted.",
+      "B": "Mengunggah konten kosong tidak mengembalikan data sebelumnya; data yang masih dalam retention seharusnya dipulihkan terlebih dahulu.",
+      "C": "Objek yang berada dalam periode soft delete dapat dipulihkan menggunakan operasi restore yang sesuai. Mengidentifikasi generation memastikan versi objek yang dimaksud dipilih.",
+      "D": "Mengaktifkan versioning setelah kejadian tidak membuat versi noncurrent secara retroaktif; objek soft-deleted perlu dipulihkan dengan mekanisme soft delete."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/storage/docs/soft-delete",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "3.2",
+    "topic": "storage-soft-delete-recover-retention",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-020",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Dataset transaksi berisi nama pelanggan dan nomor rekening. Analis hanya boleh mengueri ringkasan penjualan tanpa kedua kolom tersebut. Mereka sudah memiliki BigQuery Job User pada proyek eksekusi. Anda ingin tetap memakai tabel sumber tanpa menyalin data secara berkala. Apa yang dilakukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Buat view biasa pada dataset terpisah lalu berikan Data Viewer pada kedua dataset"
+      },
+      {
+        "id": "B",
+        "text": "Buat authorized view ringkasan pada dataset terpisah dan berikan analis Data Viewer hanya pada dataset view"
+      },
+      {
+        "id": "C",
+        "text": "Berikan Data Viewer pada dataset sumber dan simpan kueri ringkasan sebagai saved query"
+      },
+      {
+        "id": "D",
+        "text": "Berikan Metadata Viewer pada dataset sumber dan kirim SQL ringkasan kepada analis"
+      }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "Authorized view dapat membaca dataset sumber dengan otorisasi view, sementara analis hanya diberi akses ke hasil view. Jangan berikan akses tabel sumber yang memungkinkan melewati pembatasan view.",
+    "optionExplanations": {
+      "A": "Memberi Data Viewer pada dataset sumber tetap membuka akses ke kolom sensitif; pemisahan view sendiri tidak membatasi akses langsung itu.",
+      "B": "Authorized view dapat membaca dataset sumber dengan otorisasi view, sementara analis hanya diberi akses ke hasil view. Jangan berikan akses tabel sumber yang memungkinkan melewati pembatasan view.",
+      "C": "Analis tetap dapat membaca tabel sumber dan kolom sensitif; saved query bukan batas keamanan akses data.",
+      "D": "Metadata Viewer tidak memberikan akses membaca data hasil ringkasan dari tabel yang tidak dapat diakses analis."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/bigquery/docs/authorized-views",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "4.1",
+    "topic": "authorized-view-sensitive-columns",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-021",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "multiple",
+    "prompt": "Seorang engineer harus menjalankan gcloud sebagai service account pembaca bucket tanpa mengunduh key. Engineer belum dapat membuat token untuk identitas itu, dan service account belum dapat membaca objek bucket. Dua pemberian role mana yang memenuhi kebutuhan dengan cakupan yang sesuai? (Pilih 2 jawaban.)",
+    "options": [
+      {
+        "id": "A",
+        "text": "Berikan Service Account Token Creator kepada engineer pada service account target"
+      },
+      {
+        "id": "B",
+        "text": "Berikan Storage Object Viewer kepada service account target pada bucket yang dibaca"
+      },
+      {
+        "id": "C",
+        "text": "Berikan Service Account User kepada engineer sebagai pengganti Token Creator"
+      },
+      {
+        "id": "D",
+        "text": "Berikan Storage Object Viewer hanya kepada engineer pada bucket tersebut"
+      },
+      {
+        "id": "E",
+        "text": "Berikan Service Account Key Admin kepada engineer agar dapat memakai impersonation tanpa key"
+      }
+    ],
+    "correctAnswers": ["A", "B"],
+    "explanation": "Token Creator memungkinkan engineer membuat kredensial berumur pendek untuk impersonation pada identitas target; binding pada service account membatasi cakupan impersonation. Operasi menggunakan token impersonation dievaluasi sebagai service account, sehingga identitas target perlu izin membaca objek pada bucket tersebut.",
+    "optionExplanations": {
+      "A": "Token Creator memungkinkan engineer membuat kredensial berumur pendek untuk impersonation pada identitas target; binding pada service account membatasi cakupan impersonation.",
+      "B": "Operasi menggunakan token impersonation dievaluasi sebagai service account, sehingga identitas target perlu izin membaca objek pada bucket tersebut.",
+      "C": "Service Account User terutama menyediakan actAs untuk memasang identitas pada resource; role ini sendiri tidak memberikan izin membuat access token impersonation.",
+      "D": "Akses langsung engineer tidak memberikan izin baca kepada service account yang dipakai menjalankan perintah.",
+      "E": "Key Admin mengelola key dan bukan pengganti izin menghasilkan token berumur pendek untuk pola tanpa key ini."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/iam/docs/service-account-impersonation",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "4.2",
+    "topic": "impersonation-user-versus-runtime-permission",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-022",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "VM memakai service account yang sudah memiliki Storage Object Creator pada bucket tujuan. Aplikasi menggunakan token dari metadata server, tetapi upload ditolak dengan pesan insufficient authentication scopes. VM masih memiliki storage-ro scope. Apa yang perlu diperbaiki?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Berikan Storage Admin pada service account tanpa mengubah access scope VM"
+      },
+      {
+        "id": "B",
+        "text": "Tambahkan firewall egress allow TCP 443 tanpa mengubah access scope VM"
+      },
+      {
+        "id": "C",
+        "text": "Berikan Storage Object Creator kepada akun pengguna yang membuat VM"
+      },
+      {
+        "id": "D",
+        "text": "Ubah access scope VM menjadi cloud-platform sambil mempertahankan pembatasan akses melalui IAM"
+      }
+    ],
+    "correctAnswers": ["D"],
+    "explanation": "Permintaan token metadata VM dibatasi oleh access scope dan IAM. Scope baca-saja menghalangi upload meskipun IAM mengizinkan; cloud-platform memungkinkan IAM menjadi pembatas izin terperinci.",
+    "optionExplanations": {
+      "A": "Role IAM yang lebih luas tidak menghilangkan batas OAuth scope baca-saja pada token yang dipakai aplikasi.",
+      "B": "Pesan insufficient authentication scopes menunjukkan batas otorisasi token, bukan koneksi TCP yang ditolak firewall.",
+      "C": "Aplikasi memakai identitas service account dari metadata server, bukan izin langsung pengguna pembuat VM.",
+      "D": "Permintaan token metadata VM dibatasi oleh access scope dan IAM. Scope baca-saja menghalangi upload meskipun IAM mengizinkan; cloud-platform memungkinkan IAM menjadi pembatas izin terperinci."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/compute/docs/access/service-accounts",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "4.2",
+    "topic": "compute-write-denied-oauth-scope",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-023",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Vendor tanpa akun Google harus mengunduh satu file dari bucket privat selama 15 menit. Public access prevention aktif dan harus tetap aktif. Anda ingin menghindari perubahan IAM bucket untuk setiap vendor. Apa yang dilakukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Berikan URL gs:// biasa dan jadwalkan penghapusan objek 15 menit lagi"
+      },
+      {
+        "id": "B",
+        "text": "Buat service account key dan kirimkan key itu bersama nama bucket kepada vendor"
+      },
+      {
+        "id": "C",
+        "text": "Buat signed URL untuk metode GET pada objek tersebut dengan kedaluwarsa 15 menit"
+      },
+      {
+        "id": "D",
+        "text": "Berikan Storage Object Viewer kepada allUsers pada bucket selama 15 menit"
+      }
+    ],
+    "correctAnswers": ["C"],
+    "explanation": "Signed URL memberikan akses terbatas pada operasi, objek, dan waktu yang ditandatangani tanpa membuat objek publik. Siapa pun yang memegang URL dapat menggunakannya selama masih berlaku, sehingga URL harus dibagikan secara aman.",
+    "optionExplanations": {
+      "A": "Lokasi gs:// tidak memberikan otorisasi membaca objek privat. Menghapus file juga berbeda dari memberikan akses sementara.",
+      "B": "Key berumur panjang memberikan kredensial identitas, menambah risiko dan pengelolaan, serta tidak membatasi akses langsung menjadi satu GET selama 15 menit.",
+      "C": "Signed URL memberikan akses terbatas pada operasi, objek, dan waktu yang ditandatangani tanpa membuat objek publik. Siapa pun yang memegang URL dapat menggunakannya selama masih berlaku, sehingga URL harus dibagikan secara aman.",
+      "D": "Binding allUsers membuat akses publik dan diblokir oleh public access prevention; cakupannya juga melebihi satu file."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/storage/docs/access-control/signed-urls",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "4.1",
+    "topic": "signed-url-one-object-short-lived",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  },
+  {
+    "id": "ace-scenario-id-20261028-024",
+    "examType": "gcp-ace",
+    "lang": "id",
+    "domain": "Konfigurasi Akses dan Keamanan",
+    "type": "single",
+    "prompt": "Satu key service account diduga masih dipakai skrip lama. Tidak ada indikasi kebocoran. Tim ingin menguji penghentian penggunaan key secara dapat dibatalkan, tanpa menonaktifkan service account yang juga dipakai workload tanpa key. Apa yang dilakukan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Nonaktifkan seluruh service account sampai skrip lama ditemukan"
+      },
+      {
+        "id": "B",
+        "text": "Nonaktifkan key yang dimaksud dan pantau workload sebelum menghapusnya permanen"
+      },
+      {
+        "id": "C",
+        "text": "Hapus service account lalu buat ulang dengan nama yang sama jika ada gangguan"
+      },
+      {
+        "id": "D",
+        "text": "Hapus key sekarang lalu aktifkan kembali key yang sama jika skrip gagal"
+      }
+    ],
+    "correctAnswers": ["B"],
+    "explanation": "Key dapat dinonaktifkan dan diaktifkan kembali bila diperlukan selama evaluasi. Service account tetap dapat digunakan melalui mekanisme lain; token berumur pendek yang sudah diterbitkan dapat tetap berlaku sampai kedaluwarsa.",
+    "optionExplanations": {
+      "A": "Penonaktifan identitas memengaruhi workload tanpa key yang memakai service account tersebut, bertentangan dengan pembatasan dampak yang diminta.",
+      "B": "Key dapat dinonaktifkan dan diaktifkan kembali bila diperlukan selama evaluasi. Service account tetap dapat digunakan melalui mekanisme lain; token berumur pendek yang sudah diterbitkan dapat tetap berlaku sampai kedaluwarsa.",
+      "C": "Menghapus identitas memengaruhi semua pemakai service account dan bukan penghentian satu key yang mudah dibatalkan; nama yang sama juga tidak menjamin identitas IAM yang sama.",
+      "D": "Penghapusan key bersifat permanen; key yang dihapus tidak dapat diaktifkan kembali untuk uji yang diminta."
+    },
+    "sourceUrl": "https://docs.cloud.google.com/iam/docs/keys-disable-enable",
+    "verifiedAt": "2026-10-28",
+    "version": 1,
+    "difficulty": "intermediate",
+    "status": "approved",
+    "sourceRef": "original-practice-scenarios",
+    "objective": "4.2",
+    "topic": "service-account-key-reversible-disable",
+    "blueprintVersion": "2026-10-22",
+    "duplicateReviewed": true
+  }
+]
