@@ -530,5 +530,25 @@
   "curated-ccp-id-138": {
     "prompt": "Sebuah tim arsitek cloud meninjau metrik pemakaian sistem pada armada server Amazon EC2 mereka dan menemukan bahwa server yang digunakan saat ini hanya mengonsumsi 10% CPU dan RAM. Tim memutuskan untuk memilih tipe instance yang lebih kecil yang tepat sesuai kebutuhan beban kerja riil daripada mempertahankan instance terbesar. Praktik efisiensi arsitektur cloud manakah ini?",
     "explanation": "Right-sizing adalah proses memilih dan mencocokkan tipe dan ukuran instance komputasi secara tepat dengan persyaratan performa dan kapasitas beban kerja nyata untuk menghilangkan pemborosan biaya sumber daya yang tidak terpakai."
+  },
+  "curated-ccp-id-1": {
+    "prompt": "Sebuah aplikasi pendaftaran mahasiswa baru mengalami lonjakan lalu lintas yang masif selama masa pendaftaran dan kembali normal setelahnya. Tim secara otomatis menambah instance EC2 saat beban puncak dan menguranginya setelah periode sibuk berakhir agar tidak membayar kapasitas yang menganggur. Konsep cloud computing manakah yang paling tepat menggambarkan kemampuan adaptasi kapasitas dua arah ini?",
+    "explanation": "Elastisitas (Elasticity) adalah kemampuan sistem cloud untuk menambah atau mengurangi sumber daya komputasi secara dinamis mengikuti perubahan volume beban kerja nyata."
+  },
+  "curated-ccp-id-17": {
+    "prompt": "Sebuah tim IT menjalankan sistem operasi Linux pada armada Amazon EC2 dan mendeteksi adanya kerentanan keamanan pada paket sistem operasi tersebut. Berdasarkan AWS Shared Responsibility Model, di mana AWS mengelola fasilitas fisik dan infrastruktur virtualisasi, pihak manakah yang bertanggung jawab untuk memastikan patch keamanan guest OS tersebut diterapkan?",
+    "explanation": "Dalam AWS Shared Responsibility Model untuk Amazon EC2, pelanggan bertanggung jawab atas keamanan 'IN the cloud', termasuk konfigurasi, pembaruan, dan patching sistem operasi guest serta aplikasi."
+  },
+  "curated-ccp-id-37": {
+    "prompt": "Sebuah konfigurasi security group diubah secara mencurigakan selama insiden keamanan berlangsung. Tim investigasi forensik perlu mengetahui identitas pemanggil IAM, stempel waktu (timestamp) kejadian yang presisi, dan parameter operasi API yang dieksekusi. Sumber catatan AWS manakah yang paling tepat untuk menginvestigasi aktivitas tersebut?",
+    "explanation": "AWS CloudTrail mencatat seluruh panggilan API AWS, menyediakan riwayat peristiwa lengkap termasuk identitas penelepon, waktu, alamat IP sumber, dan parameter permintaan API."
+  },
+  "curated-ccp-id-59": {
+    "prompt": "Sebuah perusahaan perlu menjalankan beban kerja migrasi data komputasi intensif selama tepat dua hari sebagai proyek satu kali. Beban kerja ini kritis terhadap waktu, tidak dapat mentolerir interupsi mendadak, dan tidak membutuhkan kapasitas komputasi lagi setelah selesai. Opsi pembelian Amazon EC2 manakah yang paling hemat biaya tanpa komitmen jangka panjang?",
+    "explanation": "On-Demand Instances memungkinkan pembayaran kapasitas komputasi per detik atau per jam tanpa komitmen jangka panjang, serta menjamin beban kerja tidak diinterupsi seperti halnya Spot Instances."
+  },
+  "curated-ccp-id-83": {
+    "prompt": "Sebuah perusahaan riset membuat lingkungan pengujian komputasi berskala besar hanya untuk pengujian validasi selama satu hari dan langsung menghapusnya setelah pengujian selesai tanpa melalui proses pengadaan perangkat keras fisik. Keuntungan cloud computing manakah yang paling langsung digambarkan oleh skenario ini?",
+    "explanation": "Agilitas (Agility) memungkinkan organisasi menyediakan dan menghentikan sumber daya infrastruktur dalam hitungan menit untuk bereksperimen dengan cepat tanpa investasi perangkat keras di muka."
   }
 }

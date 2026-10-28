@@ -16,6 +16,9 @@ import certifications from "../src/data/certifications.json" with { type: "json"
 const ccpScenariosId = fs.existsSync("scripts/curated/ccp-scenarios-id.json")
   ? JSON.parse(fs.readFileSync("scripts/curated/ccp-scenarios-id.json", "utf8"))
   : {};
+const ccpScenariosEn = fs.existsSync("scripts/curated/ccp-scenarios-en.json")
+  ? JSON.parse(fs.readFileSync("scripts/curated/ccp-scenarios-en.json", "utf8"))
+  : {};
 async function legacy(path, name) {
   const source = fs.readFileSync(path, "utf8"),
     output = ts.transpileModule(source, {
@@ -129,8 +132,17 @@ rows.push(
     extra.map((row) => ({ type, domain, row })),
   ),
 );
-const banks = {};
-for (const type of ["ccp", "saa"])
+// A focused ACE rebuild preserves other banks, including unrelated editorial work.
+const onlyAce = process.argv.includes("--exam=gcp-ace");
+const banks = onlyAce
+  ? Object.fromEntries(
+      ["ccp-id", "ccp-en", "saa-id", "saa-en"].map((key) => [
+        key,
+        JSON.parse(fs.readFileSync(`src/data/banks/${key}.json`, "utf8")),
+      ]),
+    )
+  : {};
+for (const type of onlyAce ? [] : ["ccp", "saa"])
   for (const lang of ["id", "en"]) {
     const old = (type === "ccp" ? legacyCcp : legacySaa)
       .filter((q) => lang === "id" && q.lang === "id")
@@ -169,13 +181,13 @@ for (const type of ["ccp", "saa"])
         );
         const qid = `curated-${type}-${lang}-${index + 1}`;
         const scenario =
-          type === "ccp" && lang === "id" ? ccpScenariosId[qid] : null;
-        const prompt =
           type === "ccp"
             ? lang === "id"
-              ? promptId
-              : promptEn
-            : scenario?.prompt || (lang === "id" ? promptId : promptEn);
+              ? ccpScenariosId[qid]
+              : ccpScenariosEn[qid]
+            : null;
+        const prompt =
+          scenario?.prompt || (lang === "id" ? promptId : promptEn);
         const finalExplanation = scenario?.explanation || explanation;
         return {
           id: qid,

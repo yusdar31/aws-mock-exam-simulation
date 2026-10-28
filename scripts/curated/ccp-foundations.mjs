@@ -2,7 +2,7 @@
 const cases = [
   [
     20,
-    "Perusahaan ingin mencegah bucket S3 dibuka untuk umum karena kesalahan pengaturan. Kontrol S3 apa yang sesuai?",
+    "Sebuah perusahaan ingin memastikan bahwa seluruh bucket Amazon S3 di akun mereka terlindungi dari kebocoran data akibat kesalahan pengaturan izin yang tidak disengaja oleh staf. Kontrol keamanan Amazon S3 terpusat manakah yang harus diaktifkan untuk mencegah bucket dibuka ke publik?",
     [
       "S3 Block Public Access",
       "S3 Transfer Acceleration",
@@ -14,7 +14,7 @@ const cases = [
   ],
   [
     22,
-    "Perusahaan memerlukan sambungan terenkripsi antara kantor dan VPC melalui internet. Layanan AWS apa yang sesuai?",
+    "Sebuah perusahaan memerlukan sambungan jaringan pribadi yang terenkripsi aman antara kantor pusat on-premise mereka dan Amazon VPC di cloud melalui jalur koneksi internet publik. Layanan jaringan AWS manakah yang paling tepat untuk kebutuhan ini?",
     [
       "AWS Site-to-Site VPN",
       "Amazon CloudFront",
@@ -26,7 +26,7 @@ const cases = [
   ],
   [
     24,
-    "Aplikasi pada EC2 memerlukan izin untuk mengakses layanan AWS tanpa menyimpan access key permanen. Mekanisme apa yang sesuai?",
+    "Sebuah aplikasi yang berjalan pada armada instans Amazon EC2 memerlukan izin akses untuk membaca file data dari bucket Amazon S3 tanpa perlu menyimpan kredensial access key statis di dalam kode program. Mekanisme keamanan IAM manakah yang paling tepat digunakan?",
     [
       "IAM role",
       "Kata sandi pengguna root",
@@ -38,7 +38,7 @@ const cases = [
   ],
   [
     26,
-    "Apa fungsi utama security group pada Amazon EC2?",
+    "Sebuah perusahaan meluncurkan instans Amazon EC2 untuk menjalankan aplikasi web. Tim keamanan perlu memastikan bahwa instans tersebut hanya menerima lalu lintas masuk pada port web yang ditentukan dan membatasi akses lainnya. Apakah fungsi utama dari Security Group pada Amazon EC2?",
     [
       "Mengendalikan lalu lintas jaringan ke dan dari resource",
       "Menyimpan cadangan basis data",
@@ -50,7 +50,7 @@ const cases = [
   ],
   [
     27,
-    "Siapa yang bertanggung jawab mengonfigurasi akses jaringan aplikasi pelanggan pada EC2?",
+    "Dalam penerapan AWS Shared Responsibility Model pada instans komputasi Amazon EC2, tim keamanan perlu mengatur konfigurasi firewall dan kontrol port bagi aplikasi. Siapakah yang memegang tanggung jawab atas konfigurasi aturan akses jaringan aplikasi tersebut?",
     [
       "Pelanggan",
       "AWS untuk semua konfigurasi aplikasi",
@@ -62,7 +62,7 @@ const cases = [
   ],
   [
     28,
-    "Apa tujuan penggunaan HTTPS saat aplikasi mengirim data?",
+    "Sebuah aplikasi web perbankan mengirimkan informasi sensitif pengguna antara browser klien dan server backend melalui internet menggunakan protokol HTTPS. Apakah tujuan utama dari penerapan protokol HTTPS dalam pengiriman data aplikasi tersebut?",
     [
       "Melindungi data selama perjalanan",
       "Menghapus kebutuhan autentikasi",
@@ -74,7 +74,7 @@ const cases = [
   ],
   [
     34,
-    "Seorang karyawan hanya perlu membaca berkas pada satu bucket S3. Prinsip pemberian izin apa yang sebaiknya diterapkan?",
+    "Seorang karyawan di bagian pemasaran hanya bertugas meninjau laporan bulanan yang tersimpan di dalam satu bucket Amazon S3 tertentu tanpa perlu mengubah atau menghapus data. Prinsip pengelolaan izin IAM manakah yang paling tepat diterapkan untuk membatasi hak akses karyawan tersebut?",
     [
       "Memberikan hanya izin yang diperlukan",
       "Memberikan AdministratorAccess kepada semua karyawan",
@@ -86,7 +86,7 @@ const cases = [
   ],
   [
     38,
-    "Aplikasi dijalankan pada beberapa Availability Zone. Manfaat utama pendekatan ini adalah apa?",
+    "Sebuah perusahaan merancang arsitektur aplikasi web penting agar instans server komputasinya didistribusikan ke minimal dua Availability Zone yang berbeda dalam satu Region AWS. Apakah manfaat arsitektural utama dari pendekatan multi-AZ ini?",
     [
       "Meningkatkan ketersediaan saat satu AZ mengalami gangguan",
       "Menghilangkan seluruh biaya aplikasi",
@@ -98,394 +98,412 @@ const cases = [
   ],
   [
     40,
-    "Tim ingin memisahkan pengirim dan penerima pesan agar keduanya tidak harus berjalan bersamaan. Layanan antrean AWS apa yang sesuai?",
-    ["Amazon SQS", "Amazon Route 53", "Amazon EBS", "AWS Cost Explorer"],
-    "Amazon SQS menyimpan pesan dalam antrean sehingga komponen pengirim dan penerima dapat bekerja secara terpisah.",
+    "Sebuah toko online memiliki modul frontend pemesanan dan modul backend pemrosesan pembayaran. Tim arsitek ingin memisahkan kedua komponen tersebut menggunakan perantara antrean pesan terkelola agar beban kerja dapat diproses secara asinkron tanpa kehilangan data. Layanan antrean AWS apa yang sesuai?",
+    [
+      "Amazon SQS",
+      "Amazon RDS",
+      "Amazon EC2 Auto Scaling",
+      "AWS CloudTrail",
+    ],
+    "Amazon SQS menyediakan antrean pesan terkelola untuk memisahkan komponen sistem.",
     "AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html",
   ],
   [
     41,
-    "Apa manfaat utama kopling longgar antar komponen aplikasi?",
+    "Dalam perancangan sistem berbasis microservices di AWS, tim arsitek menerapkan pola kopling longgar (loose coupling) antar layanan dengan menggunakan antrean pesan. Manakah dari pernyataan berikut yang paling tepat menjelaskan manfaat utama dari prinsip kopling longgar ini?",
     [
       "Komponen dapat berkembang dan diskalakan secara lebih mandiri",
-      "Semua komponen wajib berada dalam satu proses",
-      "Setiap kegagalan harus menghentikan seluruh aplikasi",
-      "Pemantauan tidak lagi diperlukan",
+      "Menghapus seluruh kebutuhan pemantauan sistem",
+      "Menjamin biaya komputasi selalu nol rupiah",
+      "Mencegah seluruh pembaruan kode aplikasi di masa depan",
     ],
-    "Kopling longgar mengurangi ketergantungan langsung antar komponen dan mendukung perubahan serta penskalaan secara mandiri.",
-    "whitepapers/latest/aws-overview/amazon-simple-queue-service.html",
+    "Kopling longgar memungkinkan komponen berubah, gagal, atau diskalakan tanpa langsung merusak komponen lain.",
+    "whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html",
   ],
   [
     42,
-    "Perusahaan ingin mengirim satu notifikasi kepada banyak pelanggan layanan. Layanan publish/subscribe AWS apa yang sesuai?",
-    ["Amazon SNS", "Amazon EBS", "Amazon RDS", "AWS KMS"],
-    "Amazon SNS menggunakan topik dan langganan untuk mendistribusikan pesan kepada banyak penerima.",
+    "Sebuah aplikasi e-commerce ingin mengirimkan notifikasi pembaruan status pesanan secara serentak ke ribuan perangkat seluler pengguna dan beberapa sistem backend sekaligus menggunakan pola publish/subscribe. Layanan publish/subscribe AWS apa yang sesuai?",
+    [
+      "Amazon SNS",
+      "Amazon EBS",
+      "AWS Budgets",
+      "Amazon Route 53",
+    ],
+    "Amazon SNS adalah layanan pub/sub terkelola untuk mengirim pesan ke banyak penerima.",
     "sns/latest/dg/welcome.html",
   ],
   [
     43,
-    "Apa kegunaan utama Amazon SQS?",
+    "Sebuah arsitektur aplikasi pemrosesan pesanan menggunakan Amazon SQS untuk menghubungkan frontend penerima pesanan dengan armada worker backend. Apakah peran dan kegunaan utama dari layanan Amazon SQS dalam arsitektur terdistribusi tersebut?",
     [
       "Menyimpan pesan untuk diproses komponen aplikasi",
-      "Mendaftarkan nama domain internet",
-      "Membuat sertifikat TLS",
-      "Menganalisis tagihan AWS",
+      "Menggantikan fungsi firewall jaringan",
+      "Mengelola nama domain publik",
+      "Menjalankan komputasi tanpa kode program",
     ],
-    "Amazon SQS adalah layanan antrean pesan terkelola untuk komunikasi antar komponen aplikasi.",
+    "Amazon SQS menyimpan pesan dalam antrean hingga komponen pemroses mengambil dan menanganinya.",
     "AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html",
   ],
   [
     44,
-    "Perusahaan membutuhkan basis data relasional terkelola agar tugas pemeliharaan rutin berkurang. Layanan apa yang sesuai?",
-    ["Amazon RDS", "Amazon S3", "Amazon CloudFront", "Amazon SQS"],
-    "Amazon RDS mengelola tugas basis data relasional seperti pencadangan dan pemeliharaan sesuai pengaturan layanan.",
+    "Sebuah perusahaan bermigrasi ke AWS dan membutuhkan basis data relasional dengan mesin MySQL untuk aplikasi transaksinya. Perusahaan ingin agar tugas-tugas administratif rutin seperti provisi perangkat keras, pencadangan otomatis, dan penambalan perangkat lunak ditangani oleh AWS. Layanan apa yang sesuai?",
+    [
+      "Amazon RDS",
+      "Amazon S3",
+      "AWS IAM",
+      "AWS Shield",
+    ],
+    "Amazon RDS adalah layanan basis data relasional terkelola yang menangani pemeliharaan rutin seperti patching dan cadangan.",
     "AmazonRDS/latest/UserGuide/Welcome.html",
   ],
   [
     46,
-    "Layanan AWS apa yang menyediakan DNS untuk menerjemahkan nama domain menjadi alamat tujuan?",
-    ["Amazon Route 53", "Amazon Inspector", "AWS Backup", "Amazon EFS"],
-    "Amazon Route 53 menyediakan layanan DNS yang membantu mengarahkan pengguna berdasarkan nama domain.",
-    "Route53/latest/DeveloperGuide/Welcome.html",
+    "Sebuah perusahaan global mendaftarkan nama domain baru untuk portal web mereka dan membutuhkan layanan DNS berbasis cloud yang sangat andal dan skalabel untuk menerjemahkan nama domain tersebut menjadi alamat IP server. Layanan AWS apa yang menyediakan DNS untuk menerjemahkan nama domain menjadi alamat tujuan?",
+    [
+      "Amazon Route 53",
+      "AWS WAF",
+      "Amazon EFS",
+      "AWS Trusted Advisor",
+    ],
+    "Amazon Route 53 adalah layanan DNS terkelola yang memetakan nama domain ke alamat IP atau resource AWS.",
+    "Route53/latest/DeveloperGuide/welcome-dns-service.html",
   ],
   [
     47,
-    "Apa tujuan menyeimbangkan permintaan pengguna ke beberapa server?",
+    "Sebuah aplikasi web populer mengalami peningkatan jumlah pengguna secara drastis. Tim infrastruktur menempatkan Elastic Load Balancer di depan armada server aplikasi web. Apakah tujuan arsitektural utama dari menyeimbangkan permintaan pengguna ke beberapa server web tersebut?",
     [
       "Membagikan beban kerja antar target yang tersedia",
-      "Menjadikan semua data publik",
-      "Menggantikan enkripsi data",
-      "Menghapus seluruh kebutuhan server",
+      "Menghapus kebutuhan kata sandi pengguna",
+      "Menghindari pembuatan cadangan data",
+      "Menghentikan seluruh pencatatan log sistem",
     ],
-    "Elastic Load Balancing mendistribusikan lalu lintas ke beberapa target untuk membantu ketersediaan dan pemanfaatan kapasitas.",
+    "Penyeimbang beban membagikan lalu lintas ke beberapa server sehat agar beban tidak menumpuk pada satu server saja.",
     "elasticloadbalancing/latest/userguide/what-is-load-balancing.html",
   ],
   [
     49,
-    "Perusahaan membutuhkan basis data NoSQL key-value yang dikelola AWS. Layanan apa yang sesuai?",
-    ["Amazon DynamoDB", "Amazon RDS", "Amazon EFS", "Amazon Route 53"],
-    "Amazon DynamoDB adalah layanan basis data NoSQL terkelola yang mendukung model key-value dan dokumen.",
+    "Sebuah game seluler membutuhkan penyimpanan data profil dan skor pemain yang menawarkan latensi pembacaan data konsisten dalam hitungan milidetik tunggal pada skala jutaan pemain bersamaan dengan model NoSQL key-value yang dikelola penuh oleh AWS. Layanan apa yang sesuai?",
+    [
+      "Amazon DynamoDB",
+      "Amazon RDS",
+      "Amazon EFS",
+      "AWS Direct Connect",
+    ],
+    "Amazon DynamoDB adalah basis data NoSQL terkelola penuh yang dioptimalkan untuk penyimpanan key-value dan dokumen.",
     "amazondynamodb/latest/developerguide/Introduction.html",
   ],
   [
     51,
-    "Manfaat apa yang ditawarkan layanan basis data terkelola seperti Amazon RDS?",
+    "Sebuah tim pengembang memilih menggunakan basis data terkelola Amazon RDS daripada memasang dan memelihara mesin basis data sendiri di dalam server virtual EC2. Keuntungan operasional terpenting manakah yang langsung diperoleh tim dari penggunaan Amazon RDS?",
     [
       "Mengurangi pekerjaan administrasi basis data rutin",
-      "Menghapus tanggung jawab pelanggan atas data",
-      "Menjamin seluruh kueri selalu benar",
-      "Menjadikan seluruh akses tidak terbatas",
+      "Menghilangkan kebutuhan desain skema tabel",
+      "Menjamin data tidak pernah perlu dienkripsi",
+      "Membuat data otomatis terbuka untuk umum",
     ],
-    "Layanan terkelola mengurangi pekerjaan rutin, tetapi pelanggan tetap mengelola data, pengguna, dan izin yang sesuai.",
+    "Layanan terkelola seperti RDS mengotomatiskan provisi perangkat keras, patching, dan cadangan rutin.",
     "AmazonRDS/latest/UserGuide/Welcome.html",
   ],
   [
     52,
-    "Perusahaan ingin mengumpulkan dan memproses aliran data secara berkelanjutan. Layanan streaming AWS apa yang sesuai?",
+    "Sebuah armada kendaraan pintar mengirimkan rekaman data sensor telemetri secara berkelanjutan setiap detik. Sistem memerlukan layanan AWS yang mampu menyerap, menyimpan, dan menyediakan data streaming real-time ini untuk dianalisis oleh beberapa aplikasi konsumen. Layanan streaming AWS apa yang sesuai?",
     [
       "Amazon Kinesis Data Streams",
-      "Amazon EBS",
-      "AWS Certificate Manager",
+      "Amazon S3 Glacier",
       "AWS Budgets",
+      "AWS Artifact",
     ],
-    "Amazon Kinesis Data Streams menyediakan layanan untuk mengumpulkan dan memproses data streaming.",
+    "Amazon Kinesis Data Streams dirancang untuk menyerap dan memproses aliran data besar secara real-time.",
     "streams/latest/dev/introduction.html",
   ],
   [
     53,
-    "Apa fungsi utama Elastic Load Balancing?",
+    "Sebuah aplikasi portal berita melayani jutaan pembaca setiap hari. Tim pengembang mengonfigurasi layanan Elastic Load Balancing (ELB) di lapisan terdepan arsitektur mereka. Apakah fungsi utama dari layanan Elastic Load Balancing tersebut?",
     [
       "Mendistribusikan lalu lintas aplikasi ke beberapa target",
-      "Menyimpan arsip dokumen jangka panjang",
-      "Mengelola kunci enkripsi",
-      "Menghitung biaya pajak perusahaan",
+      "Menyimpan kode sumber aplikasi secara privat",
+      "Menghitung perkiraan tagihan bulanan",
+      "Menghapus akun yang tidak aktif",
     ],
-    "Elastic Load Balancing mendistribusikan lalu lintas masuk ke beberapa target, seperti instance EC2.",
+    "Elastic Load Balancing mendistribusikan lalu lintas masuk ke beberapa target seperti instance EC2 dan kontainer.",
     "elasticloadbalancing/latest/userguide/what-is-load-balancing.html",
   ],
   [
     54,
-    "Tim ingin menambah atau mengurangi jumlah instance EC2 mengikuti kebutuhan aplikasi. Layanan apa yang sesuai?",
-    ["Amazon EC2 Auto Scaling", "Amazon Route 53", "AWS Artifact", "AWS KMS"],
-    "Amazon EC2 Auto Scaling menyesuaikan jumlah instance menurut kebijakan dan kebutuhan kapasitas.",
+    "Sebuah platform streaming video mengalami lonjakan penonton yang tinggi pada malam hari dan penurunan drastis pada dini hari. Tim ingin agar kapasitas armada instans EC2 dapat bertambah dan berkurang secara otomatis mengikuti fluktuasi permintaan penonton. Layanan apa yang sesuai?",
+    [
+      "Amazon EC2 Auto Scaling",
+      "Amazon CloudFront",
+      "AWS Secrets Manager",
+      "AWS Shield",
+    ],
+    "Amazon EC2 Auto Scaling menambah atau mengurangi instance EC2 secara otomatis sesuai aturan atau metrik beban.",
     "autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html",
   ],
   [
     55,
-    "Perusahaan membutuhkan server virtual dengan kendali atas sistem operasi. Layanan komputasi apa yang sesuai?",
-    ["Amazon EC2", "Amazon S3", "Amazon SNS", "AWS Cost Explorer"],
-    "Amazon EC2 menyediakan kapasitas komputasi virtual dan memungkinkan pelanggan mengelola sistem operasi instance.",
+    "Sebuah perusahaan membutuhkan server virtual di cloud dengan kendali penuh atas konfigurasi sistem operasi, hak akses administrator (root), dan paket perangkat lunak khusus yang terpasang di dalamnya. Layanan komputasi apa yang sesuai?",
+    [
+      "Amazon EC2",
+      "Amazon S3",
+      "AWS Organizations",
+      "Amazon Route 53",
+    ],
+    "Amazon EC2 menyediakan kapasitas komputasi virtual dengan akses dan kendali penuh atas sistem operasi tamu.",
     "AWSEC2/latest/UserGuide/concepts.html",
   ],
   [
     57,
-    "Tim ingin menjalankan kode berdasarkan peristiwa tanpa mengelola server. Layanan AWS apa yang sesuai?",
+    "Sebuah aplikasi web perlu memproses file gambar setiap kali pengguna mengunggah foto baru. Pengembang ingin menjalankan kode fungsi pemrosesan gambar hanya ketika ada event unggahan tanpa perlu mengelola, memelihara, atau membayar server virtual yang menganggur. Layanan AWS apa yang sesuai?",
     [
       "AWS Lambda",
-      "Amazon EC2 Dedicated Hosts",
       "Amazon EBS",
-      "AWS Direct Connect",
+      "Amazon RDS",
+      "AWS Snowball",
     ],
-    "AWS Lambda menjalankan kode sebagai respons atas peristiwa tanpa pelanggan menyediakan atau mengelola server.",
+    "AWS Lambda menjalankan kode sebagai respons terhadap peristiwa tanpa mengharuskan pelanggan mengelola server.",
     "lambda/latest/dg/welcome.html",
   ],
   [
     58,
-    "Instance EC2 membutuhkan penyimpanan blok persisten. Layanan AWS apa yang sesuai?",
-    ["Amazon EBS", "Amazon Route 53", "Amazon SNS", "AWS CloudTrail"],
-    "Amazon EBS menyediakan penyimpanan blok persisten untuk digunakan dengan instance EC2.",
-    "ebs/latest/userguide/what-is-ebs.html",
+    "Sebuah instans Amazon EC2 menjalankan aplikasi transaksional yang membutuhkan volume penyimpanan disk persisten untuk sistem operasi dan file aplikasinya, di mana data pada disk tersebut tetap tersimpan aman saat instans dimatikan sementara. Layanan AWS apa yang sesuai?",
+    [
+      "Amazon EBS",
+      "Amazon CloudFront",
+      "AWS IAM",
+      "AWS Cost Explorer",
+    ],
+    "Amazon EBS menyediakan penyimpanan blok tingkat volume yang persisten dan terpasang pada instance EC2.",
+    "AWSEC2/latest/UserGuide/AmazonEBS.html",
   ],
   [
     65,
-    "Perusahaan mencari basis data yang dapat menyesuaikan kapasitas dengan kebutuhan tanpa pengelolaan server basis data. Layanan NoSQL apa yang sesuai?",
+    "Sebuah startup meluncurkan aplikasi e-commerce baru yang membutuhkan basis data NoSQL model dokumen dengan kemampuan penskalaan kapasitas otomatis mengikuti lonjakan transaksi pembeli tanpa perlu memprovisikan atau mengelola server basis data. Layanan NoSQL apa yang sesuai?",
     [
       "Amazon DynamoDB",
-      "Amazon EC2 dengan basis data yang dipasang sendiri",
-      "Amazon EFS",
-      "Amazon CloudFront",
+      "Amazon RDS for MySQL",
+      "Amazon Redshift",
+      "Amazon EC2",
     ],
-    "Amazon DynamoDB adalah basis data NoSQL terkelola dan serverless yang mendukung penskalaan sesuai kebutuhan.",
+    "Amazon DynamoDB adalah basis data NoSQL terkelola yang dapat diskalakan secara otomatis tanpa perlu mengelola server.",
     "amazondynamodb/latest/developerguide/Introduction.html",
   ],
   [
     66,
-    "Tim ingin mengelola pencadangan beberapa layanan AWS secara terpusat. Layanan apa yang sesuai?",
-    ["AWS Backup", "Amazon Route 53", "AWS Shield", "Amazon SNS"],
-    "AWS Backup membantu memusatkan dan mengotomatiskan perlindungan data melalui kebijakan pencadangan.",
+    "Sebuah tim operasional ingin menyederhanakan dan mengotomatiskan kebijakan jadwal pencadangan data serta retensi kepatuhan untuk beberapa layanan AWS yang berbeda (seperti volume EBS, basis data RDS, dan sistem file EFS) secara terpusat dari satu konsol. Layanan apa yang sesuai?",
+    [
+      "AWS Backup",
+      "Amazon CloudWatch",
+      "Amazon Route 53",
+      "AWS WAF",
+    ],
+    "AWS Backup menyediakan manajemen pencadangan terpusat berbasis kebijakan untuk berbagai layanan AWS.",
     "aws-backup/latest/devguide/whatisbackup.html",
   ],
   [
     104,
-    "Apa kegunaan utama Amazon VPC?",
+    "Sebuah perusahaan mulai memindahkan beban kerja mereka ke AWS dan perlu mendefinisikan topologi jaringan virtual pribadi di cloud dengan rentang alamat IP khusus, subnet publik dan privat, serta kontrol rute jaringan. Apakah kegunaan utama dari layanan Amazon VPC dalam skenario ini?",
     [
       "Menyediakan jaringan virtual yang terisolasi secara logis",
-      "Mengelola pembayaran kartu kredit pelanggan",
-      "Menyediakan direktori identitas pelanggan situs web",
-      "Membuat laporan audit keuangan perusahaan",
+      "Menggantikan sistem operasi server aplikasi",
+      "Menyimpan file arsip jangka panjang",
+      "Menghasilkan laporan keuangan bulanan",
     ],
-    "Amazon VPC memungkinkan pelanggan menjalankan resource AWS dalam jaringan virtual yang terisolasi secara logis.",
+    "Amazon VPC memungkinkan pelanggan menyediakan bagian terisolasi secara logis di AWS Cloud untuk menjalankan resource dalam jaringan virtual yang ditentukan sendiri.",
     "vpc/latest/userguide/what-is-amazon-vpc.html",
   ],
   [
     107,
-    "Mengapa perusahaan memakai beberapa Availability Zone untuk beban kerja penting?",
+    "Seorang arsitek cloud menyarankan agar sistem pembayaran perbankan disebarkan ke minimal dua Availability Zone yang berbeda di dalam satu Region AWS. Mengapa penyebaran lintas beberapa Availability Zone ini sangat direkomendasikan untuk beban kerja penting perusahaan?",
     [
       "Mengurangi dampak kegagalan satu lokasi",
-      "Menjamin tagihan selalu nol",
-      "Menghapus seluruh kebutuhan pencadangan",
-      "Membuat semua resource dapat diakses publik",
+      "Menghilangkan kebutuhan kata sandi admin",
+      "Menghapus seluruh biaya transfer data",
+      "Menghentikan kebutuhan pemantauan sistem",
     ],
-    "Penyebaran di beberapa AZ membantu aplikasi tetap tersedia ketika salah satu AZ mengalami gangguan.",
+    "Menyebarkan beban kerja ke beberapa AZ melindungi aplikasi dari pemadaman di satu pusat data atau satu AZ.",
     "whitepapers/latest/aws-overview/global-infrastructure.html",
   ],
   [
     108,
-    "Basis data perusahaan menggunakan tabel relasional dan SQL. Layanan basis data terkelola AWS apa yang sesuai?",
-    ["Amazon RDS", "Amazon SQS", "Amazon Route 53", "Amazon CloudFront"],
-    "Amazon RDS mendukung engine basis data relasional dan mengurangi pekerjaan pengelolaan infrastruktur basis data.",
+    "Sebuah organisasi bisnis memiliki aplikasi akuntansi yang bergantung pada skema tabel relasional dan kueri SQL standar. Organisasi ingin memindahkan basis data tersebut ke layanan terkelola AWS yang mengotomatiskan pencadangan dan pemeliharaan perangkat keras. Layanan basis data terkelola AWS apa yang sesuai?",
+    [
+      "Amazon RDS",
+      "Amazon S3",
+      "Amazon DynamoDB",
+      "AWS Lambda",
+    ],
+    "Amazon RDS adalah layanan basis data relasional terkelola yang mendukung berbagai mesin SQL seperti MySQL, PostgreSQL, dan MariaDB.",
     "AmazonRDS/latest/UserGuide/Welcome.html",
   ],
   [
     110,
-    "Layanan apa yang menyediakan antrean pesan terkelola untuk aplikasi?",
-    ["Amazon SQS", "Amazon SNS", "Amazon EFS", "Amazon RDS"],
-    "Amazon SQS menyimpan pesan agar dapat diambil dan diproses oleh komponen penerima. SNS menggunakan pola publish/subscribe.",
+    "Sebuah arsitektur aplikasi e-commerce membutuhkan komponen perantara terkelola yang dapat menampung antrean pesan transaksi secara andal saat komponen pemroses backend sedang sibuk atau offline. Layanan apa yang menyediakan antrean pesan terkelola untuk aplikasi?",
+    [
+      "Amazon SQS",
+      "Amazon SNS",
+      "AWS CloudTrail",
+      "Amazon CloudFront",
+    ],
+    "Amazon SQS menyediakan antrean pesan terkelola untuk menyimpan dan meneruskan pesan antar komponen aplikasi.",
     "AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html",
   ],
   [
     116,
-    "Apa karakteristik utama Amazon DynamoDB?",
+    "Sebuah aplikasi seluler dengan jutaan pengguna aktif memilih menggunakan Amazon DynamoDB untuk menyimpan preferensi pengguna dengan performa latensi satu digit milidetik. Karakteristik utama apakah yang mendefinisikan layanan Amazon DynamoDB tersebut?",
     [
       "Basis data NoSQL terkelola",
-      "Layanan DNS global",
-      "Penyimpanan berkas berbasis NFS",
-      "Layanan sertifikat digital",
+      "Penyimpanan file berbasis jaringan NFS",
+      "Server virtual dengan akses root",
+      "Layanan analitik data warehouse OLAP",
     ],
-    "Amazon DynamoDB menyediakan basis data NoSQL terkelola untuk data key-value dan dokumen.",
+    "Amazon DynamoDB adalah layanan basis data NoSQL terkelola penuh yang menyediakan performa cepat dan terprediksi.",
     "amazondynamodb/latest/developerguide/Introduction.html",
   ],
   [
     118,
-    "Perusahaan ingin menyebarkan permintaan web ke beberapa server aplikasi. Layanan AWS apa yang sesuai?",
-    ["Elastic Load Balancing", "AWS KMS", "AWS Budgets", "Amazon EBS"],
-    "Elastic Load Balancing membagikan lalu lintas aplikasi ke beberapa target yang tersedia.",
+    "Sebuah situs web e-commerce mengalami lonjakan pengunjung yang signifikan selama periode promosi. Tim infrastruktur ingin membagi beban lalu lintas HTTP/HTTPS masuk secara merata ke beberapa instans server web backend di berbagai Availability Zone. Layanan AWS apa yang sesuai?",
+    [
+      "Elastic Load Balancing",
+      "Amazon EBS",
+      "AWS IAM",
+      "AWS Trusted Advisor",
+    ],
+    "Elastic Load Balancing mendistribusikan lalu lintas masuk ke beberapa instans EC2 atau target lain di beberapa AZ.",
     "elasticloadbalancing/latest/userguide/what-is-load-balancing.html",
   ],
   [
     121,
-    "Perusahaan ingin menyimpan data sementara yang sering dibaca dalam memori untuk mempercepat aplikasi. Layanan cache terkelola apa yang sesuai?",
-    ["Amazon ElastiCache", "Amazon Route 53", "AWS Artifact", "Amazon SNS"],
-    "Amazon ElastiCache menyediakan penyimpanan dalam memori untuk caching dan kasus penggunaan terkait.",
+    "Sebuah aplikasi web sering melakukan kueri berulang untuk data produk yang jarang berubah ke basis data relasional. Untuk mempercepat waktu respons aplikasi menjadi mikrodetik dan meringankan beban kerja basis data, layanan cache terkelola apa yang sesuai?",
+    [
+      "Amazon ElastiCache",
+      "Amazon EFS",
+      "AWS Artifact",
+      "AWS Budgets",
+    ],
+    "Amazon ElastiCache menyediakan cache in-memory terkelola untuk mempercepat akses data yang sering dibaca.",
     "AmazonElastiCache/latest/dg/WhatIs.html",
   ],
   [
     124,
-    "Tim ingin menganalisis data dalam jumlah besar untuk laporan bisnis. Layanan data warehouse AWS apa yang sesuai?",
-    ["Amazon Redshift", "Amazon Route 53", "AWS Secrets Manager", "Amazon SNS"],
-    "Amazon Redshift adalah layanan data warehouse untuk analitik dan pelaporan bisnis.",
+    "Sebuah perusahaan ritel mengumpulkan data transaksi penjualan historis berskala petabyte dari ratusan cabang dan ingin menjalankan kueri analitik Business Intelligence (BI) yang kompleks untuk laporan manajemen. Layanan data warehouse AWS apa yang sesuai?",
+    [
+      "Amazon Redshift",
+      "Amazon RDS",
+      "Amazon DynamoDB",
+      "AWS Lambda",
+    ],
+    "Amazon Redshift adalah layanan data warehouse cloud terkelola berskala petabyte yang dioptimalkan untuk analitik OLAP.",
     "redshift/latest/mgmt/welcome.html",
   ],
   [
     127,
-    "Apa yang dimaksud layanan terkelola AWS?",
+    "Seorang manajer TI sedang mengevaluasi perbedaan antara mengelola infrastruktur server sendiri dan mengadopsi layanan terkelola (managed services) dari AWS seperti Amazon RDS atau Amazon DynamoDB. Apakah yang dimaksud dengan layanan terkelola AWS?",
     [
       "AWS menangani sebagian tugas infrastruktur dan pemeliharaan layanan",
-      "Pelanggan tidak lagi memiliki tanggung jawab keamanan",
-      "Semua layanan selalu gratis",
-      "Pelanggan wajib mengelola perangkat keras fisik AWS",
+      "Pelanggan tidak memiliki kendali atas data yang disimpan",
+      "Seluruh layanan AWS otomatis gratis tanpa biaya penggunaan",
+      "Aplikasi tidak dapat dihubungkan ke jaringan internet publik",
     ],
-    "Layanan terkelola mengurangi pekerjaan operasional pelanggan. Tanggung jawab keamanan tetap dibagi sesuai layanan yang digunakan.",
-    "whitepapers/latest/aws-overview/security-and-compliance.html",
+    "Pada layanan terkelola, AWS menangani tugas rutin seperti penyediaan infrastruktur, pemeliharaan, pencadangan, dan patching.",
+    "whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html",
   ],
   [
     129,
-    "Perusahaan ingin menyajikan konten statis lebih dekat dengan pengguna global. Layanan AWS apa yang sesuai?",
-    ["Amazon CloudFront", "Amazon EBS", "AWS Backup", "AWS Secrets Manager"],
-    "Amazon CloudFront adalah CDN yang menggunakan jaringan edge location untuk mendekatkan konten kepada pengguna.",
+    "Sebuah portal media global ingin mempercepat waktu muat konten statis seperti gambar, video klip, dan file stylesheet bagi pengguna akhir yang tersebar di berbagai belahan dunia. Layanan AWS apa yang sesuai?",
+    [
+      "Amazon CloudFront",
+      "Amazon EC2",
+      "Amazon EBS",
+      "AWS Secrets Manager",
+    ],
+    "Amazon CloudFront adalah layanan CDN yang menyajikan konten dari lokasi edge terdekat dengan pengguna.",
     "AmazonCloudFront/latest/DeveloperGuide/Introduction.html",
   ],
 ];
+
 const alternatives = {
-  "S3 Transfer Acceleration":
-    "Mempercepat transfer data menuju atau dari S3; tidak mengendalikan akses publik bucket.",
-  "S3 Versioning":
-    "Menyimpan beberapa versi objek; bukan kontrol pencegah akses publik.",
-  "S3 website hosting":
-    "Menyajikan situs web statis; tidak mencegah bucket dibuka untuk umum.",
-  "Amazon CloudFront":
-    "Merupakan CDN untuk pengiriman konten, bukan VPN, basis data, atau layanan antrean.",
-  "Amazon Route 53":
-    "Menyediakan DNS dan pengelolaan domain, bukan penyimpanan, komputasi, atau sambungan VPN.",
-  "AWS Budgets":
-    "Memantau anggaran dan mengirim peringatan biaya; bukan layanan jaringan atau komputasi.",
-  "Kata sandi pengguna root":
-    "Kata sandi root bukan mekanisme izin aplikasi. Berbagi kredensial root juga meningkatkan risiko keamanan.",
-  "Alamat IP publik":
-    "Alamat jaringan tidak memberikan izin IAM untuk mengakses layanan AWS.",
-  "Tag alokasi biaya":
-    "Tag membantu mengelompokkan biaya, bukan memberikan kredensial kepada aplikasi.",
-  "Menyimpan cadangan basis data":
-    "Pencadangan melindungi salinan data; security group mengendalikan lalu lintas jaringan.",
-  "Mengelola tagihan bulanan":
-    "Penagihan termasuk pengelolaan biaya, bukan fungsi security group.",
-  "Mempercepat pengiriman video global":
-    "Pengiriman konten global merupakan fungsi CDN seperti CloudFront, bukan security group.",
-  "AWS untuk semua konfigurasi aplikasi":
-    "AWS melindungi infrastrukturnya; konfigurasi aplikasi dan akses pelanggan tetap menjadi tanggung jawab pelanggan.",
-  "Penyedia listrik pusat data":
-    "Kelistrikan mendukung fasilitas fisik dan tidak menentukan izin jaringan aplikasi pelanggan.",
-  "Pengunjung situs web":
-    "Pengunjung memakai aplikasi, bukan mengelola konfigurasi keamanan resource milik perusahaan.",
-  "Menghapus kebutuhan autentikasi":
-    "Enkripsi koneksi tidak membuktikan bahwa pengguna memiliki izin mengakses aplikasi.",
-  "Membuat data otomatis terbuka untuk umum":
-    "HTTPS melindungi koneksi; tidak mengubah izin data menjadi publik.",
-  "Menggantikan pencadangan data":
-    "Enkripsi tidak menyediakan salinan pemulihan jika data hilang atau rusak.",
-  "Memberikan AdministratorAccess kepada semua karyawan":
-    "Izin administrator memberi akses jauh lebih luas daripada kebutuhan membaca satu bucket.",
-  "Berbagi akun root":
-    "Akun root berhak sangat luas dan tidak sesuai untuk akses baca terbatas atau penggunaan bersama.",
-  "Menghapus seluruh pembatasan akses":
-    "Menghapus pembatasan justru melanggar prinsip hak akses minimum.",
-  "Menghilangkan seluruh biaya aplikasi":
-    "Penggunaan beberapa AZ tidak menghapus biaya resource dan dapat menambah komponen berbayar.",
-  "Menghapus kebutuhan keamanan data":
-    "Ketersediaan lintas AZ tidak menggantikan pengamanan akses dan perlindungan data.",
-  "Menjamin tidak ada kesalahan program":
-    "Pemisahan lokasi tidak mencegah bug pada kode aplikasi.",
-  "Amazon EBS":
-    "Menyediakan penyimpanan blok untuk EC2, bukan basis data terkelola, DNS, atau antrean pesan.",
-  "AWS Cost Explorer":
-    "Menganalisis penggunaan dan biaya AWS; tidak menyediakan komputasi atau antrean pesan.",
-  "Semua komponen wajib berada dalam satu proses":
-    "Satu proses menambah ketergantungan langsung, berlawanan dengan kopling longgar.",
-  "Setiap kegagalan harus menghentikan seluruh aplikasi":
-    "Kopling longgar justru bertujuan membatasi dampak kegagalan antar komponen.",
-  "Pemantauan tidak lagi diperlukan":
-    "Komponen tetap perlu dipantau meskipun komunikasinya dipisahkan.",
-  "Amazon RDS":
-    "Merupakan basis data relasional terkelola, bukan layanan publish/subscribe atau antrean pesan.",
-  "AWS KMS":
-    "Mengelola kunci kriptografi; bukan layanan notifikasi atau distribusi lalu lintas.",
-  "Mendaftarkan nama domain internet":
-    "Pendaftaran domain disediakan melalui layanan seperti Route 53, bukan SQS.",
-  "Membuat sertifikat TLS":
-    "Pengelolaan sertifikat merupakan fungsi AWS Certificate Manager, bukan antrean SQS.",
-  "Menganalisis tagihan AWS":
-    "Analisis biaya tersedia melalui alat seperti Cost Explorer, bukan SQS.",
-  "Amazon S3":
-    "Merupakan penyimpanan objek; bukan engine basis data relasional terkelola.",
-  "Amazon SQS":
-    "Merupakan antrean pesan untuk memisahkan komponen aplikasi, bukan basis data relasional atau DNS.",
-  "Amazon Inspector":
-    "Menilai kerentanan pada workload yang didukung, bukan menyediakan DNS.",
-  "AWS Backup":
-    "Mengelola pencadangan data, bukan DNS, CDN, atau penskalaan aplikasi.",
-  "Amazon EFS":
-    "Menyediakan sistem berkas bersama, bukan basis data NoSQL, DNS, atau komputasi.",
-  "Menjadikan semua data publik":
-    "Penyeimbangan beban tidak mengubah izin akses data menjadi publik.",
-  "Menggantikan enkripsi data":
-    "Penyeimbangan beban tidak menggantikan kebutuhan melindungi data melalui enkripsi.",
-  "Menghapus seluruh kebutuhan server":
-    "Load balancer memerlukan target pemroses permintaan; tidak menghilangkan seluruh resource aplikasi.",
-  "Menghapus tanggung jawab pelanggan atas data":
-    "Pelanggan tetap mengatur data dan aksesnya dalam model tanggung jawab bersama.",
-  "Menjamin seluruh kueri selalu benar":
-    "Layanan terkelola tidak dapat menjamin logika kueri yang ditulis pelanggan.",
-  "Menjadikan seluruh akses tidak terbatas":
-    "Akses tetap dibatasi melalui autentikasi dan izin yang sesuai.",
-  "AWS Certificate Manager":
-    "Mengelola sertifikat TLS, bukan mengumpulkan data streaming.",
-  "Menyimpan arsip dokumen jangka panjang":
-    "Pengarsipan memerlukan layanan penyimpanan seperti S3, bukan load balancer.",
-  "Mengelola kunci enkripsi":
-    "Ini merupakan fungsi KMS, bukan Elastic Load Balancing.",
-  "Menghitung biaya pajak perusahaan":
-    "Load balancer mengarahkan lalu lintas aplikasi; tidak menghitung kewajiban pajak perusahaan.",
-  "AWS Artifact":
-    "Menyediakan akses ke dokumen kepatuhan AWS, bukan cache atau penskalaan komputasi.",
-  "Amazon SNS":
-    "Mengirim pesan melalui pola publish/subscribe; tidak menggantikan penyimpanan antrean SQS atau basis data.",
-  "Amazon EC2 Dedicated Hosts":
-    "Menyediakan server fisik khusus untuk instance EC2; pelanggan tetap mengelola instance dan sistem operasinya.",
-  "AWS Direct Connect":
-    "Menyediakan koneksi jaringan khusus antara lokasi pelanggan dan AWS, bukan eksekusi kode.",
-  "AWS CloudTrail":
-    "Mencatat aktivitas API untuk audit; tidak menyediakan disk bagi instance EC2.",
-  "Amazon EC2 dengan basis data yang dipasang sendiri":
-    "Pelanggan masih harus mengelola server dan basis datanya sendiri, sehingga tidak memenuhi kebutuhan layanan NoSQL tanpa pengelolaan server.",
-  "AWS Shield":
-    "Membantu melindungi dari serangan DDoS; tidak mengelola pencadangan data.",
-  "Mengelola pembayaran kartu kredit pelanggan":
-    "VPC menyediakan jaringan virtual; pemrosesan pembayaran bukan fungsi utamanya.",
-  "Menyediakan direktori identitas pelanggan situs web":
-    "Identitas pengguna aplikasi disediakan layanan seperti Cognito, bukan VPC.",
-  "Membuat laporan audit keuangan perusahaan":
-    "VPC menyediakan isolasi jaringan, bukan laporan audit keuangan.",
-  "Menjamin tagihan selalu nol":
-    "Penggunaan beberapa AZ tidak membuat resource AWS menjadi gratis.",
-  "Menghapus seluruh kebutuhan pencadangan":
-    "Ketersediaan lintas AZ tidak menggantikan cadangan untuk pemulihan setelah penghapusan atau kerusakan data.",
-  "Membuat semua resource dapat diakses publik":
-    "Pemisahan AZ tidak mengharuskan resource diberi akses publik.",
-  "Layanan DNS global":
-    "DNS disediakan oleh layanan seperti Route 53, bukan DynamoDB.",
-  "Penyimpanan berkas berbasis NFS":
-    "Penyimpanan berkas bersama berbasis NFS disediakan layanan seperti EFS, bukan DynamoDB.",
-  "Layanan sertifikat digital":
-    "Sertifikat digital dikelola melalui layanan seperti Certificate Manager, bukan DynamoDB.",
-  "AWS Secrets Manager":
-    "Mengelola rahasia seperti kata sandi dan kredensial; bukan data warehouse atau CDN.",
-  "Pelanggan tidak lagi memiliki tanggung jawab keamanan":
-    "Tanggung jawab pelanggan tetap ada; cakupannya bergantung pada layanan yang digunakan.",
-  "Semua layanan selalu gratis":
-    "Layanan terkelola tetap memiliki model harga dan dapat menimbulkan biaya.",
-  "Pelanggan wajib mengelola perangkat keras fisik AWS":
-    "Perangkat keras fasilitas AWS dikelola AWS dalam model tanggung jawab bersama.",
+  "S3 Transfer Acceleration": "Digunakan untuk mempercepat pengunggahan berkas ke S3 melintasi jarak jauh, bukan untuk pembatasan akses publik.",
+  "S3 Versioning": "Menyimpan beberapa versi objek untuk mencegah penghapusan tidak disengaja, bukan mengatur akses publik.",
+  "S3 website hosting": "Mengonfigurasi bucket sebagai situs web statis yang biasanya justru memerlukan akses publik.",
+  "Amazon CloudFront": "Layanan distribusi konten global, bukan sambungan VPN terenkripsi antara kantor dan VPC.",
+  "Amazon Route 53": "Layanan DNS terkelola untuk menerjemahkan nama domain, bukan untuk sambungan terenkripsi.",
+  "AWS Budgets": "Mengelola ambang batas dan notifikasi biaya, bukan sambungan jaringan.",
+  "Kata sandi pengguna root": "Kredensial root memiliki hak penuh dan tidak boleh digunakan oleh aplikasi untuk akses terprogram.",
+  "Alamat IP publik": "Alamat IP publik tidak memberikan otorisasi untuk mengakses API layanan AWS.",
+  "Tag alokasi biaya": "Digunakan untuk pelacakan biaya berdasarkan kategori bisnis, bukan untuk izin akses.",
+  "Menyimpan cadangan basis data": "Fungsi pencadangan basis data ditangani oleh layanan penyimpanan atau snapshot, bukan firewall jaringan.",
+  "Mengelola tagihan bulanan": "Pelacakan dan analisis biaya dilakukan melalui alat penagihan, bukan security group.",
+  "Mempercepat pengiriman video global": "Pengiriman konten dipercepat menggunakan jaringan tepi CDN seperti CloudFront.",
+  "AWS untuk semua konfigurasi aplikasi": "AWS mengelola infrastruktur fisik dan hypervisor, bukan aturan akses aplikasi pelanggan pada EC2.",
+  "Penyedia listrik pusat data": "Penyedia fasilitas fisik tidak memiliki akses ke konfigurasi perangkat lunak atau jaringan pelanggan.",
+  "Pengunjung situs web": "Pengguna akhir hanya mengirim permintaan dan tidak mengonfigurasi aturan keamanan jaringan.",
+  "Menghapus kebutuhan autentikasi": "Enkripsi dalam perjalanan tidak menggantikan verifikasi identitas pengguna.",
+  "Membuat data otomatis terbuka untuk umum": "HTTPS mengamankan komunikasi data, bukan membuka akses ke publik.",
+  "Menggantikan pencadangan data": "Protokol transmisi data tidak berfungsi sebagai salinan cadangan penyimpanan.",
+  "Memberikan AdministratorAccess kepada semua karyawan": "Memberikan hak administrator melanggar prinsip hak akses minimum dan meningkatkan risiko keamanan.",
+  "Berbagi akun root": "Akun root tidak boleh digunakan untuk tugas harian dan kredensialnya tidak boleh dibagikan.",
+  "Menghapus seluruh pembatasan akses": "Membuka seluruh akses menghilangkan kendali keamanan dan perlindungan data.",
+  "Menghilangkan seluruh biaya aplikasi": "Penyebaran multi-AZ meningkatkan ketahanan tetapi tidak menghapus biaya komputasi.",
+  "Menghapus kebutuhan keamanan data": "Ketahanan lokasi tidak menggantikan enkripsi dan kontrol akses data.",
+  "Menjamin tidak ada kesalahan program": "Arsitektur multi-AZ melindungi dari kegagalan infrastruktur, bukan bug perangkat lunak.",
+  "Amazon RDS": "Layanan basis data relasional terkelola, bukan antrean pesan asinkron.",
+  "Amazon EC2 Auto Scaling": "Menyesuaikan jumlah instance komputasi secara otomatis, bukan layanan antrean pesan.",
+  "AWS CloudTrail": "Mencatat aktivitas panggilan API untuk audit, bukan antrean pesan aplikasi.",
+  "Menghapus seluruh kebutuhan pemantauan sistem": "Sistem tetap memerlukan metrik dan pemantauan kinerja meskipun menggunakan kopling longgar.",
+  "Menjamin biaya komputasi selalu nol rupiah": "Layanan cloud tetap dikenakan biaya berdasarkan penggunaan sumber daya.",
+  "Mencegah seluruh pembaruan kode aplikasi di masa depan": "Kopling longgar justru mempermudah pembaruan komponen secara mandiri.",
+  "Amazon EBS": "Layanan penyimpanan blok untuk instance EC2, bukan layanan publish/subscribe pesan.",
+  "AWS Budgets": "Mengelola anggaran biaya dan notifikasi tagihan, bukan pengiriman pesan.",
+  "Amazon Route 53": "Layanan DNS dan routing lalu lintas, bukan layanan publish/subscribe.",
+  "Menggantikan fungsi firewall jaringan": "Antrean pesan tidak mengatur izin lalu lintas jaringan pada instance atau subnet.",
+  "Mengelola nama domain publik": "Pengelolaan domain dan pencatatan DNS ditangani oleh Amazon Route 53.",
+  "Menjalankan komputasi tanpa kode program": "Aplikasi tetap memerlukan logika kode pemroses untuk menangani pesan antrean.",
+  "Amazon S3": "Layanan penyimpanan objek untuk berkas dan data statis, bukan basis data relasional.",
+  "AWS IAM": "Mengelola identitas dan kebijakan izin akses, bukan basis data aplikasi.",
+  "AWS Shield": "Layanan perlindungan terhadap serangan DDoS, bukan penyedia basis data relasional.",
+  "AWS WAF": "Web Application Firewall untuk memfilter lalu lintas web, bukan penerjemah nama domain DNS.",
+  "Amazon EFS": "Sistem file bersama yang dapat di-mount oleh beberapa instance, bukan layanan DNS.",
+  "AWS Trusted Advisor": "Memberikan rekomendasi optimasi biaya dan keamanan, bukan layanan routing DNS.",
+  "Menghapus kebutuhan kata sandi pengguna": "Distribusi beban kerja tidak menggantikan mekanisme autentikasi aplikasi.",
+  "Menghindari pembuatan cadangan data": "Penyeimbang beban tidak menyediakan penyimpanan data atau salinan cadangan.",
+  "Menghentikan seluruh pencatatan log sistem": "Sistem penyeimbang beban tetap memerlukan log akses untuk analisis operasional.",
+  "Amazon EFS": "Penyimpanan file terkelola berbasis NFS, bukan basis data NoSQL key-value.",
+  "AWS Direct Connect": "Koneksi jaringan fisik berkecepatan tinggi antara on-premises dan AWS, bukan basis data.",
+  "Menghilangkan kebutuhan desain skema tabel": "Struktur data dan relasi tabel tetap dirancang oleh tim aplikasi.",
+  "Menjamin data tidak pernah perlu dienkripsi": "Enkripsi data tetap menjadi tanggung jawab pelanggan sesuai kebutuhan regulasi.",
+  "Membuat data otomatis terbuka untuk umum": "Basis data RDS secara default berada dalam jaringan pribadi dan tidak dibuka untuk publik.",
+  "Amazon S3 Glacier": "Layanan penyimpanan arsip berbiaya rendah untuk data yang jarang diakses, bukan streaming data.",
+  "AWS Artifact": "Portal kepatuhan untuk mengunduh laporan audit dan perjanjian keamanan AWS, bukan streaming data.",
+  "Menyimpan kode sumber aplikasi secara privat": "Penyimpanan repositori kode ditangani oleh layanan version control, bukan load balancer.",
+  "Menghitung perkiraan tagihan bulanan": "Perhitungan estimasi biaya dilakukan menggunakan AWS Pricing Calculator atau Cost Explorer.",
+  "Menghapus akun yang tidak aktif": "Tata kelola pengguna ditangani melalui layanan identitas seperti IAM atau Organizations.",
+  "AWS Secrets Manager": "Menyimpan dan mengelola rotasi kredensial kata sandi, bukan penskalaan armada server.",
+  "AWS Organizations": "Mengelola banyak akun AWS secara terpusat, bukan menyediakan kapasitas komputasi virtual.",
+  "Amazon S3": "Layanan penyimpanan objek untuk berkas, bukan server virtual dengan sistem operasi.",
+  "AWS Snowball": "Perangkat fisik untuk migrasi data skala terabyte ke AWS, bukan komputasi serverless.",
+  "AWS Cost Explorer": "Alat visualisasi dan analisis pengeluaran biaya cloud, bukan media penyimpanan blok.",
+  "Amazon RDS for MySQL": "Basis data relasional yang memerlukan pengelolaan kapasitas instans dan skema tabel terstruktur.",
+  "Amazon Redshift": "Layanan data warehouse analitik OLAP, bukan basis data NoSQL transaksional.",
+  "Amazon EC2": "Penyediaan server virtual yang memerlukan konfigurasi dan pengelolaan sistem operasi mandiri.",
+  "Amazon CloudWatch": "Layanan pemantauan metrik dan log sistem, bukan penjadwal backup terpusat.",
+  "Menggantikan sistem operasi server aplikasi": "VPC menyediakan jaringan virtual, bukan sistem operasi untuk menjalankan aplikasi.",
+  "Menyimpan file arsip jangka panjang": "Penyimpanan arsip berkas dikelola melalui layanan seperti Amazon S3 Glacier.",
+  "Menghasilkan laporan keuangan bulanan": "Laporan pengeluaran dianalisis melalui konsol penagihan dan Cost Explorer.",
+  "Menghilangkan kebutuhan kata sandi admin": "Ketersediaan multi-AZ tidak menggantikan kontrol autentikasi dan otorisasi.",
+  "Menghapus seluruh biaya transfer data": "Transfer data antar-AZ tetap tunduk pada ketentuan biaya jaringan AWS.",
+  "Menghentikan kebutuhan pemantauan sistem": "Workload multi-AZ tetap memerlukan pemantauan kesehatan dan metrik secara berkala.",
+  "Penyimpanan file berbasis jaringan NFS": "Karakteristik sistem file NFS dimiliki oleh Amazon EFS, bukan DynamoDB.",
+  "Server virtual dengan akses root": "Karakteristik server virtual dengan kendali sistem operasi adalah Amazon EC2.",
+  "Layanan analitik data warehouse OLAP": "Karakteristik data warehouse analitik terstruktur adalah Amazon Redshift.",
+  "Pelanggan tidak memiliki kendali atas data yang disimpan": "Pelanggan tetap memiliki kepemilikan penuh dan kontrol atas data pada layanan terkelola.",
+  "Seluruh layanan AWS otomatis gratis tanpa biaya penggunaan": "Layanan terkelola tetap dikenakan biaya sesuai kapasitas atau pemakaian.",
+  "Aplikasi tidak dapat dihubungkan ke jaringan internet publik": "Layanan terkelola dapat dikonfigurasi untuk melayani lalu lintas internet publik maupun privat.",
+  "Amazon DynamoDB": "Basis data NoSQL terkelola untuk model data dokumen dan key-value, bukan basis data relasional atau data warehouse.",
+  "AWS Lambda": "Layanan komputasi serverless berbasis event, bukan layanan basis data terkelola.",
+  "Amazon SNS": "Layanan publish/subscribe untuk pengiriman pesan fanout, bukan antrean pesan terkelola.",
 };
+
 export function reviewCcpFoundation(q) {
   const row = cases.find(([number]) => q.id === `curated-ccp-id-${number}`);
   if (!row) return q;
