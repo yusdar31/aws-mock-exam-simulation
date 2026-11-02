@@ -1067,20 +1067,22 @@ html[data-theme="dark"] .live-page {
   margin-block: 20px;
 }
 .quiz-lobby-list { display: flex; flex-wrap: wrap; gap: 12px 24px; padding: 0; list-style: none; }
-.quiz-choices { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+.quiz-choices { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; }
 .quiz-choice {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 12px;
   margin: 0;
   padding: 20px;
-  min-height: 90px;
-  border: 2px solid var(--border);
+  min-height: 76px;
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
   line-height: 1.65;
   font-weight: 400;
+  font-size: 16px;
   overflow-wrap: anywhere;
 }
 .quiz-choice > span[lang] { flex: 1 1 160px; }
@@ -1088,7 +1090,11 @@ html[data-theme="dark"] .live-page {
 .quiz-choice:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 3px; }
 .quiz-choice.quiz-selected { background: var(--selected-bg); border-color: var(--selected-border); }
 .quiz-choice.quiz-correct { background: var(--review-correct-bg); border-color: var(--review-correct-ink); color: var(--review-correct-ink); }
-.quiz-letter { display: inline-grid; place-content: center; min-width: 32px; min-height: 32px; border: 1px solid currentColor; border-radius: 4px; }
+.quiz-letter { flex: 0 0 auto; }
+.quiz-question fieldset { min-width: 0; }
+.quiz-question .classroom-review-options { margin-block: 0; }
+.quiz-question .classroom-review-option { padding: 20px; min-height: 76px; }
+.quiz-choice.quiz-correct { border-left-width: 4px; }
 .quiz-option-status { flex: 1 0 100%; font-size: 14px; }
 .quiz-answer-action { margin-top: 24px; }
 .quiz-answer-action > button { min-height: 48px; }
@@ -1101,7 +1107,7 @@ html[data-theme="dark"] .live-page {
 .quiz-self { background: var(--selected-bg); }
 .quiz-presentation { position: fixed; inset: 0; z-index: 80; overflow-y: auto; padding: clamp(16px,3vw,48px); background: var(--canvas); }
 .quiz-presentation .quiz-question h2 { font-size: clamp(1.3rem,2.2vw,2rem); }
-.quiz-presentation .quiz-choice { font-size: clamp(1rem,1.6vw,1.4rem); }
+.quiz-presentation :is(.quiz-choice, .classroom-review-option) { font-size: clamp(1rem,1.6vw,1.4rem); }
 @media (max-width: 700px) {
   .quiz-choices { grid-template-columns: minmax(0,1fr); }
   .quiz-choice { padding: 16px; min-height: 76px; }

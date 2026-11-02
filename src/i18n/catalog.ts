@@ -7,6 +7,9 @@ export const messages: Record<string, string> = {
   "Mode sesi": "Session mode",
   "Kuis terpandu — satu soal bersama": "Guided quiz — one question together",
   "Kuis terpandu": "Guided quiz",
+  "Suara: aktif": "Sound: on",
+  "Suara: nonaktif": "Sound: off",
+  "Waktu habis": "Time is up",
   "Mode kuis terpandu belum aktif.": "Guided quiz mode is not active yet.",
   "Host mengatur soal, penutupan jawaban, dan pembahasan. Satu jawaban benar mendapat satu poin.":
     "The host controls questions, answer collection, and review. Each correct answer earns one point.",

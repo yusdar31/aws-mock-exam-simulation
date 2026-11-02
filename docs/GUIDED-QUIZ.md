@@ -24,6 +24,8 @@ Setiap jawaban tepat mendapat satu poin; soal multi-jawaban memerlukan seluruh p
 
 Host dapat menggunakan **Mode presentasi**. Tombol Escape mengembalikan tampilan; fokus keyboard tetap berada di tampilan presentasi selama mode itu aktif.
 
+Pilihan jawaban menggunakan daftar vertikal pada fase menjawab, waktu habis, dan pembahasan, termasuk di layar host. **Suara: nonaktif** dapat ditekan untuk mengaktifkan nada singkat saat timer habis. Preferensi disimpan di browser masing-masing; suara tidak diaktifkan otomatis bagi seluruh kelas. Nada berbunyi sekali per ronde, tanpa alarm berulang. Menutup jawaban secara manual atau memakai waktu 0 tidak memutar nada. Setelah reload, interaksi klik atau keyboard mengaktifkan kembali audio sesuai kebijakan browser. Indikator teks **Waktu habis** tetap tersedia saat suara dimatikan atau browser tidak mendukung audio.
+
 ## Pemulihan dan kompatibilitas
 
 - Muat ulang browser mempertahankan jawaban yang sudah diterima server dan mengikuti ronde aktif.

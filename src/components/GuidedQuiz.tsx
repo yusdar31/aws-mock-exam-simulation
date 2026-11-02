@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "../i18n/context";
 import type { ClassroomState } from "../lib/classroom";
 import { formatTime, isQuestion, matches } from "../lib/exam";
+import { useQuizSound } from "../lib/useQuizSound";
 import type { Question } from "../types";
 import ClassroomAnswerReview from "./ClassroomAnswerReview";
 import ClassroomShare from "./ClassroomShare";
@@ -45,6 +46,11 @@ export default function GuidedQuiz({
     : null;
   const open = phase === "answering" && (remaining === null || remaining > 0);
   const review = phase === "review" || finished;
+  const sound = useQuizSound(
+    `${room.code}:${room.quizIndex}`,
+    remaining,
+    phase === "answering",
+  );
   const leaderboard = room.quizLeaderboard || [];
   const wrong: Question[] = finished
     ? room.questions.flatMap((q) =>
@@ -57,7 +63,7 @@ export default function GuidedQuiz({
     void onAction(action, { questionIndex: room.quizIndex });
   useEffect(() => {
     title.current?.focus();
-  }, [question?.id, phase]);
+  }, [question?.id]);
   useEffect(() => {
     if (!presentation) return;
     const previous = document.activeElement;
@@ -104,6 +110,9 @@ export default function GuidedQuiz({
       <div className="quiz-toolbar">
         <span className="eyebrow">{t("Kuis terpandu")}</span>
         <strong className="room-code">{room.code}</strong>
+        <button aria-pressed={sound.enabled} onClick={sound.toggle}>
+          {t(sound.enabled ? "Suara: aktif" : "Suara: nonaktif")}
+        </button>
         {room.host && (
           <button
             aria-pressed={presentation}
@@ -173,11 +182,13 @@ export default function GuidedQuiz({
             </strong>
             {!finished && (
               <span role="timer" className="live-timer">
-                {phase !== "answering"
-                  ? t("Jawaban ditutup")
-                  : remaining === null
-                    ? t("Tanpa timer")
-                    : formatTime(remaining)}
+                {remaining === 0
+                  ? t("Waktu habis")
+                  : phase !== "answering"
+                    ? t("Jawaban ditutup")
+                    : remaining === null
+                      ? t("Tanpa timer")
+                      : formatTime(remaining)}
               </span>
             )}
           </div>
@@ -269,7 +280,10 @@ export default function GuidedQuiz({
                               }
                             />
                           )}
-                          <b className="quiz-letter">{o.id}</b>
+                          <b className="quiz-letter">
+                            {o.id}
+                            <span aria-hidden="true">.</span>
+                          </b>
                           <span lang={question.lang}>{o.text}</span>
                           {correct && (
                             <strong className="quiz-option-status">

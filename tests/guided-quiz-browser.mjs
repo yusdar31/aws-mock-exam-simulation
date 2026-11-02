@@ -203,6 +203,24 @@ try {
     packet[0].prompt,
   );
   await expect(bob.p.locator(".quiz-question h2")).toHaveText(packet[0].prompt);
+  async function verticalChoices(p) {
+    const boxes = await p.locator(".quiz-choice").evaluateAll((els) =>
+      els.map((el) => {
+        const { x, y, width, height } = el.getBoundingClientRect();
+        return { x, y, width, height };
+      }),
+    );
+    expect(boxes.length).toBe(4);
+    expect(boxes.every((box) => box.height < 160)).toBe(true);
+    for (let i = 1; i < boxes.length; i++) {
+      expect(Math.abs(boxes[i].x - boxes[0].x)).toBeLessThan(1);
+      expect(boxes[i].y).toBeGreaterThanOrEqual(
+        boxes[i - 1].y + boxes[i - 1].height,
+      );
+    }
+  }
+  await verticalChoices(host.p);
+  await verticalChoices(alice.p);
   await expect(alice.p.locator(".rationale")).toHaveCount(0);
   const answer = async (person, ids) => {
     for (const id of ids)
@@ -210,7 +228,7 @@ try {
         .locator(".quiz-choice")
         .filter({
           has: person.p.locator(".quiz-letter", {
-            hasText: new RegExp(`^${id}$`),
+            hasText: new RegExp(`^${id}\\.$`),
           }),
         })
         .locator("input")
@@ -260,6 +278,7 @@ try {
   await expect(host.p.locator(".quiz-leaderboard li").first()).toContainText(
     "Alice",
   );
+  await verticalChoices(host.p);
   await host.p
     .getByRole("button", { name: "Mode presentasi", exact: true })
     .click();
@@ -358,6 +377,81 @@ try {
       .at(-1)
       .payload.questions.map((q) => q.id),
   ).toEqual(packet.map((q) => q.id));
+  // Real Web Audio scheduling plus server-driven expiry; polling must not repeat the cue.
+  await host.p.evaluate(() => {
+    window.quizNotes = 0;
+    const original = AudioContext.prototype.createOscillator;
+    AudioContext.prototype.createOscillator = function (...args) {
+      window.quizNotes++;
+      return original.apply(this, args);
+    };
+  });
+  await host.p
+    .getByRole("button", { name: "Suara: nonaktif", exact: true })
+    .click();
+  const charlie = await context("Charlie");
+  await join(charlie, replay.code, "Charlie");
+  const timed = queue.then(() =>
+    db.exec(
+      `RESET ROLE; UPDATE public.classroom_rooms SET quiz_seconds=120 WHERE code='${replay.code}';`,
+    ),
+  );
+  queue = timed.catch(() => {});
+  await timed;
+  await host.p.getByRole("button", { name: "Mulai kuis", exact: true }).click();
+  await expect(host.p.locator(".live-timer")).toContainText("02:");
+  const expireSoon = async () => {
+    const task = queue.then(() =>
+      db.exec(
+        `RESET ROLE; UPDATE public.classroom_rooms SET quiz_deadline=clock_timestamp()+interval '4 seconds' WHERE code='${replay.code}';`,
+      ),
+    );
+    queue = task.catch(() => {});
+    await task;
+  };
+  await verticalChoices(host.p);
+  await host.p.screenshot({
+    path: `${out}/answering-vertical.png`,
+    fullPage: true,
+  });
+  await expireSoon();
+  await expect(host.p.locator(".live-timer")).toHaveText("Waktu habis", {
+    timeout: 12000,
+  });
+  await expect.poll(() => host.p.evaluate(() => window.quizNotes)).toBe(3);
+  await wait(2200);
+  expect(await host.p.evaluate(() => window.quizNotes)).toBe(3);
+  await verticalChoices(host.p);
+  await verticalChoices(charlie.p);
+  await expect(
+    charlie.p.getByRole("button", { name: "Kirim jawaban kuis", exact: true }),
+  ).toHaveCount(0);
+  await host.p.screenshot({
+    path: `${out}/expired-vertical.png`,
+    fullPage: true,
+  });
+  await host.p
+    .getByRole("button", { name: "Tampilkan pembahasan", exact: true })
+    .click();
+  await verticalChoices(host.p);
+  await host.p.screenshot({
+    path: `${out}/host-review-vertical.png`,
+    fullPage: true,
+  });
+  await host.p
+    .getByRole("button", { name: "Suara: aktif", exact: true })
+    .click();
+  expect(
+    await host.p.evaluate(() => localStorage.getItem("exam-quiz-sound")),
+  ).toBe("off");
+  await host.p
+    .getByRole("button", { name: "Lanjut ke soal berikutnya", exact: true })
+    .click();
+  await expireSoon();
+  await expect(host.p.locator(".live-timer")).toHaveText("Waktu habis", {
+    timeout: 12000,
+  });
+  expect(await host.p.evaluate(() => window.quizNotes)).toBe(3);
   expect(errors).toEqual([]);
   console.log(
     `${remote ? "Production" : "Local"} guided quiz: reusable packet, synchronized rounds, answer locks, no future leaks, multiple answers, review, ranking, reload, presentation, mobile, dark mode and accessibility passed.`,
