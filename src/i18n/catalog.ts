@@ -4,6 +4,48 @@ import { studyMessages } from "./study";
 export const LANGUAGE_STORAGE_KEY = "aws-exam-ui-language";
 export const messages: Record<string, string> = {
   ...studyMessages,
+  "Mode sesi": "Session mode",
+  "Kuis terpandu — satu soal bersama": "Guided quiz — one question together",
+  "Kuis terpandu": "Guided quiz",
+  "Mode kuis terpandu belum aktif.": "Guided quiz mode is not active yet.",
+  "Host mengatur soal, penutupan jawaban, dan pembahasan. Satu jawaban benar mendapat satu poin.":
+    "The host controls questions, answer collection, and review. Each correct answer earns one point.",
+  "Peserta mengerjakan seluruh paket dengan batas waktu sesi yang sama.":
+    "Participants complete the whole packet with the same session deadline.",
+  "Waktu per soal (detik)": "Time per question (seconds)",
+  "Isi 0 untuk tanpa timer; host menutup jawaban secara manual.":
+    "Enter 0 for no timer; the host closes answers manually.",
+  "Ruang tunggu kuis": "Quiz lobby",
+  "Satu soal yang sama untuk semua peserta. Host membuka pembahasan sebelum melanjutkan.":
+    "Everyone receives the same question. The host opens the review before moving on.",
+  "{count} peserta siap": "{count} participants ready",
+  Siap: "Ready",
+  "Belum siap": "Not ready",
+  "Mulai kuis": "Start quiz",
+  "Kuis selesai": "Quiz finished",
+  "Jawaban ditutup": "Answers closed",
+  "Tanpa timer": "No timer",
+  "{answered} dari {total} peserta sudah menjawab":
+    "{answered} of {total} participants have answered",
+  "{count} soal telah dibahas. Satu jawaban benar mendapat satu poin.":
+    "{count} questions reviewed. Each correct answer earns one point.",
+  "Navigator pembahasan kuis": "Quiz review navigator",
+  "Jawaban terkirim dan terkunci. Tunggu pembahasan dari host.":
+    "Answer submitted and locked. Wait for the host to open the review.",
+  "Kirim jawaban kuis": "Submit quiz answer",
+  "Jawaban ditutup. Tunggu host membuka pembahasan.":
+    "Answers are closed. Wait for the host to open the review.",
+  "Tutup jawaban": "Close answers",
+  "Tampilkan pembahasan": "Show review",
+  "Lanjut ke soal berikutnya": "Continue to next question",
+  "Selesaikan kuis": "Finish quiz",
+  "Selesaikan kuis sekarang? Soal yang belum dimainkan tidak dihitung.":
+    "Finish the quiz now? Questions not played will not count.",
+  "Peringkat akhir kuis": "Final quiz rankings",
+  "Peringkat sementara": "Current rankings",
+  "Poin hanya dihitung dari soal yang pembahasannya sudah dibuka.":
+    "Points only include questions whose review has been opened.",
+  "{count} poin": "{count} points",
   "Jawaban Anda benar": "Your answer is correct",
   "Jawaban Anda salah": "Your answer is incorrect",
   "Soal ini belum dijawab": "This question was not answered",

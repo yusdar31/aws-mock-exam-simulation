@@ -19,6 +19,21 @@ export type ClassroomAccess = {
   status?: "waiting" | "running" | "closed";
 };
 export type ClassroomState = {
+  mode?: "exam" | "quiz";
+  quizPhase?: "lobby" | "answering" | "locked" | "review" | "finished";
+  quizIndex?: number;
+  quizSeconds?: number;
+  quizDeadline?: number | null;
+  quizAnswered?: number;
+  quizReviewed?: number;
+  quizDistribution?: Record<string, number> | null;
+  quizLeaderboard?: {
+    id: string;
+    name: string;
+    score: number;
+    answered: number;
+    ready: boolean;
+  }[];
   version?: number;
   createdAt?: number;
   expiresAt?: number;

@@ -8,6 +8,7 @@ import ClassroomHistory from "../components/ClassroomHistory";
 import ClassroomAccount from "../components/ClassroomAccount";
 import ClassroomSubmitReview from "../components/ClassroomSubmitReview";
 import ClassroomAnswerReview from "../components/ClassroomAnswerReview";
+import GuidedQuiz from "../components/GuidedQuiz";
 import { answerOutcome, rankParticipants } from "../lib/classroomResults";
 import { CERTIFICATIONS, EXAM_TYPES } from "../lib/catalog";
 import { loadBank } from "../lib/banks";
@@ -34,6 +35,8 @@ export default function LiveClass({
   const [history, setHistory] = useState(readClassroomHistory);
   const [room, setRoom] = useState<ClassroomState | null>(null);
   const [packet, setPacket] = useState<Question[] | null>(null);
+  const [mode, setMode] = useState<"exam" | "quiz">("exam");
+  const [quizSeconds, setQuizSeconds] = useState("120");
   const [followHost, setFollowHost] = useState(true);
   const followHostRef = useRef(true);
   function follow(value: boolean) {
@@ -115,6 +118,7 @@ export default function LiveClass({
         anchor.current.server + performance.now() - anchor.current.local;
       const canSave =
         snapshot &&
+        old?.mode !== "quiz" &&
         old?.member &&
         !old.member.submitted &&
         old.status === "running" &&
@@ -131,6 +135,7 @@ export default function LiveClass({
         // session using the existing authorized RPC, including after reconnect.
         if (
           data.host &&
+          data.mode !== "quiz" &&
           data.status === "running" &&
           data.participants?.length &&
           data.participants.every((p) => p.submitted)
@@ -203,9 +208,11 @@ export default function LiveClass({
       const delay =
         document.visibilityState === "hidden"
           ? 10000
-          : current?.revealed && !current.reviewSync
-            ? 5000
-            : 1500;
+          : current?.mode === "quiz"
+            ? 1000
+            : current?.revealed && !current.reviewSync
+              ? 5000
+              : 1500;
       timer = setTimeout(() => {
         if (!final && document.visibilityState !== "hidden") void sync();
         poll();
@@ -362,6 +369,8 @@ export default function LiveClass({
         minutes,
         questions,
         allowLate: form.get("allowLate") === "on",
+        mode,
+        seconds: mode === "quiz" ? Number(form.get("seconds")) : 0,
       });
     } catch (e) {
       setError(
@@ -690,6 +699,32 @@ export default function LiveClass({
                       onChange={() => setPacket(null)}
                     >
                       <label>
+                        {t("Mode sesi")}
+                        <select
+                          name="mode"
+                          aria-label={t("Mode sesi")}
+                          value={mode}
+                          onChange={(e) =>
+                            setMode(e.target.value as "exam" | "quiz")
+                          }
+                        >
+                          <option value="exam">{t("Ujian bersama")}</option>
+                          <option value="quiz" disabled={serverVersion < 4}>
+                            {t("Kuis terpandu — satu soal bersama")}
+                          </option>
+                        </select>
+                      </label>
+                      {ready && serverVersion < 4 && (
+                        <small>{t("Mode kuis terpandu belum aktif.")}</small>
+                      )}
+                      <p className="form-help">
+                        {t(
+                          mode === "quiz"
+                            ? "Host mengatur soal, penutupan jawaban, dan pembahasan. Satu jawaban benar mendapat satu poin."
+                            : "Peserta mengerjakan seluruh paket dengan batas waktu sesi yang sama.",
+                        )}
+                      </p>
+                      <label>
                         {t("Judul sesi")}
                         <input
                           name="title"
@@ -754,18 +789,42 @@ export default function LiveClass({
                             defaultValue={10}
                           />
                         </label>
-                        <label>
-                          {t("Durasi (menit)")}
-                          <input
-                            name="minutes"
-                            type="number"
-                            min={1}
-                            max={180}
-                            step={1}
-                            required
-                            defaultValue={15}
-                          />
-                        </label>
+                        {mode === "exam" ? (
+                          <label>
+                            {t("Durasi (menit)")}
+                            <input
+                              name="minutes"
+                              type="number"
+                              min={1}
+                              max={180}
+                              step={1}
+                              required
+                              defaultValue={15}
+                            />
+                          </label>
+                        ) : (
+                          <label>
+                            {t("Waktu per soal (detik)")}
+                            <input name="minutes" type="hidden" value={15} />
+                            <input
+                              name="seconds"
+                              aria-label={t("Waktu per soal (detik)")}
+                              aria-describedby="quiz-seconds-help"
+                              type="number"
+                              min={0}
+                              max={600}
+                              step={1}
+                              required
+                              value={quizSeconds}
+                              onChange={(e) => setQuizSeconds(e.target.value)}
+                            />
+                            <small id="quiz-seconds-help">
+                              {t(
+                                "Isi 0 untuk tanpa timer; host menutup jawaban secara manual.",
+                              )}
+                            </small>
+                          </label>
+                        )}
                       </div>
                       <ClassroomPacket
                         key={type + "-" + lang}
@@ -773,6 +832,11 @@ export default function LiveClass({
                         lang={lang}
                         packet={packet}
                         onPacket={setPacket}
+                        onSettings={(nextMode, seconds) => {
+                          if (nextMode === "quiz" && serverVersion < 4) return;
+                          setMode(nextMode);
+                          setQuizSeconds(String(seconds));
+                        }}
                       />
                       {serverVersion >= 2 && (
                         <label className="inline-control">
@@ -810,7 +874,16 @@ export default function LiveClass({
                 </button>
               </div>
             </div>
-            {room.host ? (
+            {room.mode === "quiz" ? (
+              <GuidedQuiz
+                key={room.code}
+                room={room}
+                now={now}
+                busy={busy}
+                onAction={run}
+                onPractice={onPractice}
+              />
+            ) : room.host ? (
               <>
                 <section className="panel">
                   <h2>

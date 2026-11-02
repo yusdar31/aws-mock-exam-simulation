@@ -108,6 +108,13 @@ async function context(name) {
   return { c, p, name };
 }
 async function scan(p, name) {
+  await p.evaluate(() =>
+    Promise.all(
+      document
+        .getAnimations()
+        .map((animation) => animation.finished.catch(() => {})),
+    ),
+  );
   await p.addScriptTag({ path: require.resolve("axe-core/axe.min.js") });
   const r = await p.evaluate(async () => {
     const r = await axe.run(document, {

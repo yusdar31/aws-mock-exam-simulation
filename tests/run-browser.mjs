@@ -11,6 +11,7 @@ for (const file of [
   "studio-browser.mjs",
   "classroom-browser.mjs",
   "classroom-upgrade-browser.mjs",
+  "guided-quiz-browser.mjs",
   "classroom-learners-browser.mjs",
   "review-quality-browser.mjs",
 ]) {

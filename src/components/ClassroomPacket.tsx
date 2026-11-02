@@ -9,6 +9,8 @@ type Template = {
   title: string;
   minutes: number;
   questions: Question[];
+  mode?: "exam" | "quiz";
+  seconds?: number;
 };
 const key = "exam-classroom-templates-v1";
 function read(): Template[] {
@@ -26,6 +28,12 @@ function read(): Template[] {
               Array.isArray(t.questions) &&
               t.questions.length > 0 &&
               t.questions.length <= 100 &&
+              (t.mode === undefined ||
+                t.mode === "exam" ||
+                (t.mode === "quiz" &&
+                  Number.isInteger(t.seconds) &&
+                  t.seconds! >= 0 &&
+                  t.seconds! <= 600)) &&
               t.questions.every(isQuestion),
           )
           .slice(0, 20)
@@ -39,11 +47,13 @@ export default function ClassroomPacket({
   lang,
   packet,
   onPacket,
+  onSettings,
 }: {
   type: Config["examType"];
   lang: Config["lang"];
   packet: Question[] | null;
   onPacket: (qs: Question[] | null) => void;
+  onSettings?: (mode: "exam" | "quiz", seconds: number) => void;
 }) {
   const { t } = useLanguage();
   const [templates, setTemplates] = useState(read),
@@ -105,6 +115,7 @@ export default function ClassroomPacket({
               const v = options.find((v) => v.id === selected);
               if (!v) return;
               const f = form(e.currentTarget);
+              if (v.mode) onSettings?.(v.mode, v.seconds || 0);
               (f.elements.namedItem("title") as HTMLInputElement).value =
                 v.title;
               (f.elements.namedItem("count") as HTMLInputElement).value =
@@ -236,6 +247,11 @@ export default function ClassroomPacket({
                     title: String(f.get("title")).trim() || "AWS re/Start",
                     minutes: Number(f.get("minutes")),
                     questions: packet!,
+                    mode:
+                      f.get("mode") === "quiz"
+                        ? ("quiz" as const)
+                        : ("exam" as const),
+                    seconds: Number(f.get("seconds") || 0),
                   };
                   const next = [v, ...templates].slice(0, 20);
                   localStorage.setItem(key, JSON.stringify(next));
