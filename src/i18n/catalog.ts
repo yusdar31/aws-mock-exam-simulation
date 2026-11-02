@@ -10,6 +10,8 @@ export const messages: Record<string, string> = {
   "Suara: aktif": "Sound: on",
   "Suara: nonaktif": "Sound: off",
   "Waktu habis": "Time is up",
+  "Saat waktu habis, jawaban benar dan pembahasan terbuka otomatis.":
+    "When time runs out, the correct answer and explanation open automatically.",
   "Mode kuis terpandu belum aktif.": "Guided quiz mode is not active yet.",
   "Host mengatur soal, penutupan jawaban, dan pembahasan. Satu jawaban benar mendapat satu poin.":
     "The host controls questions, answer collection, and review. Each correct answer earns one point.",

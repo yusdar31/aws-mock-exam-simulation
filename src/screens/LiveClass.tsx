@@ -131,6 +131,20 @@ export default function LiveClass({
           ...credential,
           ...(canSave ? { answers: snapshot, revision: revision.current } : {}),
         });
+        // The server closes timed rounds. The connected host opens their review
+        // immediately on the next synchronized state, using its existing authority.
+        if (
+          data.host &&
+          data.mode === "quiz" &&
+          data.quizPhase === "locked" &&
+          data.quizDeadline != null &&
+          data.serverNow >= data.quizDeadline
+        ) {
+          data = await classroomCall("quiz_reveal", {
+            ...credential,
+            questionIndex: data.quizIndex,
+          });
+        }
         // All submissions are already immutable. The connected host finalizes the
         // session using the existing authorized RPC, including after reconnect.
         if (
@@ -821,6 +835,9 @@ export default function LiveClass({
                             <small id="quiz-seconds-help">
                               {t(
                                 "Isi 0 untuk tanpa timer; host menutup jawaban secara manual.",
+                              )}{" "}
+                              {t(
+                                "Saat waktu habis, jawaban benar dan pembahasan terbuka otomatis.",
                               )}
                             </small>
                           </label>

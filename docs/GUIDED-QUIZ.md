@@ -16,7 +16,7 @@ Skrip membungkus implementasi ujian sebelumnya sebagai fungsi privat. Klien tida
 4. Gunakan **Preview paket soal** untuk memeriksa paket. **Simpan sebagai template** menyimpan soal, urutan, mode, dan timer pada browser host agar dapat digunakan lagi di sesi berikutnya. Template tersimpan di perangkat tersebut.
 5. Buat sesi dan bagikan kode, tautan, atau QR kepada peserta. Setelah peserta masuk, tekan **Mulai kuis**.
 6. Peserta memilih jawaban, lalu menekan **Kirim jawaban kuis**. Jawaban pertama yang diterima terkunci; pengiriman ulang akibat masalah koneksi tidak menggandakan poin.
-7. Host melihat jumlah peserta yang sudah menjawab. Tekan **Tutup jawaban**, lalu **Tampilkan pembahasan** untuk membuka kunci, penjelasan, distribusi pilihan, dan peringkat.
+7. Saat timer habis, halaman host yang terbuka dan terhubung otomatis membuka jawaban benar, pembahasan, distribusi pilihan, dan peringkat untuk semua peserta pada sinkronisasi berikutnya (biasanya sekitar satu detik). Jika host terputus, jawaban tetap terkunci di server dan pembahasan terbuka setelah host terhubung kembali. Untuk membuka lebih awal atau memakai waktu 0, tekan **Tutup jawaban**, lalu **Tampilkan pembahasan**.
 8. Tekan **Lanjut ke soal berikutnya** setelah selesai berdiskusi. Tidak ada navigasi bebas ke soal berikutnya bagi peserta.
 9. Tekan **Selesaikan kuis** untuk peringkat akhir dan review soal yang telah dimainkan. Jika kuis diakhiri lebih awal, soal yang belum dimainkan tidak dihitung atau dibuka.
 
@@ -24,7 +24,7 @@ Setiap jawaban tepat mendapat satu poin; soal multi-jawaban memerlukan seluruh p
 
 Host dapat menggunakan **Mode presentasi**. Tombol Escape mengembalikan tampilan; fokus keyboard tetap berada di tampilan presentasi selama mode itu aktif.
 
-Pilihan jawaban menggunakan daftar vertikal pada fase menjawab, waktu habis, dan pembahasan, termasuk di layar host. **Suara: nonaktif** dapat ditekan untuk mengaktifkan nada singkat saat timer habis. Preferensi disimpan di browser masing-masing; suara tidak diaktifkan otomatis bagi seluruh kelas. Nada berbunyi sekali per ronde, tanpa alarm berulang. Menutup jawaban secara manual atau memakai waktu 0 tidak memutar nada. Setelah reload, interaksi klik atau keyboard mengaktifkan kembali audio sesuai kebijakan browser. Indikator teks **Waktu habis** tetap tersedia saat suara dimatikan atau browser tidak mendukung audio.
+Pilihan jawaban menggunakan daftar vertikal pada fase menjawab, waktu habis, dan pembahasan, termasuk di layar host. **Suara: nonaktif** dapat ditekan untuk mengaktifkan bunyi hitung mundur pada 5 detik terakhir dan nada singkat saat timer habis. Preferensi disimpan di browser masing-masing; suara tidak diaktifkan otomatis bagi seluruh kelas. Setiap detik terakhir berbunyi sekali tanpa mengejar detik yang terlewat; nada penutup berbunyi sekali per ronde, tanpa alarm berulang. Menutup jawaban secara manual atau memakai waktu 0 tidak memutar nada. Setelah reload, interaksi klik atau keyboard mengaktifkan kembali audio sesuai kebijakan browser. Indikator teks **Waktu habis** tetap tersedia saat suara dimatikan atau browser tidak mendukung audio.
 
 ## Pemulihan dan kompatibilitas
 

@@ -39,6 +39,7 @@ const server = remote
     );
 let queue = Promise.resolve(),
   browser;
+let failNextReveal = false;
 const inputs = [];
 const errors = [],
   scans = [],
@@ -83,6 +84,13 @@ async function context(name) {
     if (url.pathname.endsWith("/rpc/classroom_rpc")) {
       const input = route.request().postDataJSON();
       inputs.push(input);
+      if (name === "Host" && input.action === "quiz_reveal" && failNextReveal) {
+        failNextReveal = false;
+        return route.fulfill({
+          status: 503,
+          json: { message: "Temporary test outage" },
+        });
+      }
       try {
         const data = await rpc(input.action, input.payload);
         responses.push({ name, action: input.action, data });
@@ -380,10 +388,17 @@ try {
   // Real Web Audio scheduling plus server-driven expiry; polling must not repeat the cue.
   await host.p.evaluate(() => {
     window.quizNotes = 0;
+    window.quizFrequencies = [];
     const original = AudioContext.prototype.createOscillator;
     AudioContext.prototype.createOscillator = function (...args) {
       window.quizNotes++;
-      return original.apply(this, args);
+      const oscillator = original.apply(this, args);
+      const start = oscillator.start.bind(oscillator);
+      oscillator.start = (...times) => {
+        window.quizFrequencies.push(oscillator.frequency.value);
+        return start(...times);
+      };
+      return oscillator;
     };
   });
   await host.p
@@ -403,7 +418,7 @@ try {
   const expireSoon = async () => {
     const task = queue.then(() =>
       db.exec(
-        `RESET ROLE; UPDATE public.classroom_rooms SET quiz_deadline=clock_timestamp()+interval '4 seconds' WHERE code='${replay.code}';`,
+        `RESET ROLE; UPDATE public.classroom_rooms SET quiz_deadline=clock_timestamp()+interval '7 seconds' WHERE code='${replay.code}';`,
       ),
     );
     queue = task.catch(() => {});
@@ -414,15 +429,29 @@ try {
     path: `${out}/answering-vertical.png`,
     fullPage: true,
   });
+  failNextReveal = true;
   await expireSoon();
+  await expect
+    .poll(() => host.p.evaluate(() => window.quizNotes))
+    .toBeGreaterThan(0);
   await expect(host.p.locator(".live-timer")).toHaveText("Waktu habis", {
     timeout: 12000,
   });
-  await expect.poll(() => host.p.evaluate(() => window.quizNotes)).toBe(3);
+  await expect(host.p.locator(".rationale")).toBeVisible();
+  await expect(charlie.p.locator(".classroom-verdict")).toContainText(
+    "Soal ini belum dijawab",
+  );
+  await expect(
+    charlie.p.locator(".classroom-review-option.review-correct"),
+  ).toHaveCount(1);
+  const notes = await host.p.evaluate(() => window.quizNotes);
+  expect(notes).toBe(8);
+  expect(await host.p.evaluate(() => window.quizFrequencies)).toEqual([
+    880, 880, 880, 880, 880, 660, 550, 440,
+  ]);
   await wait(2200);
-  expect(await host.p.evaluate(() => window.quizNotes)).toBe(3);
+  expect(await host.p.evaluate(() => window.quizNotes)).toBe(notes);
   await verticalChoices(host.p);
-  await verticalChoices(charlie.p);
   await expect(
     charlie.p.getByRole("button", { name: "Kirim jawaban kuis", exact: true }),
   ).toHaveCount(0);
@@ -430,9 +459,9 @@ try {
     path: `${out}/expired-vertical.png`,
     fullPage: true,
   });
-  await host.p
-    .getByRole("button", { name: "Tampilkan pembahasan", exact: true })
-    .click();
+  await expect(
+    host.p.getByRole("button", { name: "Tampilkan pembahasan", exact: true }),
+  ).toHaveCount(0);
   await verticalChoices(host.p);
   await host.p.screenshot({
     path: `${out}/host-review-vertical.png`,
@@ -451,7 +480,9 @@ try {
   await expect(host.p.locator(".live-timer")).toHaveText("Waktu habis", {
     timeout: 12000,
   });
-  expect(await host.p.evaluate(() => window.quizNotes)).toBe(3);
+  await expect(host.p.locator(".rationale")).toBeVisible();
+  await expect(charlie.p.locator(".classroom-verdict")).toBeVisible();
+  expect(await host.p.evaluate(() => window.quizNotes)).toBe(notes);
   expect(errors).toEqual([]);
   console.log(
     `${remote ? "Production" : "Local"} guided quiz: reusable packet, synchronized rounds, answer locks, no future leaks, multiple answers, review, ranking, reload, presentation, mobile, dark mode and accessibility passed.`,
