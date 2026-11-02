@@ -7,7 +7,8 @@ import ClassroomPacket from "../components/ClassroomPacket";
 import ClassroomHistory from "../components/ClassroomHistory";
 import ClassroomAccount from "../components/ClassroomAccount";
 import ClassroomSubmitReview from "../components/ClassroomSubmitReview";
-import { rankParticipants } from "../lib/classroomResults";
+import ClassroomAnswerReview from "../components/ClassroomAnswerReview";
+import { answerOutcome, rankParticipants } from "../lib/classroomResults";
 import { CERTIFICATIONS, EXAM_TYPES } from "../lib/catalog";
 import { loadBank } from "../lib/banks";
 import { formatTime, selectQuestions, isQuestion, matches } from "../lib/exam";
@@ -1005,6 +1006,65 @@ export default function LiveClass({
                       )}
                     </div>
                     {room.revealed && (
+                      <div className="classroom-review-overview">
+                        <div
+                          className="classroom-review-counts"
+                          aria-label={t("Ringkasan hasil Anda")}
+                        >
+                          {(
+                            ["correct", "incorrect", "unanswered"] as const
+                          ).map((outcome) => (
+                            <span
+                              className={`classroom-result-badge review-${outcome}`}
+                              key={outcome}
+                            >
+                              {
+                                room.questions.filter(
+                                  (q) =>
+                                    answerOutcome(q, answers[q.id]) === outcome,
+                                ).length
+                              }{" "}
+                              {t(
+                                outcome === "correct"
+                                  ? "Benar"
+                                  : outcome === "incorrect"
+                                    ? "Salah"
+                                    : "Belum dijawab",
+                              )}
+                            </span>
+                          ))}
+                        </div>
+                        <button
+                          disabled={
+                            !room.questions.some(
+                              (q) =>
+                                answerOutcome(q, answers[q.id]) === "incorrect",
+                            )
+                          }
+                          onClick={() => {
+                            const next = Array.from(
+                              { length: room.questions.length },
+                              (_, i) =>
+                                (displayedIndex + i + 1) %
+                                room.questions.length,
+                            ).find(
+                              (i) =>
+                                answerOutcome(
+                                  room.questions[i],
+                                  answers[room.questions[i].id],
+                                ) === "incorrect",
+                            );
+                            if (next !== undefined) {
+                              follow(false);
+                              setIndex(next);
+                            }
+                          }}
+                        >
+                          {t("Soal salah berikutnya")}
+                        </button>
+                      </div>
+                    )}
+                    {room.revealed && (
                       <label className="inline-control">
                         <input
                           type="checkbox"
@@ -1018,44 +1078,76 @@ export default function LiveClass({
                       className="live-numbers"
                       aria-label={t("Navigator soal")}
                     >
-                      {room.questions.map((q, i) => (
-                        <button
-                          key={q.id}
-                          aria-current={
-                            displayedIndex === i ? "step" : undefined
-                          }
-                          className={
-                            (answers[q.id]?.length || 0) === q.required
-                              ? "answered"
-                              : ""
-                          }
-                          onClick={() => {
-                            follow(false);
-                            setIndex(i);
-                          }}
-                          aria-label={t("Soal {index}, {status}{flag}", {
-                            index: i + 1,
-                            status: t(
+                      {room.questions.map((q, i) => {
+                        const outcome = room.revealed
+                          ? answerOutcome(q, answers[q.id])
+                          : null;
+                        const status = outcome
+                          ? t(
+                              outcome === "correct"
+                                ? "Benar"
+                                : outcome === "incorrect"
+                                  ? "Salah"
+                                  : "Belum dijawab",
+                            )
+                          : t(
                               (answers[q.id]?.length || 0) === q.required
                                 ? "jawaban lengkap"
                                 : "belum lengkap",
-                            ),
-                            flag: flags.includes(q.id) ? t(", ditandai") : "",
-                          })}
-                        >
-                          {i + 1}
-                          {flags.includes(q.id) && (
-                            <span className="live-flag" aria-hidden="true">
-                              ⚑
-                            </span>
-                          )}
-                          {(answers[q.id]?.length || 0) === q.required && (
-                            <span className="live-complete" aria-hidden="true">
-                              ✓
-                            </span>
-                          )}
-                        </button>
-                      ))}
+                            );
+                        return (
+                          <button
+                            key={q.id}
+                            aria-current={
+                              displayedIndex === i ? "step" : undefined
+                            }
+                            className={
+                              outcome
+                                ? `classroom-result-number review-${outcome}`
+                                : (answers[q.id]?.length || 0) === q.required
+                                  ? "answered"
+                                  : ""
+                            }
+                            onClick={() => {
+                              follow(false);
+                              setIndex(i);
+                            }}
+                            aria-label={t("Soal {index}, {status}{flag}", {
+                              index: i + 1,
+                              status,
+                              flag: flags.includes(q.id) ? t(", ditandai") : "",
+                            })}
+                          >
+                            {i + 1}
+                            {outcome && (
+                              <span className="classroom-number-status">
+                                <span aria-hidden="true">
+                                  {outcome === "correct"
+                                    ? "✓ "
+                                    : outcome === "incorrect"
+                                      ? "× "
+                                      : "– "}
+                                </span>
+                                {status}
+                              </span>
+                            )}
+                            {flags.includes(q.id) && (
+                              <span className="live-flag" aria-hidden="true">
+                                ⚑
+                              </span>
+                            )}
+                            {!room.revealed &&
+                              (answers[q.id]?.length || 0) === q.required && (
+                                <span
+                                  className="live-complete"
+                                  aria-hidden="true"
+                                >
+                                  ✓
+                                </span>
+                              )}
+                          </button>
+                        );
+                      })}
                     </nav>
                     {question && (
                       <article className="panel">
@@ -1080,41 +1172,48 @@ export default function LiveClass({
                         <h2 ref={heading} tabIndex={-1} lang={question.lang}>
                           {question.prompt}
                         </h2>
-                        <fieldset disabled={locked}>
-                          <legend>
-                            {question.type === "single"
-                              ? t("Pilih satu jawaban.")
-                              : t("Pilih {count} jawaban.", {
-                                  count: question.required,
-                                })}
-                          </legend>
-                          <div className="choice-list">
-                            {question.options.map((o) => (
-                              <label
-                                key={o.id}
-                                className={`choice ${selected.includes(o.id) ? "selected" : ""}`}
-                              >
-                                <input
-                                  type={
-                                    question.type === "single"
-                                      ? "radio"
-                                      : "checkbox"
-                                  }
-                                  name={question.id}
-                                  checked={selected.includes(o.id)}
-                                  onChange={() => choose(o.id)}
-                                  disabled={
-                                    !selected.includes(o.id) &&
-                                    question.type === "multiple" &&
-                                    selected.length >= question.required
-                                  }
-                                />
-                                <strong>{o.id}.</strong>
-                                <span lang={question.lang}>{o.text}</span>
-                              </label>
-                            ))}
-                          </div>
-                        </fieldset>
+                        {room.revealed ? (
+                          <ClassroomAnswerReview
+                            question={question}
+                            selected={selected}
+                          />
+                        ) : (
+                          <fieldset disabled={locked}>
+                            <legend>
+                              {question.type === "single"
+                                ? t("Pilih satu jawaban.")
+                                : t("Pilih {count} jawaban.", {
+                                    count: question.required,
+                                  })}
+                            </legend>
+                            <div className="choice-list">
+                              {question.options.map((o) => (
+                                <label
+                                  key={o.id}
+                                  className={`choice ${selected.includes(o.id) ? "selected" : ""}`}
+                                >
+                                  <input
+                                    type={
+                                      question.type === "single"
+                                        ? "radio"
+                                        : "checkbox"
+                                    }
+                                    name={question.id}
+                                    checked={selected.includes(o.id)}
+                                    onChange={() => choose(o.id)}
+                                    disabled={
+                                      !selected.includes(o.id) &&
+                                      question.type === "multiple" &&
+                                      selected.length >= question.required
+                                    }
+                                  />
+                                  <strong>{o.id}.</strong>
+                                  <span lang={question.lang}>{o.text}</span>
+                                </label>
+                              ))}
+                            </div>
+                          </fieldset>
+                        )}
                         {room.revealed && (
                           <div className="rationale" lang={question.lang}>
                             <strong>

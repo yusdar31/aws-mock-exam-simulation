@@ -50,17 +50,34 @@ export default function ClassroomHostQuestions({
         </p>
       )}
       <nav className="live-numbers" aria-label={t("Navigator soal host")}>
-        {room.questions.map((q, i) => (
-          <button
-            key={q.id}
-            aria-current={index === i ? "step" : undefined}
-            aria-label={t("Lihat soal {index}", { index: i + 1 })}
-            disabled={busy}
-            onClick={() => onIndex(i)}
-          >
-            {i + 1}
-          </button>
-        ))}
+        {room.questions.map((q, i) => {
+          const wrong = closed
+            ? participants.filter(
+                (p) => answerOutcome(q, p.answers?.[q.id]) === "incorrect",
+              ).length
+            : 0;
+          return (
+            <button
+              key={q.id}
+              className={
+                closed
+                  ? `classroom-result-number ${wrong ? "review-incorrect" : ""}`
+                  : ""
+              }
+              aria-current={index === i ? "step" : undefined}
+              aria-label={t("Lihat soal {index}", { index: i + 1 })}
+              disabled={busy}
+              onClick={() => onIndex(i)}
+            >
+              {i + 1}
+              {closed && (
+                <span className="classroom-number-status">
+                  {t("{count} salah", { count: wrong })}
+                </span>
+              )}
+            </button>
+          );
+        })}
       </nav>
       <article>
         <span className="eyebrow">
@@ -81,7 +98,12 @@ export default function ClassroomHostQuestions({
               className={
                 closed && question.correctAnswers?.includes(o.id)
                   ? "live-option-correct"
-                  : ""
+                  : closed &&
+                      participants.some((p) =>
+                        p.answers?.[question.id]?.includes(o.id),
+                      )
+                    ? "live-option-incorrect"
+                    : ""
               }
             >
               <div>
@@ -90,9 +112,14 @@ export default function ClassroomHostQuestions({
               </div>
               {closed && (
                 <div className="live-option-detail">
-                  {question.correctAnswers?.includes(o.id) && (
-                    <strong>{t("Jawaban benar")} · </strong>
-                  )}
+                  <strong>
+                    {t(
+                      question.correctAnswers?.includes(o.id)
+                        ? "Jawaban benar"
+                        : "Opsi salah",
+                    )}{" "}
+                    ·{" "}
+                  </strong>
                   {t("{count} peserta memilih", {
                     count: participants.filter((p) =>
                       p.answers?.[question.id]?.includes(o.id),

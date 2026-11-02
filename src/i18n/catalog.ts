@@ -4,6 +4,15 @@ import { studyMessages } from "./study";
 export const LANGUAGE_STORAGE_KEY = "aws-exam-ui-language";
 export const messages: Record<string, string> = {
   ...studyMessages,
+  "Jawaban Anda benar": "Your answer is correct",
+  "Jawaban Anda salah": "Your answer is incorrect",
+  "Soal ini belum dijawab": "This question was not answered",
+  "Pilihan Anda — salah": "Your choice — incorrect",
+  "Tidak Anda pilih": "Not selected by you",
+  "Ringkasan hasil Anda": "Your result summary",
+  "Soal salah berikutnya": "Next incorrect question",
+  "{count} salah": "{count} incorrect",
+  "Opsi salah": "Incorrect option",
   "Simpan sesi ke akun": "Save classroom sessions to your account",
   "Masuk agar hasil dan pembahasan kelas dapat dibuka dari browser lain. Bergabung sebagai tamu tetap tersedia.":
     "Sign in to reopen classroom results and explanations in another browser. You can still join as a guest.",

@@ -6,8 +6,11 @@ import { setTimeout as wait } from "node:timers/promises";
 import { createRequire } from "node:module";
 const expect = baseExpect.configure({ timeout: 15000 }),
   require = createRequire(import.meta.url);
-const base = "http://127.0.0.1:4196",
-  out = "artifacts/review-fixes-2026-10-19/browser";
+const remote = !!process.env.EXAM_TEST_URL;
+const base = process.env.EXAM_TEST_URL || "http://127.0.0.1:4196",
+  out = remote
+    ? "artifacts/classroom-review-20261102/production"
+    : "artifacts/review-fixes-2026-10-19/browser";
 mkdirSync(out, { recursive: true });
 const db = new PGlite();
 await db.exec(`CREATE ROLE anon;CREATE ROLE authenticated;CREATE SCHEMA auth;CREATE TABLE auth.users(id uuid primary key);
@@ -16,19 +19,21 @@ CREATE FUNCTION auth.jwt() RETURNS jsonb LANGUAGE sql STABLE AS $$ SELECT '{}'::
 await db.exec(
   readFileSync("supabase/migrations/20261019_classroom_upgrade.sql", "utf8"),
 );
-const server = spawn(
-  process.execPath,
-  [
-    "node_modules/vite/bin/vite.js",
-    "preview",
-    "--host",
-    "127.0.0.1",
-    "--port",
-    "4196",
-    "--strictPort",
-  ],
-  { windowsHide: true, stdio: "pipe" },
-);
+const server = remote
+  ? null
+  : spawn(
+      process.execPath,
+      [
+        "node_modules/vite/bin/vite.js",
+        "preview",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "4196",
+        "--strictPort",
+      ],
+      { windowsHide: true, stdio: "pipe" },
+    );
 let queue = Promise.resolve(),
   browser,
   offline = false;
@@ -95,7 +100,7 @@ async function context(name) {
       return route.fulfill({
         json: { items: [], excludedIds: [], source: "release", total: 0 },
       });
-    return u.hostname === "127.0.0.1" ? route.continue() : route.abort();
+    return u.origin === new URL(base).origin ? route.continue() : route.abort();
   });
   const p = await c.newPage();
   p.on("pageerror", (e) => errors.push(e.message));
@@ -384,6 +389,8 @@ try {
     "3",
   ]);
   await expect(bob.p.locator(".rationale")).toHaveCount(0);
+  await expect(bob.p.locator(".classroom-verdict")).toHaveCount(0);
+  await expect(bob.p.locator(".live-numbers .review-incorrect")).toHaveCount(0);
   await nextHost.p.waitForTimeout(3200);
   const before = counts.get("NextHost");
   await nextHost.p.waitForTimeout(5100);
@@ -434,6 +441,67 @@ try {
     .getByRole("button", { name: "Buka hasil & pembahasan", exact: true })
     .click();
   await expect(bob.p.locator(".rationale")).toBeVisible();
+  await expect(bob.p.locator(".classroom-verdict")).toContainText(
+    "Jawaban Anda salah",
+  );
+  await expect(
+    bob.p.locator(".classroom-review-option.review-incorrect"),
+  ).toHaveCount(1);
+  await expect(
+    bob.p.locator(".classroom-review-option.review-correct"),
+  ).toHaveCount(packet[0].correctAnswers.length);
+  await expect(bob.p.locator(".classroom-review-counts")).toHaveText(
+    "0 Benar1 Salah2 Belum dijawab",
+  );
+  await expect(bob.p.locator(".live-numbers .review-incorrect")).toHaveCount(1);
+  await expect(bob.p.locator(".live-numbers .review-unanswered")).toHaveCount(
+    2,
+  );
+  await expect(
+    nextHost.p.locator(".live-numbers .review-incorrect"),
+  ).toContainText("1 salah");
+  for (const theme of ["light", "dark"]) {
+    await bob.p.evaluate(
+      (value) => (document.documentElement.dataset.theme = value),
+      theme,
+    );
+    await bob.p.setViewportSize({ width: 375, height: 900 });
+    expect(
+      await bob.p.evaluate(
+        () => document.documentElement.scrollWidth <= innerWidth + 1,
+      ),
+    ).toBe(true);
+    await scan(bob.p, `participant-review-${theme}`);
+    await bob.p.locator(".classroom-verdict").scrollIntoViewIfNeeded();
+    await bob.p.screenshot({ path: `${out}/participant-review-${theme}.png` });
+  }
+  await bob.p.evaluate(
+    () => (document.documentElement.dataset.theme = "light"),
+  );
+  await bob.p.setViewportSize({ width: 1440, height: 1000 });
+  await bob.p.locator(".live-numbers button").nth(1).click();
+  await expect(bob.p.locator(".classroom-verdict")).toContainText(
+    "Soal ini belum dijawab",
+  );
+  await bob.p
+    .getByRole("button", { name: "Soal salah berikutnya", exact: true })
+    .click();
+  await expect(bob.p.locator("article .eyebrow")).toHaveText("Soal 1/3");
+  await expect(
+    bob.p.getByLabel("Ikuti pembahasan host", { exact: true }),
+  ).not.toBeChecked();
+  await bob.p.getByLabel("Bahasa tampilan").selectOption("en");
+  await expect(bob.p.locator(".classroom-verdict")).toContainText(
+    "Your answer is incorrect",
+  );
+  await expect(
+    bob.p.locator(".review-incorrect .classroom-option-labels"),
+  ).toContainText("Your choice — incorrect");
+  await expect(
+    bob.p.locator(".review-correct .classroom-option-labels").first(),
+  ).toContainText("Correct answer");
+  await bob.p.getByLabel("Display language").selectOption("id");
+  await bob.p.getByLabel("Ikuti pembahasan host", { exact: true }).check();
   await nextHost.p
     .getByLabel("Sinkronkan pembahasan ke peserta", { exact: true })
     .click();
@@ -552,7 +620,7 @@ try {
     }
   }
   await browser?.close();
-  server.kill();
+  server?.kill();
   await queue;
   await db.close();
 }
