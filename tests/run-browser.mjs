@@ -5,6 +5,7 @@ for (const file of [
   "bank-browser.mjs",
   "question-banks-browser.mjs",
   "ace-bank-browser.mjs",
+  "ccp-additions-browser.mjs",
   "language-browser.mjs",
   "usability-browser.mjs",
   "studio-browser.mjs",

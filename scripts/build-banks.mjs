@@ -11,6 +11,7 @@ import { deepen } from "./curated/depth.mjs";
 import { buildAceScenarios } from "./curated/gcp-ace-scenarios.mjs";
 import { localizeOption } from "./curated/options-id.mjs";
 import { reviewCcpFoundation } from "./curated/ccp-foundations.mjs";
+import { buildCcp20261102 } from "./curated/ccp-20261102.mjs";
 import certifications from "../src/data/certifications.json" with { type: "json" };
 
 const ccpScenariosId = fs.existsSync("scripts/curated/ccp-scenarios-id.json")
@@ -223,13 +224,15 @@ for (const type of onlyAce ? [] : ["ccp", "saa"])
             }
           : q,
       );
+    const additions = type === "ccp" ? buildCcp20261102(lang) : [];
+    banks[`${type}-${lang}`].push(...additions);
     fs.mkdirSync("src/data/banks", { recursive: true });
     fs.writeFileSync(
       `src/data/banks/${type}-${lang}.json`,
       JSON.stringify(banks[`${type}-${lang}`]),
     );
     console.log(
-      `${type}-${lang}: ${old.length} legacy + ${fresh.length} original`,
+      `${type}-${lang}: ${old.length} legacy + ${fresh.length + additions.length} original`,
     );
   }
 const legacyAce = JSON.parse(

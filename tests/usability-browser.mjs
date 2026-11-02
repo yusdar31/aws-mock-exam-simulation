@@ -121,7 +121,7 @@ try {
   await expect(start()).toBeDisabled();
   await expect(
     page
-      .getByText("Masukkan jumlah soal bulat antara 1 dan 138.", {
+      .getByText("Masukkan jumlah soal bulat antara 1 dan 200.", {
         exact: true,
       })
       .first(),
